@@ -14,12 +14,13 @@
 # Weblate <noreply-mt-weblate@weblate.org>, 2025.
 # Yoshi Tashiro <tashiro@quartile.co>, 2025.
 # "Tiffany Chang (tic)" <tic@odoo.com>, 2026.
+# Odoo Translation Bot <c3p@odoo.com>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-09-06 17:49+0000\n"
-"PO-Revision-Date: 2026-09-25 08:06+0000\n"
+"PO-Revision-Date: 2026-11-06 05:09+0000\n"
 "Last-Translator: \"Junko Augias (juau)\" <juau@odoo.com>\n"
 "Language-Team: Japanese <https://translate.odoo.com/projects/odoo-20/base/"
 "ja/>\n"
@@ -39,6 +40,11 @@ msgid ""
 "        can't be used for endpoints requiring any other scope than 'A'.\n"
 "        "
 msgstr ""
+"\n"
+"        スコープが「A」のトークンは、スコープ「A」のベアラートークンを必要と"
+"するエンドポイントでのみ使用でき、\n"
+"        「A」以外のスコープを必要とするエンドポイントには使用できません。\n"
+"        "
 
 #. module: base
 #. odoo-python
@@ -47,6 +53,8 @@ msgid ""
 "\n"
 "Example: %(example)s"
 msgstr ""
+"\n"
+"例：%(example)s"
 
 #. module: base
 #. odoo-python
@@ -77,6 +85,9 @@ msgid ""
 "User: %(user)s\n"
 "Groups: %(allowed_groups_msg)s"
 msgstr ""
+"\n"
+"ユーザ：%(user)s\n"
+"グループ：%(allowed_groups_msg)s"
 
 #. module: base
 #: model:ir.model.fields.selection,name:base.selection__res_lang__time_format__%i:%m:%s_%p
@@ -119,7 +130,7 @@ msgstr "%(action_name)sは%(model_name)sに対する有効なアクションで�
 #. odoo-python
 #: code:addons/base/models/ir_actions.py:0
 msgid "%(date_label)s - %(author)s"
-msgstr ""
+msgstr "%(date_label)s - %(author)s"
 
 #. module: base
 #. odoo-python
@@ -152,6 +163,9 @@ msgid ""
 "\n"
 "Implicitly accessed through '%(document_kind)s' (%(document_model)s)."
 msgstr ""
+"%(previous_message)s\n"
+"\n"
+"'%(document_kind)s' (%(document_model)s)を介して暗黙的にアクセスされます。"
 
 #. module: base
 #. odoo-python
@@ -290,7 +304,7 @@ msgstr "'new'は確保されており、パスとして使用することはで�
 #. odoo-python
 #: code:addons/fields.py:0
 msgid "(Record: %(record)s, User: %(user)s)"
-msgstr ""
+msgstr "(レコード: %(record)s, ユーザ: %(user)s)"
 
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.view_partner_form
@@ -325,6 +339,8 @@ msgid ""
 "- Only a root company can be set on “%(record)s”. Currently set to “%"
 "(company)s”"
 msgstr ""
+"- ルート会社のみ “%(record)s”で設定できます。現在 “%(company)s”に設定されてい"
+"ます"
 
 #. module: base
 #. odoo-python
@@ -333,6 +349,8 @@ msgid ""
 "- Record is company “%(company)s” while “%(field)s” (%(fname)s: %(values)s) "
 "belongs to another company."
 msgstr ""
+"- レコードは会社「%(company)s」のものですが、「%(field)s」(%(fname)s:%"
+"(values)s )は別の会社のものであり、これらは区別してください。"
 
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.report_irmodeloverview
@@ -395,17 +413,19 @@ msgid ""
 "- “%(record)s” belongs to company “%(company)s” while “%(field)s” (%"
 "(fname)s: %(values)s) belongs to another company."
 msgstr ""
+"- 「%(record)s」は「%(company)s」という会社に属していますが、「%(field)s」（%"
+"(fname)s:%(values)s ）は別の会社に属しています。"
 
 #. module: base
 #: model:website,contact_us_link_url:base.default_website
 msgid "/contactus"
-msgstr ""
+msgstr "/contactus"
 
 #. module: base
 #. odoo-python
 #: code:addons/base/models/res_partner.py:0
 msgid "0123456789016 or 1234545678781 [13 digits]"
-msgstr ""
+msgstr "0123456789016 または 1234545678781 [13桁]"
 
 #. module: base
 #: model:ir.model.fields.selection,name:base.selection__base_enable_profiling_wizard__duration__days_1
@@ -427,7 +447,7 @@ msgstr "1か月"
 #: code:addons/base/models/res_partner.py:0
 #: code:addons/partner_identifiers.py:0
 msgid "1-01-85004-3 or 101850043"
-msgstr ""
+msgstr "1-01-85004-3 または 101850043"
 
 #. module: base
 #. odoo-python
@@ -435,25 +455,27 @@ msgstr ""
 #: code:addons/partner_identifiers.py:0
 msgid "10XXXXXXXXY or 20XXXXXXXXY or 15XXXXXXXXY or 16XXXXXXXXY or 17XXXXXXXXY"
 msgstr ""
+"10XXXXXXXXY または 20XXXXXXXXY または 15XXXXXXXXY または 16XXXXXXXXY または "
+"17XXXXXXXXY"
 
 #. module: base
 #. odoo-python
 #: code:addons/base/models/res_partner.py:0
 #: code:addons/partner_identifiers.py:0
 msgid "11111111111 (NIN) or 2222222222 (VKN)"
-msgstr ""
+msgstr "11111111111 (NIN) または 2222222222 (VKN)"
 
 #. module: base
 #. odoo-python
 #: code:addons/partner_identifiers.py:0
 msgid "123-45-67890 or 1234567890"
-msgstr ""
+msgstr "123-45-67890 または 1234567890"
 
 #. module: base
 #. odoo-python
 #: code:addons/base/models/res_partner.py:0
 msgid "1234567 or 1234567-8 or 12345-1234567-8"
-msgstr ""
+msgstr "1234567 または 1234567-8 または 12345-1234567-8"
 
 #. module: base
 #. odoo-python
@@ -462,45 +484,47 @@ msgstr ""
 msgid ""
 "12345678 or UA12345678 (EDRPOU), 1234567890 (RNOPP) or 123456789012 (IPN)"
 msgstr ""
+"12345678 または UA12345678 (EDRPOU)、 1234567890 (RNOPP) または 123456789012 "
+"(IPN)"
 
 #. module: base
 #. odoo-python
 #: code:addons/base/models/res_partner.py:0
 msgid "123456782 or 123456782RT0001"
-msgstr ""
+msgstr "123456782 または 123456782RT0001"
 
 #. module: base
 #. odoo-python
 #: code:addons/base/models/res_partner.py:0
 msgid "123456789 (TIN) or 12345678901234 (PINFL)"
-msgstr ""
+msgstr "123456789 (TIN) または 12345678901234 (PINFL)"
 
 #. module: base
 #. odoo-python
 #: code:addons/base/models/res_partner.py:0
 #: code:addons/partner_identifiers.py:0
 msgid "1792060346001 or 1792060346"
-msgstr ""
+msgstr "1792060346001 または 1792060346"
 
 #. module: base
 #. odoo-python
 #: code:addons/partner_identifiers.py:0
 msgid "3002707692 [Tax identification number]"
-msgstr ""
+msgstr "3002707692 [納税者番号]"
 
 #. module: base
 #. odoo-python
 #: code:addons/base/models/res_partner.py:0
 #: code:addons/partner_identifiers.py:0
 msgid "310175397400003 [Fifteen digits, first and last digits should be \"3\"]"
-msgstr ""
+msgstr "310175397400003 [15桁、最初と最後の数字は \"3\"にして下さい]"
 
 #. module: base
 #. odoo-python
 #: code:addons/base/models/res_partner.py:0
 #: code:addons/partner_identifiers.py:0
 msgid "49-098-576 or 49098576"
-msgstr ""
+msgstr "49-098-576 または 49098576"
 
 #. module: base
 #: model:ir.model.fields.selection,name:base.selection__base_enable_profiling_wizard__duration__minutes_5
@@ -511,7 +535,7 @@ msgstr "5 分"
 #. odoo-python
 #: code:addons/partner_identifiers.py:0
 msgid "700 Number"
-msgstr ""
+msgstr "700 番号"
 
 #. module: base
 #: model_terms:res.partner,website_description:base.res_partner_1
@@ -520,7 +544,7 @@ msgstr ""
 #: model_terms:res.partner,website_description:base.res_partner_5
 msgid ""
 "<a href=\"#\" class=\"btn btn-primary o_translate_inline\">Discover more</a>"
-msgstr ""
+msgstr "<a href=\"#\" class=\"btn btn-primary o_translate_inline\">さらに表示</a>"
 
 #. module: base
 #: model_terms:ir.actions.act_window,help:base.action_ir_mail_server_list
@@ -651,7 +675,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:base.view_partner_form
 msgid ""
 "<i class=\"oi d-none d-md-block\" data-icon=\"luggage\" title=\"Position\"/>"
-msgstr ""
+msgstr "<i class=\"oi d-none d-md-block\" data-icon=\"luggage\" title=\"職位\"/>"
 
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.view_partner_form
@@ -660,6 +684,8 @@ msgid ""
 "<i class=\"oi d-none d-md-inline-flex\" data-icon=\"business\" "
 "title=\"Company\"/>"
 msgstr ""
+"<i class=\"oi d-none d-md-inline-flex\" data-icon=\"business\" title=\"会"
+"社\"/>"
 
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.view_partner_form
@@ -668,6 +694,8 @@ msgid ""
 "<i class=\"oi oi-filled d-none d-md-block\" data-icon=\"mail\" "
 "title=\"Email\"/>"
 msgstr ""
+"<i class=\"oi oi-filled d-none d-md-block\" data-icon=\"mail\" "
+"title=\"メール\"/>"
 
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.view_users_form
@@ -677,6 +705,10 @@ msgid ""
 "                                    <i class=\"oi d-none d-md-block\" data-"
 "icon=\"key\" title=\"Login\" invisible=\"login == email\"/>"
 msgstr ""
+"<i class=\"oi oi-filled d-none d-md-block\" data-icon=\"mail\" "
+"title=\"ログイン / メール\" invisible=\"login != email\"/>\n"
+"                                    <i class=\"oi d-none d-md-block\" data-"
+"icon=\"key\" title=\"ログイン\" invisible=\"login == email\"/>"
 
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.view_partner_form
@@ -685,6 +717,8 @@ msgid ""
 "<i class=\"oi oi-filled d-none d-md-block\" data-icon=\"phone\" "
 "title=\"Phone\"/>"
 msgstr ""
+"<i class=\"oi oi-filled d-none d-md-block\" data-icon=\"phone\" title=\"電"
+"話\"/>"
 
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.view_partner_form
@@ -693,6 +727,8 @@ msgid ""
 "<i class=\"oi oi-filled d-none d-md-inline-flex\" data-icon=\"mail\" "
 "title=\"Email\"/>"
 msgstr ""
+"<i class=\"oi oi-filled d-none d-md-inline-flex\" data-icon=\"mail\" "
+"title=\"メール\"/>"
 
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.view_partner_form
@@ -701,6 +737,8 @@ msgid ""
 "<i class=\"oi oi-filled d-none d-md-inline-flex\" data-icon=\"phone\" "
 "title=\"Phone\"/>"
 msgstr ""
+"<i class=\"oi oi-filled d-none d-md-inline-flex\" data-icon=\"phone\" "
+"title=\"電話\"/>"
 
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.view_res_users_kanban
@@ -708,6 +746,8 @@ msgid ""
 "<i class=\"oi oi-filled me-1\" data-icon=\"mail\" role=\"img\" aria-"
 "label=\"Login\"/>"
 msgstr ""
+"<i class=\"oi oi-filled me-1\" data-icon=\"mail\" role=\"img\" aria-"
+"label=\"ログイン\"/>"
 
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.view_res_users_kanban
@@ -715,6 +755,8 @@ msgid ""
 "<i class=\"oi oi-filled\" data-icon=\"circle\" role=\"img\" aria-"
 "label=\"Invalid\" title=\"Invalid\"/>"
 msgstr ""
+"<i class=\"oi oi-filled\" data-icon=\"circle\" role=\"img\" aria-"
+"label=\"Invalid\" title=\"無効\"/>"
 
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.view_res_users_kanban
@@ -722,18 +764,20 @@ msgid ""
 "<i class=\"oi oi-filled\" data-icon=\"circle\" role=\"img\" aria-"
 "label=\"Ok\" title=\"Ok\"/>"
 msgstr ""
+"<i class=\"oi oi-filled\" data-icon=\"circle\" role=\"img\" aria-"
+"label=\"Ok\" title=\"Ok\"/>"
 
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.res_partner_kanban_view
 #: model_terms:ir.ui.view,arch_db:base.view_partner_form
 msgid ""
 "<i class=\"oi oi-fw me-1\" data-icon=\"location_on\" title=\"Location\"/>"
-msgstr ""
+msgstr "<i class=\"oi oi-fw me-1\" data-icon=\"location_on\" title=\"ロケーション\"/>"
 
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.view_partner_form
 msgid "<i class=\"oi oi-fw me-1\" data-icon=\"luggage\" title=\"Position\"/>"
-msgstr ""
+msgstr "<i class=\"oi oi-fw me-1\" data-icon=\"luggage\" title=\"職位\"/>"
 
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.ir_access_form_view
@@ -741,6 +785,8 @@ msgid ""
 "<i class=\"oi oi-fw o_button_icon\" data-icon=\"east\"/>\n"
 "                                Access rights documentation"
 msgstr ""
+"<i class=\"oi oi-fw o_button_icon\" data-icon=\"east\"/>\n"
+"                                アクセス権限に関するドキュメント"
 
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.view_users_form_simple_modif
@@ -748,6 +794,8 @@ msgid ""
 "<i class=\"oi oi-fw oi-filled d-none d-md-inline-flex\" data-icon=\"mail\" "
 "title=\"Email\"/>"
 msgstr ""
+"<i class=\"oi oi-fw oi-filled d-none d-md-inline-flex\" data-icon=\"mail\" "
+"title=\"メール\"/>"
 
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.view_users_form_simple_modif
@@ -755,6 +803,8 @@ msgid ""
 "<i class=\"oi oi-fw oi-filled d-none d-md-inline-flex\" data-icon=\"phone\" "
 "title=\"Phone\"/>"
 msgstr ""
+"<i class=\"oi oi-fw oi-filled d-none d-md-inline-flex\" data-icon=\"phone\" "
+"title=\"電話\"/>"
 
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.res_partner_kanban_view
@@ -762,6 +812,8 @@ msgid ""
 "<i class=\"oi oi-fw oi-filled me-1 text-muted\" data-icon=\"mail\" "
 "title=\"Email\"/>"
 msgstr ""
+"<i class=\"oi oi-fw oi-filled me-1 text-muted\" data-icon=\"mail\" "
+"title=\"メール\"/>"
 
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.res_partner_kanban_view
@@ -769,25 +821,27 @@ msgid ""
 "<i class=\"oi oi-fw oi-filled me-1 text-muted\" data-icon=\"phone\" "
 "title=\"Phone\"/>"
 msgstr ""
+"<i class=\"oi oi-fw oi-filled me-1 text-muted\" data-icon=\"phone\" "
+"title=\"電話\"/>"
 
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.view_partner_form
 #: model_terms:ir.ui.view,arch_db:base.view_res_company_kanban
 msgid ""
 "<i class=\"oi oi-fw oi-filled me-1\" data-icon=\"mail\" title=\"Email\"/>"
-msgstr ""
+msgstr "<i class=\"oi oi-fw oi-filled me-1\" data-icon=\"mail\" title=\"メール\"/>"
 
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.view_partner_form
 #: model_terms:ir.ui.view,arch_db:base.view_res_company_kanban
 msgid ""
 "<i class=\"oi oi-fw oi-filled me-1\" data-icon=\"phone\" title=\"Phone\"/>"
-msgstr ""
+msgstr "<i class=\"oi oi-fw oi-filled me-1\" data-icon=\"phone\" title=\"電話\"/>"
 
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.view_server_action_form
 msgid "<i class=\"oi pe-2\" data-icon=\"warning\" title=\"Warning\"/>"
-msgstr ""
+msgstr "<i class=\"oi pe-2\" data-icon=\"warning\" title=\"警告\"/>"
 
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.view_currency_kanban
@@ -797,12 +851,12 @@ msgstr "<span class=\"badge rounded-pill bg-light border\">無効</span>"
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.ir_access_kanban_view
 msgid "<span class=\"me-1\">For</span>"
-msgstr ""
+msgstr "<span class=\"me-1\">：</span>"
 
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.ir_access_kanban_view
 msgid "<span class=\"me-1\">On</span>"
-msgstr ""
+msgstr "<span class=\"me-1\">：</span>"
 
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.view_base_module_update
@@ -968,6 +1022,8 @@ msgid ""
 "<span invisible=\"evaluation_type != 'value' or value_field_to_show != "
 "'x2many'\">by</span>"
 msgstr ""
+"<span invisible=\"evaluation_type != 'value' or value_field_to_show != "
+"'x2many'\">by</span>"
 
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.view_server_action_form
@@ -977,6 +1033,10 @@ msgid ""
 "                                <span invisible=\"evaluation_type != "
 "'sequence'\">with</span>"
 msgstr ""
+"<span invisible=\"evaluation_type != 'value' or value_field_to_show == "
+"'x2many'\">~</span>\n"
+"                                <span invisible=\"evaluation_type != "
+"'sequence'\">/</span>"
 
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.view_base_module_uninstall
@@ -1042,7 +1102,7 @@ msgstr ""
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.view_groups_form
 msgid "<span> days</span>"
-msgstr ""
+msgstr "<span>日</span>"
 
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.report_irmodulereference
@@ -1256,6 +1316,8 @@ msgid ""
 "and is used by domestic money transfer protocols (from/to bank accounts in "
 "the same country)."
 msgstr ""
+"クリアリング番号(またはルーティング番号)は、銀行・支店・拠点を識別する番号で"
+"、国内送金プロトコル(同一国内の銀行口座間の送金)で使用されます。"
 
 #. module: base
 #: model_terms:res.partner,website_description:base.res_partner_3
@@ -1267,6 +1329,10 @@ msgid ""
 "and\n"
 "                    turbomachinery and propulsion)."
 msgstr ""
+"非営利の国際的な教育・科学\n"
+"                    機関であり、3つの部門(航空宇宙、\n"
+"                    環境・応用流体力学、ターボ機械・\n"
+"                    推進)を擁しています。"
 
 #. module: base
 #: model:res.partner,website_short_description:base.res_partner_3
@@ -1275,6 +1341,8 @@ msgid ""
 "three departments (aeronautics and aerospace, environmental and applied "
 "fluid dynamics, and turbomachinery and propulsion)."
 msgstr ""
+"航空・宇宙、環境・応用流体力学、ターボ機械・推進の3部門を擁する非営利の国際教"
+"育科学団体。"
 
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.view_groups_form
@@ -1285,12 +1353,16 @@ msgid ""
 "group                                             that is constrained by "
 "their domain and the restrictions"
 msgstr ""
+"制限とは、グループに紐付かないアクセス権で、全体に一律で適用され、"
+"                                             回避できないものです。権限とは、"
+"グループに紐付いたアクセス権で                                             "
+"グループのドメイン条件および制限によって制約されるものです。"
 
 #. module: base
 #. odoo-python
 #: code:addons/base/models/ir_actions.py:0
 msgid "A sequence must only be used with character fields."
-msgstr ""
+msgstr "シーケンスは、文字列フィールドでのみ使用できます。"
 
 #. module: base
 #: model:ir.model.fields,field_description:base.field_base_partner_merge_automatic_wizard__exclude_contact
@@ -1322,7 +1394,7 @@ msgstr "A0 5 841 x 1189 mm"
 #. odoo-python
 #: code:addons/partner_identifiers.py:0
 msgid "A00012345"
-msgstr ""
+msgstr "A00012345"
 
 #. module: base
 #: model:ir.model.fields.selection,name:base.selection__report_paperformat__format__a1
@@ -1378,7 +1450,7 @@ msgstr "ABN"
 #. odoo-python
 #: code:addons/partner_identifiers.py:0
 msgid "ACN"
-msgstr ""
+msgstr "ACN"
 
 #. module: base
 #: model:ir.module.category,name:base.module_category_ai
@@ -1457,7 +1529,7 @@ msgstr "アクセス管理"
 #. module: base
 #: model:ir.model.fields,field_description:base.field_res_groups__access_count
 msgid "Access Count"
-msgstr ""
+msgstr "アクセス数"
 
 #. module: base
 #: model:ir.model,name:base.model_res_groups
@@ -1472,7 +1544,7 @@ msgstr "アドレスメニュー"
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.ir_access_search_view
 msgid "Access Right"
-msgstr ""
+msgstr "アクセス権"
 
 #. module: base
 #. odoo-python
@@ -1503,7 +1575,7 @@ msgstr "アクセス権の不一致"
 #: code:addons/base/models/res_groups.py:0
 #: model:ir.model.fields,field_description:base.field_res_groups__access_ids
 msgid "Access Rules"
-msgstr ""
+msgstr "アクセスルール"
 
 #. module: base
 #: model:ir.model.fields,field_description:base.field_ir_attachment__access_token
@@ -1513,7 +1585,7 @@ msgstr "アクセストークン"
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.ir_access_form_view
 msgid "Access name..."
-msgstr ""
+msgstr "アクセス名..."
 
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.ir_access_form_view
@@ -1523,16 +1595,21 @@ msgid ""
 "                            Access rights associated with a group grant "
 "permissions. These are constrained by their domain and the restrictions."
 msgstr ""
+"グループが指定されていないアクセス権は、回避できないグローバルな制限を適用し"
+"ます。<br/>\n"
+"                            一方、グループに関連付けられたアクセス権は権限を"
+"付与します。これらは設定されたドメイン(対象範囲)および各種制限によって制約さ"
+"れます。"
 
 #. module: base
 #: model:res.groups,comment:base.group_user
 msgid "Access to the home menu with limited access"
-msgstr ""
+msgstr "アクセス制限付きのホームメニューへのアクセス"
 
 #. module: base
 #: model:res.groups,comment:base.group_user_regular
 msgid "Access to the home menu with regular access"
-msgstr ""
+msgstr "通常の操作によるホームメニューへのアクセス"
 
 #. module: base
 #: model:res.groups,comment:base.group_system
@@ -1543,13 +1620,15 @@ msgstr "アプリの設定を行うための管理設定へのアクセス"
 #. odoo-python
 #: code:addons/environments.py:0
 msgid "Access to unauthorized or invalid companies."
-msgstr ""
+msgstr "許可されていない、または無効な会社へのアクセス。"
 
 #. module: base
 #. odoo-python
 #: code:addons/base/models/ir_access.py:0
 msgid "Accesses with domain can not be applied on model Access itself."
 msgstr ""
+"ドメインを含むアクセス権は「アクセス権」モデル自体に適用することはできません"
+"。"
 
 #. module: base
 #. odoo-python
@@ -1571,7 +1650,7 @@ msgstr "口座番号"
 #: model:ir.model.fields,help:base.field_res_partner_bank__holder_name
 msgid ""
 "Account holder name in case it is different than the name of the partner."
-msgstr ""
+msgstr "取引先名と異なる場合の口座名義人名。"
 
 #. module: base
 #: model:ir.module.category,name:base.module_category_accounting
@@ -1587,6 +1666,10 @@ msgid ""
 "productive,\n"
 "                responsive and profitable."
 msgstr ""
+"Acme Corporationは、顧客の生産性、\n"
+"                対応力、収益性を高めるため、\n"
+"                人事およびサプライチェーンプロセスの設計、開発、統合、および"
+"サポートを行っています。"
 
 #. module: base
 #: model:res.partner,website_short_description:base.res_partner_2
@@ -1596,6 +1679,8 @@ msgid ""
 "Chain processes in order to make our customers more productive, responsive "
 "and profitable."
 msgstr ""
+"Acme Corporationは、顧客の生産性、対応力、収益性を高めるため、人事および"
+"サプライチェーンプロセスの設計、開発、統合、およびサポートを行っています。"
 
 #. module: base
 #: model_terms:res.partner,website_description:base.res_partner_2
@@ -1605,6 +1690,10 @@ msgid ""
 "                with Open Sources software to manage their businesses. Our\n"
 "                consultants are experts in the following areas:"
 msgstr ""
+"Acme Corporationは、グローバル企業向けにERPを統合するとともに、\n"
+"                オープンソースソフトウェアを活用して中小企業(PME)のビジネス管"
+"理を支援しています。\n"
+"                当社のコンサルタントは、以下の分野における専門家です："
 
 #. module: base
 #: model:ir.model,name:base.model_ir_actions_actions
@@ -1816,7 +1905,7 @@ msgstr "方向情報を追加します(デジタルには使用されません)"
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.act_report_xml_view
 msgid "Add to the 'Print' menu"
-msgstr ""
+msgstr "「印刷」メニューに追加"
 
 #. module: base
 #: model:ir.model.fields.selection,name:base.selection__ir_actions_server__update_m2m_operation__add
@@ -1826,7 +1915,7 @@ msgstr "追加"
 #. module: base
 #: model:res.partner,website_short_description:base.res_partner_address_31
 msgid "Addison Olson is a mighty sales representative at Acme Corporation."
-msgstr ""
+msgstr "Addison Olsonは、Acme Corporationの非常に優秀な営業担当者です。"
 
 #. module: base
 #: model_terms:res.partner,website_description:base.res_partner_address_31
@@ -1835,13 +1924,17 @@ msgid ""
 "    notably for selling mouse traps. With that trick he cut\n"
 "    IT budget by almost half within the last 2 years."
 msgstr ""
+"Addison Olsonは、IT業界で<b>10年以上</b>のキャリアの持ち主です。\n"
+"    彼は特に、無駄を徹底的に排除する画期的なアプローチで知られています。\n"
+"    この独自の手法により、過去2年間でIT予算をほぼ半減させることに成功しました"
+"。"
 
 #. module: base
 #: model:ir.model.fields,field_description:base.field_res_company__additional_identifiers
 #: model:ir.model.fields,field_description:base.field_res_partner__additional_identifiers
 #: model:ir.model.fields,field_description:base.field_res_users__additional_identifiers
 msgid "Additional Identifiers"
-msgstr ""
+msgstr "追加の識別子"
 
 #. module: base
 #. odoo-python
@@ -1858,7 +1951,7 @@ msgstr "住所"
 #: model:ir.model.fields,field_description:base.field_res_partner__address
 #: model:ir.model.fields,field_description:base.field_res_users__address
 msgid "Address (without name)"
-msgstr ""
+msgstr "住所 (名前なし)"
 
 #. module: base
 #: model:ir.model,name:base.model_format_address_mixin
@@ -1886,7 +1979,7 @@ msgstr "アドレスのフォーマット..."
 #: model:ir.model.fields,field_description:base.field_res_partner__address_inline
 #: model:ir.model.fields,field_description:base.field_res_users__address_inline
 msgid "Address inline (without name)"
-msgstr ""
+msgstr "住所 (名前なし・1行表示)"
 
 #. module: base
 #. odoo-python
@@ -1904,7 +1997,7 @@ msgstr "管理"
 #: model:ir.model.fields,help:base.field_res_country_state__name
 msgid ""
 "Administrative divisions of a country. E.g. Fed. State, Department, Canton"
-msgstr ""
+msgstr "国の行政区分。例：連邦、州、県、カントン(郡/州)"
 
 #. module: base
 #: model:res.partner.industry,name:base.res_partner_industry_N
@@ -2266,14 +2359,14 @@ msgstr ""
 #: model_terms:res.company,invoice_terms_html:base.demo_company_id
 msgid ""
 "All our contractual relations will be governed exclusively by Indonesia law."
-msgstr ""
+msgstr "当社との契約関係は、すべてインドネシア法のみを準拠法として規律されます。"
 
 #. module: base
 #: model_terms:res.company,invoice_terms_html:base.main_company
 msgid ""
 "All our contractual relations will be governed exclusively by United States "
 "law."
-msgstr ""
+msgstr "当社との契約関係は、すべて米国法のみを準拠法として規律されます。"
 
 #. module: base
 #. odoo-python
@@ -2313,7 +2406,7 @@ msgstr "許可されたグループ"
 #. module: base
 #: model:ir.model.fields,field_description:base.field_ir_model_fields__allowed_index_types
 msgid "Allowed Index Types"
-msgstr ""
+msgstr "許可されたインデックス種別"
 
 #. module: base
 #: model:ir.model.fields,field_description:base.field_ir_actions_server__allowed_states
@@ -3227,6 +3320,11 @@ msgid ""
 "Thanks to the following constraint: %(field_display)s\n"
 "How about archiving the record instead?"
 msgstr ""
+"削除しようとしているレコードは、別のモデルで使用されています。\n"
+"\n"
+"原因となっているモデル：%(model_display)s\n"
+"関連している制約項目：%(field_display)s\n"
+"代わりに、このレコードをアーカイブしてみてはいかがでしょうか?"
 
 #. module: base
 #. odoo-python
@@ -3331,7 +3429,7 @@ msgstr "スケジュールされた更新を適用"
 #: model:ir.actions.act_window,name:base.action_view_base_module_upgrade
 #: model:ir.ui.menu,name:base.menu_view_base_module_upgrade
 msgid "Apply Schedule Upgrades"
-msgstr ""
+msgstr "予約アップグレードの適用"
 
 #. module: base
 #: model:ir.module.category,name:base.module_category_services_appointment
@@ -3465,7 +3563,7 @@ msgstr "アルバ"
 #: model_terms:res.partner,website_description:base.res_partner_12
 #: model_terms:res.partner,website_description:base.res_partner_5
 msgid "As a team, we are happy to contribute to this event."
-msgstr ""
+msgstr "チームとして、このイベントに貢献できることをうれしく思います。"
 
 #. module: base
 #: model:ir.model.fields.selection,name:base.selection__res_partner__tz__asia/aden
@@ -4012,7 +4110,7 @@ msgstr "添付ファイル"
 #. module: base
 #: model:ir.model.fields,field_description:base.field_ir_actions_report__attachment
 msgid "Attachment Name"
-msgstr ""
+msgstr "添付ファイル名"
 
 #. module: base
 #. odoo-python
@@ -4118,7 +4216,7 @@ msgstr "オーストラリア/Yancowinna"
 #. odoo-python
 #: code:addons/partner_identifiers.py:0
 msgid "Australian Company Number."
-msgstr ""
+msgstr "オーストラリアの会社番号。"
 
 #. module: base
 #: model:res.country,name:base.at
@@ -4129,7 +4227,7 @@ msgstr "オーストリア"
 #. odoo-python
 #: code:addons/partner_identifiers.py:0
 msgid "Austrian company ID number (UID)."
-msgstr ""
+msgstr "オーストリアの企業識別番号(UID)。"
 
 #. module: base
 #: model:ir.model.fields,field_description:base.field_res_users_identitycheck__auth_method
@@ -4204,7 +4302,7 @@ msgstr "自動化"
 #: model:ir.model.fields,field_description:base.field_res_partner__available_additional_identifiers_metadata
 #: model:ir.model.fields,field_description:base.field_res_users__available_additional_identifiers_metadata
 msgid "Available Additional Identifiers Metadata"
-msgstr ""
+msgstr "対応可能な追加識別子メタデータ"
 
 #. module: base
 #: model:ir.model.fields,field_description:base.field_ir_actions_server__available_model_ids
@@ -4215,7 +4313,7 @@ msgstr "利用可能モデル"
 #. module: base
 #: model:ir.model.fields,field_description:base.field_res_users_apikeys_description__available_scopes_count
 msgid "Available Scopes Count"
-msgstr ""
+msgstr "利用可能な適用範囲数"
 
 #. module: base
 #: model:ir.model.fields,field_description:base.field_avatar_mixin__avatar_1920
@@ -4269,6 +4367,8 @@ msgid ""
 "Azure Interior brings honesty and seriousness to wood industry while helping "
 "customers deal with trees, flowers and fungi."
 msgstr ""
+"木材業界に誠実さと真摯なモノづくりを。Azure Interiorは、木や花、菌類といった"
+"自然の恵みと向き合うお客様をサポートします。"
 
 #. module: base
 #: model:res.partner.industry,full_name:base.res_partner_industry_B
@@ -4278,12 +4378,12 @@ msgstr "B - 採鉱・採石"
 #. module: base
 #: model:ir.model.fields.selection,name:base.selection__ir_model_fields__index__btree
 msgid "B-tree"
-msgstr ""
+msgstr "B-tree"
 
 #. module: base
 #: model:ir.model.fields.selection,name:base.selection__ir_model_fields__index__btree_not_null
 msgid "B-tree, excluding nulls"
-msgstr ""
+msgstr "B-tree (NULL値を除く)"
 
 #. module: base
 #: model:ir.model.fields.selection,name:base.selection__report_paperformat__format__b0
@@ -4344,24 +4444,26 @@ msgstr "B9  23  33 x 62 mm"
 #. odoo-python
 #: code:addons/partner_identifiers.py:0
 msgid "BCE/KBO"
-msgstr ""
+msgstr "BCE/KBO"
 
 #. module: base
 #: model:ir.model.fields,field_description:base.field_res_partner_bank__bank_bic
 msgid "BIC/SWIFT"
-msgstr ""
+msgstr "BIC/SWIFT"
 
 #. module: base
 #. odoo-python
 #: code:addons/partner_identifiers.py:0 model:res.country,vat_label:base.hk
 msgid "BRN"
-msgstr ""
+msgstr "BRN"
 
 #. module: base
 #. odoo-python
 #: code:addons/base/models/res_partner_bank.py:0
 msgid "BSB is not valid (expected format is \"NNN-NNN\"). Please rectify."
 msgstr ""
+"入力されたBSBが正しくありません。正しい形式「NNN-NNN」で再度入力してください"
+"。"
 
 #. module: base
 #. odoo-python
@@ -4372,7 +4474,7 @@ msgstr "不正なファイル形式:%s"
 #. module: base
 #: model:ir.model.fields,field_description:base.field_res_users__barcode
 msgid "Badge ID"
-msgstr ""
+msgstr "バッジ ID"
 
 #. module: base
 #: model:res.country,name:base.bs
@@ -4445,7 +4547,7 @@ msgstr "銀行の住所"
 #. odoo-python
 #: code:addons/base/models/res_partner_bank.py:0
 msgid "Bank Code length must be 3."
-msgstr ""
+msgstr "銀行コードの長さは3桁にしてください。"
 
 #. module: base
 #: model:ir.model.fields,help:base.field_res_partner_bank__bank_bic
@@ -4454,11 +4556,13 @@ msgid ""
 "letters) + Country Code (2 letters) + Location Code (2 letters/numbers) + "
 "Optional Branch Code (3 letters/numbers)."
 msgstr ""
+"国際送金に使用する銀行識別コード(BIC)です。形式は、銀行コード(4文字)＋国"
+"コード(2文字)＋所在地コード(2文字/数字)＋(任意)支店コード(3文字/数字)です。"
 
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.view_partner_bank_form
 msgid "Bank Information"
-msgstr ""
+msgstr "銀行情報"
 
 #. module: base
 #: model:ir.model.fields,field_description:base.field_res_partner_bank__bank_name
@@ -4471,7 +4575,7 @@ msgstr "銀行名"
 #. odoo-python
 #: code:addons/base/models/res_partner_bank.py:0
 msgid "Bank SARIE ID must consist of 4 upper case English letter."
-msgstr ""
+msgstr "銀行のSARIE IDは、大文字の英字4文字で入力してください。"
 
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.view_partner_bank_form
@@ -4484,6 +4588,8 @@ msgid ""
 "Bank account type: Normal, IBAN, CLABE, or other from localization. Inferred "
 "from the bank account number."
 msgstr ""
+"銀行口座の種類：通常、IBAN、CLABE、またはローカライズで定義されたその他。銀行"
+"口座番号から推定されます。"
 
 #. module: base
 #: model:ir.model.fields,field_description:base.field_res_company__bank_ids
@@ -4608,13 +4714,13 @@ msgstr "ベラルーシ"
 #. odoo-python
 #: code:addons/partner_identifiers.py:0
 msgid "Belgian Crossroads Bank for Enterprises number."
-msgstr ""
+msgstr "ベルギー企業向けクロスロード銀行の番号。"
 
 #. module: base
 #. odoo-python
 #: code:addons/partner_identifiers.py:0
 msgid "Belgian national identification number."
-msgstr ""
+msgstr "ベルギーの国民識別番号。"
 
 #. module: base
 #: model:res.country,name:base.be
@@ -4700,6 +4806,8 @@ msgid ""
 "Blame the following accesses:\n"
 "%s"
 msgstr ""
+"以下のアクセス権に起因しています:\n"
+"%s"
 
 #. module: base
 #: model:ir.model.fields.selection,name:base.selection__res_company__report_tables_id__bold
@@ -4761,19 +4869,19 @@ msgstr "ボックス表示"
 #. odoo-python
 #: code:addons/partner_identifiers.py:0
 msgid "Branch Code"
-msgstr ""
+msgstr "支店コード"
 
 #. module: base
 #. odoo-python
 #: code:addons/partner_identifiers.py:0
 msgid "Branch Number"
-msgstr ""
+msgstr "支店番号"
 
 #. module: base
 #. odoo-python
 #: code:addons/partner_identifiers.py:0
 msgid "Branch Number of your company, leave empty for headquarters."
-msgstr ""
+msgstr "自社の支店番号。本社の場合は空欄のままにしてください。"
 
 #. module: base
 #. odoo-python
@@ -4790,6 +4898,11 @@ msgid ""
 "                notably for selling mouse traps. With that trick he cut\n"
 "                IT budget by almost half within the last 2 years."
 msgstr ""
+"BrandonはIT業界で<b>10年以上</b>のキャリアの持ち主です。\n"
+"                彼は特に、無駄を徹底的に排除する画期的なアプローチで知られて"
+"います。\n"
+"                この独自の手法により、過去2年間でIT予算をほぼ半減させることに"
+"成功しました。"
 
 #. module: base
 #: model:res.country,name:base.br
@@ -4800,7 +4913,7 @@ msgstr "ブラジル"
 #. odoo-python
 #: code:addons/partner_identifiers.py:0
 msgid "Brazilian company identification number. 14 digits."
-msgstr ""
+msgstr "ブラジルの法人識別番号。14桁。"
 
 #. module: base
 #: model:res.country,name:base.io
@@ -4834,7 +4947,7 @@ msgstr "ブルネイ・ダルサラーム国"
 #. odoo-python
 #: code:addons/partner_identifiers.py:0
 msgid "Brønnøysund nr"
-msgstr ""
+msgstr "Brønnøysund番号"
 
 #. module: base
 #: model:ir.model.fields.selection,name:base.selection__res_company__report_tables_id__bubble
@@ -4865,19 +4978,19 @@ msgstr "ブルンジ"
 #. odoo-python
 #: code:addons/partner_identifiers.py:0
 msgid "Business ID"
-msgstr ""
+msgstr "事業者ID"
 
 #. module: base
 #. odoo-python
 #: code:addons/partner_identifiers.py:0
 msgid "Business ID (Y-tunnus)."
-msgstr ""
+msgstr "事業者ID (Y-tunnus)。"
 
 #. module: base
 #. odoo-python
 #: code:addons/partner_identifiers.py:0
 msgid "Business Registration Number."
-msgstr ""
+msgstr "事業者登録番号。"
 
 #. module: base
 #: model:res.currency,currency_subunit_label:base.GMD
@@ -4915,7 +5028,7 @@ msgstr "C5E 24 163 x 229 mm"
 #: code:addons/base/models/res_partner.py:0
 #: code:addons/partner_identifiers.py:0
 msgid "CHE-123.456.788 TVA or CHE-123.456.788 MWST or CHE-123.456.788 IVA"
-msgstr ""
+msgstr "CHE-123.456.788 TVA または CHE-123.456.788 MWST または CHE-123.456.788 IVA"
 
 #. module: base
 #: model:ir.module.category,name:base.module_category_accounting_localizations_uk_cis
@@ -4926,13 +5039,13 @@ msgstr "CIS"
 #. odoo-python
 #: code:addons/bank_account_number.py:0
 msgid "CLABE should be a string of 18 digits."
-msgstr ""
+msgstr "CLABEは18桁の文字列である必要があります。"
 
 #. module: base
 #. odoo-python
 #: code:addons/partner_identifiers.py:0 model:res.country,vat_label:base.br
 msgid "CNPJ"
-msgstr ""
+msgstr "CNPJ"
 
 #. module: base
 #: model:ir.model.fields,field_description:base.field_ir_profile__cpu_duration
@@ -4979,7 +5092,7 @@ msgstr "CUIT"
 #. odoo-python
 #: code:addons/partner_identifiers.py:0
 msgid "CVR"
-msgstr ""
+msgstr "CVR"
 
 #. module: base
 #: model:ir.model.fields.selection,name:base.selection__ir_actions_act_window_view__view_mode__calendar
@@ -5066,7 +5179,7 @@ msgstr "構成を複製することはできません！"
 #. odoo-python
 #: code:addons/models.py:0
 msgid "Cannot grab a lock on records"
-msgstr ""
+msgstr "レコードのロックを取得できません"
 
 #. module: base
 #. odoo-python
@@ -5084,13 +5197,13 @@ msgstr ""
 #. odoo-python
 #: code:addons/base/models/ir_attachment.py:0
 msgid "Cannot search, too many attachments"
-msgstr ""
+msgstr "検索できません。添付ファイルが多すぎます"
 
 #. module: base
 #. odoo-python
 #: code:addons/models.py:0
 msgid "Cannot update a record without specifying its id or xml_id"
-msgstr ""
+msgstr "IDまたはxml_idを指定せずにレコードを更新することはできません"
 
 #. module: base
 #. odoo-python
@@ -5107,7 +5220,7 @@ msgstr "カーボベルデ"
 #. module: base
 #: model:ir.model.fields.selection,name:base.selection__ir_ui_view__type__card
 msgid "Card"
-msgstr ""
+msgstr "カード"
 
 #. module: base
 #: model:ir.model.fields.selection,name:base.selection__ir_model_fields__on_delete__cascade
@@ -5275,6 +5388,11 @@ msgid ""
 "and does not include any costs relating to the legislation of the country in "
 "which the client is located."
 msgstr ""
+"一部の国では、国内法令に基づき、請求書金額に対して源泉徴収(支払時控除)が適用"
+"されます。源泉徴収が発生する場合、その税金はクライアントが税務当局に納付する"
+"ものとします。いかなる場合も、ID Company は当該国の法令に起因する費用に関与し"
+"ません。したがって、請求書金額は全額が ID Company に支払われるものとし、"
+"クライアントが所在する国の法令に関連する一切の費用は含まれません。"
 
 #. module: base
 #: model_terms:res.company,invoice_terms_html:base.main_company
@@ -5287,6 +5405,12 @@ msgid ""
 "(San Francisco) in its entirety and does not include any costs relating to "
 "the legislation of the country in which the client is located."
 msgstr ""
+"一部の国では、国内法令に基づき、請求書金額に対して源泉徴収(支払時控除)が適用"
+"されます。源泉徴収が発生する場合、その税金はクライアントが税務当局に納付する"
+"ものとします。いかなる場合も、My Company (San Francisco)は当該国の法令に起因"
+"する費用に関与しません。したがって、請求書金額は全額が My Company (San "
+"Francisco)に支払われるものとし、クライアントが所在する国の法令に関連する一切"
+"の費用は含まれません。"
 
 #. module: base
 #: model:ir.model.constraint,message:base.constraint_ir_mail_server_certificate_requires_tls
@@ -5472,7 +5596,7 @@ msgstr "クリスマス島"
 #. odoo-python
 #: code:addons/partner_identifiers.py:0
 msgid "Citizen Identification"
-msgstr ""
+msgstr "個人識別番号"
 
 #. module: base
 #: model:ir.model.fields,field_description:base.field_res_company__city
@@ -5507,7 +5631,7 @@ msgstr "空にする"
 #. module: base
 #: model:ir.model.fields.selection,name:base.selection__ir_logging__type__client
 msgid "Client"
-msgstr "顧客"
+msgstr "クライアント"
 
 #. module: base
 #: model:ir.model,name:base.model_ir_actions_client
@@ -5520,7 +5644,7 @@ msgstr "クライアントアクション"
 #: model:ir.ui.menu,name:base.menu_ir_client_actions_report
 #: model_terms:ir.ui.view,arch_db:base.view_client_action_tree
 msgid "Client Actions"
-msgstr "顧客アクション"
+msgstr "クライアントアクション"
 
 #. module: base
 #: model:ir.model.fields,field_description:base.field_ir_actions_client__tag
@@ -5587,6 +5711,11 @@ msgid ""
 "                notably for selling mouse traps. With that trick he cut\n"
 "                IT budget by almost half within the last 2 years."
 msgstr ""
+"Colleen DiazはIT業界で<b>10年以上</b>のキャリアの持ち主です。\n"
+"                彼は特に、無駄を徹底的に排除する画期的なアプローチで知られて"
+"います。\n"
+"                この独自の手法により、過去2年間でIT予算をほぼ半減させることに"
+"成功しました。"
 
 #. module: base
 #: model:res.country,name:base.co
@@ -5648,7 +5777,7 @@ msgstr "モデルテーブル内のレコードを参照するカラム"
 #: model_terms:res.partner,website_description:base.res_partner_12
 #: model_terms:res.partner,website_description:base.res_partner_5
 msgid "Come see us live, we hope to meet you!"
-msgstr ""
+msgstr "ライブを見に来てください、お会いできるのを楽しみにしています!"
 
 #. module: base
 #: model:ir.model.fields.selection,name:base.selection__report_paperformat__format__comm10e
@@ -5695,7 +5824,7 @@ msgstr "取引先"
 #. odoo-python
 #: code:addons/partner_identifiers.py:0
 msgid "Commercial Registration Number"
-msgstr ""
+msgstr "商業登録番号"
 
 #. module: base
 #: model:ir.module.category,name:base.module_category_sales_commission
@@ -5715,7 +5844,7 @@ msgstr "コモロ"
 #. module: base
 #: model:ir.model.fields.selection,name:base.selection__res_company__report_tables_id__compact
 msgid "Compact"
-msgstr ""
+msgstr "コンパクト"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_res_company_form
@@ -5818,7 +5947,7 @@ msgstr "会社スローガン"
 #. odoo-python
 #: code:addons/partner_identifiers.py:0
 msgid "Company identification number"
-msgstr ""
+msgstr "会社登録番号"
 
 #. module: base
 #: model:ir.model.fields,help:base.field_res_company__report_header
@@ -5859,7 +5988,7 @@ msgstr "完全な住所"
 #: model:ir.model.fields,field_description:base.field_res_partner__contact_address_inline
 #: model:ir.model.fields,field_description:base.field_res_users__contact_address_inline
 msgid "Complete Address inline"
-msgstr ""
+msgstr "完全な住所(1行表示)"
 
 #. module: base
 #: model:ir.model.fields,field_description:base.field_ir_model_data__complete_name
@@ -5973,7 +6102,7 @@ msgstr "確定"
 #: model:res.company,free_order_label:base.demo_company_id
 #: model:res.company,free_order_label:base.main_company
 msgid "Confirm Order"
-msgstr ""
+msgstr "オーダ確定"
 
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.res_users_identitycheck_view_form
@@ -6088,13 +6217,13 @@ msgstr "建設"
 #. module: base
 #: model:res.partner.category,name:base.res_partner_category_8
 msgid "Consulting Services"
-msgstr ""
+msgstr "コンサルティングサービス"
 
 #. module: base
 #. odoo-python
 #: code:addons/partner_identifiers.py:0
 msgid "Consumer Identification"
-msgstr ""
+msgstr "消費者識別"
 
 #. module: base
 #: model:ir.model,name:base.model_res_partner
@@ -6213,6 +6342,9 @@ msgid ""
 "have a 'company_id' or 'company_ids' field, and isn't company-dependent "
 "either."
 msgstr ""
+"フィールド %s の会社依存ドメインを生成できませんでした。モデルに "
+"'company_id' または 'company_ids' フィールドが存在せず、会社依存(company-"
+"dependent)の設定にもなっていません。"
 
 #. module: base
 #: model:ir.model.fields,field_description:base.field_ir_model__count
@@ -6308,7 +6440,7 @@ msgstr "作成"
 #. odoo-python
 #: code:addons/base/models/ir_actions.py:0
 msgid "Create %(model_name)s"
-msgstr ""
+msgstr "%(model_name)sを作成"
 
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.view_server_action_form
@@ -6422,37 +6554,37 @@ msgstr ""
 #. module: base
 #: model:ir.model.fields.selection,name:base.selection__ir_access__operation__cd
 msgid "Create, Delete"
-msgstr ""
+msgstr "作成、削除"
 
 #. module: base
 #: model:ir.model.fields.selection,name:base.selection__ir_access__operation__cr
 msgid "Create, Read"
-msgstr ""
+msgstr "作成、閲覧"
 
 #. module: base
 #: model:ir.model.fields.selection,name:base.selection__ir_access__operation__crd
 msgid "Create, Read, Delete"
-msgstr ""
+msgstr "作成、閲覧、削除"
 
 #. module: base
 #: model:ir.model.fields.selection,name:base.selection__ir_access__operation__cru
 msgid "Create, Read, Update"
-msgstr ""
+msgstr "作成、閲覧、更新"
 
 #. module: base
 #: model:ir.model.fields.selection,name:base.selection__ir_access__operation__crud
 msgid "Create, Read, Update, Delete"
-msgstr ""
+msgstr "作成、閲覧、更新、削除"
 
 #. module: base
 #: model:ir.model.fields.selection,name:base.selection__ir_access__operation__cu
 msgid "Create, Update"
-msgstr ""
+msgstr "作成、更新"
 
 #. module: base
 #: model:ir.model.fields.selection,name:base.selection__ir_access__operation__cud
 msgid "Create, Update, Delete"
-msgstr ""
+msgstr "作成、更新、削除"
 
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.module_form
@@ -6667,7 +6799,7 @@ msgstr "クロアチア"
 #. odoo-python
 #: code:addons/partner_identifiers.py:0
 msgid "Croatian company ID number."
-msgstr ""
+msgstr "クロアチアの事業者登録番号。"
 
 #. module: base
 #: model:ir.model.fields,field_description:base.field_ir_cron_progress__cron_id
@@ -6704,6 +6836,8 @@ msgid ""
 "take action. More information can be found in the server logs around %"
 "(time)s."
 msgstr ""
+"Cronジョブ「%(name)s」。(%(id)s)でエラーが発生しています。放置すると無効化さ"
+"れます。詳細は %(time)s 前後のサーバログをご確認ください。"
 
 #. module: base
 #: model:res.country,name:base.cu
@@ -6813,7 +6947,7 @@ msgstr "通貨記号：印刷時に使用される"
 #: model:ir.model.fields,field_description:base.field_res_device__is_current
 #: model:ir.model.fields,field_description:base.field_res_session__is_current
 msgid "Current"
-msgstr ""
+msgstr "現在"
 
 #. module: base
 #. odoo-python
@@ -6882,7 +7016,7 @@ msgstr "顧客名位置"
 #: model_terms:res.partner,website_description:base.res_partner_2
 #: model_terms:res.partner,website_description:base.res_partner_4
 msgid "Customer Relationship Management"
-msgstr ""
+msgstr "顧客関係管理"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_partner_customer_form
@@ -6899,7 +7033,7 @@ msgstr "カスタマイズ"
 #: model_terms:ir.ui.view,arch_db:base.ir_access_form_view
 #: model_terms:ir.ui.view,arch_db:base.view_model_form
 msgid "Customize"
-msgstr ""
+msgstr "カスタマイズ"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_ui_view_custom
@@ -6916,8 +7050,8 @@ msgid ""
 "Customized views are used when users reorganize the content of their "
 "dashboard views (via web client)"
 msgstr ""
-"ユーザ自身がダッシュボードビュー（Webクライアントを介して）の内容を再編成し"
-"た、カスタマイズビューを使うことができます。"
+"ユーザ自身がダッシュボードビュー（ウェブクライアントを介して）の内容を再編成"
+"した、カスタマイズビューを使うことができます。"
 
 #. module: base
 #: model:res.country,name:base.cy
@@ -6933,7 +7067,7 @@ msgstr "チェコ共和国"
 #. odoo-python
 #: code:addons/partner_identifiers.py:0
 msgid "Czech business identification number (IČO)."
-msgstr ""
+msgstr "チェコの事業者登録番号（IČO）。"
 
 #. module: base
 #: model:res.country,name:base.ci
@@ -6950,7 +7084,7 @@ msgstr "D - 電気、ガス、蒸気、空調の供給"
 #: code:addons/base/models/res_partner.py:0
 #: code:addons/partner_identifiers.py:0
 msgid "DE123456788 or 12/345/67890"
-msgstr ""
+msgstr "DE123456788 または 12/345/67890"
 
 #. module: base
 #: model:ir.model.fields.selection,name:base.selection__report_paperformat__format__dle
@@ -6966,7 +7100,7 @@ msgstr "フランス海外地域"
 #. odoo-python
 #: code:addons/partner_identifiers.py:0
 msgid "DUNS"
-msgstr ""
+msgstr "DUNS"
 
 #. module: base
 #: model:res.currency,currency_unit_label:base.GMD
@@ -6977,13 +7111,13 @@ msgstr "ダラシ"
 #. odoo-python
 #: code:addons/partner_identifiers.py:0
 msgid "Danish Central Business Register number."
-msgstr ""
+msgstr "デンマーク中央企業登録番号。"
 
 #. module: base
 #. odoo-python
 #: code:addons/partner_identifiers.py:0
 msgid "Danish tax entity number (SE-nummer)."
-msgstr ""
+msgstr "デンマークの納税者番号(SE-nummer)。"
 
 #. module: base
 #. odoo-python
@@ -7193,12 +7327,12 @@ msgstr "デフォルトビュー"
 #. module: base
 #: model:res.groups,name:base.default_user_group
 msgid "Default access for new light users"
-msgstr ""
+msgstr "新規ライトユーザーに対するデフォルトのアクセス権限"
 
 #. module: base
 #: model:res.groups,name:base.default_user_regular_group
 msgid "Default access for new regular users"
-msgstr ""
+msgstr "新規一般ユーザのデフォルトアクセス権限"
 
 #. module: base
 #: model:ir.model.fields,help:base.field_ir_embedded_actions__filter_ids
@@ -7229,13 +7363,13 @@ msgstr "定義されたレポート"
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.act_report_xml_view
 msgid "Defined in the general settings"
-msgstr ""
+msgstr "一般管理設定で定義されています"
 
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.view_groups_form
 msgid ""
 "Defines the number of days the API keys will be alive for users in this group"
-msgstr ""
+msgstr "このグループのユーザに対して、APIキーが有効である日数を定義します"
 
 #. module: base
 #: model:ir.model.fields,field_description:base.field_ir_model_constraint__definition
@@ -7268,6 +7402,8 @@ msgid ""
 "Deleting the public user is not allowed. Deleting this profile will "
 "compromise critical functionalities."
 msgstr ""
+"パブリックユーザの削除は許可されていません。このプロフィールを削除すると、重"
+"要な機能が損なわれます。"
 
 #. module: base
 #. odoo-python
@@ -7384,7 +7520,7 @@ msgstr "説明 HTML"
 #. module: base
 #: model:res.partner.category,name:base.res_partner_category_14
 msgid "Desk Manufacturers"
-msgstr ""
+msgstr "デスクメーカー"
 
 #. module: base
 #: model:ir.model.fields,field_description:base.field_base_partner_merge_automatic_wizard__dst_partner_id
@@ -7831,7 +7967,7 @@ msgstr "ドン"
 #. module: base
 #: model:res.partner,website_short_description:base.res_partner_address_3
 msgid "Douglas Fletcher is a mighty functional consultant at Acme Corporation"
-msgstr ""
+msgstr "Douglas FletcherはAcme Corporationの非常に優秀な機能コンサルタントです"
 
 #. module: base
 #: model_terms:res.partner,website_description:base.res_partner_address_3
@@ -7840,6 +7976,10 @@ msgid ""
 "    notably for selling mouse traps. With that trick he cut\n"
 "    IT budget by almost half within the last 2 years."
 msgstr ""
+"Douglas FletcherはIT業界で<b>10年以上</b>のキャリアの持ち主です。\n"
+"    彼は特に、無駄を徹底的に排除する画期的なアプローチで知られています。\n"
+"    この独自の手法により、過去2年間でIT予算をほぼ半減させることに成功しました"
+"。"
 
 #. module: base
 #: model:ir.model.fields.selection,name:base.selection__ir_actions_act_url__target__download
@@ -7855,19 +7995,19 @@ msgstr "ドラム"
 #. odoo-python
 #: code:addons/partner_identifiers.py:0
 msgid "Dun & Bradstreet unique 9-digit business identifier."
-msgstr ""
+msgstr "Dun & Bradstreet社が発行する独自の9桁の企業識別番号(D-U-N-S番号)。"
 
 #. module: base
 #. odoo-python
 #: code:addons/base/models/ir_actions.py:0
 msgid "Duplicate %(record)s"
-msgstr ""
+msgstr "%(record)sを複製"
 
 #. module: base
 #. odoo-python
 #: code:addons/base/models/ir_actions.py:0
 msgid "Duplicate ..."
-msgstr ""
+msgstr "複製..."
 
 #. module: base
 #: model:ir.model.fields.selection,name:base.selection__ir_actions_server__state__object_copy
@@ -7883,7 +8023,7 @@ msgstr "複製元"
 #: model_terms:ir.ui.view,arch_db:base.ir_access_form_view
 #: model_terms:ir.ui.view,arch_db:base.view_model_form
 msgid "Duplicate this access to customize it"
-msgstr ""
+msgstr "このアクセスを複製してカスタマイズしてください"
 
 #. module: base
 #. odoo-python
@@ -7904,13 +8044,13 @@ msgstr "期間"
 #. odoo-python
 #: code:addons/partner_identifiers.py:0
 msgid "Dutch Chamber of Commerce registration number."
-msgstr ""
+msgstr "オランダ商工会議所の登録番号。"
 
 #. module: base
 #. odoo-python
 #: code:addons/partner_identifiers.py:0
 msgid "Dutch government Organisation Identification Number."
-msgstr ""
+msgstr "オランダ政府の組織識別番号。"
 
 #. module: base
 #: model:res.partner.industry,full_name:base.res_partner_industry_E
@@ -7920,13 +8060,13 @@ msgstr "E - 上水道、下水道、廃棄物管理、浄化活動"
 #. module: base
 #: model:ir.model.fields,help:base.field_website__domain
 msgid "E.g. https://www.mydomain.com"
-msgstr ""
+msgstr "例: https://www.mydomain.com"
 
 #. module: base
 #. odoo-python
 #: code:addons/partner_identifiers.py:0
 msgid "EAN/GLN"
-msgstr ""
+msgstr "EAN/GLN"
 
 #. module: base
 #: model:ir.module.category,name:base.module_category_accounting_localizations_edi
@@ -7981,7 +8121,7 @@ msgstr "エルサルバドル"
 #. odoo-python
 #: code:addons/partner_identifiers.py:0
 msgid "Electronic address for French e-invoicing platforms (PDP/PPF)."
-msgstr ""
+msgstr "フランスの電子請求書プラットフォーム(PDP/PPF)向けの電子メールアドレス。"
 
 #. module: base
 #. odoo-python
@@ -8115,6 +8255,8 @@ msgid ""
 "Enter a description of and purpose for the key. <strong>it will be the only "
 "way to identify the key once created</strong>"
 msgstr ""
+"キーの説明と使用目的を入力してください。<strong>作成されたキーを識別できる唯"
+"一の情報となります。</strong>"
 
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.res_users_identitycheck_view_form
@@ -8221,7 +8363,7 @@ msgstr "エストニア"
 #. odoo-python
 #: code:addons/partner_identifiers.py:0
 msgid "Estonian business registry code."
-msgstr ""
+msgstr "エストニアの企業登録番号。"
 
 #. module: base
 #: model:res.country,name:base.sz
@@ -8748,19 +8890,19 @@ msgstr "Pythonコード例:"
 #: code:addons/base/models/res_partner.py:0
 msgid ""
 "Example: '219999830019' (format: 12 digits, all numbers, valid check digit)"
-msgstr ""
+msgstr "例: '219999830019' (フォーマット: 112桁、すべて数字、有効なチェックデジット)"
 
 #. module: base
 #: model:ir.model.fields,help:base.field_res_currency_rate__rate
 msgid ""
 "Exchange rate expressed as reference-currency units per 1 unit of this "
 "currency"
-msgstr ""
+msgstr "自国通貨1単位に対する参照通貨(基準通貨)の数量で表示された為替レート"
 
 #. module: base
 #: model:ir.model.fields,help:base.field_res_currency_rate__inverse_company_rate
 msgid "Exchange rate from the company currency to this currency"
-msgstr ""
+msgstr "会社通貨から本通貨への為替レート"
 
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.base_partner_merge_automatic_wizard_form
@@ -8812,7 +8954,7 @@ msgstr "グループを展開"
 #. odoo-python
 #: code:addons/base/models/ir_binary.py:0
 msgid "Expected singleton: %(record)s"
-msgstr ""
+msgstr "単一レコードが必要です: %(record)s"
 
 #. module: base
 #: model:ir.module.category,name:base.module_category_human_resources_expenses
@@ -8844,7 +8986,7 @@ msgstr "有効期限："
 #: model_terms:ir.ui.view,arch_db:base.view_client_action_form
 #: model_terms:ir.ui.view,arch_db:base.view_server_action_form
 msgid "Explanation"
-msgstr ""
+msgstr "説明"
 
 #. module: base
 #: model:ir.model.fields,help:base.field_report_paperformat__report_ids
@@ -9015,7 +9157,7 @@ msgstr ""
 #. odoo-python
 #: code:addons/fields_relational.py:0
 msgid "Failed to write field %s"
-msgstr ""
+msgstr "フィールドへの書き込みに失敗しました%s"
 
 #. module: base
 #: model:ir.model.fields,field_description:base.field_ir_cron__failure_count
@@ -9089,6 +9231,8 @@ msgid ""
 "Field \"%(field_name)s\" in related path \"%(related_field)s\" is not "
 "searchable. Non-searchable fields cannot be used in related fields."
 msgstr ""
+"関連パス「%(related_field)s 」内のフィールド「%(field_name)s 」は検索対象外で"
+"す。検索対象外のフィールドは、関連フィールドとして使用できません。"
 
 #. module: base
 #. odoo-python
@@ -9197,6 +9341,8 @@ msgid ""
 "Field “%(field)s” is type “%(field_type)s” but it is only possible to stream "
 "Binary or Image fields."
 msgstr ""
+"フィールド「%(field)s」のタイプは「%(field_type)s」ですが、ストリーミングでき"
+"るのはバイナリまたは画像フィールドのみです。"
 
 #. module: base
 #. odoo-python
@@ -9445,7 +9591,7 @@ msgstr "フリート"
 #. module: base
 #: model:res.partner,website_short_description:base.res_partner_address_4
 msgid "Floyd Steward is a mighty analyst at Acme Corporation."
-msgstr ""
+msgstr "Floyd StewardはAcme Corporationの優秀なアナリストです。"
 
 #. module: base
 #: model_terms:res.partner,website_description:base.res_partner_address_4
@@ -9454,6 +9600,11 @@ msgid ""
 "    notably for selling mouse traps. With that trick he cut\n"
 "    IT budget by almost half within the last 2 years."
 msgstr ""
+"Floyd StewardはIT業界で<b>10年以上</b>のキャリアの持ち主です。\n"
+"                彼は特に、無駄を徹底的に排除する画期的なアプローチで知られて"
+"います。\n"
+"                この独自の手法により、過去2年間でIT予算をほぼ半減させることに"
+"成功しました。"
 
 #. module: base
 #: model:ir.model.fields,field_description:base.field_ir_model__fold_name
@@ -9469,7 +9620,7 @@ msgstr "Folio 27 210 x 330 mm"
 #. odoo-python
 #: code:addons/base/models/ir_actions.py:0
 msgid "Following child actions have warnings: %(children)s"
-msgstr ""
+msgstr "以下の子アクションに警告があります: %(children)s"
 
 #. module: base
 #. odoo-python
@@ -9478,6 +9629,8 @@ msgid ""
 "Following child actions should have the same groups (%(groups)s): %"
 "(children)s"
 msgstr ""
+"後続の子アクションは、同じグループを使用する必要があります(%(groups)s): %"
+"(children)s"
 
 #. module: base
 #. odoo-python
@@ -9485,6 +9638,8 @@ msgstr ""
 msgid ""
 "Following child actions should have the same model (%(model)s): %(children)s"
 msgstr ""
+"後続の子アクションは、同じモデルを使用する必要があります (%(model)s): %"
+"(children)s"
 
 #. module: base
 #: model:ir.model.fields,field_description:base.field_res_company__font
@@ -9527,6 +9682,8 @@ msgid ""
 "For many2one_reference fields, the field that stores the technical name of "
 "the target model"
 msgstr ""
+"many2one_reference フィールドの場合、ターゲットモデルの技術名を格納する"
+"フィールド"
 
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.wizard_lang_export
@@ -9540,6 +9697,8 @@ msgid ""
 "For one2many fields, the field on the target model that implements the "
 "opposite many2one relationship"
 msgstr ""
+"one2manyフィールドの場合、反対側のmany2one関係を実装するターゲットモデルの"
+"フィールド"
 
 #. module: base
 #: model:ir.model.fields,help:base.field_ir_model_fields__relation
@@ -9624,6 +9783,8 @@ msgid ""
 "Found more than 10 errors and more than one error per 10 records, "
 "interrupted to avoid showing too many errors."
 msgstr ""
+"10を超えるエラーと10レコードごとに複数のエラーが見つかりました。エラーが多す"
+"ぎないように中断されました。"
 
 #. module: base
 #. odoo-python
@@ -9656,13 +9817,13 @@ msgstr "フランス"
 #. odoo-python
 #: code:addons/partner_identifiers.py:0
 msgid "France FRCTC Electronic Address"
-msgstr ""
+msgstr "フランス FRCTC 電子アドレス"
 
 #. module: base
 #. odoo-python
 #: code:addons/partner_identifiers.py:0
 msgid "France Register of legal persons"
-msgstr ""
+msgstr "フランス法人登記簿"
 
 #. module: base
 #. odoo-python
@@ -9674,13 +9835,13 @@ msgstr "無料アクセス"
 #. odoo-python
 #: code:addons/partner_identifiers.py:0
 msgid "French 14-digit establishment identification number (SIREN + NIC)."
-msgstr ""
+msgstr "フランスの14桁の事業所識別番号 (SIREN + NIC)。"
 
 #. module: base
 #. odoo-python
 #: code:addons/partner_identifiers.py:0
 msgid "French 9-digit business identification number."
-msgstr ""
+msgstr "フランスの9桁の事業者登録番号。"
 
 #. module: base
 #: model:res.country,name:base.gf
@@ -9701,7 +9862,7 @@ msgstr "フランス領極南諸島"
 #. odoo-python
 #: code:addons/partner_identifiers.py:0
 msgid "French national identification number (NIR)."
-msgstr ""
+msgstr "フランスの国民識別番号(NIR)。"
 
 #. module: base
 #: model:ir.model.fields.selection,name:base.selection__res_lang__week_start__5
@@ -9729,7 +9890,7 @@ msgstr "フロントデスク"
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.ir_access_search_view
 msgid "Full"
-msgstr ""
+msgstr "フル"
 
 #. module: base
 #: model:ir.model.fields,field_description:base.field_res_partner_industry__full_name
@@ -9763,25 +9924,25 @@ msgstr "G - 卸売・小売業; 自動車・オートバイの修理"
 #: code:addons/base/models/res_partner.py:0
 #: code:addons/partner_identifiers.py:0
 msgid "GB123456782 or XI123456782"
-msgstr ""
+msgstr "GB123456782 または XI123456782"
 
 #. module: base
 #. odoo-python
 #: code:addons/partner_identifiers.py:0
 msgid "GCC ID"
-msgstr ""
+msgstr "GCC ID"
 
 #. module: base
 #. odoo-python
 #: code:addons/partner_identifiers.py:0
 msgid "GCC ID Number"
-msgstr ""
+msgstr "GCC ID番号"
 
 #. module: base
 #. odoo-python
 #: code:addons/partner_identifiers.py:0
 msgid "GEBA"
-msgstr ""
+msgstr "GEBA"
 
 #. module: base
 #: model:ir.model.fields.selection,name:base.selection__res_partner__tz__gmt
@@ -9792,7 +9953,7 @@ msgstr "GMT"
 #. odoo-python
 #: code:addons/base/models/res_partner.py:0
 msgid "GODE561231GR8"
-msgstr ""
+msgstr "GODE561231GR8"
 
 #. module: base
 #: model:ir.model.fields.selection,name:base.selection__ir_module_module__license__gpl-2
@@ -9863,7 +10024,7 @@ msgstr "キーを生成する"
 #. module: base
 #: model:ir.model.fields,field_description:base.field_ir_actions_report__attachment_use
 msgid "Generate new file each time the report is printed"
-msgstr ""
+msgstr "レポートが印刷されるたびに新しいファイルを生成"
 
 #. module: base
 #: model:res.country,name:base.ge
@@ -9874,13 +10035,13 @@ msgstr "グルジア"
 #. odoo-python
 #: code:addons/partner_identifiers.py:0
 msgid "German Commercial Register (Handelsregister) number."
-msgstr ""
+msgstr "ドイツの商業登記(Handelsregister)番号。"
 
 #. module: base
 #. odoo-python
 #: code:addons/partner_identifiers.py:0
 msgid "German Electronic Business Address."
-msgstr ""
+msgstr "ドイツ電子事業者住所。"
 
 #. module: base
 #: model:res.country,name:base.de
@@ -9911,7 +10072,7 @@ msgstr "グローバル"
 #. odoo-python
 #: code:addons/partner_identifiers.py:0
 msgid "Global Location Number, used to identify parties and locations."
-msgstr ""
+msgstr "当事者や場所を特定するために使用されるグローバルロケーション番号。"
 
 #. module: base
 #. odoo-python
@@ -9933,6 +10094,12 @@ msgid ""
 "                IT budget by almost half within the last 2 years.\n"
 "                Famous Senior Consultant."
 msgstr ""
+"Gordon OwensはIT業界で<b>10年以上</b>のキャリアの持ち主です。\n"
+"                彼は特に、無駄を徹底的に排除する画期的なアプローチで知られて"
+"います。\n"
+"                この独自の手法により、過去2年間でIT予算をほぼ半減させることに"
+"成功しました。\n"
+"                有名なシニアコンサルタントです。"
 
 #. module: base
 #: model:res.currency,currency_unit_label:base.HTG
@@ -9993,12 +10160,16 @@ msgid ""
 "remove the following fields from the webhook payload:\n"
 "%(restricted_fields)s"
 msgstr ""
+"グループ制限付きのフィールドは、Webhookのペイロードに含めることはできません。"
+"これは、すべてのユーザが誤って機密情報を漏洩させる可能性があるためです。以下"
+"のフィールドをWebhookのペイロードから削除する必要があります:\n"
+"%(restricted_fields)s"
 
 #. module: base
 #. odoo-python
 #: code:addons/fields_properties.py:0
 msgid "Grouping by HTML properties is not supported."
-msgstr ""
+msgstr "HTMLプロパティによるグループ化はサポートされていません。"
 
 #. module: base
 #. odoo-python
@@ -10029,11 +10200,16 @@ msgid ""
 "interact with,\n"
 "                    or enforce strict record-level security rules."
 msgstr ""
+"グループ機能により、ユーザのアクセス権を一元的に管理できます。<br>\n"
+"                    ユーザが操作できるモデル、メニュー、ビューを定義したり"
+"、\n"
+"                    レコードレベルの厳格なセキュリティルールを適用したりでき"
+"ます。"
 
 #. module: base
 #: model:ir.model.fields,field_description:base.field_res_users__all_group_ids
 msgid "Groups and implied groups"
-msgstr "グループおよび継承グループ"
+msgstr "グループと包含グループ"
 
 #. module: base
 #: model:ir.model.fields,help:base.field_res_users__group_ids
@@ -10127,7 +10303,7 @@ msgstr "HMRC"
 #. odoo-python
 #: code:addons/partner_identifiers.py:0
 msgid "HRB Nr"
-msgstr ""
+msgstr "HRB Nr"
 
 #. module: base
 #: model:ir.model.fields.selection,name:base.selection__ir_actions_report__report_type__qweb-html
@@ -10149,7 +10325,7 @@ msgstr "HTTPルーティング"
 #. odoo-python
 #: code:addons/base/models/res_partner.py:0
 msgid "HU12345676 or 12345678-1-11 or 8071592153"
-msgstr ""
+msgstr "HU12345676 または 12345678-1-11 or 8071592153"
 
 #. module: base
 #: model:res.country,name:base.ht
@@ -10172,7 +10348,7 @@ msgstr "ハレシュ"
 #: model_terms:res.partner,website_description:base.res_partner_12
 #: model_terms:res.partner,website_description:base.res_partner_5
 msgid "Happy to be Sponsor"
-msgstr ""
+msgstr "スポンサーとして協賛しています"
 
 #. module: base
 #: model:ir.model.fields,field_description:base.field_reset_view_arch_wizard__has_diff
@@ -10184,7 +10360,7 @@ msgstr "差分あり"
 #: model:ir.model.fields,field_description:base.field_res_partner__has_vat
 #: model:ir.model.fields,field_description:base.field_res_users__has_vat
 msgid "Has Tax ID"
-msgstr ""
+msgstr "税IDあり"
 
 #. module: base
 #: model:ir.model.fields,field_description:base.field_report_paperformat__header_spacing
@@ -10280,7 +10456,7 @@ msgstr "履歴"
 #. module: base
 #: model:ir.model.fields,field_description:base.field_res_partner_bank__holder_name
 msgid "Holder Name"
-msgstr ""
+msgstr "口座名義"
 
 #. module: base
 #: model:res.country,name:base.va
@@ -10354,13 +10530,13 @@ msgstr "人事"
 #. odoo-python
 #: code:addons/partner_identifiers.py:0
 msgid "Hungarian Tax ID"
-msgstr ""
+msgstr "ハンガリー税ID"
 
 #. module: base
 #. odoo-python
 #: code:addons/partner_identifiers.py:0
 msgid "Hungarian company ID number."
-msgstr ""
+msgstr "ハンガリー会社ID番号。"
 
 #. module: base
 #: model:res.country,name:base.hu
@@ -10378,20 +10554,20 @@ msgstr "I - 宿泊・飲食サービス業"
 msgid ""
 "I'll be happy to send a webhook for you, but you really need to give me a "
 "URL to reach out to..."
-msgstr ""
+msgstr "Webhook の送信には、送信先 URL の指定が必要です。"
 
 #. module: base
 #. odoo-python
 #: code:addons/base/models/ir_actions.py:0
 msgid ""
 "I'm sorry to say that JSON fields (such as '%s') are currently not supported."
-msgstr ""
+msgstr "申し訳ありません。JSONフィールド (例えば '%s') は現在サポートされていません。"
 
 #. module: base
 #. odoo-python
 #: code:addons/partner_identifiers.py:0
 msgid "ICE"
-msgstr ""
+msgstr "ICE"
 
 #. module: base
 #: model:ir.model.fields,field_description:base.field__unknown__id
@@ -10532,6 +10708,11 @@ msgid ""
 "as a third party in the context of any claim for damages filed against the "
 "client by an end consumer."
 msgstr ""
+"ID Company は、合意された履行期日に基づき、適切なサービスを提供するために合理"
+"的な努力を払います。ただし、当社の義務は結果を約束するものではありません。さ"
+"らに、最終消費者がクライアントに対して起こした損害賠償請求において、"
+"クライアントがID Companyに対して第三者参加や追訴(補助参加等)を求めることはい"
+"かなる場合も認められません。"
 
 #. module: base
 #: model:ir.model.fields,help:base.field_ir_actions_server__xml_id
@@ -10552,13 +10733,13 @@ msgstr "XMLファイルで定義されているビューのID"
 #. module: base
 #: model:ir.model.fields,help:base.field_res_users__barcode
 msgid "ID used for employee identification."
-msgstr ""
+msgstr "従業員の識別に使用されるID。"
 
 #. module: base
 #. odoo-python
 #: code:addons/partner_identifiers.py:0
 msgid "IIN"
-msgstr ""
+msgstr "IIN"
 
 #. module: base
 #: model:ir.model.fields,field_description:base.field_res_device__ip_address
@@ -10596,7 +10777,7 @@ msgstr "IT・通信"
 #. odoo-python
 #: code:addons/partner_identifiers.py:0
 msgid "IVA"
-msgstr ""
+msgstr "IVA"
 
 #. module: base
 #: model:res.country,name:base.is
@@ -10637,6 +10818,9 @@ msgid ""
 "payment date, ID Company reserves the right to call on the services of a "
 "debt recovery company. All legal expenses will be payable by the client."
 msgstr ""
+"支払期日から60日を経過してもなお支払いが未了の場合、ID Companyは債権回収会社"
+"のサービスを利用する権利を留保します。これに伴い発生する一切の法的費用は、"
+"クライアントが負担するものとします。"
 
 #. module: base
 #: model_terms:res.company,invoice_terms_html:base.main_company
@@ -10646,6 +10830,9 @@ msgid ""
 "services of a debt recovery company. All legal expenses will be payable by "
 "the client."
 msgstr ""
+"支払期日から60日（60）を経過してもなお支払いが未了の場合、My Company (San "
+"Francisco)は債権回収会社のサービスを利用する権利を留保します。これに伴い発生"
+"する一切の法的費用は、クライアントが負担するものとします。"
 
 #. module: base
 #: model:ir.model.fields,help:base.field_ir_model_fields__group_expand
@@ -10760,6 +10947,8 @@ msgstr ""
 msgid ""
 "If you are trying to input a European number, this is the expected format: "
 msgstr ""
+"ヨーロッパの電話番号を入力しようとしている場合、想定される形式は次のとおりで"
+"す:"
 
 #. module: base
 #: model:ir.model.fields,help:base.field_base_language_install__overwrite
@@ -10882,17 +11071,17 @@ msgstr "実装"
 #. module: base
 #: model:ir.model.fields,field_description:base.field_res_groups__implied_by_count
 msgid "Implied By Count"
-msgstr ""
+msgstr "内包元数"
 
 #. module: base
 #: model:ir.model.fields,field_description:base.field_res_groups__implied_count
 msgid "Implied Count"
-msgstr ""
+msgstr "包含数"
 
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.view_groups_search
 msgid "Implied Group"
-msgstr ""
+msgstr "包含グループ"
 
 #. module: base
 #. odoo-python
@@ -10900,17 +11089,17 @@ msgstr ""
 #: model:ir.model.fields,field_description:base.field_res_groups__implied_ids
 #: model_terms:ir.ui.view,arch_db:base.view_groups_form
 msgid "Implied Groups"
-msgstr "継承元グループ"
+msgstr "包含グループ"
 
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.view_groups_list
 msgid "Implied groups"
-msgstr "継承元グループ"
+msgstr "包含グループ"
 
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.view_groups_search
 msgid "Implying Group"
-msgstr ""
+msgstr "包含元グループ"
 
 #. module: base
 #. odoo-python
@@ -10918,7 +11107,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:base.field_res_groups__implied_by_ids
 #: model_terms:ir.ui.view,arch_db:base.view_groups_form
 msgid "Implying Groups"
-msgstr "継承グループ"
+msgstr "包含元グループ"
 
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.view_base_import_language
@@ -10959,6 +11148,8 @@ msgid ""
 "by means of a letter sent by recorded delivery to its registered office "
 "within 8 days of the delivery of the goods or the provision of the services."
 msgstr ""
+"申し立てが認められるためには、商品の引渡しまたはサービスの提供から8日以内に、"
+"配達記録郵便により登記上の事務所宛てにID Companyへ通知する必要があります。"
 
 #. module: base
 #: model_terms:res.company,invoice_terms_html:base.main_company
@@ -10968,6 +11159,9 @@ msgid ""
 "registered office within 8 days of the delivery of the goods or the "
 "provision of the services."
 msgstr ""
+"クレームが認められるためには、商品の引渡しまたはサービスの提供から8日以内に、"
+"配達記録郵便でMy Company (San Francisco)の登録事務所に送付された書簡により、"
+"クレームを通知する必要があります。"
 
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.view_currency_search
@@ -10996,7 +11190,7 @@ msgstr ""
 #: code:addons/base/models/ir_model.py:0
 msgid ""
 "Inconsistent values: model=%(model)s does not match model_id=%(model_id)s."
-msgstr ""
+msgstr "値の不一致：model=%(model)s は model_id=%(model_id)s と一致しません。"
 
 #. module: base
 #. odoo-python
@@ -11011,7 +11205,7 @@ msgstr ""
 #. module: base
 #: model:ir.model.fields,field_description:base.field_ir_model_fields__index
 msgid "Index"
-msgstr ""
+msgstr "インデックス"
 
 #. module: base
 #: model:ir.model.fields,field_description:base.field_ir_attachment__index_content
@@ -11090,6 +11284,8 @@ msgid ""
 "Indicates that the group is used external data sharing prupose (e.g., portal "
 "access to specific records)"
 msgstr ""
+"このグループが外部データ共有の目的(例：特定のレコードへのポータルアクセス)で"
+"使用されることを示します"
 
 #. module: base
 #: model:res.country,name:base.id
@@ -11144,6 +11340,8 @@ msgid ""
 "Inherited view cannot have '%(attr)s' defined on the record. Use '%(attr)s' "
 "attributes inside the view definition"
 msgstr ""
+"継承されたビューでは、レコードに対して「%(attr)s 」を定義することはできません"
+"。ビュー定義内では「%(attr)s 」属性を使用してください"
 
 #. module: base
 #: model:ir.model.fields,field_description:base.field_ir_profile__init_stack_trace
@@ -11247,6 +11445,8 @@ msgid ""
 "separated list of valid field names (optionally followed by asc/desc for the "
 "direction)"
 msgstr ""
+"無効な'順序'が指定されました(%s)。有効な'順序'指定は、有効なフィールド名の"
+"コンマ区切りのリストです(オプションで、方向にasc /descが続きます)"
 
 #. module: base
 #. odoo-python
@@ -11324,7 +11524,7 @@ msgstr "日付フィルタ用の無効なデフォルト期間 %(default_period)
 #. odoo-python
 #: code:addons/base/models/ir_access.py:0
 msgid "Invalid domain %(domain)s: %(error)s"
-msgstr ""
+msgstr "無効なドメイン%(domain)s:%(error)s"
 
 #. module: base
 #. odoo-python
@@ -11337,7 +11537,7 @@ msgstr "無効なフィールド %(model)s.%(field)s"
 #: code:addons/partner_identifiers.py:0
 msgid ""
 "Invalid identifier: %(identifier_value)s%(identifier_label)s.%(example)s"
-msgstr ""
+msgstr "無効な識別子：%(identifier_value)s%(identifier_label)s 。%(example)s"
 
 #. module: base
 #. odoo-python
@@ -11434,7 +11634,7 @@ msgstr "無効なテンプレートユーザ。削除されているようです
 #. odoo-python
 #: code:addons/base/models/res_users.py:0
 msgid "Invalid user group."
-msgstr ""
+msgstr "無効なユーザグループです。"
 
 #. module: base
 #. odoo-python
@@ -11459,6 +11659,8 @@ msgid ""
 "Invalid value in Default Value field. Expected type '%(field_type)s' for '%"
 "(model_name)s.%(field_name)s'."
 msgstr ""
+"デフォルト値フィールドに無効な値が入力されています。'%(model_name)s.%"
+"(field_name)s' に対して期待される型は '%(field_type)s' です。"
 
 #. module: base
 #. odoo-python
@@ -11493,7 +11695,7 @@ msgstr "在庫"
 #: model_terms:res.partner,website_description:base.res_partner_2
 #: model_terms:res.partner,website_description:base.res_partner_4
 msgid "Inventory and Warehouse management"
-msgstr ""
+msgstr "在庫および倉庫管理"
 
 #. module: base
 #: model:ir.model.fields,field_description:base.field_res_currency_rate__inverse_company_rate
@@ -11530,13 +11732,13 @@ msgstr "IoT"
 #. odoo-python
 #: code:addons/partner_identifiers.py:0
 msgid "Iqama ID Number"
-msgstr ""
+msgstr "Iqama ID番号"
 
 #. module: base
 #. odoo-python
 #: code:addons/partner_identifiers.py:0
 msgid "Iqama Number"
-msgstr ""
+msgstr "Iqama番号"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_menu_ir_profile
@@ -11567,7 +11769,7 @@ msgstr "アイルランド"
 #. odoo-python
 #: code:addons/partner_identifiers.py:0
 msgid "Ireland Personal Public Service Number."
-msgstr ""
+msgstr "アイルランドの個人公共サービス番号。"
 
 #. module: base
 #: model:ir.model.fields,field_description:base.field_base_partner_merge_automatic_wizard__group_by_is_company
@@ -11598,7 +11800,7 @@ msgstr "公開済"
 #. module: base
 #: model:ir.model.fields,field_description:base.field_ir_access__is_standard
 msgid "Is Standard"
-msgstr ""
+msgstr "標準"
 
 #. module: base
 #: model:ir.model.fields,field_description:base.field_res_partner__is_company
@@ -11626,8 +11828,7 @@ msgstr "イスラエル"
 #: code:addons/base/models/res_groups.py:0
 msgid ""
 "It is not possible to remove implied group %(group)s from users %(users)s"
-msgstr ""
-"他の設定から継承されたグループ%(group)sはユーザから%(users)s削除できません"
+msgstr "包含グループ %(group)s はユーザ %(users)s から削除できません"
 
 #. module: base
 #: model_terms:res.partner,website_description:base.res_partner_3
@@ -11639,6 +11840,11 @@ msgid ""
 "                    series) and encourages \"training in research through\n"
 "                    research\"."
 msgstr ""
+"流体力学の大学院教育(流体力学の研究マスター、\n"
+"                    (元'卒業証書コース'、博士課程、\n"
+"                    スタジエールプログラム、講義シリーズ)を提供し、\n"
+"                    '研究を通じた研究のトレーニング'\n"
+"                    を奨励しています。"
 
 #. module: base
 #: model_terms:res.partner,website_description:base.res_partner_3
@@ -11659,6 +11865,16 @@ msgid ""
 "well\n"
 "                    as industries."
 msgstr ""
+"流体力学分野の研究に取り組み、これを推進しています。\n"
+"                    約50種類の風洞をはじめ、ターボ機械や\n"
+"                    その他の専門試験設備を保有しており、\n"
+"                    その中には世界でも唯一のものや、世界最大級のものも\n"
+"                    含まれます。気体および液体の流れに関する実験・\n"
+"                    数値計算・理論の各側面について、教員および研究エの指導の"
+"下で幅広い研究が\n"
+"                    行われており、主に政府機関・国際機関ならびに\n"
+"                    産業界の支援を受けて\n"
+"                    います。"
 
 #. module: base
 #: model:res.country,name:base.it
@@ -11669,7 +11885,7 @@ msgstr "イタリア"
 #. odoo-python
 #: code:addons/partner_identifiers.py:0
 msgid "IČO"
-msgstr ""
+msgstr "IČO"
 
 #. module: base
 #: model:res.partner.industry,full_name:base.res_partner_industry_J
@@ -11690,7 +11906,7 @@ msgstr "日本"
 #. odoo-python
 #: code:addons/partner_identifiers.py:0
 msgid "Japanese corporate number (Specified Subject to Tax)."
-msgstr ""
+msgstr "日本の法人番号 (適格請求書発行事業者)。"
 
 #. module: base
 #: model:res.country,name:base.je
@@ -11739,7 +11955,7 @@ msgstr "K - 金融・保険業"
 #. odoo-python
 #: code:addons/partner_identifiers.py:0
 msgid "KVK"
-msgstr ""
+msgstr "KVK"
 
 #. module: base
 #: model:ir.model.fields.selection,name:base.selection__ir_actions_act_window_view__view_mode__kanban
@@ -11768,21 +11984,27 @@ msgstr "ユーザがシステムに接続できないようにしたい場合に
 #: model_terms:ir.ui.view,arch_db:base.ir_access_form_view
 msgid "Keep track of what this access right does and why it exists..."
 msgstr ""
+"このアクセス権限が何を行うものか、そしてなぜ存在するのかを常に把握しておいて"
+"ください…"
 
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.view_groups_form
 msgid "Keep track of what this groups does and why it exists..."
 msgstr ""
+"このグループが何を行うものか、そしてなぜ存在するのかを常に把握しておいてくだ"
+"さい…"
 
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.act_report_xml_view
 msgid "Keep track of what this report action does and why it exists..."
 msgstr ""
+"このレポートアクションが何を行うものか、そしてなぜ存在するのかを常に把握して"
+"おいてください…"
 
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.view_res_groups_privilege_form
 msgid "Keep track of what this scope does and why it exists..."
-msgstr ""
+msgstr "このグループの役割や作成理由を記録・管理しておきましょう…"
 
 #. module: base
 #: model:res.country,name:base.ke
@@ -11816,7 +12038,7 @@ msgstr "キナ"
 #. module: base
 #: model:ir.model.fields,field_description:base.field_ir_access__kind
 msgid "Kind"
-msgstr ""
+msgstr "種別"
 
 #. module: base
 #: model:res.currency,currency_unit_label:base.LAK
@@ -11920,7 +12142,7 @@ msgstr "L - 不動産業"
 #. odoo-python
 #: code:addons/partner_identifiers.py:0
 msgid "LEI"
-msgstr ""
+msgstr "LEI"
 
 #. module: base
 #: model:ir.model.fields.selection,name:base.selection__ir_module_module__license__lgpl-3
@@ -11936,7 +12158,7 @@ msgstr "ラリ"
 #: model:ir.model.fields,help:base.field_res_groups_privilege__placeholder
 msgid ""
 "Label displayed when the user does not belong of any group of that scope."
-msgstr ""
+msgstr "ユーザがその適用範囲のどのグループにも所属していない場合に表示されるラベル。"
 
 #. module: base
 #. odoo-python
@@ -12215,7 +12437,7 @@ msgstr "最新バージョン"
 #: model:ir.model.fields,field_description:base.field_res_partner__partner_latitude
 #: model:ir.model.fields,field_description:base.field_res_users__partner_latitude
 msgid "Latitude"
-msgstr ""
+msgstr "緯度"
 
 #. module: base
 #: model:ir.model.fields.selection,name:base.selection__res_company__font__lato
@@ -12236,7 +12458,7 @@ msgstr "ラトビア"
 #. odoo-python
 #: code:addons/partner_identifiers.py:0
 msgid "Latvian unified registration number."
-msgstr ""
+msgstr "ラトビアの統一登録番号。"
 
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.config_wizard_step_view_form
@@ -12289,7 +12511,7 @@ msgstr "Legal    3   8.5 x 14 inches, 215.9 x 355.6 mm"
 #. odoo-python
 #: code:addons/partner_identifiers.py:0
 msgid "Legal Entity Identifier"
-msgstr ""
+msgstr "法人識別子"
 
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.sequence_view
@@ -12300,7 +12522,7 @@ msgstr "凡例 (プレフィクス、サフィックス用)"
 #. odoo-python
 #: code:addons/partner_identifiers.py:0
 msgid "Leitweg-ID"
-msgstr ""
+msgstr "Leitweg-ID"
 
 #. module: base
 #: model:res.currency,currency_unit_label:base.ALL
@@ -12373,7 +12595,7 @@ msgstr "ライト"
 #. module: base
 #: model:ir.model.fields.selection,name:base.selection__res_users__role__group_user
 msgid "Light User"
-msgstr ""
+msgstr "ライトユーザ"
 
 #. module: base
 #: model:res.currency,currency_unit_label:base.SZL
@@ -12389,7 +12611,7 @@ msgstr "制限"
 #. odoo-python
 #: code:addons/base/models/res_users.py:0
 msgid "Limit of %s API keys is reached for programmatic creation"
-msgstr ""
+msgstr "%s API キーのプログラムによる作成上限に達しました"
 
 #. module: base
 #: model:ir.model.fields,field_description:base.field_ir_logging__line
@@ -12416,12 +12638,12 @@ msgstr "リンク領域"
 #. module: base
 #: model:ir.model.fields,field_description:base.field_ir_actions_report__linked_view_ids
 msgid "Linked View"
-msgstr ""
+msgstr "リンクされたビュー"
 
 #. module: base
 #: model:ir.model.fields,field_description:base.field_ir_actions_report__linked_view_count
 msgid "Linked View Count"
-msgstr ""
+msgstr "リンクされたビュー数"
 
 #. module: base
 #: model:res.currency,currency_subunit_label:base.HRK
@@ -12476,7 +12698,7 @@ msgstr "リトアニア"
 #. odoo-python
 #: code:addons/partner_identifiers.py:0
 msgid "Lithuanian legal entity code (JAK)."
-msgstr ""
+msgstr "リトアニアの法人コード (JAK)。"
 
 #. module: base
 #: model:ir.module.category,name:base.module_category_website_live_chat
@@ -12565,7 +12787,7 @@ msgstr "長いです"
 #: model:ir.model.fields,field_description:base.field_res_partner__partner_longitude
 #: model:ir.model.fields,field_description:base.field_res_users__partner_longitude
 msgid "Longitude"
-msgstr ""
+msgstr "経度"
 
 #. module: base
 #: model:res.currency,currency_unit_label:base.LSL
@@ -12591,7 +12813,7 @@ msgstr "ルクセンブルク"
 #. odoo-python
 #: code:addons/partner_identifiers.py:0
 msgid "Luxembourg business registry number."
-msgstr ""
+msgstr "ルクセンブルクの事業登記番号。"
 
 #. module: base
 #: model:res.partner.industry,full_name:base.res_partner_industry_M
@@ -12602,37 +12824,37 @@ msgstr "M - 専門的、科学的、技術的活動"
 #. odoo-python
 #: code:addons/partner_identifiers.py:0
 msgid "MHRSD License"
-msgstr ""
+msgstr "MHRSD ライセンス"
 
 #. module: base
 #. odoo-python
 #: code:addons/partner_identifiers.py:0
 msgid "MHRSD License Number"
-msgstr ""
+msgstr "MHRSD ライセンス番号"
 
 #. module: base
 #. odoo-python
 #: code:addons/partner_identifiers.py:0
 msgid "MISA License"
-msgstr ""
+msgstr "MISAライセンス"
 
 #. module: base
 #. odoo-python
 #: code:addons/partner_identifiers.py:0
 msgid "MISA License Number"
-msgstr ""
+msgstr "MISAライセンス番号"
 
 #. module: base
 #. odoo-python
 #: code:addons/partner_identifiers.py:0
 msgid "MOMRAH License"
-msgstr ""
+msgstr "MOMRAH ライセンス"
 
 #. module: base
 #. odoo-python
 #: code:addons/partner_identifiers.py:0
 msgid "MOMRAH License Number"
-msgstr ""
+msgstr "MOMRAH ライセンス番号"
 
 #. module: base
 #: model:res.country,name:base.mo
@@ -12711,7 +12933,7 @@ msgstr "マレーシア"
 #. odoo-python
 #: code:addons/partner_identifiers.py:0
 msgid "Malaysian company registration number."
-msgstr ""
+msgstr "マレーシアの会社登録番号。"
 
 #. module: base
 #: model:res.country,name:base.mv
@@ -12731,7 +12953,7 @@ msgstr "マルタ"
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.view_groups_form
 msgid "Manage Scopes"
-msgstr ""
+msgstr "適用範囲の管理"
 
 #. module: base
 #: model_terms:ir.actions.act_window,help:base.grant_menu_access
@@ -12824,7 +13046,7 @@ msgstr "マスタデータ"
 #: model_terms:res.partner,website_description:base.res_partner_2
 #: model_terms:res.partner,website_description:base.res_partner_4
 msgid "Materials Management"
-msgstr ""
+msgstr "資材管理"
 
 #. module: base
 #: model:res.country,name:base.mr
@@ -12835,7 +13057,7 @@ msgstr "モーリタニア"
 #. odoo-python
 #: code:addons/partner_identifiers.py:0
 msgid "Mauritian Business Registration Number."
-msgstr ""
+msgstr "モーリシャス事業者登録番号。"
 
 #. module: base
 #: model:res.country,name:base.mu
@@ -12912,7 +13134,7 @@ msgstr "パートナー行をマージ"
 #. module: base
 #: model:ir.model,name:base.model_base_partner_merge_automatic_wizard
 msgid "Merge Partner Wizard"
-msgstr "パートナーをマージするウィザード"
+msgstr "取引先統合ウィザード"
 
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.base_partner_merge_automatic_wizard_form
@@ -12928,7 +13150,7 @@ msgstr "手動チェックでマージ"
 #. odoo-python
 #: code:addons/partner_identifiers.py:0
 msgid "Mersis Number"
-msgstr ""
+msgstr "Mersis番号"
 
 #. module: base
 #: model:ir.model.fields,field_description:base.field_ir_logging__message
@@ -12985,7 +13207,7 @@ msgstr "その他"
 #. odoo-python
 #: code:addons/template_inheritance.py:0
 msgid "Missing 'expr' attribute in xpath specification"
-msgstr ""
+msgstr "xpath 仕様で 'expr' 属性が未設定です"
 
 #. module: base
 #. odoo-python
@@ -13002,7 +13224,7 @@ msgstr ""
 #. odoo-python
 #: code:addons/models.py:0
 msgid "Missing required field %(field_display)s for model %(model_display)s"
-msgstr ""
+msgstr "必要なフィールド%(field_display)s が未設定です(モデル：%(model_display)s)"
 
 #. module: base
 #. odoo-python
@@ -13321,7 +13543,7 @@ msgstr "モントセラト"
 #: code:addons/partner_identifiers.py:0
 msgid ""
 "Moroccan joint business identifier (Identifiant Commun de l'Entreprise)."
-msgstr ""
+msgstr "モロッコの共同企業識別番号（Identifiant Commun de l'Entreprise）。"
 
 #. module: base
 #: model:res.country,name:base.ma
@@ -13358,6 +13580,11 @@ msgid ""
 "required by the client to appear as a third party in the context of any "
 "claim for damages filed against the client by an end consumer."
 msgstr ""
+"My Company (San Francisco)は、合意された期間に従い、適時に高品質なサービスを"
+"提供できるよう最大限努めます。ただし、当社のいかなる義務も、結果の達成を保証"
+"する義務(結果債務)とはみなされません。いかなる場合も、クライアントが"
+"エンドコンシューマーから損害賠償請求を受けた際に、クライアントは当該請求に関"
+"して当社に第三者としての出頭等を求めることはできません。"
 
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.view_attachment_search
@@ -13382,7 +13609,7 @@ msgstr "N - 管理およびサポート・サービス活動"
 #. module: base
 #: model:res.country,vat_label:base.ci
 msgid "NCC"
-msgstr ""
+msgstr "NCC"
 
 #. module: base
 #: model:res.country,vat_label:base.co model:res.country,vat_label:base.gt
@@ -13392,7 +13619,7 @@ msgstr "NIT"
 #. module: base
 #: model:res.country,vat_label:base.id
 msgid "NPWP/NIK"
-msgstr ""
+msgstr "NPWP/NIK"
 
 #. module: base
 #: model:res.country,vat_label:base.pk
@@ -13402,13 +13629,13 @@ msgstr "NTN"
 #. module: base
 #: model:res.country,vat_label:base.mz
 msgid "NUIT"
-msgstr ""
+msgstr "NUIT"
 
 #. module: base
 #. odoo-python
 #: code:addons/partner_identifiers.py:0
 msgid "NZBN"
-msgstr ""
+msgstr "NZBN"
 
 #. module: base
 #: model:res.currency,currency_unit_label:base.NGN
@@ -13470,7 +13697,7 @@ msgstr "名前(会社または個人)"
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.act_report_xml_view
 msgid "Name in the 'Print' menu..."
-msgstr ""
+msgstr "「印刷」メニュー内の名前..."
 
 #. module: base
 #: model:ir.model.fields,help:base.field_ir_model_fields__currency_field
@@ -13518,7 +13745,7 @@ msgstr "ナロー"
 #. odoo-python
 #: code:addons/partner_identifiers.py:0
 msgid "National ID"
-msgstr ""
+msgstr "国民ID"
 
 #. module: base
 #: model:res.country,name:base.nr
@@ -13529,7 +13756,7 @@ msgstr "ナウル"
 #. odoo-python
 #: code:addons/models.py:0
 msgid "Need groupby or aggregates."
-msgstr ""
+msgstr "グループ化または集計が必要です。"
 
 #. module: base
 #: model:res.country,name:base.np
@@ -13579,7 +13806,7 @@ msgstr "ニュージーランド"
 #. odoo-python
 #: code:addons/partner_identifiers.py:0
 msgid "New Zealand Business Number."
-msgstr ""
+msgstr "ニュージーランド事業者登録番号。"
 
 #. module: base
 #: model:ir.model.fields,field_description:base.field_ir_cron__nextcall
@@ -13636,6 +13863,9 @@ msgid ""
 "Nicole is <b>author of several books</b>, including Amazon best seller\n"
 "                \"How Azure and Odoo will change the business world!\"."
 msgstr ""
+"Nicoleは、Amazonのベストセラー『How Azure and Odoo will change the business "
+"world!(AzureとOdooがビジネス界をどう変えるか)』をはじめ、\n"
+"                <b>数冊の著書を持つ著者</b>です。"
 
 #. module: base
 #: model_terms:res.partner,website_description:base.res_partner_address_16
@@ -13647,6 +13877,13 @@ msgid ""
 "                from 1 to 55 employees mostly by reselling services on\n"
 "                Odoo."
 msgstr ""
+"Nicoleは、IT業界で<b>20年のキャリア</b>を積んできました。彼女は\n"
+"                ウェブサイト制作を支援するソフトウェアを開発しています。  30"
+"歳で最初の会社を\n"
+"                売却し、主にOdoo上でのサービス転売によって、Azure Interior社"
+"を\n"
+"                従業員1名から55名規模の企業へと成長\n"
+"                させました。"
 
 #. module: base
 #: model:res.country,name:base.ne
@@ -13669,7 +13906,7 @@ msgstr "ニウエ"
 #: model:res.groups.privilege,placeholder:base.res_groups_privilege_contact
 #: model:res.groups.privilege,placeholder:base.res_groups_privilege_export
 msgid "No"
-msgstr ""
+msgstr "いいえ"
 
 #. module: base
 #: model:ir.model.fields.selection,name:base.selection__ir_actions_server__update_boolean_value__false
@@ -13706,18 +13943,18 @@ msgstr "現在、この操作を許可しているグループはありません
 #. module: base
 #: model:ir.model.fields,field_description:base.field_res_groups_privilege__placeholder
 msgid "No group label"
-msgstr ""
+msgstr "グループラベルなし"
 
 #. module: base
 #: model_terms:ir.actions.act_window,help:base.action_res_groups
 msgid "No groups found. Let's create one!"
-msgstr ""
+msgstr "グループが見つかりませんでした。作成してみましょう！"
 
 #. module: base
 #. odoo-python
 #: code:addons/fields_relational.py:0
 msgid "No inverse field \"%(inverse_field)s\" found for \"%(comodel)s\""
-msgstr ""
+msgstr "逆フィールド「%(inverse_field)s」(「%(comodel)s」用)が見つかりません"
 
 #. module: base
 #. odoo-python
@@ -13756,6 +13993,8 @@ msgstr "ビュー数"
 msgid ""
 "No record found for xmlid=%(xmlid)s, res_model=%(res_model)s, id=%(res_id)s"
 msgstr ""
+"xmlid=%(xmlid)s 、res_model=%(res_model)s 、id= %(res_id)sのレコードが見つか"
+"りませんでした"
 
 #. module: base
 #. odoo-python
@@ -13770,7 +14009,7 @@ msgstr ""
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.view_groups_form
 msgid "No scope"
-msgstr ""
+msgstr "適用範囲なし"
 
 #. module: base
 #. odoo-python
@@ -13787,7 +14026,7 @@ msgstr "更新不可"
 #. odoo-python
 #: code:addons/base/models/ir_sequence.py:0
 msgid "Non-ASCII characters in %s"
-msgstr ""
+msgstr "%s に非ASCII文字が含まれています"
 
 #. module: base
 #. odoo-python
@@ -13856,7 +14095,7 @@ msgstr "ノルウェー"
 #. odoo-python
 #: code:addons/partner_identifiers.py:0
 msgid "Norwegian Register of Legal Entities (Brønnøysund Register Center)"
-msgstr ""
+msgstr "ノルウェー法人登記所（Brønnøysund Register Center）"
 
 #. module: base
 #: model:ir.model.fields.selection,name:base.selection__ir_module_module__state__uninstalled
@@ -13879,6 +14118,8 @@ msgid ""
 "Not enough workers to generate the PDF. Please try another engine or upgrade "
 "your setup."
 msgstr ""
+"PDF生成に必要なワーカープロセスが不足しています。別のエンジンを試すか、"
+"サーバー環境をアップグレードしてください。"
 
 #. module: base
 #: model:ir.model.fields,field_description:base.field_ir_access__note
@@ -13890,7 +14131,7 @@ msgstr "メモ"
 #. odoo-python
 #: code:addons/base/models/res_partner.py:0
 msgid "Note: the expected format is %(expected_format)s"
-msgstr ""
+msgstr "注: 想定される形式は %(expected_format)sです"
 
 #. module: base
 #. odoo-python
@@ -13899,6 +14140,8 @@ msgid ""
 "Note: this might be a multi-company issue. Switching company may help - in "
 "Odoo, not in real life!"
 msgstr ""
+"メモ: マルチカンパニーの設定による問題かもしれません。Odoo内で会社を切り替え"
+"てみてください。"
 
 #. module: base
 #: model:ir.model.fields,field_description:base.field_res_groups__comment
@@ -13957,19 +14200,19 @@ msgstr "O - 行政・防衛、強制社会保障"
 #. odoo-python
 #: code:addons/partner_identifiers.py:0
 msgid "OB"
-msgstr ""
+msgstr "OB"
 
 #. module: base
 #. odoo-python
 #: code:addons/partner_identifiers.py:0
 msgid "OB-number cannot be computed from the VAT for sole proprietorships."
-msgstr ""
+msgstr "個人事業主の場合、VAT(付加価値税)からOB番号を計算することはできません。"
 
 #. module: base
 #. odoo-python
 #: code:addons/partner_identifiers.py:0
 msgid "OIN"
-msgstr ""
+msgstr "OIN"
 
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.view_server_action_form
@@ -13989,7 +14232,7 @@ msgstr "オブジェクト:"
 #. module: base
 #: model:ir.module.category,name:base.module_category_supply_chain_obox
 msgid "Obox"
-msgstr ""
+msgstr "Obox"
 
 #. module: base
 #: model:ir.model.fields.selection,name:base.selection__ir_module_module__license__oeel-1
@@ -14072,7 +14315,7 @@ msgstr ""
 #. module: base
 #: model:res.partner.category,name:base.res_partner_category_12
 msgid "Office Supplies"
-msgstr ""
+msgstr "オフィス用品"
 
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.demo_failures_dialog
@@ -14134,7 +14377,7 @@ msgstr "オンライン予約"
 #: model:ir.model.fields,help:base.field_ir_access__active
 msgid ""
 "Only active accesses are taken into account when checking access rights."
-msgstr ""
+msgstr "アクセス権限の確認時には、有効なアクセスのみが考慮されます。"
 
 #. module: base
 #. odoo-python
@@ -14152,7 +14395,7 @@ msgstr "管理者のみこのアクションを実行できます。"
 #. odoo-python
 #: code:addons/fields_binary.py:0
 msgid "Only admins can upload SVG files."
-msgstr ""
+msgstr "管理者のみがSVGファイルをアップロードできます。"
 
 #. module: base
 #: model:ir.model.fields,help:base.field_ir_ui_view__mode
@@ -14176,7 +14419,7 @@ msgstr ""
 "検索され、\n"
 "   当該ビューのモデルから継承するすべてのビューが適用されます (inherit_id経"
 "由)\n"
-"* プライマリの場合、最も近い主要ビューは完全に解決され (異なる\n"
+"* メインの場合、最も近い主要ビューは完全に解決され (異なる\n"
 "   モデルを使用している場合でも)、そして当該ビューの継承仕様 (<xpath/>) が \n"
 "   適用されて当該ビューの実際アーチとして結果が使用されます。\n"
 
@@ -14206,7 +14449,7 @@ msgstr "それぞれの使い方には一つの値だけ定義できます！"
 #. odoo-python
 #: code:addons/base/models/ir_model.py:0
 msgid "Only stored fields with a database column can be indexed."
-msgstr ""
+msgstr "データベース列を持つ保存済みフィールドのみインデックスを作成できます。"
 
 #. module: base
 #. odoo-python
@@ -14271,17 +14514,19 @@ msgid ""
 "OpenWood brings honesty and seriousness to wood industry while helping "
 "customers deal with trees, flowers and fungi."
 msgstr ""
+"OpenWoodは、お客様の木、花、菌類の取り扱いのサポートをしながら、木材産業に誠"
+"実に真摯に向き合っています。"
 
 #. module: base
 #: model:ir.model.fields,field_description:base.field_ir_access__operation
 msgid "Operation"
-msgstr ""
+msgstr "操作"
 
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.ir_access_form_view
 #: model_terms:ir.ui.view,arch_db:base.ir_access_search_view
 msgid "Operations"
-msgstr ""
+msgstr "操作"
 
 #. module: base
 #: model:ir.model.fields.selection,name:base.selection__base_partner_merge_automatic_wizard__state__option
@@ -14383,13 +14628,13 @@ msgstr "その他の追加権限"
 #. odoo-python
 #: code:addons/partner_identifiers.py:0
 msgid "Other ID"
-msgstr ""
+msgstr "その他ID"
 
 #. module: base
 #. odoo-python
 #: code:addons/partner_identifiers.py:0
 msgid "Other ID Number"
-msgstr ""
+msgstr "その他ID番号"
 
 #. module: base
 #: model:ir.model.fields.selection,name:base.selection__ir_module_module__license__other_osi_approved_licence
@@ -14441,6 +14686,14 @@ msgid ""
 "                installed IT software into account. That is why Idealis\n"
 "                Consulting delivers excellence in HR and SC Management."
 msgstr ""
+"当社のエキスパートは、お客様のビジネス要件を満たすソリューションを構想・創出"
+"し、構築します。\n"
+"                お客様の企業に最適な新しい技術環境を構築する際も、\n"
+"                すでに導入済みのITシステム\n"
+"                (既存システム)を決して疎かにはしません。だからこそ、Idealis "
+"Consultingは\n"
+"                人事およびサプライチェーン管理の分野で卓越した成果をお届けで"
+"きるのです。"
 
 #. module: base
 #: model_terms:res.company,invoice_terms_html:base.demo_company_id
@@ -14452,6 +14705,11 @@ msgid ""
 "will be authorized to suspend any provision of services without prior "
 "warning in the event of late payment."
 msgstr ""
+"当社の請求書は、請求書または注文書に別段の支払期日が記載されている場合を除き"
+"、21営業日以内にお支払いいただくものとします。期日までにお支払いがない場合、"
+"ID Companyは未払残高の10%に相当する固定利息の支払いを請求する権利を留保します"
+"。また、支払遅延が発生した場合、ID Companyは事前通知を行うことなく、一切の"
+"サービス提供を停止する権限を有します。"
 
 #. module: base
 #: model_terms:res.company,invoice_terms_html:base.main_company
@@ -14463,6 +14721,11 @@ msgid ""
 "due. My Company (San Francisco) will be authorized to suspend any provision "
 "of services without prior warning in the event of late payment."
 msgstr ""
+"当社の請求書は、請求書または注文書に別段の支払期日が記載されている場合を除き"
+"、21営業日以内にお支払いいただくものとします。期日までにお支払いがない場合、"
+"My Company (San Francisco)は未払残高の10%に相当する固定利息の支払いを請求する"
+"権利を留保します。また、支払遅延が発生した場合、My Company (San Francisco)は"
+"事前の予告なく、一切のサービス提供を停止する権限を有します。"
 
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.view_ir_mail_server_search
@@ -14524,7 +14787,7 @@ msgstr "POEdit"
 #. odoo-python
 #: code:addons/partner_identifiers.py:0
 msgid "PPSN"
-msgstr ""
+msgstr "PPSN"
 
 #. module: base
 #: model:res.currency,currency_unit_label:base.TOP
@@ -14773,7 +15036,7 @@ msgstr "パキスタン"
 #. odoo-python
 #: code:addons/partner_identifiers.py:0
 msgid "Pakistani Computerized National Identity Card number (CNIC), 13 digits."
-msgstr ""
+msgstr "パキスタンのコンピュータ化国民身分証明書番号（CNIC）、13桁。"
 
 #. module: base
 #: model:res.country,name:base.pw
@@ -14804,7 +15067,7 @@ msgstr "用紙フォーマット一般設定"
 #: model:ir.model.fields,field_description:base.field_ir_actions_report__paperformat_id
 #: model_terms:ir.ui.view,arch_db:base.act_report_xml_search_view
 msgid "Paper Size"
-msgstr ""
+msgstr "用紙サイズ"
 
 #. module: base
 #: model:ir.model.fields,field_description:base.field_res_company__paperformat_id
@@ -14946,19 +15209,19 @@ msgstr "パートナー:%(category)s"
 #. odoo-python
 #: code:addons/partner_identifiers.py:0
 msgid "Passport"
-msgstr ""
+msgstr "パスポート"
 
 #. module: base
 #. odoo-python
 #: code:addons/partner_identifiers.py:0
 msgid "Passport ID"
-msgstr ""
+msgstr "パスポートID"
 
 #. module: base
 #. odoo-python
 #: code:addons/partner_identifiers.py:0
 msgid "Passport number."
-msgstr ""
+msgstr "パスポート番号。"
 
 #. module: base
 #: model:ir.model.fields,field_description:base.field_ir_mail_server__smtp_pass
@@ -15035,7 +15298,7 @@ msgstr "フォーマットするパターン"
 #: model:res.company,pay_now_label:base.demo_company_id
 #: model:res.company,pay_now_label:base.main_company
 msgid "Pay now"
-msgstr ""
+msgstr "今すぐ支払う"
 
 #. module: base
 #: model:ir.module.category,name:base.module_category_accounting_payment
@@ -15045,7 +15308,7 @@ msgstr "支払"
 #. module: base
 #: model:ir.module.category,name:base.module_category_accounting_payment_custom
 msgid "Payment Custom"
-msgstr ""
+msgstr "カスタム支払"
 
 #. module: base
 #: model:ir.module.category,name:base.module_category_accounting_payment_providers
@@ -15074,13 +15337,13 @@ msgstr "ペニー"
 #: model:ir.model.fields.selection,name:base.selection__ir_access__kind__permission
 #: model_terms:ir.ui.view,arch_db:base.ir_access_form_view
 msgid "Permission"
-msgstr ""
+msgstr "許可"
 
 #. module: base
 #: model_terms:res.partner,website_description:base.res_partner_2
 #: model_terms:res.partner,website_description:base.res_partner_4
 msgid "Personnel Administration"
-msgstr ""
+msgstr "人事管理"
 
 #. module: base
 #: model:res.country,name:base.pe
@@ -15091,7 +15354,7 @@ msgstr "ペルー"
 #. odoo-python
 #: code:addons/partner_identifiers.py:0
 msgid "Peruvian unique taxpayer registry number (RUC)."
-msgstr ""
+msgstr "ペルーの固有納税者登録番号(RUC)。"
 
 #. module: base
 #: model:res.currency,currency_subunit_label:base.GHS
@@ -15180,7 +15443,7 @@ msgstr "プラットフォーム"
 #: code:addons/base/models/res_partner_bank.py:0
 msgid ""
 "Please add your own bank account manually: %(account_number)s (%(partner)s)"
-msgstr ""
+msgstr "ご自身の銀行口座を手動で追加してください：%(account_number)s (%(partner)s)"
 
 #. module: base
 #. odoo-python
@@ -15220,7 +15483,7 @@ msgstr "POS"
 #. module: base
 #: model:ir.module.category,name:base.module_category_point_of_sale
 msgid "Point of sale"
-msgstr ""
+msgstr "POS"
 
 #. module: base
 #: model:res.country,name:base.pl
@@ -15458,7 +15721,7 @@ msgstr ""
 #. odoo-python
 #: code:addons/base/models/res_users.py:0
 msgid "Programmatic API keys are not enabled"
-msgstr ""
+msgstr "プログラム用 API キーは有効になっていません"
 
 #. module: base
 #: model:ir.model,name:base.model_ir_cron_progress
@@ -15517,23 +15780,23 @@ msgstr ""
 #: model:ir.model.fields,field_description:base.field_ir_actions_server__property_selection
 #: model:ir.model.fields,field_description:base.field_ir_cron__property_selection
 msgid "Property Selection"
-msgstr ""
+msgstr "プロパティ選択"
 
 #. module: base
 #: model:ir.model.fields,field_description:base.field_ir_actions_server__update_property
 #: model:ir.model.fields,field_description:base.field_ir_cron__update_property
 msgid "Property to Update"
-msgstr ""
+msgstr "更新対象プロパティ"
 
 #. module: base
 #: model:res.partner.category,name:base.res_partner_category_2
 msgid "Prospects"
-msgstr ""
+msgstr "見込顧客"
 
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.view_model_form
 msgid "Provide a verbose explanation of the model's purpose..."
-msgstr ""
+msgstr "モデルの目的について詳しく説明してください..."
 
 #. module: base
 #: model:res.partner.industry,name:base.res_partner_industry_O
@@ -15543,7 +15806,7 @@ msgstr "行政"
 #. module: base
 #: model:ir.model.fields,field_description:base.field_website__user_id
 msgid "Public User"
-msgstr ""
+msgstr "一般ユーザ"
 
 #. module: base
 #: model:res.groups,comment:base.group_public
@@ -15582,7 +15845,7 @@ msgstr "プル"
 #. module: base
 #: model:ir.model.fields,field_description:base.field_website__domain_punycode
 msgid "Punycode Domain"
-msgstr ""
+msgstr "Punycodeドメイン"
 
 #. module: base
 #: model:ir.module.category,name:base.module_category_accounting_localizations_purchase
@@ -15770,7 +16033,7 @@ msgstr "R - 芸術、エンターテイメント、娯楽"
 #. odoo-python
 #: code:addons/partner_identifiers.py:0
 msgid "RC123456"
-msgstr ""
+msgstr "RC123456"
 
 #. module: base
 #: model:res.country,vat_label:base.mx
@@ -15786,12 +16049,12 @@ msgstr "RNC"
 #. odoo-python
 #: code:addons/partner_identifiers.py:0
 msgid "RO1234567897 or 8001011234567 or 9000123456789"
-msgstr ""
+msgstr "RO1234567897 または 8001011234567 または 9000123456789"
 
 #. module: base
 #: model:ir.model.fields.selection,name:base.selection__res_users_apikeys_description__scope__rpc
 msgid "RPC"
-msgstr ""
+msgstr "RPC"
 
 #. module: base
 #: model:res.country,vat_label:base.hn
@@ -15842,17 +16105,17 @@ msgstr "読み取り"
 #. module: base
 #: model:ir.model.fields.selection,name:base.selection__ir_access__operation__rd
 msgid "Read, Delete"
-msgstr ""
+msgstr "読取、削除"
 
 #. module: base
 #: model:ir.model.fields.selection,name:base.selection__ir_access__operation__ru
 msgid "Read, Update"
-msgstr ""
+msgstr "閲覧、更新"
 
 #. module: base
 #: model:ir.model.fields.selection,name:base.selection__ir_access__operation__rud
 msgid "Read, Update, Delete"
-msgstr ""
+msgstr "読取、更新、削除"
 
 #. module: base
 #: model:ir.model.fields,field_description:base.field_ir_model_fields__readonly
@@ -15902,13 +16165,13 @@ msgstr ""
 #. odoo-python
 #: code:addons/fields.py:0
 msgid "Record does not exist or has been deleted."
-msgstr ""
+msgstr "レコードが存在しないか、削除されました。"
 
 #. module: base
 #. odoo-python
 #: code:addons/base/models/ir_binary.py:0
 msgid "Record has no field “%s”"
-msgstr ""
+msgstr "レコードに「%s」フィールドがありません"
 
 #. module: base
 #: model:ir.model.fields,field_description:base.field_ir_actions_server__crud_model_id
@@ -15931,7 +16194,7 @@ msgstr "モジュールの依存関係による再帰エラー！"
 #. odoo-python
 #: code:addons/base/models/ir_actions.py:0
 msgid "Recursion found in child server actions"
-msgstr ""
+msgstr "再帰は子サーバアクションで見つかりました"
 
 #. module: base
 #: model:ir.model.fields,field_description:base.field_ir_model_data__reference
@@ -15956,7 +16219,7 @@ msgstr "リファラル"
 #. odoo-python
 #: code:addons/partner_identifiers.py:0
 msgid "Registrikood"
-msgstr ""
+msgstr "登録番号(Registrikood)"
 
 #. module: base
 #: model:ir.model.fields,field_description:base.field_res_partner__parent_id
@@ -15968,7 +16231,7 @@ msgstr "関連会社"
 #: model:ir.model.fields,field_description:base.field_res_partner__child_ids
 #: model:ir.model.fields,field_description:base.field_res_users__child_ids
 msgid "Related Contacts"
-msgstr ""
+msgstr "関連連絡先"
 
 #. module: base
 #: model:ir.model.fields,field_description:base.field_ir_model_fields__related_field_id
@@ -16017,7 +16280,7 @@ msgstr "関係モデル"
 #. module: base
 #: model:ir.model.fields,field_description:base.field_ir_model_fields__relation_model_field
 msgid "Relation Model Field"
-msgstr ""
+msgstr "関係モデルフィールド"
 
 #. module: base
 #: model:ir.model.fields,field_description:base.field_ir_model_relation__name
@@ -16042,7 +16305,7 @@ msgstr "残り"
 #. module: base
 #: model:ir.module.category,name:base.module_category_human_resources_remote_work
 msgid "Remote Work"
-msgstr ""
+msgstr "リモートワーク"
 
 #. module: base
 #: model:ir.model.fields.selection,name:base.selection__ir_asset__directive__remove
@@ -16064,7 +16327,7 @@ msgstr "コンテキストアクションを削除する"
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.act_report_xml_view
 msgid "Remove from the 'Print' menu"
-msgstr ""
+msgstr "「印刷」メニューから削除"
 
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.act_report_xml_view
@@ -16115,7 +16378,7 @@ msgstr "レポートアクション"
 #: model:ir.actions.act_window,name:base.ir_action_report
 #: model:ir.ui.menu,name:base.menu_ir_action_report
 msgid "Report Actions"
-msgstr ""
+msgstr "レポートアクション"
 
 #. module: base
 #: model:ir.model.fields,field_description:base.field_res_company__report_footer
@@ -16182,12 +16445,12 @@ msgstr "必須"
 #. module: base
 #: model:ir.model.fields,field_description:base.field_ir_attachment__res_access_read
 msgid "Res Access Read"
-msgstr ""
+msgstr "対象レコードの読取権限"
 
 #. module: base
 #: model:ir.model.fields,field_description:base.field_ir_attachment__res_access_write
 msgid "Res Access Write"
-msgstr ""
+msgstr "対象レコードの書込権限"
 
 #. module: base
 #: model:ir.model.fields,field_description:base.field_res_users__res_users_settings_ids
@@ -16228,7 +16491,7 @@ msgstr "ファイルバージョンにリセットします(ハードリセッ�
 #. odoo-python
 #: code:addons/models.py:0
 msgid "Resolve other errors first"
-msgstr ""
+msgstr "最初に他のエラーを解決してください"
 
 #. module: base
 #: model:ir.model.fields,field_description:base.field_ir_exports__resource
@@ -16274,12 +16537,12 @@ msgstr "制限"
 #: model:ir.model.fields.selection,name:base.selection__ir_access__kind__restriction
 #: model_terms:ir.ui.view,arch_db:base.ir_access_form_view
 msgid "Restriction"
-msgstr ""
+msgstr "制限"
 
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.ir_access_form_view
 msgid "Restriction globally applied"
-msgstr ""
+msgstr "この制限は全体(グローバル)に適用されます"
 
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.ir_access_form_view
@@ -16290,6 +16553,10 @@ msgid ""
 "                            If a user belongs to several groups, the "
 "permissions are combined with a logical OR operator."
 msgstr ""
+"制限は論理AND(かつ)で組み合わされます。<br/>\n"
+"                            権限は論理OR(または)で組み合わされます。<br/>\n"
+"                            ユーザが複数のグループに所属している場合、権限は"
+"論理OR(または)で組み合わされます。"
 
 #. module: base
 #: model:ir.model.fields,field_description:base.field_server_action_history_wizard__revision
@@ -16369,7 +16636,7 @@ msgstr "役割 / 全員"
 #. module: base
 #: model:res.groups,name:base.group_user
 msgid "Role / Light User"
-msgstr ""
+msgstr "役割 / ライトユーザ"
 
 #. module: base
 #: model:res.groups,name:base.group_portal
@@ -16427,13 +16694,13 @@ msgstr "丸め単位"
 #. odoo-python
 #: code:addons/partner_identifiers.py:0
 msgid "Routing ID for invoicing German public authorities."
-msgstr ""
+msgstr "ドイツの公的機関への請求書発行用ルーティングID。"
 
 #. module: base
 #. odoo-python
 #: code:addons/base/models/res_partner_bank.py:0
 msgid "Routing Number should only contain numbers (maximum 9 digits)."
-msgstr ""
+msgstr "ルーティング番号には数字のみを含めてください(最大9桁)。"
 
 #. module: base
 #: model:res.currency,currency_unit_label:base.RUB
@@ -16518,7 +16785,7 @@ msgstr "S - その他のサービス活動"
 #. odoo-python
 #: code:addons/partner_identifiers.py:0
 msgid "SE"
-msgstr ""
+msgstr "SE"
 
 #. module: base
 #: model:res.country.group,name:base.sepa_zone
@@ -16529,13 +16796,13 @@ msgstr "SEPA諸国"
 #. odoo-python
 #: code:addons/partner_identifiers.py:0
 msgid "SIREN"
-msgstr ""
+msgstr "SIREN"
 
 #. module: base
 #. odoo-python
 #: code:addons/partner_identifiers.py:0
 msgid "SIRET"
-msgstr ""
+msgstr "SIRET"
 
 #. module: base
 #: model:ir.model.fields,field_description:base.field_ir_mail_server__smtp_port
@@ -16607,7 +16874,7 @@ msgstr "SSL/TLS 暗号化のみ"
 #. odoo-python
 #: code:addons/partner_identifiers.py:0
 msgid "SST"
-msgstr ""
+msgstr "SST"
 
 #. module: base
 #: model_terms:res.company,invoice_terms_html:base.demo_company_id
@@ -16671,7 +16938,7 @@ msgstr "販売 & 購買"
 #: model_terms:res.partner,website_description:base.res_partner_2
 #: model_terms:res.partner,website_description:base.res_partner_4
 msgid "Sales and Distribution"
-msgstr ""
+msgstr "販売と流通"
 
 #. module: base
 #: model:ir.model.fields,field_description:base.field_res_partner__user_id
@@ -16761,77 +17028,77 @@ msgstr "サウジアラビア"
 #. odoo-python
 #: code:addons/partner_identifiers.py:0
 msgid "Saudi Arabia 700 Number"
-msgstr ""
+msgstr "サウジアラビア 700番号"
 
 #. module: base
 #. odoo-python
 #: code:addons/partner_identifiers.py:0
 msgid "Saudi Arabia Commercial Registration Number"
-msgstr ""
+msgstr "サウジアラビアの商業登録番号"
 
 #. module: base
 #. odoo-python
 #: code:addons/partner_identifiers.py:0
 msgid "Saudi Arabia GCC ID Number"
-msgstr ""
+msgstr "サウジアラビア GCC ID番号"
 
 #. module: base
 #. odoo-python
 #: code:addons/partner_identifiers.py:0
 msgid "Saudi Arabia Iqama ID Number"
-msgstr ""
+msgstr "サウジアラビアIqama ID番号"
 
 #. module: base
 #. odoo-python
 #: code:addons/partner_identifiers.py:0
 msgid "Saudi Arabia MHRSD License Number"
-msgstr ""
+msgstr "サウジアラビア MHRSD ライセンス番号"
 
 #. module: base
 #. odoo-python
 #: code:addons/partner_identifiers.py:0
 msgid "Saudi Arabia MISA License Number"
-msgstr ""
+msgstr "サウジアラビア MISA ライセンス番号"
 
 #. module: base
 #. odoo-python
 #: code:addons/partner_identifiers.py:0
 msgid "Saudi Arabia MOMRAH License Number"
-msgstr ""
+msgstr "サウジアラビア MOMRAH ライセンス番号"
 
 #. module: base
 #. odoo-python
 #: code:addons/partner_identifiers.py:0
 msgid "Saudi Arabia National ID Number"
-msgstr ""
+msgstr "サウジアラビア 国民ID番号"
 
 #. module: base
 #. odoo-python
 #: code:addons/partner_identifiers.py:0
 msgid "Saudi Arabia Other ID Number"
-msgstr ""
+msgstr "サウジアラビア その他のID番号"
 
 #. module: base
 #. odoo-python
 #: code:addons/partner_identifiers.py:0
 msgid "Saudi Arabia Passport ID Number"
-msgstr ""
+msgstr "サウジアラビア パスポートID番号"
 
 #. module: base
 #. odoo-python
 #: code:addons/partner_identifiers.py:0
 msgid "Saudi Arabia Tax Identification Number"
-msgstr ""
+msgstr "サウジアラビア 納税者番号"
 
 #. module: base
 #: model:ir.model.fields,field_description:base.field_ir_actions_report__save_as_attachment
 msgid "Save As Attachment"
-msgstr ""
+msgstr "添付ファイルとして保存"
 
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.act_report_xml_view
 msgid "Save as attachment"
-msgstr ""
+msgstr "添付ファイルとして保存"
 
 #. module: base
 #: model:ir.model,name:base.model_ir_cron
@@ -16885,7 +17152,7 @@ msgstr "スコープ："
 #: model:ir.actions.act_window,name:base.action_res_groups_privilege
 #: model:ir.ui.menu,name:base.menu_action_res_groups_privilege
 msgid "Scopes"
-msgstr ""
+msgstr "適用範囲"
 
 #. module: base
 #: model:ir.model.fields.selection,name:base.selection__ir_ui_view__type__search
@@ -16961,7 +17228,7 @@ msgstr "利用可能なすべての値を見る"
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.view_server_action_form
 msgid "Select Field:"
-msgstr ""
+msgstr "フィールドを選択："
 
 #. module: base
 #: model:ir.model.fields,help:base.field_report_paperformat__format
@@ -16976,7 +17243,7 @@ msgstr "レコードをリンクするフィールドを選択します。"
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.form_res_users_key_description
 msgid "Select a scope"
-msgstr ""
+msgstr "適用範囲を選択"
 
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.view_server_action_form
@@ -17236,6 +17503,8 @@ msgstr "サーバアクション"
 msgid ""
 "Server action %(action_name)s has one or more warnings, address them first."
 msgstr ""
+"サーバアクション%(action_name)sに 1 つ以上の警告があります。まずそれらに対処"
+"してください。"
 
 #. module: base
 #. odoo-python
@@ -17282,7 +17551,7 @@ msgstr "パスワードのセット"
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.act_report_xml_view
 msgid "Set a technical name to call the report in the code"
-msgstr ""
+msgstr "コード上でレポートを呼び出すための技術名を設定"
 
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.view_server_action_form
@@ -17303,12 +17572,12 @@ msgstr "ToDoとしてセット"
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.act_report_xml_view
 msgid "Set the name of the file that will be saved on the computer"
-msgstr ""
+msgstr "コンピュータに保存されるファイル名を設定"
 
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.view_groups_form
 msgid "Sets in which scope this group appears on the users access rights page"
-msgstr ""
+msgstr "ユーザのアクセス権ページで、このグループがどの適用範囲に表示されるかを設定"
 
 #. module: base
 #: model:ir.model.fields,help:base.field_ir_actions_act_url__binding_model_id
@@ -17409,7 +17678,7 @@ msgstr "APIキーを表示"
 #. module: base
 #: model:ir.model.fields,field_description:base.field_res_partner_bank__show_clearing_number
 msgid "Show Clearing Number"
-msgstr ""
+msgstr "クリアリング番号を表示"
 
 #. module: base
 #: model:ir.model.fields,field_description:base.field_ir_actions_server__show_code_history
@@ -17471,7 +17740,7 @@ msgstr "シンガポール"
 #. odoo-python
 #: code:addons/partner_identifiers.py:0
 msgid "Singapore Unique Entity Number."
-msgstr ""
+msgstr "シンガポール固有法人番号。"
 
 #. module: base
 #: model:res.country,name:base.sx
@@ -17501,6 +17770,9 @@ msgid ""
 "(field_names)s are set as company-dependent, but the model doesn't have a "
 "`company_id` or `company_ids` field!"
 msgstr ""
+"モデル%(model_name)sの会社チェックをスキップします。 そのフィールド%"
+"(field_names)s は会社依存として設定されていますが、モデルには `company_id` ま"
+"たは `company_ids` フィールドがありません"
 
 #. module: base
 #. odoo-python
@@ -17512,7 +17784,7 @@ msgstr "スラッシュ"
 #. odoo-python
 #: code:addons/partner_identifiers.py:0
 msgid "Slovak company identification number (IČO)."
-msgstr ""
+msgstr "スロバキアの企業識別番号（IČO）。"
 
 #. module: base
 #: model:res.country,name:base.sk
@@ -17560,13 +17832,13 @@ msgstr "ソマリア"
 #. odoo-python
 #: code:addons/fields_textual.py:0
 msgid "Some of the languages are not active: %s"
-msgstr ""
+msgstr "一部の言語が有効化されていません：%s"
 
 #. module: base
 #. odoo-python
 #: code:addons/fields_textual.py:0
 msgid "Some of the translations are False: %s"
-msgstr ""
+msgstr "翻訳の一部は誤りです：%s"
 
 #. module: base
 #: model:res.currency,currency_unit_label:base.TJS
@@ -17830,6 +18102,8 @@ msgid ""
 "Stringified Python variable value. Supported types: str, bool, int, float. "
 "Blank means undefined."
 msgstr ""
+"文字列化されたPython変数の値。サポートされる型：str、bool、int、float。空白は"
+"未定義を意味します。"
 
 #. module: base
 #: model:ir.model.fields,field_description:base.field_ir_model_fields__strip_classes
@@ -17844,7 +18118,7 @@ msgstr "Stripスタイル属性"
 #. module: base
 #: model:ir.model.fields.selection,name:base.selection__res_company__report_tables_id__striped
 msgid "Striped"
-msgstr ""
+msgstr "ストライプ"
 
 #. module: base
 #: model:ir.module.category,name:base.module_category_customizations_studio
@@ -17854,7 +18128,7 @@ msgstr "スタジオ"
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.view_res_partner_filter
 msgid "Subject to VAT"
-msgstr ""
+msgstr "VAT課税対象"
 
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.edit_menu_access
@@ -17930,13 +18204,13 @@ msgstr "スウェーデン"
 #. odoo-python
 #: code:addons/partner_identifiers.py:0
 msgid "Swedish organization number (Organisationsnummer)."
-msgstr ""
+msgstr "スウェーデン語の組織番号（Organisationsnummer）。"
 
 #. module: base
 #. odoo-python
 #: code:addons/partner_identifiers.py:0
 msgid "Swiss company identification number (UIDB)."
-msgstr ""
+msgstr "スイス企業識別番号 (UIDB)。"
 
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.language_install_view_form_lang_switch
@@ -18029,7 +18303,7 @@ msgstr "TIN"
 #. odoo-python
 #: code:addons/partner_identifiers.py:0
 msgid "TKU"
-msgstr ""
+msgstr "TKU"
 
 #. module: base
 #: model:ir.model.fields.selection,name:base.selection__ir_mail_server__smtp_encryption__starttls_strict
@@ -18054,7 +18328,7 @@ msgstr "TRN"
 #. module: base
 #: model:ir.model.fields,field_description:base.field_res_company__report_tables_id
 msgid "Table Design"
-msgstr ""
+msgstr "表デザイン"
 
 #. module: base
 #: model:ir.model.fields.selection,name:base.selection__report_paperformat__format__tabloid
@@ -18101,7 +18375,7 @@ msgstr "タラ"
 #: model_terms:res.partner,website_description:base.res_partner_2
 #: model_terms:res.partner,website_description:base.res_partner_4
 msgid "Talent Management"
-msgstr ""
+msgstr "人材管理"
 
 #. module: base
 #: model:res.currency,currency_subunit_label:base.MWK
@@ -18150,7 +18424,7 @@ msgstr "登録番号ラベル"
 #. odoo-python
 #: code:addons/partner_identifiers.py:0
 msgid "Tax Identification Number"
-msgstr ""
+msgstr "納税者番号"
 
 #. module: base
 #: model:ir.module.category,name:base.module_category_hidden
@@ -18205,6 +18479,8 @@ msgid ""
 "Technical field indicating whether the Tax ID is not a placeholder.Returns "
 "False for placeholder values such as '/', 'NA', 'na', or an empty string."
 msgstr ""
+"税IDがプレースホルダーではないかどうかを示す技術的なフィールド。「/」、「NA」"
+"、「na」、または空文字列などのプレースホルダー値に対してはFalseを返却します。"
 
 #. module: base
 #: model:ir.actions.report,name:base.ir_module_reference_print
@@ -18215,7 +18491,7 @@ msgstr "テクニカルガイド"
 #. odoo-python
 #: code:addons/base/models/res_partner.py:0
 msgid "Template for Contacts"
-msgstr ""
+msgstr "連絡先用テンプレート"
 
 #. module: base
 #. odoo-python
@@ -18301,6 +18577,9 @@ msgid ""
 "this sequence may be printed as Code128 barcodes in reports, which only "
 "support ASCII characters."
 msgstr ""
+"%(field)s(%(value)s)に非ASCII文字が含まれています。このシーケンスで生成された"
+"名称はレポート上でCode128バーコードとして印刷される場合がありますが、Code128"
+"はASCII文字のみ対応しています。"
 
 #. module: base
 #. odoo-python
@@ -18308,7 +18587,7 @@ msgstr ""
 msgid ""
 "The %(vat_label)s number [%(wrong_vat)s] does not seem to be valid. %"
 "(expected_note)s"
-msgstr ""
+msgstr "%(vat_label)s の数 [%(wrong_vat)s] が有効ではないようです。 %(expected_note)s"
 
 #. module: base
 #. odoo-python
@@ -18317,6 +18596,8 @@ msgid ""
 "The %(vat_label)s number [%(wrong_vat)s] for %(record_label)s does not seem "
 "to be valid. %(expected_note)s"
 msgstr ""
+"%(vat_label)s 番号 [%(wrong_vat)s] (%(record_label)s 用) が有効ではないようで"
+"す。 %(expected_note)s"
 
 #. module: base
 #. odoo-python
@@ -18330,7 +18611,7 @@ msgstr "子会社の%sは元会社と同様である必要があります。"
 msgid ""
 "The 5-digit branch code as registered with the Revenue Department. Leave "
 "empty for Head Office."
-msgstr ""
+msgstr "歳入局に登録されている5桁の支店コード。本社の場合は空欄のままにしてください。"
 
 #. module: base
 #. odoo-python
@@ -18349,7 +18630,7 @@ msgstr "APIキーには有効期限日が必要です"
 msgid ""
 "The API key will only be valid for the selected scope and can't be used for "
 "other scopes."
-msgstr ""
+msgstr "APIキーは選択された適用範囲でのみ有効であり、他の適用範囲では使用できません。"
 
 #. module: base
 #. odoo-python
@@ -18360,12 +18641,14 @@ msgid ""
 "Where B = National bank code, S = Branch code, C = Account No, k = Check "
 "digit"
 msgstr ""
+"IBANが正しくないようです。次のような形式で入力する必要があります：%s\n"
+"(B＝国内銀行コード、S＝支店コード、C＝口座番号、k＝チェックデジット)"
 
 #. module: base
 #. odoo-python
 #: code:addons/bank_account_number.py:0
 msgid "The IBAN is invalid, it should begin with the country code"
-msgstr ""
+msgstr "IBANが無効です。国コードで始まる必要があります"
 
 #. module: base
 #: model:ir.model.fields,help:base.field_clearing_label__country_code
@@ -18396,6 +18679,8 @@ msgid ""
 "The Jackson Group brings honesty and seriousness to wood industry while "
 "helping customers deal with trees, flowers and fungi."
 msgstr ""
+"Jackson Groupは、樹木や草花、菌類のケアを通じてお客様の課題を解決し、木材業界"
+"に「誠実」と「信頼」をお届けします。"
 
 #. module: base
 #: model:ir.model.fields,help:base.field_res_lang__url_code
@@ -18645,6 +18930,10 @@ msgid ""
 "with higher privileges previously modified it, and you are therefore not "
 "able to modify it yourself while preserving the content."
 msgstr ""
+"保存しようとしているフィールド値 (%(model)s %(field)s)(%(record)s) には、"
+"セキュリティ上の理由から制限されているコンテンツが含まれています。より高い権"
+"限を持つユーザーが以前に変更した可能性があり、そのコンテンツを保持したままご"
+"自身で変更することはできません。"
 
 #. module: base
 #: model:ir.model.fields,help:base.field_ir_cron__first_failure_date
@@ -18655,7 +18944,7 @@ msgstr "最初のcronは失敗しました。成功すると自動的にリセ�
 #. odoo-python
 #: code:addons/models.py:0
 msgid "The following languages are not activated: %(missing_names)s"
-msgstr ""
+msgstr "以下の言語は有効化されていません:%(missing_names)s"
 
 #. module: base
 #. odoo-python
@@ -18671,7 +18960,7 @@ msgstr "以下の変数が使用できます:"
 #. module: base
 #: model:ir.model.fields,help:base.field_res_groups__all_implied_ids
 msgid "The group itself with all its implied groups."
-msgstr "そのグループ自体と、そのグループに含まれるすべてのグループ。"
+msgstr "当該グループおよび、そのグループに包含されるすべてのグループ。"
 
 #. module: base
 #. odoo-python
@@ -18709,6 +18998,11 @@ msgid ""
 "most values are empty; trigram indexes speed up text pattern searches. "
 "Leaving this empty does not remove an index that already exists."
 msgstr ""
+"このフィールドに対して要求するデータベースインデックスの種類。B-tree"
+"インデックスは完全一致検索および範囲検索をサポートします。Null値を除外すると"
+"、大半の値が空の場合にインデックスサイズを小さく抑えられます。トリグラム"
+"(Trigram)インデックスはテキストのパターン検索を高速化します。この項目を空欄に"
+"しても、既存のインデックスが削除されることはありません。"
 
 #. module: base
 #. odoo-python
@@ -18861,7 +19155,7 @@ msgstr "この後のステップはファイル形式に依存します:"
 #: code:addons/fields_textual.py:0
 msgid ""
 "The non translatable content of the written value are not consistent: %s"
-msgstr ""
+msgstr "記述された値の翻訳不可コンテンツに一貫性がありません：%s"
 
 #. module: base
 #: model:ir.model.fields,help:base.field_ir_cron__failure_count
@@ -18886,7 +19180,7 @@ msgstr "事前定義された変数は次のもののみ:"
 #. module: base
 #: model:ir.model.fields,help:base.field_ir_access__domain
 msgid "The operations will only be allowed for records in this domain"
-msgstr ""
+msgstr "この操作は、このドメイン内のレコードに対してのみ許可されます"
 
 #. module: base
 #: model:ir.model.fields,help:base.field_ir_model_fields__domain
@@ -18907,6 +19201,10 @@ msgid ""
 "You can't traverse non-relational fields (even in the quantum realm). Make "
 "sure only the last field in the path is non-relational."
 msgstr ""
+"フィールド「%(searched_field)s」のパスに、末尾ではない非"
+"リレーショナルフィールド(%(current_field)s)が含まれています。非"
+"リレーショナルフィールドをたどって参照することはできません(いかなる場合でも不"
+"可能です)。パスの末尾のみに非リレーショナルフィールドを指定してください。"
 
 #. module: base
 #. odoo-python
@@ -18922,7 +19220,7 @@ msgstr ""
 #. odoo-python
 #: code:addons/base/models/ir_actions_report.py:0
 msgid "The pdf engine on this system is not working."
-msgstr ""
+msgstr "このシステムのPDFエンジンが動作していません。"
 
 #. module: base
 #. odoo-python
@@ -18968,13 +19266,13 @@ msgstr ""
 #. odoo-python
 #: code:addons/base/models/res_users.py:0
 msgid "The provided API key is invalid or does not belong to the current user."
-msgstr ""
+msgstr "入力されたAPIキーは無効であるか、現在のユーザのものではありません。"
 
 #. module: base
 #. odoo-python
 #: code:addons/base/models/res_users.py:0
 msgid "The provided API key is invalid."
-msgstr ""
+msgstr "入力されたAPIキーは無効です。"
 
 #. module: base
 #: model:ir.model.fields,help:base.field_res_currency__rate
@@ -18992,6 +19290,12 @@ msgid ""
 "For example, __import__, resulting in the external id __import__.%"
 "(record_id)s."
 msgstr ""
+"レコード%(xml_id)sにはモジュールプレフィックス%(module_name)sがあります。 こ"
+"れは外部 ID の '.' の前の部分です。このプレフィックスは既存のモジュールを指す"
+"ので、モジュールがアップグレードされるとレコードは削除されます。"
+"プレフィックスもドットもないか、既存のモジュールではないプレフィックスを使用"
+"して下さい。例えば、__import__とすると、外部IDは__import__...となります%"
+"(record_id)s。"
 
 #. module: base
 #. odoo-python
@@ -19085,6 +19389,9 @@ msgid ""
 "rendering method. HTML means the report will be opened directly in your "
 "browser, PDF means the report will be generated and downloaded by the user."
 msgstr ""
+"レンダリングされるレポートの種類です。種類ごとにレンダリング方法が異なります"
+"。HTMLの場合はレポートがブラウザで直接開かれ、PDFの場合はレポートが生成されて"
+"ユーザがダウンロードします。"
 
 #. module: base
 #: model:ir.model.fields,help:base.field_ir_filters__user_ids
@@ -19109,6 +19416,9 @@ msgid ""
 "\n"
 "Detail: %(detail)s\n"
 msgstr ""
+"%(field_display)s の値は既に存在します。\n"
+"\n"
+"詳細：%(detail)s\n"
 
 #. module: base
 #. odoo-python
@@ -19158,7 +19468,7 @@ msgstr ""
 #. odoo-python
 #: code:addons/bank_account_number.py:0
 msgid "There is no IBAN code."
-msgstr ""
+msgstr "IBANコードがありません。"
 
 #. module: base
 #: model:ir.actions.act_url,name:base.action_third_party
@@ -19170,13 +19480,13 @@ msgstr "サードパーティのアプリ"
 #. odoo-python
 #: code:addons/bank_account_number.py:0
 msgid "This CLABE does not pass the checksum check, please verify it."
-msgstr ""
+msgstr "このCLABEはチェックサム検証に合格しません。内容を確認してください。"
 
 #. module: base
 #. odoo-python
 #: code:addons/bank_account_number.py:0
 msgid "This IBAN does not pass the validation check, please verify it."
-msgstr ""
+msgstr "このIBANは検証に通りません。内容を確認してください。"
 
 #. module: base
 #: model:ir.model.fields,help:base.field_res_lang__iso_code
@@ -19306,6 +19616,8 @@ msgstr "これはあなたの会社の通貨です。"
 #: code:addons/base/models/res_groups.py:0
 msgid "This makes a group imply two disjoint groups."
 msgstr ""
+"これにより、あるグループが互いに排他的な2つのグループを含意するようになります"
+"。"
 
 #. module: base
 #. odoo-python
@@ -19334,6 +19646,8 @@ msgid ""
 "This seems to be a multi-company issue, but you do not have access to the "
 "proper company to access the record anyhow."
 msgstr ""
+"これはマルチカンパニーに起因する問題のようですが、いずれにせよ、このレコード"
+"にアクセスするための適切な会社へのアクセス権がありません。"
 
 #. module: base
 #. odoo-python
@@ -19342,6 +19656,8 @@ msgid ""
 "This seems to be a multi-company issue, you might be able to access the "
 "record by switching to the company: %s."
 msgstr ""
+"これはマルチカンパニーに起因する問題のようです。会社を「%s」に切り替えると、"
+"このレコードにアクセスできる可能性があります。"
 
 #. module: base
 #. odoo-python
@@ -19366,7 +19682,7 @@ msgstr ""
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.view_base_module_uninstall
 msgid "This will remove:"
-msgstr ""
+msgstr "これにより、以下が削除されます："
 
 #. module: base
 #. odoo-python
@@ -19447,7 +19763,7 @@ msgstr "未処理"
 #. odoo-python
 #: code:addons/models.py:0
 msgid "To avoid a mess, no company crossover is allowed!"
-msgstr ""
+msgstr "混乱を避けるため、会社をまたいだ紐付けは許可されていません!"
 
 #. module: base
 #: model:ir.model.fields.selection,name:base.selection__ir_module_module__state__to_install
@@ -19475,6 +19791,8 @@ msgstr "アップグレード対象"
 #: code:addons/base/models/res_partner.py:0
 msgid "To explicitly indicate no (valid) VAT, use '/', 'na' or 'NA' instead. "
 msgstr ""
+"(有効な)VATが存在しないことを明示するには、代わりに'/'、 'na' または 'NA'を使"
+"用してください。 "
 
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.view_server_action_form
@@ -19530,6 +19848,12 @@ msgid ""
 "                IT budget by almost half within the last 2 years.\n"
 "                Famous Managing Partner."
 msgstr ""
+"Toni Rhodesは、IT業界で<b>10年以上</b>のキャリアの持ち主です。\n"
+"                彼は特に、無駄を徹底的に排除する画期的なアプローチで知られて"
+"います。\n"
+"                この独自の手法により、過去2年間でIT予算をほぼ半減させることに"
+"成功しました。\n"
+"                有名なマネージング・パートナーです。"
 
 #. module: base
 #. odoo-python
@@ -19573,7 +19897,7 @@ msgstr "非同期をトレース"
 #. odoo-python
 #: code:addons/partner_identifiers.py:0
 msgid "Trade Registry Number"
-msgstr ""
+msgstr "商業登記番号"
 
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.view_model_search
@@ -19598,12 +19922,12 @@ msgstr "過渡: True"
 #. module: base
 #: model:ir.model.fields,field_description:base.field_res_groups__all_implied_ids
 msgid "Transitively Implied Groups"
-msgstr "間接的に継承されるグループ"
+msgstr "間接的に包含されるグループ"
 
 #. module: base
 #: model:ir.model.fields,field_description:base.field_res_groups__all_implied_by_ids
 msgid "Transitively Implying Groups"
-msgstr "間接的に継承するグループ"
+msgstr "間接的に包含するグループ"
 
 #. module: base
 #: model:ir.model.fields,field_description:base.field_ir_model_fields__translate
@@ -19634,7 +19958,7 @@ msgstr "全体として翻訳"
 #. odoo-python
 #: code:addons/base/models/ir_model.py:0
 msgid "Translated fields only support trigram indexes."
-msgstr ""
+msgstr "翻訳フィールドはトリグラムインデックスのみサポートしています。"
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_translation
@@ -19648,6 +19972,8 @@ msgid ""
 "Translations %(translations)s for field %(field)s has None value for "
 "language '%(language)s'"
 msgstr ""
+"翻訳 %(translations)s(フィールド %(field)s) に、言語 '%(language)s' の None（"
+"空値）が含まれています"
 
 #. module: base
 #. odoo-python
@@ -19656,6 +19982,8 @@ msgid ""
 "Translations %(translations)s for field %(field)s has invalid language '%"
 "(language)s'"
 msgstr ""
+"翻訳 `%(translations)s ` (フィールド `%(field)s `) に、無効な言語 `%"
+"(language)s` が含まれています"
 
 #. module: base
 #. odoo-python
@@ -19664,26 +19992,30 @@ msgid ""
 "Translations %(translations)s for field %(field)s has technical language %"
 "(technical_language)s but not corresponding language '%(language)s'"
 msgstr ""
+"翻訳%(translations)s のフィールド%(field)s には技術用語%(technical_language)"
+"s がありますが、対応する言語 '%(language)s' はありません"
 
 #. module: base
 #. odoo-python
 #: code:addons/translate.py:0
 msgid ""
 "Translations %(translations)s for field %(field)s have different structures"
-msgstr ""
+msgstr "翻訳 %(translations)s(フィールド %(field)s)は構造が異なります"
 
 #. module: base
 #. odoo-python
 #: code:addons/translate.py:0
 msgid "Translations %(translations)s for field %(field)s must have 'en_US'"
 msgstr ""
+"翻訳%(translations)s (フィールド%(field)s)は、'en_US' を指定する必要がありま"
+"す"
 
 #. module: base
 #. odoo-python
 #: code:addons/models.py:0
 msgid ""
 "Translations for model translated fields only accept falsy values and str"
-msgstr ""
+msgstr "モデル翻訳されたフィールドの翻訳は、偽の値とstr値のみ許可します"
 
 #. module: base
 #: model:res.partner.industry,name:base.res_partner_industry_H
@@ -19693,12 +20025,12 @@ msgstr "交通/物流"
 #. module: base
 #: model:ir.model,name:base.model_ir_cron_trigger
 msgid "Triggered Action"
-msgstr ""
+msgstr "トリガされたアクション"
 
 #. module: base
 #: model:ir.model.fields.selection,name:base.selection__ir_model_fields__index__trigram
 msgid "Trigram"
-msgstr ""
+msgstr "トリグラム"
 
 #. module: base
 #. odoo-python
@@ -19706,12 +20038,14 @@ msgstr ""
 msgid ""
 "Trigram indexes are only supported on stored Char, Text, and HTML fields."
 msgstr ""
+"トリグラムインデックスは保存済みのChar、Text、およびHTMLフィールドでのみ"
+"サポートされています。"
 
 #. module: base
 #. odoo-python
 #: code:addons/base/models/ir_model.py:0
 msgid "Trigram indexes require the PostgreSQL pg_trgm extension."
-msgstr ""
+msgstr "トリグラムインデックスにはPostgreSQLのpg_trgm拡張機能が必要です。"
 
 #. module: base
 #: model:res.country,name:base.tt
@@ -19721,7 +20055,7 @@ msgstr "トリニダード・トバゴ"
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.view_partner_bank_form
 msgid "Trust bank account"
-msgstr ""
+msgstr "信頼済の銀行口座"
 
 #. module: base
 #: model:ir.model.fields.selection,name:base.selection__res_lang__week_start__2
@@ -19833,13 +20167,13 @@ msgstr "U -域外組織および団体の活動"
 #. odoo-python
 #: code:addons/partner_identifiers.py:0
 msgid "UEN"
-msgstr ""
+msgstr "UEN"
 
 #. module: base
 #. odoo-python
 #: code:addons/partner_identifiers.py:0
 msgid "UIDB"
-msgstr ""
+msgstr "UIDB"
 
 #. module: base
 #: model:ir.module.category,name:base.module_category_accounting_localizations_uk
@@ -19863,7 +20197,7 @@ msgstr "URLコード"
 #. odoo-python
 #: code:addons/base/models/ir_attachment.py:0
 msgid "URL attachment (%s) shouldn't be migrated to local."
-msgstr ""
+msgstr "添付のURL (%s) はローカルに移行しないでください。"
 
 #. module: base
 #: model:ir.model.fields,help:base.field_ir_actions_server__webhook_url
@@ -19908,7 +20242,7 @@ msgstr ""
 #. odoo-python
 #: code:addons/models.py:0
 msgid "Uh-oh! You’ve got some company inconsistencies here:"
-msgstr ""
+msgstr "注意!会社情報に不整合があります:"
 
 #. module: base
 #: model:res.country,name:base.ua
@@ -19922,13 +20256,15 @@ msgid ""
 "Unable to delete %(record)s because it is used as the default value of %"
 "(field)s"
 msgstr ""
+"%(record)s を削除することができません。 %(field)sのデフォルト値として使用され"
+"ています"
 
 #. module: base
 #. odoo-python
 #: code:addons/base/models/ir_actions_report.py:0
 msgid ""
 "Unable to find the pdf engine on this system. The PDF can not be created."
-msgstr ""
+msgstr "このシステムではPDFエンジンが見つかりません。PDFを作成できません。"
 
 #. module: base
 #. odoo-python
@@ -20025,7 +20361,7 @@ msgstr "アンインストール可能"
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.view_base_module_uninstall
 msgid "Uninstallation"
-msgstr ""
+msgstr "アンインストール"
 
 #. module: base
 #: model:ir.model.fields,field_description:base.field_res_company__uninstalled_l10n_module_ids
@@ -20038,6 +20374,8 @@ msgid ""
 "Uninstalling modules can be risky. We recommend to try it on a testing "
 "environment first."
 msgstr ""
+"モジュールのアンインストールはリスクを伴う場合があります。まずはテスト環境で"
+"試すことをお勧めします。"
 
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.module_view_kanban
@@ -20047,7 +20385,7 @@ msgstr "アンインストール…"
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.view_currency_form
 msgid "Unit/Base"
-msgstr ""
+msgstr "単位/基準"
 
 #. module: base
 #: model:res.country,name:base.ae
@@ -20077,19 +20415,19 @@ msgstr "不明"
 #. odoo-python
 #: code:addons/models.py:0
 msgid "Unknown database error: '%s'"
-msgstr ""
+msgstr "不明なデータベースエラー: '%s'"
 
 #. module: base
 #. odoo-python
 #: code:addons/models.py:0
 msgid "Unknown database identifier '%s'"
-msgstr ""
+msgstr "不明なデータベースシステム識別子: '%s'"
 
 #. module: base
 #. odoo-python
 #: code:addons/models.py:0
 msgid "Unknown error during import: %(error_type)s: %(error_message)s"
-msgstr ""
+msgstr "以下のインポート中の不明なエラー: %(error_type)s: %(error_message)s"
 
 #. module: base
 #. odoo-python
@@ -20176,7 +20514,7 @@ msgstr ""
 #. odoo-python
 #: code:addons/domains.py:0
 msgid "Unsupported operator on %(field_label)s %(model_label)s in %(domain)s"
-msgstr ""
+msgstr "%(field_label)s %(model_label)s (%(domain)s)内でサポートされていない演算子"
 
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.view_model_data_search
@@ -20198,7 +20536,7 @@ msgstr "更新"
 #. odoo-python
 #: code:addons/base/models/ir_actions.py:0
 msgid "Update %(model_name)s"
-msgstr ""
+msgstr "%(model_name)sを更新"
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_view_base_module_update
@@ -20234,7 +20572,7 @@ msgstr "関連モデルを更新"
 #. module: base
 #: model:ir.model.fields.selection,name:base.selection__ir_access__operation__ud
 msgid "Update, Delete"
-msgstr ""
+msgstr "更新、削除"
 
 #. module: base
 #. odoo-python
@@ -20243,6 +20581,8 @@ msgid ""
 "Updating records with different property fields definitions is not "
 "supported. Update by separate definition instead."
 msgstr ""
+"プロパティフィールドの定義が異なるレコードの更新はサポートされていません。代"
+"わりに、個別の定義を使用して更新してください。"
 
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.module_form
@@ -20423,14 +20763,14 @@ msgstr ""
 #. module: base
 #: model:ir.model,name:base.model_res_users_apikeys
 msgid "User API Key"
-msgstr ""
+msgstr "ユーザ API キー"
 
 #. module: base
 #: model:ir.model.fields,field_description:base.field_res_device__user_agent
 #: model:ir.model.fields,field_description:base.field_res_device_log__user_agent
 #: model:ir.model.fields,field_description:base.field_res_session__user_agent
 msgid "User Agent"
-msgstr ""
+msgstr "ユーザエージェント"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_user_device
@@ -20457,7 +20797,7 @@ msgstr "ユーザログイン"
 #: model:ir.actions.act_window,name:base.action_user_session
 #: model:ir.ui.menu,name:base.menu_action_user_session
 msgid "User Sessions"
-msgstr ""
+msgstr "ユーザセッション"
 
 #. module: base
 #: model:ir.model,name:base.model_res_users_settings
@@ -20477,7 +20817,7 @@ msgstr "ユーザのログエントリ"
 #. module: base
 #: model:ir.model.fields,field_description:base.field_res_users__session_ids
 msgid "User sessions"
-msgstr ""
+msgstr "ユーザセッション"
 
 #. module: base
 #: model:ir.model.fields,help:base.field_ir_embedded_actions__user_id
@@ -20553,13 +20893,13 @@ msgstr "ユーザログ"
 #. module: base
 #: model:ir.model.fields,field_description:base.field_res_groups__all_user_ids
 msgid "Users and implied users"
-msgstr "ユーザおよび継承ユーザ"
+msgstr "ユーザおよび包含ユーザ"
 
 #. module: base
 #. odoo-python
 #: code:addons/base/models/res_groups.py:0
 msgid "Users and implied users of %(group)s"
-msgstr "%(group)sのユーザおよび継承ユーザ"
+msgstr "%(group)sのユーザおよび包含ユーザ"
 
 #. module: base
 #: model:ir.model.fields,help:base.field_res_groups__user_ids
@@ -20570,11 +20910,13 @@ msgstr "このグループに明示的に含まれるユーザ"
 #: model:ir.model.fields,help:base.field_res_groups__implied_by_ids
 msgid "Users in implying groups are implicitly part of the current group"
 msgstr ""
+"グループを包含しているグループに属するユーザは、現在のグループにも暗黙的に含"
+"まれます"
 
 #. module: base
 #: model:ir.model.fields,help:base.field_res_groups__implied_ids
 msgid "Users in the current group are implicitly part of the implied groups"
-msgstr ""
+msgstr "現在のグループに属するユーザは、包含グループにも暗黙的に含まれます"
 
 #. module: base
 #: model:ir.model.fields,help:base.field_res_groups__disjoint_ids
@@ -20582,6 +20924,9 @@ msgid ""
 "Users in the current group cannot be added in disjoint groups. For example, "
 "a user cannot be in the \"Internal\" and \"Portal\" groups at the same time."
 msgstr ""
+"現在のグループに属するユーザは、互いに排他的なグループに追加することはできま"
+"せん。たとえば、同一のユーザが「社内」グループと「ポータル」グループに同時に"
+"所属することはできません。"
 
 #. module: base
 #: model:ir.model.fields,field_description:base.field_res_company__uses_default_logo
@@ -20626,7 +20971,7 @@ msgstr "VAT（Value Added Tax）"
 #. odoo-python
 #: code:addons/partner_identifiers.py:0
 msgid "VAT Registry (VAT ID)"
-msgstr ""
+msgstr "VAT(付加価値税)登録 (VAT ID)"
 
 #. module: base
 #: model:ir.model.fields,field_description:base.field_ir_actions_server__value
@@ -20657,7 +21002,7 @@ msgstr "値タイプ"
 #. module: base
 #: model:ir.model.fields,help:base.field_res_currency_rate__company_rate
 msgid "Value of 1 unit of this currency in the company currency"
-msgstr ""
+msgstr "この通貨の1単位あたりの、社内通貨での価値"
 
 #. module: base
 #: model:res.country,name:base.vu
@@ -20677,7 +21022,7 @@ msgstr "バツ"
 #. module: base
 #: model:res.partner.category,name:base.res_partner_category_0
 msgid "Vendor"
-msgstr ""
+msgstr "仕入先"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_partner_supplier_form
@@ -20692,7 +21037,7 @@ msgstr "ベネズエラ"
 #. module: base
 #: model:ir.model.fields,help:base.field_ir_model__explanation
 msgid "Verbose description of what is this model for"
-msgstr ""
+msgstr "このモデルの用途に関する詳細な説明"
 
 #. module: base
 #: model:ir.model.fields,help:base.field_ir_actions_act_url__explanation
@@ -20704,7 +21049,7 @@ msgstr ""
 #: model:ir.model.fields,help:base.field_ir_actions_server__explanation
 #: model:ir.model.fields,help:base.field_ir_cron__explanation
 msgid "Verbose description of what this action actually does"
-msgstr ""
+msgstr "このアクションが実際に何を行うかについての詳細な説明"
 
 #. module: base
 #. odoo-python
@@ -20793,7 +21138,7 @@ msgstr "ビュー継承モード"
 #. module: base
 #: model:ir.model.fields,field_description:base.field_ir_ui_view__technical_usage
 msgid "View's Technical Usage"
-msgstr ""
+msgstr "ビューの技術的用途"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_ui_view
@@ -20842,7 +21187,7 @@ msgstr "ヴァージン諸島 (アメリカ領)"
 #: model_terms:ir.ui.view,arch_db:base.edit_menu_access
 #: model_terms:ir.ui.view,arch_db:base.view_window_action_form
 msgid "Visibility"
-msgstr "可視性"
+msgstr "表示設定"
 
 #. module: base
 #: model:ir.model.fields,field_description:base.field_ir_module_category__visible
@@ -20859,12 +21204,12 @@ msgstr "全員に表示"
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.act_report_xml_view
 msgid "Visible to all groups"
-msgstr ""
+msgstr "すべてのグループに表示"
 
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.act_report_xml_view
 msgid "Visible to all records"
-msgstr ""
+msgstr "すべてのレコードに表示"
 
 #. module: base
 #: model:res.country,name:base.wf
@@ -20904,6 +21249,9 @@ msgid ""
 "enhancing solutions through the use of advanced software for our clients "
 "worldwide. At Lumber Inc we bring operational experience combined..."
 msgstr ""
+"当社は、高度なソフトウェアを活用し、世界中のクライアントに向けて価値創出"
+"ソリューションを提供するテクノロジーコンサルティングおよび戦略アドバイザリー"
+"企業です。Lumber Inc. では、これまでの実務運用経験と..."
 
 #. module: base
 #: model_terms:res.partner,website_description:base.res_partner_18
@@ -20920,6 +21268,17 @@ msgid ""
 "it contributes to the goals of the company, we then optimize it, and design "
 "the software solutions to best support it."
 msgstr ""
+"当社は、世界中のお客様を対象に、最先端のソフトウェアを活用した付加価値の高い"
+"ソリューションを提供する、テクノロジーコンサルティングおよび戦略"
+"アドバイザリー企業です。\n"
+" <br> <br>\n"
+"では、これまでに培った現場の運用経験と、高度な技術的知見を融合させています。"
+"ビジネス運用を支えるソフトウェアは、重要な業務プロセスの実行を円滑にし、"
+"ユーザーにとって障壁ではなく「強力なツール」として機能するように設計されなけ"
+"ればならない、と当社は考えています。そのため、当社のアプローチはまず「"
+"プロセス」に焦点を当て、それが企業の目標達成に確実に貢献するようにします。そ"
+"の上でプロセスを最適化し、それを最大限にサポートするための最適な"
+"ソフトウェアソリューションを設計・構築いたします。"
 
 #. module: base
 #: model:ir.model.fields,field_description:base.field_ir_ui_menu__web_icon
@@ -20960,12 +21319,12 @@ msgstr "ウェブサイト"
 #. module: base
 #: model:ir.model.fields,field_description:base.field_website__domain
 msgid "Website Domain"
-msgstr ""
+msgstr "サイトドメイン"
 
 #. module: base
 #: model:ir.model.constraint,message:base.constraint_website_domain_unique
 msgid "Website Domain should be unique."
-msgstr ""
+msgstr "サイトドメインは一意であることが必要です。"
 
 #. module: base
 #: model:ir.model.fields,field_description:base.field_res_company__website
@@ -20977,12 +21336,12 @@ msgstr "ウェブサイトリンク"
 #. module: base
 #: model:ir.model.fields,field_description:base.field_website__name
 msgid "Website Name"
-msgstr ""
+msgstr "ウェブサイト名"
 
 #. module: base
 #: model:ir.module.category,name:base.module_category_website_sale
 msgid "Website Sale"
-msgstr ""
+msgstr "ウェブサイト販売"
 
 #. module: base
 #: model:ir.model.fields.selection,name:base.selection__res_lang__week_start__3
@@ -21043,7 +21402,8 @@ msgstr ""
 "ドキュメントを印刷し、データをエクスポート・インポートする場合は、時間値はこ"
 "のタイムゾーンに従って計算されます。\n"
 "タイムゾーンが設定されていない場合は、UTC (協定世界時)が使用されます。\n"
-"それ以外の場合、時間値はWebクライアントの時間オフセットに従って計算されます。"
+"それ以外の場合、時間値はウェブクライアントの時間オフセットに従って計算されま"
+"す。"
 
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.sequence_view
@@ -21060,13 +21420,13 @@ msgstr ""
 #. module: base
 #: model:ir.model.fields,help:base.field_ir_access__is_standard
 msgid "Whether the access is defined by a module"
-msgstr ""
+msgstr "アクセスがモジュールによって定義されているかどうか"
 
 #. module: base
 #: model:ir.model.fields,help:base.field_ir_actions_report__save_as_attachment
 #: model_terms:ir.ui.view,arch_db:base.act_report_xml_view
 msgid "Whether the report is saved as attachment when it is printed"
-msgstr ""
+msgstr "印刷時にレポートを添付ファイルとして保存するかどうか"
 
 #. module: base
 #: model:ir.model.fields,help:base.field_ir_model_fields__copied
@@ -21081,22 +21441,22 @@ msgstr "この値がデータベースに保存されているかどうか"
 #. module: base
 #: model:ir.model.fields,help:base.field_ir_access__for_create
 msgid "Whether this access record applies for operation 'create'"
-msgstr ""
+msgstr "このアクセス権が「作成」操作に適用されるかどうか"
 
 #. module: base
 #: model:ir.model.fields,help:base.field_ir_access__for_read
 msgid "Whether this access record applies for operation 'read'"
-msgstr ""
+msgstr "このアクセス権が「読取」操作に適用されるかどうか"
 
 #. module: base
 #: model:ir.model.fields,help:base.field_ir_access__for_unlink
 msgid "Whether this access record applies for operation 'unlink'"
-msgstr ""
+msgstr "このアクセス権が「削除」操作に適用されるかどうか"
 
 #. module: base
 #: model:ir.model.fields,help:base.field_ir_access__for_write
 msgid "Whether this access record applies for operation 'write'"
-msgstr ""
+msgstr "このアクセス権が「書込」操作に適用されるかどうか"
 
 #. module: base
 #: model:ir.model.fields,help:base.field_res_partner__employee
@@ -21115,6 +21475,8 @@ msgid ""
 "Whether this record adds (permission) or restricts (restriction) access to "
 "the given model"
 msgstr ""
+"このレコードが指定されたモデルに対するアクセス権を付与(許可)するか、それとも"
+"制限(禁止)するか"
 
 #. module: base
 #: model:ir.model.fields,help:base.field_ir_model_fields__translate
@@ -21132,7 +21494,7 @@ msgstr "このフィールドの値が会社によって異なるかどうか"
 #. module: base
 #: model:ir.model.fields,help:base.field_ir_access__operation
 msgid "Which operation(s) this access applies to, a subset of 'crud'."
-msgstr ""
+msgstr "このアクセス権が適用される操作を指定します。対象は「crud」の一部です。"
 
 #. module: base
 #: model:ir.model.fields,help:base.field_ir_sequence__implementation
@@ -21190,6 +21552,8 @@ msgid ""
 "Wood Corner brings honesty and seriousness to wood industry while helping "
 "customers deal with trees, flowers and fungi."
 msgstr ""
+"Wood Cornerは、樹木や草花、菌類のケアを通じてお客様の課題を解決し、木材業界に"
+"「誠実」と「信頼」をお届けしています。"
 
 #. module: base
 #: model:ir.model.fields,field_description:base.field_ir_model_relation__write_date
@@ -21215,14 +21579,14 @@ msgstr "キーを書き留めてください"
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.report_irmodeloverview
 msgid "X"
-msgstr ""
+msgstr "X"
 
 #. module: base
 #. odoo-python
 #: code:addons/base/models/res_partner.py:0
 #: code:addons/partner_identifiers.py:0
 msgid "XXXXXXXXX [9 digits] and it should respect the Luhn algorithm checksum"
-msgstr ""
+msgstr "XXXXXXXXX [9 桁] でLuhnアルゴリズムのチェックサムにならう必要があります"
 
 #. module: base
 #: model:res.currency,currency_subunit_label:base.VND
@@ -21256,6 +21620,8 @@ msgid ""
 "You are creating a loop in your '%s' records. A record cannot be a child of "
 "itself or one of its own sub-items. Please select a different parent."
 msgstr ""
+"'%s' レコードでループが発生しています。レコードは、それ自体または自身の"
+"サブアイテムの子になることはできません。別の親を選択してください。"
 
 #. module: base
 #. odoo-python
@@ -21379,7 +21745,7 @@ msgstr ""
 #: model:ir.model.fields,help:base.field_res_partner__vat
 #: model:ir.model.fields,help:base.field_res_users__vat
 msgid "You can use '/' to indicate that the customer has no Tax ID."
-msgstr ""
+msgstr "顧客の税IDがない場合は、「/」を入力できます。"
 
 #. module: base
 #. odoo-python
@@ -21459,6 +21825,8 @@ msgid ""
 "You cannot attach an attachment to itself.\n"
 "Attachment %(record)s cannot have res_id: %(res_id)s"
 msgstr ""
+"添付ファイルをそれ自体に添付することはできません。\n"
+"添付ファイル%(record)s には res_id を指定できません:%(res_id)s"
 
 #. module: base
 #. odoo-python
@@ -21494,6 +21862,8 @@ msgid ""
 "You cannot delete %(to_delete_record)s, as it is used by %"
 "(on_restrict_record)s"
 msgstr ""
+"%(to_delete_record)sを削除することはできません。 %(on_restrict_record)sによっ"
+"て使用されています"
 
 #. module: base
 #. odoo-python
@@ -21605,6 +21975,8 @@ msgid ""
 "You cannot use “%(property_name)s” because the linked “%(model_name)s” model "
 "doesn't exist or is invalid"
 msgstr ""
+"リンク先の「%(model_name)s」モデルが存在しない、または無効なため、「%"
+"(property_name)s」は使用できません"
 
 #. module: base
 #. odoo-python
@@ -21616,19 +21988,23 @@ msgid ""
 "\n"
 "Operation: %(operation)s"
 msgstr ""
+"フィールド \"%(field)s\" (%(document_kind)s(%(document_model)s))にアクセスす"
+"る権限がありません。システム管理者に連絡してください。\n"
+"\n"
+"オペレーション: %(operation)s"
 
 #. module: base
 #. odoo-python
 #: code:addons/base/models/ir_actions.py:0
 msgid "You don't have enough access rights to run this action."
-msgstr ""
+msgstr "このアクションを実行するための十分なアクセス権がありません。"
 
 #. module: base
 #. odoo-python
 #: code:addons/models.py:0
 msgid ""
 "You don't have the rights to export data. Please contact an Administrator."
-msgstr ""
+msgstr "データのエクスポート権限がありません。管理者にお問い合わせください。"
 
 #. module: base
 #. odoo-python
@@ -21735,7 +22111,7 @@ msgstr "ザンビア"
 #. odoo-python
 #: code:addons/base/models/res_partner_bank.py:0
 msgid "Zengin Branch Code must consist of 3 digits."
-msgstr ""
+msgstr "全銀支店コードは3桁で入力してください。"
 
 #. module: base
 #: model:res.currency,currency_unit_label:base.ZIG
@@ -21779,19 +22155,19 @@ msgstr "有効"
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.view_partner_form
 msgid "address"
-msgstr ""
+msgstr "住所"
 
 #. module: base
 #. odoo-python
 #: code:addons/models.py:0
 msgid "allowed for groups %s"
-msgstr ""
+msgstr "%sグループに許可されている"
 
 #. module: base
 #. odoo-python
 #: code:addons/models.py:0
 msgid "always forbidden"
-msgstr ""
+msgstr "常に禁止"
 
 #. module: base
 #: model:ir.module.category,name:base.module_category_services_assets
@@ -21839,7 +22215,7 @@ msgstr "作成"
 #. odoo-python
 #: code:addons/models.py:0
 msgid "custom field access rules"
-msgstr ""
+msgstr "カスタムフィールドのアクセスルール"
 
 #. module: base
 #: model:res.currency,currency_subunit_label:base.STN
@@ -21872,7 +22248,7 @@ msgstr "日"
 #. odoo-python
 #: code:addons/base/models/ir_access.py:0
 msgid "delete"
-msgstr ""
+msgstr "削除"
 
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.wizard_lang_export
@@ -21918,7 +22294,7 @@ msgstr "例：%(placeholder)s"
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.act_report_xml_view
 msgid "e.g. 'report ' + (object.name) + '.pdf'"
-msgstr ""
+msgstr "例: 'レポート ' + (object.name) + '.pdf'"
 
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.view_company_form
@@ -21929,7 +22305,7 @@ msgstr "例: BE0477472701"
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.view_partner_bank_form
 msgid "e.g. Bank of America"
-msgstr ""
+msgstr "例：アメリカ銀行"
 
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.view_partner_form
@@ -21965,7 +22341,7 @@ msgstr "例: 鈴木 一郎"
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.view_partner_simple_form
 msgid "e.g. Lumber Inc or Brandon Freeman"
-msgstr ""
+msgstr "例：Lumber Inc または Brandon Freeman"
 
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.view_company_form
@@ -21986,7 +22362,7 @@ msgstr "例: 営業部長"
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.view_model_form
 msgid "e.g. Sales Order"
-msgstr ""
+msgstr "例：販売オーダ"
 
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.ir_mail_server_form
@@ -22013,7 +22389,7 @@ msgstr "例: https://www.odoo.com"
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.act_report_xml_view
 msgid "e.g. module_name.report_name"
-msgstr ""
+msgstr "例：module_name.report_name"
 
 #. module: base
 #: model:ir.module.category,name:base.module_category_website_elearning
@@ -22024,7 +22400,7 @@ msgstr "Eラーニング"
 #. odoo-python
 #: code:addons/base/models/res_partner.py:0
 msgid "either 11 digits for CPF or 14 characters for CNPJ"
-msgstr ""
+msgstr "CPFの場合は11桁、CNPJの場合は14文字"
 
 #. module: base
 #: model:ir.module.category,name:base.module_category_services_expenses
@@ -22223,7 +22599,7 @@ msgstr "parent_id"
 #. odoo-python
 #: code:addons/base/models/res_partner.py:0
 msgid "partner%s"
-msgstr ""
+msgstr "取引先%s"
 
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.view_server_action_form
@@ -22257,7 +22633,7 @@ msgstr "properties_definition"
 #. module: base
 #: model:ir.model.fields.selection,name:base.selection__ir_actions_server__value_field_to_show__property_selection
 msgid "property_selection"
-msgstr ""
+msgstr "property_selection"
 
 #. module: base
 #. odoo-python
@@ -22344,12 +22720,12 @@ msgstr "書き込み"
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.view_users_form
 msgid "x"
-msgstr ""
+msgstr "x"
 
 #. module: base
 #: model:ir.model.fields.selection,name:base.selection__ir_actions_server__value_field_to_show__x2many
 msgid "x2many"
-msgstr ""
+msgstr "x2many"
 
 #. module: base
 #. odoo-python

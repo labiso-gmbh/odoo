@@ -12,7 +12,6 @@ from odoo.exceptions import UserError
 from odoo.fields import Domain, Command
 from odoo.tools import format_datetime, format_date, groupby, OrderedSet
 from odoo.tools.float_utils import float_compare, float_is_zero
-from odoo.tools.misc import clean_context
 
 
 class StockPicking(models.Model):
@@ -409,16 +408,37 @@ class StockPicking(models.Model):
         'move_line_ids.result_package_id.outermost_package_id', 'move_line_ids.result_package_id.outermost_package_id.package_type_id', 'move_line_ids.result_package_id.outermost_package_id.shipping_weight',
         'weight_bulk')
     def _compute_shipping_weight(self):
+        all_packages = self.move_line_ids.result_package_id.outermost_package_id.sudo()
+        if all_packages:
+            # Batched over all pickings in self instead of one _get_weight() call per picking,
+            # which turned this compute into an N+1 (2 extra queries per picking).
+            children_by_dest_pack, all_pack_ids = all_packages._get_all_children_package_dest_ids()
+            base_weight_per_package = {p.id: p.package_type_id.base_weight for p in self.env['stock.package'].sudo().browse(all_pack_ids)}
+            move_line_groups = self.env['stock.move.line'].sudo()._read_group(
+                [('result_package_id', 'in', all_pack_ids), ('product_id', '!=', False), ('picking_id', 'in', self.ids)],
+                ['picking_id', 'result_package_id', 'product_id', 'uom_id', 'quantity'],
+                ['__count'],
+            )
+            product_weight_by_picking_package = defaultdict(float)
+            for picking_g, result_package, product, product_uom, quantity, count in move_line_groups:
+                product_weight_by_picking_package[picking_g.id, result_package.id] += (
+                    count
+                    * product_uom._compute_quantity(quantity, product.uom_id)
+                    * product.weight
+                )
+
         for picking in self:
             # if shipping weight is not assigned => default to calculated product weight
             shipping_weight = picking.weight_bulk
             relevant_packages = picking.move_line_ids.result_package_id.outermost_package_id
-            packages_weight = relevant_packages.sudo()._get_weight(picking.id)
             for package in relevant_packages:
                 if package.shipping_weight:
                     shipping_weight += package.shipping_weight
-                else:
-                    shipping_weight += packages_weight.get(package, 0)
+                    continue
+                weight = base_weight_per_package.get(package.id, 0) + product_weight_by_picking_package.get((picking.id, package.id), 0)
+                for child_id in children_by_dest_pack.get(package, []):
+                    weight += base_weight_per_package.get(child_id, 0) + product_weight_by_picking_package.get((picking.id, child_id), 0)
+                shipping_weight += weight
             picking.shipping_weight = shipping_weight
 
     def _compute_shipping_volume(self):
@@ -685,6 +705,7 @@ class StockPicking(models.Model):
             raise UserError(_("Changing the operation type of this record is forbidden at this point."))
 
         old_batches = self.batch_id
+        moves_to_sync_final_location = self.env['stock.move']
         if vals.get('picking_type_id'):
             picking_type = self.env['stock.picking.type'].browse(vals.get('picking_type_id'))
             for picking in self:
@@ -692,6 +713,15 @@ class StockPicking(models.Model):
                     picking.name = picking_type.sequence_id.next_by_id()
                     vals['location_id'] = picking_type.default_location_src_id.id
                     vals['location_dest_id'] = picking_type.default_location_dest_id.id
+                    # The final location of moves in an internal picking must be updated
+                    # to the new warehouse to reflect in the forecast.
+                    if picking.picking_type_id.code == picking_type.code:
+                        moves_to_sync_final_location |= picking.move_ids.filtered(
+                            lambda m: m.state not in ('done', 'cancel')
+                            and m.location_dest_usage != 'inventory'
+                            and m.forecasted_location_id
+                            and m.forecasted_location_id.usage == 'internal'
+                        )
         res = super().write(vals)
 
         if vals.get('batch_id'):
@@ -712,10 +742,10 @@ class StockPicking(models.Model):
             after_vals['location_id'] = vals['location_id']
         if vals.get('location_dest_id'):
             after_vals['location_dest_id'] = vals['location_dest_id']
-        if 'partner_id' in vals:
-            after_vals['partner_id'] = vals['partner_id']
         if after_vals:
             self.move_ids.filtered(lambda move: move.location_dest_usage != 'inventory').write(after_vals)
+        if moves_to_sync_final_location:
+            moves_to_sync_final_location.forecasted_location_id = picking_type.warehouse_id.lot_stock_id
         if vals.get('move_ids'):
             self._autoconfirm_picking()
 
@@ -915,8 +945,11 @@ class StockPicking(models.Model):
         # |              ↓                                | return_line.move_id              ↓
         # |       return pick(Add as dest)          return toLink                    return ship(Add as orig)
         # +--------------------------------------------------------------------------------------------------------+
+        location_id = self.location_id or move_id.location_dest_id
         origin_move = move_id.origin_returned_move_id or move_id
-        move_orig_to_link = origin_move.move_dest_ids.returned_move_ids
+        # Only keep the returns that deliver back where this return picks from, so that the
+        # chain never sources the new move from an unrelated location
+        move_orig_to_link = origin_move.move_dest_ids.returned_move_ids.filtered(lambda m: m.location_dest_id._child_of(location_id))
         if not move_id.origin_returned_move_id:
             # link to original move
             move_orig_to_link |= origin_move
@@ -941,7 +974,7 @@ class StockPicking(models.Model):
             'picking_id': self.id,
             'state': 'draft',
             'date': fields.Datetime.now(),
-            'location_id': self.location_id.id or move_id.location_dest_id.id,
+            'location_id': location_id.id,
             'location_dest_id': self.location_dest_id.id or move_id.location_id.id,
             'forecasted_location_id': False,
             'picking_type_id': self.picking_type_id.id,
@@ -1591,8 +1624,6 @@ class StockPicking(models.Model):
 
     def action_put_in_pack(self, *, package_id=False, package_type_id=False, package_name=False):
         self.ensure_one()
-        if self.env.context.get('sml_specific_default'):
-            self = self.with_context(clean_context(self.env.context))
         if self.state not in ('done', 'cancel'):
             return self.move_line_ids.action_put_in_pack(package_id=package_id, package_type_id=package_type_id, package_name=package_name)
 

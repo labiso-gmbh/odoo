@@ -87,6 +87,10 @@ class LoyaltyRule(models.Model):
         self.ensure_one()
         if self.mode == 'with_code' and self.code not in (order.applied_codes or []):
             return False
+
+        if self.program_id.is_nominative and not order.partner_id:
+            return False
+
         qualifying = self._qualifying_lines(order, lines)
         if not qualifying:
             return False
@@ -107,7 +111,7 @@ class LoyaltyRule(models.Model):
         mirror of *static/src/app/models/loyalty_rule.js* LoyaltyRule.getPoints
         """
         self.ensure_one()
-        if not self.reward_point_amount or not self._is_fulfilled(order, lines):
+        if not self.reward_point_amount or not self._is_fulfilled(order, lines) or not order._is_program_pricelist_valid(self.program_id):
             return 0
 
         order_lines = order.lines if lines is None else lines

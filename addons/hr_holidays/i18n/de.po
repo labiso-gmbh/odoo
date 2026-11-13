@@ -17,10 +17,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-25 17:37+0000\n"
-"PO-Revision-Date: 2026-09-09 14:03+0000\n"
+"POT-Creation-Date: 2026-11-06 17:38+0000\n"
+"PO-Revision-Date: 2026-11-06 09:33+0000\n"
 "Last-Translator: \"Larissa Manderfeld (lman)\" <lman@odoo.com>\n"
-"Language-Team: German <https://translate.odoo.com/projects/odoo-master/"
+"Language-Team: German <https://translate.odoo.com/projects/odoo-20/"
 "hr_holidays/de/>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -81,6 +81,34 @@ msgid ""
 "also possible in order to automatically create a meeting when a time off "
 "request is accepted by setting up a type of meeting in time off Type.\n"
 msgstr ""
+"\n"
+"Verwaltung von Urlaubsanträgen und -ansprüchen\n"
+"=====================================\n"
+"\n"
+"Diese App steuert den Abwesenheitsplan Ihres Unternehmens. Es ermöglicht den "
+"Mitarbeitern, Abwesenheiten zu beantragen. Anschließend können Manager "
+"Abwesenheitsanträge prüfen und genehmigen oder ablehnen. Auf diese Weise "
+"können Sie die Gesamtzeitplanung für das Unternehmen oder die Abteilung "
+"steuern.\n"
+"\n"
+"Sie können mehrere Arten von Abwesenheiten (Krankheit, bezahlte Tage …) "
+"einstellen und Abwesenheiten einem Mitarbeiter oder einer Abteilung über die "
+"Urlaubsansprüche schnell zuordnen. Ein Mitarbeiter kann auch durch einen "
+"neuen Antrag auf Urlaubsanspruch weitere freie Tage beantragen. Es erhöht "
+"die Gesamtzahl der verfügbaren Tage für diese Abwesenheitsart, sofern der "
+"Antrag angenommen wird.\n"
+"\n"
+"Sie können die Abwesenheit auf verschiedene Weise verfolgen, indem Sie die "
+"Berichte verfolgen:\n"
+"\n"
+"* Zusammenfassung der Abwesenheiten\n"
+"* Abwesenheit nach Abteilungen\n"
+"* Abwesenheitsanalyse\n"
+"\n"
+"Eine Synchronisation mit einer internen Agenda (Meetings des CRM-Moduls) ist "
+"ebenfalls möglich, um automatisch eine Besprechung zu erstellen, wenn ein "
+"Abwesenheitsantrag akzeptiert wird, indem eine Art von Besprechung in der "
+"Abwesenheitsart eingerichtet wird.\n"
 
 #. module: hr_holidays
 #. odoo-python
@@ -134,7 +162,7 @@ msgstr "%(allocation_name)s (von %(date_from)s bis Kein Limit)"
 #. odoo-python
 #: code:addons/hr_holidays/models/hr_leave_display_name_mixin.py:0
 msgid "%(days)g days"
-msgstr ""
+msgstr "%(days)g Tage"
 
 #. module: hr_holidays
 #. odoo-python
@@ -146,7 +174,7 @@ msgstr "%(days)g T."
 #. odoo-python
 #: code:addons/hr_holidays/models/hr_leave_display_name_mixin.py:0
 msgid "%(duration)s"
-msgstr ""
+msgstr "%(duration)s"
 
 #. module: hr_holidays
 #. odoo-python
@@ -186,6 +214,12 @@ msgstr "%(leave_name)s wurde aus folgendem Grund storniert: %(reason)s."
 
 #. module: hr_holidays
 #. odoo-python
+#: code:addons/hr_holidays/models/res_users.py:0
+msgid "%(name)s !!✈ Back on %(date)s!!"
+msgstr "%(name)s!!✈ Zurück am %(date)s!!"
+
+#. module: hr_holidays
+#. odoo-python
 #: code:addons/hr_holidays/wizard/hr_leave_allocation_generate_multi_wizard.py:0
 msgid "%(name)s (%(duration)s %(unit_of_measure)s(s))"
 msgstr "%(name)s (%(duration)s %(unit_of_measure)s(en)"
@@ -206,13 +240,13 @@ msgstr "%(name)s (%(duration)s Stunde(n)"
 #. odoo-python
 #: code:addons/hr_holidays/models/hr_work_entry_type.py:0
 msgid "%(name)s (%(time)g days left)"
-msgstr ""
+msgstr "%(name)s (%(time)g Tage übrig)"
 
 #. module: hr_holidays
 #. odoo-python
 #: code:addons/hr_holidays/models/hr_work_entry_type.py:0
 msgid "%(name)s (%(time)g hours left)"
-msgstr ""
+msgstr "%(name)s (%(time)g Stunden übrig)"
 
 #. module: hr_holidays
 #. odoo-python
@@ -320,7 +354,7 @@ msgstr ", zurück am "
 #. odoo-python
 #: code:addons/hr_holidays/models/hr_leave.py:0
 msgid "- %(code)s - %(name)s: %(nbr_days)s days"
-msgstr ""
+msgstr "- %(code)s - %(name)s: %(nbr_days)s Tage"
 
 #. module: hr_holidays
 #. odoo-python
@@ -337,64 +371,47 @@ msgstr ": der"
 #: model:mail.template,body_html:hr_holidays.new_timeoff_request_template
 msgid ""
 "<div>\n"
-"                    Dear <b><t t-out=\"object.env.context.get('manager')\"/"
-"></b>,\n"
-"                    <br/><br/>\n"
+"                    Dear <b><t t-out=\"object.env.context.get('manager')\"></"
+"t></b>,\n"
+"                    <br><br>\n"
 "                    <p>I'm requesting a Time Off. I would appreciate if you "
 "could approve it whenever possible!</p>\n"
 "                    <ul>\n"
 "                        <li>Time Type: <t t-"
-"out=\"object.work_entry_type_id.name\"/></li>\n"
-"                        <li><t t-out=\"object.request_date_from\"/> → <t t-"
-"out=\"object.request_date_to\"/> (<t t-out=\"object.duration_display\"/>)</"
-"li>\n"
+"out=\"object.work_entry_type_id.name\"></t></li>\n"
+"                        <li><t t-out=\"object.request_date_from\"></t> → <t "
+"t-out=\"object.request_date_to\"></t> (<t t-"
+"out=\"object.duration_display\"></t>)</li>\n"
 "                        <li t-if=\"object.name\">Reason: <t t-"
-"out=\"object.name\"/></li>\n"
+"out=\"object.name\"></t></li>\n"
 "                    </ul>\n"
 "                </div>\n"
 "            "
 msgstr ""
-"<div>\n"
-"                    Guten Tag<b><t t-out=\"object.env.context.get('manager')"
-"\"/></b>,\n"
-"                    <br/><br/>\n"
-"                    <p>Ich beantrage eine Abwesenheit. Ich würde es "
-"begrüßen, wenn Sie sie genehmigen könnten!</p>\n"
-"                    <ul>\n"
-"                        <li>Abwesenheitsart: <t t-"
-"out=\"object.work_entry_type_id.name\"/></li>\n"
-"                        <li><t t-out=\"object.request_date_from\"/> → <t t-"
-"out=\"object.request_date_to\"/> (<t t-out=\"object.duration_display\"/>)</"
-"li>\n"
-"                        <li t-if=\"object.name\">Grund: <t t-"
-"out=\"object.name\"/></li>\n"
-"                    </ul>\n"
-"                </div>\n"
-"            "
 
 #. module: hr_holidays
 #: model:mail.template,body_html:hr_holidays.mail_template_allocation_confirmed
 msgid ""
 "<div>\n"
-"                    Dear <t t-out=\"object.employee_id.name or 'Employee'\"/"
-">,<br/><br/>\n"
-"                    Your time off allocation has been confirmed.<br/><br/>\n"
-"                    Details:<br/>\n"
+"                    Dear <t t-out=\"object.employee_id.name or "
+"'Employee'\"></t>,<br><br>\n"
+"                    Your time off allocation has been confirmed.<br><br>\n"
+"                    Details:<br>\n"
 "                    <ul>\n"
 "                        <li>Time Type: <t t-"
-"out=\"object.work_entry_type_id.name or ''\"/></li>\n"
+"out=\"object.work_entry_type_id.name or ''\"></t></li>\n"
 "                        <li>Allocation: <t t-out=\"object.duration_display "
-"or ''\"/></li>\n"
-"                        <li>Valid From: <t t-out=\"object.date_from or ''\"/"
-"> <t t-if=\"not object.date_to\">(No Expiry)</t><t t-else=\"\"> to <t t-"
-"out=\"object.date_to or ''\"/></t></li>\n"
+"or ''\"></t></li>\n"
+"                        <li>Valid From: <t t-out=\"object.date_from or "
+"''\"></t> <t t-if=\"not object.date_to\">(No Expiry)</t><t t-else=\"\"> to "
+"<t t-out=\"object.date_to or ''\"></t></t></li>\n"
 "                        <li t-if=\"object.accrual_plan_id\">Accrual Plan: <t "
-"t-out=\"object.accrual_plan_id.name or ''\"/></li>\n"
+"t-out=\"object.accrual_plan_id.name or ''\"></t></li>\n"
 "                    </ul>\n"
-"                    <br/>\n"
-"                    For any questions, contact HR Responsible.<br/><br/>\n"
-"                    Regards,<br/>\n"
-"                    <t t-out=\"object.env.user.name or ''\"/>\n"
+"                    <br>\n"
+"                    For any questions, contact HR Responsible.<br><br>\n"
+"                    Regards,<br>\n"
+"                    <t t-out=\"object.env.user.name or ''\"></t>\n"
 "                </div>\n"
 "            "
 msgstr ""
@@ -405,6 +422,8 @@ msgid ""
 "<i class=\"oi mx-2\" data-icon=\"east\" aria-label=\"Arrow icon\" "
 "title=\"Arrow\" invisible=\"accrual_plan_id or state != 'confirm'\"/>"
 msgstr ""
+"<i class=\"oi mx-2\" data-icon=\"east\" aria-label=\"Arrow icon\" "
+"title=\"Pfeil\" invisible=\"accrual_plan_id or state != 'confirm'\"/>"
 
 #. module: hr_holidays
 #: model_terms:ir.ui.view,arch_db:hr_holidays.hr_leave_allocation_generate_multi_wizard_view_form
@@ -412,6 +431,8 @@ msgid ""
 "<i class=\"oi mx-2\" data-icon=\"east\" aria-label=\"Arrow icon\" "
 "title=\"Arrow\" invisible=\"accrual_plan_id\"/>"
 msgstr ""
+"<i class=\"oi mx-2\" data-icon=\"east\" aria-label=\"Arrow icon\" "
+"title=\"Pfeil\" invisible=\"accrual_plan_id\"/>"
 
 #. module: hr_holidays
 #: model_terms:ir.ui.view,arch_db:hr_holidays.hr_leave_allocation_view_form_manager
@@ -419,6 +440,8 @@ msgid ""
 "<i class=\"oi oi-fw mx-2\" data-icon=\"east\" aria-label=\"Arrow icon\" "
 "title=\"Arrow\" invisible=\"accrual_plan_id\"/>"
 msgstr ""
+"<i class=\"oi oi-fw mx-2\" data-icon=\"east\" aria-label=\"Arrow icon\" "
+"title=\"Pfeil\" invisible=\"accrual_plan_id\"/>"
 
 #. module: hr_holidays
 #: model_terms:ir.ui.view,arch_db:hr_holidays.hr_leave_view_form
@@ -426,6 +449,8 @@ msgid ""
 "<i class=\"oi oi-lg align-self-center\" data-icon=\"label\" title=\"Time Off "
 "Type\" name=\"work_entry_type_id\"/>"
 msgstr ""
+"<i class=\"oi oi-lg align-self-center\" data-icon=\"label\" "
+"title=\"Abwesenheitsart\" name=\"work_entry_type_id\"/>"
 
 #. module: hr_holidays
 #: model_terms:ir.ui.view,arch_db:hr_holidays.hr_leave_view_form
@@ -433,6 +458,8 @@ msgid ""
 "<i class=\"oi oi-lg align-self-center\" data-icon=\"schedule\" "
 "title=\"Dates\" name=\"date\"/>"
 msgstr ""
+"<i class=\"oi oi-lg align-self-center\" data-icon=\"schedule\" "
+"title=\"Daten\" name=\"date\"/>"
 
 #. module: hr_holidays
 #: model_terms:ir.ui.view,arch_db:hr_holidays.hr_leave_view_form
@@ -440,6 +467,8 @@ msgid ""
 "<i class=\"oi oi-lg oi-filled align-self-center\" data-icon=\"edit\" "
 "title=\"Description\" name=\"name\"/>"
 msgstr ""
+"<i class=\"oi oi-lg oi-filled align-self-center\" data-icon=\"edit\" "
+"title=\"Beschreibung\" name=\"name\"/>"
 
 #. module: hr_holidays
 #: model_terms:ir.ui.view,arch_db:hr_holidays.hr_leave_view_form_dashboard_manager_new_time_off
@@ -448,6 +477,8 @@ msgid ""
 "<i class=\"oi oi-lg oi-filled align-self-center\" data-icon=\"person\" "
 "title=\"Employee\" name=\"employee_id\"/>"
 msgstr ""
+"<i class=\"oi oi-lg oi-filled align-self-center\" data-icon=\"person\" "
+"title=\"Mitarbeiter\" name=\"employee_id\"/>"
 
 #. module: hr_holidays
 #: model_terms:ir.ui.view,arch_db:hr_holidays.hr_leave_report_calendar_view_form
@@ -455,6 +486,8 @@ msgid ""
 "<i class=\"oi oi-lg oi-fw flex-shrink-0\" data-icon=\"label\" title=\"Work "
 "Entry Types\" name=\"work_entry_type_id\"/>"
 msgstr ""
+"<i class=\"oi oi-lg oi-fw flex-shrink-0\" data-icon=\"label\" "
+"title=\"Arbeitseintragsarten\" name=\"work_entry_type_id\"/>"
 
 #. module: hr_holidays
 #: model_terms:ir.ui.view,arch_db:hr_holidays.hr_leave_report_calendar_view_form
@@ -462,6 +495,8 @@ msgid ""
 "<i class=\"oi oi-lg oi-fw flex-shrink-0\" data-icon=\"schedule\" "
 "title=\"Dates\" name=\"date\"/>"
 msgstr ""
+"<i class=\"oi oi-lg oi-fw flex-shrink-0\" data-icon=\"schedule\" "
+"title=\"Daten\" name=\"date\"/>"
 
 #. module: hr_holidays
 #: model_terms:ir.ui.view,arch_db:hr_holidays.hr_leave_report_calendar_view_form
@@ -469,6 +504,8 @@ msgid ""
 "<i class=\"oi oi-lg oi-fw oi-filled flex-shrink-0\" data-icon=\"edit\" "
 "title=\"Description\" name=\"description\"/>"
 msgstr ""
+"<i class=\"oi oi-lg oi-fw oi-filled flex-shrink-0\" data-icon=\"edit\" "
+"title=\"Beschreibung\" name=\"description\"/>"
 
 #. module: hr_holidays
 #: model_terms:ir.ui.view,arch_db:hr_holidays.hr_leave_report_calendar_view_form
@@ -476,6 +513,8 @@ msgid ""
 "<i class=\"oi oi-lg oi-fw oi-filled flex-shrink-0\" data-icon=\"person\" "
 "title=\"Employees\" name=\"employee_id\"/>"
 msgstr ""
+"<i class=\"oi oi-lg oi-fw oi-filled flex-shrink-0\" data-icon=\"person\" "
+"title=\"Mitarbeiter\" name=\"employee_id\"/>"
 
 #. module: hr_holidays
 #: model_terms:ir.ui.view,arch_db:hr_holidays.hr_leave_view_kanban
@@ -485,7 +524,7 @@ msgstr "<i class=\"oi\" data-icon=\"attach_file\" title=\"Dateianhänge\"/>"
 #. module: hr_holidays
 #: model_terms:ir.ui.view,arch_db:hr_holidays.hr_leave_view_form
 msgid "<i class=\"oi\" data-icon=\"east\" aria-label=\"to\" title=\"To\"/>"
-msgstr ""
+msgstr "<i class=\"oi\" data-icon=\"east\" aria-label=\"to\" title=\"Bis\"/>"
 
 #. module: hr_holidays
 #: model_terms:ir.ui.view,arch_db:hr_holidays.hr_leave_view_activity
@@ -537,6 +576,15 @@ msgid ""
 "tooltip=\"You can take time from the employee, with the rate of your choice "
 "(100% means 1:1).\">?</sup></span>"
 msgstr ""
+"<span class=\"o_form_label\" invisible=\"threshold_operator == "
+"'less_than'\"><sup class=\"d-print-none text-info p-1 ms-1\" data-"
+"tooltip=\"Sie können dem Mitarbeiter Zeitguthaben zu einem Stundensatz Ihrer "
+"Wahl gewähren (100 % entspricht einem Verhältnis von 1:1), sodass er diese "
+"Zeit später als Freizeitausgleich nehmen kann.\"> zuweisen?</sup></span>\n"
+"                <span class=\"o_form_label\" invisible=\"threshold_operator !"
+"= 'less_than'\"><sup class=\"d-print-none text-info p-1 ms-1\" data-"
+"tooltip=\"Sie können dem Mitarbeiter Zeitguthaben zu einem Stundensatz Ihrer "
+"Wahl gewähren (100 % entspricht einem Verhältnis von 1:1).\">?</sup></span>"
 
 #. module: hr_holidays
 #: model_terms:ir.ui.view,arch_db:hr_holidays.hr_employee_public_form_view_inherit
@@ -558,12 +606,32 @@ msgstr "<span class=\"o_stat_text\">Urlaubsansprüche</span>"
 #. module: hr_holidays
 #: model_terms:ir.ui.view,arch_db:hr_holidays.hr_leave_view_form
 msgid "<span class=\"o_stat_text\">Calendar</span>"
-msgstr ""
+msgstr "<span class=\"o_stat_text\">Kalender</span>"
 
 #. module: hr_holidays
 #: model_terms:ir.ui.view,arch_db:hr_holidays.hr_work_entry_type_view_form
 msgid "<span class=\"o_stat_text\">Time Off</span>"
 msgstr "<span class=\"o_stat_text\">Abwesenheit</span>"
+
+#. module: hr_holidays
+#: model_terms:ir.ui.view,arch_db:hr_holidays.view_employee_form_leave_inherit
+msgid ""
+"<span class=\"o_stat_value text-danger-emphasis\">Not defined</span>\n"
+"                        <span class=\"o_stat_text text-danger-"
+"emphasis\">Time Off</span>"
+msgstr ""
+"<span class=\"o_stat_value text-danger-emphasis\">Nicht definierte</span>\n"
+"                        <span class=\"o_stat_text text-danger-"
+"emphasis\">Abwesenheiten</span>"
+
+#. module: hr_holidays
+#: model_terms:ir.ui.view,arch_db:hr_holidays.hr_leave_view_form_dashboard
+msgid ""
+"<span class=\"text-danger\" invisible=\"not work_entry_type_support_document "
+"or supported_attachment_ids\">Required</span>"
+msgstr ""
+"<span class=\"text-danger\" invisible=\"not work_entry_type_support_document "
+"or supported_attachment_ids\">Erforderlich</span>"
 
 #. module: hr_holidays
 #: model_terms:ir.ui.view,arch_db:hr_holidays.hr_work_entry_type_view_form
@@ -581,6 +649,8 @@ msgid ""
 "<span class=\"text-muted text-nowrap\" "
 "invisible=\"work_entry_type_request_unit == 'hour'\">day(s)</span>"
 msgstr ""
+"<span class=\"text-muted text-nowrap\" "
+"invisible=\"work_entry_type_request_unit == 'hour'\">Tag(e)</span>"
 
 #. module: hr_holidays
 #: model_terms:ir.ui.view,arch_db:hr_holidays.hr_time_rule_view_form_inherit_hr_holidays
@@ -590,6 +660,10 @@ msgid ""
 "                    <span class=\"text-muted\" invisible=\"not "
 "leave_compensation_rate or threshold_operator != 'less_than'\">from</span>"
 msgstr ""
+"<span class=\"text-muted\" invisible=\"not leave_compensation_rate or "
+"threshold_operator == 'less_than'\">bis</span>\n"
+"                    <span class=\"text-muted\" invisible=\"not "
+"leave_compensation_rate or threshold_operator != 'less_than'\">von</span>"
 
 #. module: hr_holidays
 #: model_terms:ir.ui.view,arch_db:hr_holidays.hr_leave_view_kanban
@@ -640,11 +714,15 @@ msgstr ""
 
 #. module: hr_holidays
 #: model_terms:ir.ui.view,arch_db:hr_holidays.hr_work_entry_type_view_form
+#, fuzzy
 msgid ""
 "<span invisible=\"unit_of_measure == 'hour'\">days</span>\n"
 "                                    <span invisible=\"unit_of_measure != "
 "'hour'\">hours</span>"
 msgstr ""
+"<span invisible=\"unit_of_measure == 'hour'\">Tage</span>\n"
+"                                            <span "
+"invisible=\"unit_of_measure != 'hour'\">Stunden</span>"
 
 #. module: hr_holidays
 #: model_terms:ir.actions.act_window,help:hr_holidays.hr_leave_mandatory_day_action
@@ -703,6 +781,8 @@ msgid ""
 "A duration of %s per day does not fit in the working time of the selected "
 "dates."
 msgstr ""
+"Eine Dauer von %s pro Tag passt nicht in die Arbeitszeit der ausgewählten "
+"Daten."
 
 #. module: hr_holidays
 #: model_terms:ir.actions.act_window,help:hr_holidays.hr_leave_action_holiday_allocation_id
@@ -761,7 +841,7 @@ msgstr ""
 #. module: hr_holidays
 #: model_terms:ir.ui.view,arch_db:hr_holidays.hr_leave_view_form
 msgid "A supporting document is required for this type of time type."
-msgstr ""
+msgstr "Für diese Zeitart ist ein Nachweis erforderlich."
 
 #. module: hr_holidays
 #. odoo-python
@@ -815,7 +895,7 @@ msgstr "Heute abwesend"
 #. module: hr_holidays
 #: model:ir.model,name:hr_holidays.model_res_groups
 msgid "Access Groups"
-msgstr ""
+msgstr "Zugriffsgruppen"
 
 #. module: hr_holidays
 #. odoo-python
@@ -1069,7 +1149,7 @@ msgstr "Alle Feiertage für %(year)s sind bereits für %(companies)s aufgeführt
 #. module: hr_holidays
 #: model:ir.model.fields,field_description:hr_holidays.field_hr_time_rule__leave_compensation_rate
 msgid "Allocate %"
-msgstr ""
+msgstr "% zuweisen"
 
 #. module: hr_holidays
 #: model_terms:ir.ui.view,arch_db:hr_holidays.hr_leave_allocation_generate_multi_wizard_view_form
@@ -1079,12 +1159,12 @@ msgstr "Urlaub zuweisen"
 #. module: hr_holidays
 #: model:ir.module.module,summary:base.module_hr_holidays
 msgid "Allocate time off and follow leave requests"
-msgstr ""
+msgstr "Abwesenheiten zuweisen und Urlaubsanträge verfolgen"
 
 #. module: hr_holidays
 #: model:ir.model.fields,field_description:hr_holidays.field_hr_time_rule__allocation_type_id
 msgid "Allocate to"
-msgstr ""
+msgstr "Zuweisen an"
 
 #. module: hr_holidays
 #: model:ir.model.fields,field_description:hr_holidays.field_hr_leave_allocation__duration_display
@@ -1122,7 +1202,7 @@ msgstr "Urlaubsanspruchsanzeige"
 #. module: hr_holidays
 #: model:ir.model.fields,field_description:hr_holidays.field_hr_leave__allocation_display_warning
 msgid "Allocation Display Warning"
-msgstr ""
+msgstr "Warnung zur Zuweisungsanzeige"
 
 #. module: hr_holidays
 #: model:ir.model.fields,field_description:hr_holidays.field_hr_work_entry_type__allocation_notif_subtype_id
@@ -1165,7 +1245,7 @@ msgstr "Zweitgenehmigung für Urlaubsanspruch"
 #: model:ir.model.fields,field_description:hr_holidays.field_hr_employee__allocation_from_working_schedule_id
 #: model:ir.model.fields,field_description:hr_holidays.field_hr_version__allocation_from_working_schedule_id
 msgid "Allocation from working schedule"
-msgstr ""
+msgstr "Urlaubsanspruch aus Arbeitsplan"
 
 #. module: hr_holidays
 #. odoo-python
@@ -1227,7 +1307,7 @@ msgstr "Zusätzliche Anfrage erlauben"
 #. module: hr_holidays
 #: model:ir.model.fields,field_description:hr_holidays.field_hr_leave__allowed_request_durations
 msgid "Allowed Request Durations"
-msgstr ""
+msgstr "Zulässige Anfragedauern"
 
 #. module: hr_holidays
 #: model:ir.model.fields,field_description:hr_holidays.field_hr_leave__allowed_work_entry_type_ids
@@ -1341,7 +1421,6 @@ msgstr "Möchten Sie diesen Datensatz wirklich löschen?"
 
 #. module: hr_holidays
 #: model_terms:ir.ui.view,arch_db:hr_holidays.hr_leave_allocation_view_form_dashboard
-#: model_terms:ir.ui.view,arch_db:hr_holidays.hr_leave_allocation_view_form_manager_dashboard
 msgid "Ask for"
 msgstr "Fragen für"
 
@@ -1401,7 +1480,7 @@ msgstr "August"
 #. module: hr_holidays
 #: model:ir.ui.menu,name:hr_holidays.menu_hr_holidays_time_rules
 msgid "Automatic Rules"
-msgstr ""
+msgstr "Automatische Regeln"
 
 #. module: hr_holidays
 #. odoo-javascript
@@ -1423,12 +1502,6 @@ msgid "Available:"
 msgstr "Verfügbar:"
 
 #. module: hr_holidays
-#. odoo-python
-#: code:addons/hr_holidays/models/res_users.py:0
-msgid "Back on"
-msgstr "Zurück am"
-
-#. module: hr_holidays
 #. odoo-javascript
 #: code:addons/hr_holidays/static/src/core/common/hr_employee_model_patch.js:0
 msgid "Back on %(date)s"
@@ -1444,6 +1517,7 @@ msgstr "Zurück zur Genehmigung"
 #: code:addons/hr_holidays/static/src/components/selection_badge_with_filter/selection_badge_with_filter.js:0
 msgid "Badges for Selection With Work Entry Request Unit Type Filter"
 msgstr ""
+"Ausweise für Auswahl mit Filter für Einheitstyp der Arbeitseintragsanfrage"
 
 #. module: hr_holidays
 #. odoo-javascript
@@ -1457,7 +1531,7 @@ msgstr "Saldo"
 #. module: hr_holidays
 #. odoo-javascript
 #: code:addons/hr_holidays/static/src/dashboard/time_off_dashboard.xml:0
-msgid "Balance at the"
+msgid "Balance on the"
 msgstr "Saldo am"
 
 #. module: hr_holidays
@@ -1469,19 +1543,19 @@ msgstr "Genehmigt und bestätigt"
 #: model:ir.model.fields.selection,name:hr_holidays.selection__hr_work_entry_type__allocation_validation_type__hr
 #: model:ir.model.fields.selection,name:hr_holidays.selection__hr_work_entry_type__leave_validation_type__hr
 msgid "By HR Responsible"
-msgstr ""
+msgstr "Von Personalverantwortlichen"
 
 #. module: hr_holidays
 #: model:ir.model.fields.selection,name:hr_holidays.selection__hr_work_entry_type__allocation_validation_type__both
 #: model:ir.model.fields.selection,name:hr_holidays.selection__hr_work_entry_type__leave_validation_type__both
 msgid "By HR Responsible and Time Off Approver"
-msgstr ""
+msgstr "Vom Personalverantwortlichen und Abwesenheitsgenehmiger"
 
 #. module: hr_holidays
 #: model:ir.model.fields.selection,name:hr_holidays.selection__hr_work_entry_type__allocation_validation_type__manager
 #: model:ir.model.fields.selection,name:hr_holidays.selection__hr_work_entry_type__leave_validation_type__manager
 msgid "By Time Off Approver"
-msgstr ""
+msgstr "Nach Abwesenheitsgenehmiger"
 
 #. module: hr_holidays
 #: model:ir.model.fields.selection,name:hr_holidays.selection__hr_work_entry_type__count_days_as__calendar
@@ -1510,17 +1584,9 @@ msgstr "Kann validieren"
 
 #. module: hr_holidays
 #: model:res.groups,comment:hr_holidays.group_hr_holidays_manager
-msgid ""
-"Can manage and configure all holidays and leave requests.\n"
-"\n"
-"A user without any rights on Time Off will be able to see the application, "
-"create his own holidays and manage the requests of the users he's manager of."
+msgid "Can manage and configure all holidays and leave requests."
 msgstr ""
-"Kann alle Urlaube und Urlaubsanträge verwalten und konfigurieren.\n"
-"\n"
-"Ein Benutzer, der keine Rechte für Abwesenheiten hat, kann die Anwendung "
-"sehen, seinen eigenen Urlaub erstellen und die Anträge der Benutzer "
-"verwalten, deren Manager er ist."
+"Kann alle Feiertage und Abwesenheitsanfragen verwalten und konfigurieren."
 
 #. module: hr_holidays
 #. odoo-python
@@ -1533,6 +1599,12 @@ msgid ""
 "\n"
 "This error has been triggered by:\n"
 msgstr ""
+"Der aktuelle Arbeitsplan kann nicht geändert werden, solange bereits "
+"validierte Abwesenheiten bestehen, die mit Zuweisungen aus dem Arbeitsplan "
+"erstellt wurden. Bitte überprüfen Sie diese Abwesenheiten und/oder "
+"Zuweisungen, bevor Sie Änderungen vornehmen.\n"
+"\n"
+"Dieser Fehler wurde ausgelöst durch:\n"
 
 #. module: hr_holidays
 #: model_terms:ir.ui.view,arch_db:hr_holidays.hr_leave_view_form
@@ -1730,7 +1802,7 @@ msgstr "Konfiguration"
 #. odoo-javascript
 #: code:addons/hr_holidays/static/src/views/calendar/calendar_model.js:0
 msgid "Confirm"
-msgstr ""
+msgstr "Bestätigen"
 
 #. module: hr_holidays
 #. odoo-javascript
@@ -2188,6 +2260,7 @@ msgstr ""
 #. module: hr_holidays
 #: model:ir.model.fields,field_description:hr_holidays.field_hr_leave__request_duration
 #: model:ir.model.fields,field_description:hr_holidays.field_hr_leave_report_calendar__duration
+#: model_terms:ir.ui.view,arch_db:hr_holidays.hr_leave_allocation_view_form_manager_dashboard
 #: model_terms:ir.ui.view,arch_db:hr_holidays.hr_leave_view_tree
 msgid "Duration"
 msgstr "Dauer"
@@ -2244,6 +2317,7 @@ msgstr "Anspruch auf Rückstellungsrate"
 #: model:ir.model.fields,field_description:hr_holidays.field_hr_leave_report_calendar__employee_id
 #: model:res.groups,name:hr_holidays.group_hr_holidays_employee
 #: model_terms:ir.ui.view,arch_db:hr_holidays.hr_leave_employee_report_filter
+#: model_terms:ir.ui.view,arch_db:hr_holidays.hr_leave_report_calendar_view_search
 #: model_terms:ir.ui.view,arch_db:hr_holidays.hr_leave_view_form_manager
 #: model_terms:ir.ui.view,arch_db:hr_holidays.view_hr_holidays_filter
 #: model_terms:ir.ui.view,arch_db:hr_holidays.view_hr_holidays_filter_report
@@ -2465,6 +2539,12 @@ msgstr "Generisch"
 #. module: hr_holidays
 #: model_terms:ir.ui.view,arch_db:hr_holidays.hr_time_rule_view_search_inherit_hr_holidays
 msgid "Give Time"
+msgstr ""
+
+#. module: hr_holidays
+#. odoo-javascript
+#: code:addons/hr_holidays/static/src/views/view_dialog/allocation_form_view_dialog.xml:0
+msgid "Grant"
 msgstr ""
 
 #. module: hr_holidays
@@ -2990,7 +3070,7 @@ msgstr "März"
 #: model:ir.model.fields,help:hr_holidays.field_hr_leave__activity_type_icon
 #: model:ir.model.fields,help:hr_holidays.field_hr_leave_allocation__activity_type_icon
 msgid "Material Symbols icon e.g. checklist"
-msgstr ""
+msgstr "Material-Symbols-Icon, z. B. Checkliste"
 
 #. module: hr_holidays
 #: model:ir.model.fields,field_description:hr_holidays.field_hr_leave__max_leaves
@@ -3088,7 +3168,7 @@ msgstr "Fehlendes Dokument"
 #. module: hr_holidays
 #: model:ir.model.fields,field_description:hr_holidays.field_hr_time_rule_allocation_log__res_model
 msgid "Model"
-msgstr ""
+msgstr "Modell"
 
 #. module: hr_holidays
 #: model:ir.model.fields.selection,name:hr_holidays.selection__hr_leave_accrual_level__week_day__0
@@ -3756,7 +3836,7 @@ msgstr "Gründe"
 #. module: hr_holidays
 #: model:ir.model.fields,field_description:hr_holidays.field_hr_time_rule_allocation_log__res_id
 msgid "Record"
-msgstr ""
+msgstr "Datensatz"
 
 #. module: hr_holidays
 #. odoo-javascript
@@ -4051,6 +4131,7 @@ msgstr ""
 #: model:mail.template,description:hr_holidays.mail_template_allocation_confirmed
 msgid "Sent to employee when their time off allocation is confirmed"
 msgstr ""
+"Wird an Mitarbeiter gesendet, sobald ihr Urlaubsanspruch bestätigt wird"
 
 #. module: hr_holidays
 #: model:ir.model.fields.selection,name:hr_holidays.selection__hr_leave_accrual_level__second_month__9
@@ -4639,7 +4720,7 @@ msgstr "Urlaubsansprüche"
 #. module: hr_holidays
 #: model:mail.template,name:hr_holidays.mail_template_allocation_confirmed
 msgid "Time Off Allocation Confirmed"
-msgstr ""
+msgstr "Urlaubsanspruch bestätigt"
 
 #. module: hr_holidays
 #: model:mail.template,subject:hr_holidays.mail_template_allocation_confirmed
@@ -4647,6 +4728,8 @@ msgid ""
 "Time Off Allocation Confirmed: {{ object.work_entry_type_id.name }} "
 "({{ object.duration_display }})"
 msgstr ""
+"Urlaubsanspruch bestätigt: {{ object.work_entry_type_id.name }} "
+"({{ object.duration_display }})"
 
 #. module: hr_holidays
 #: model:ir.actions.act_window,name:hr_holidays.hr_leave_report_action
@@ -5843,6 +5926,12 @@ msgid "dates"
 msgstr "Daten"
 
 #. module: hr_holidays
+#. odoo-python
+#: code:addons/hr_holidays/models/hr_leave.py:0
+msgid "day"
+msgstr "Tag"
+
+#. module: hr_holidays
 #. odoo-javascript
 #: code:addons/hr_holidays/static/src/components/accrual_level/accrual_levels.js:0
 msgid "day(s)"
@@ -6104,6 +6193,111 @@ msgstr "Jahr(e)"
 #: code:addons/hr_holidays/models/hr_time_rule.py:0
 msgid "your HR manager"
 msgstr ""
+
+#~ msgid ""
+#~ "<div>\n"
+#~ "                    Dear <b><t t-out=\"object.env.context.get('manager')"
+#~ "\"/></b>,\n"
+#~ "                    <br/><br/>\n"
+#~ "                    <p>I'm requesting a Time Off. I would appreciate if "
+#~ "you could approve it whenever possible!</p>\n"
+#~ "                    <ul>\n"
+#~ "                        <li>Time Type: <t t-"
+#~ "out=\"object.work_entry_type_id.name\"/></li>\n"
+#~ "                        <li><t t-out=\"object.request_date_from\"/> → <t "
+#~ "t-out=\"object.request_date_to\"/> (<t t-out=\"object.duration_display\"/"
+#~ ">)</li>\n"
+#~ "                        <li t-if=\"object.name\">Reason: <t t-"
+#~ "out=\"object.name\"/></li>\n"
+#~ "                    </ul>\n"
+#~ "                </div>\n"
+#~ "            "
+#~ msgstr ""
+#~ "<div>\n"
+#~ "                    Guten Tag<b><t t-"
+#~ "out=\"object.env.context.get('manager')\"/></b>,\n"
+#~ "                    <br/><br/>\n"
+#~ "                    <p>Ich beantrage eine Abwesenheit. Ich würde es "
+#~ "begrüßen, wenn Sie sie genehmigen könnten!</p>\n"
+#~ "                    <ul>\n"
+#~ "                        <li>Abwesenheitsart: <t t-"
+#~ "out=\"object.work_entry_type_id.name\"/></li>\n"
+#~ "                        <li><t t-out=\"object.request_date_from\"/> → <t "
+#~ "t-out=\"object.request_date_to\"/> (<t t-out=\"object.duration_display\"/"
+#~ ">)</li>\n"
+#~ "                        <li t-if=\"object.name\">Grund: <t t-"
+#~ "out=\"object.name\"/></li>\n"
+#~ "                    </ul>\n"
+#~ "                </div>\n"
+#~ "            "
+
+#~ msgid ""
+#~ "<div>\n"
+#~ "                    Dear <t t-out=\"object.employee_id.name or "
+#~ "'Employee'\"/>,<br/><br/>\n"
+#~ "                    Your time off allocation has been confirmed.<br/><br/"
+#~ ">\n"
+#~ "                    Details:<br/>\n"
+#~ "                    <ul>\n"
+#~ "                        <li>Time Type: <t t-"
+#~ "out=\"object.work_entry_type_id.name or ''\"/></li>\n"
+#~ "                        <li>Allocation: <t t-"
+#~ "out=\"object.duration_display or ''\"/></li>\n"
+#~ "                        <li>Valid From: <t t-out=\"object.date_from or "
+#~ "''\"/> <t t-if=\"not object.date_to\">(No Expiry)</t><t t-else=\"\"> to "
+#~ "<t t-out=\"object.date_to or ''\"/></t></li>\n"
+#~ "                        <li t-if=\"object.accrual_plan_id\">Accrual Plan: "
+#~ "<t t-out=\"object.accrual_plan_id.name or ''\"/></li>\n"
+#~ "                    </ul>\n"
+#~ "                    <br/>\n"
+#~ "                    For any questions, contact HR Responsible.<br/><br/>\n"
+#~ "                    Regards,<br/>\n"
+#~ "                    <t t-out=\"object.env.user.name or ''\"/>\n"
+#~ "                </div>\n"
+#~ "            "
+#~ msgstr ""
+#~ "<div>\n"
+#~ "                    Guten Tag <t t-out=\"object.employee_id.name or "
+#~ "'liebe(e) Mitarbeiter(in)'\"/>,<br/><br/>\n"
+#~ "                    Ihr Urlaubsanspruch wurde bestätigt.<br/><br/>\n"
+#~ "                    Details:<br/>\n"
+#~ "                    <ul>\n"
+#~ "                       <li> Zeitart: <t t-"
+#~ "out=\"object.work_entry_type_id.name or ''\"/></li>\n"
+#~ "                       <li> Anspruch: <t t-out=\"object.duration_display "
+#~ "or ''\"/></li>\n"
+#~ "                       <li> Gültig ab: <t t-out=\"object.date_from or "
+#~ "''\"/> <t t-if=\"not object.date_to\">(kein Ablaufdatum)</t><t t-"
+#~ "else=\"\"> bis <t t-out=\"object.date_to or ''\"/></t></li>\n"
+#~ "                        <li t-if=\"object.accrual_plan_id\"> "
+#~ "Anspruchsplan: <t t-out=\"object.accrual_plan_id.name or ''\"/></li>\n"
+#~ "                   </ul>\n"
+#~ "                    <br/> \n"
+#~ "                    Bei Fragen wenden Sie sich bitte an den zuständigen "
+#~ "Personalverantwortlichen.<br/><br/>\n"
+#~ "                    Mit freundlichen Grüßen<br/>\n"
+#~ "                    <t t-out=\"object.env.user.name or ''\"/>\n"
+#~ "               </div> \n"
+#~ "            "
+
+#~ msgid "Balance at the"
+#~ msgstr "Saldo am"
+
+#~ msgid ""
+#~ "Can manage and configure all holidays and leave requests.\n"
+#~ "\n"
+#~ "A user without any rights on Time Off will be able to see the "
+#~ "application, create his own holidays and manage the requests of the users "
+#~ "he's manager of."
+#~ msgstr ""
+#~ "Kann alle Urlaube und Urlaubsanträge verwalten und konfigurieren.\n"
+#~ "\n"
+#~ "Ein Benutzer, der keine Rechte für Abwesenheiten hat, kann die Anwendung "
+#~ "sehen, seinen eigenen Urlaub erstellen und die Anträge der Benutzer "
+#~ "verwalten, deren Manager er ist."
+
+#~ msgid "Back on"
+#~ msgstr "Zurück am"
 
 #~ msgid "%(duration)s (%(start)s)"
 #~ msgstr "%(duration)s (%(start)s)"

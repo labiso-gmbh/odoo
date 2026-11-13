@@ -15,8 +15,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-25 17:39+0000\n"
-"PO-Revision-Date: 2026-09-21 06:49+0000\n"
+"POT-Creation-Date: 2026-10-23 17:42+0000\n"
+"PO-Revision-Date: 2026-10-28 12:34+0000\n"
 "Last-Translator: \"Larissa Manderfeld (lman)\" <lman@odoo.com>\n"
 "Language-Team: German <https://translate.odoo.com/projects/odoo-20/"
 "website_blog/de/>\n"
@@ -740,7 +740,7 @@ msgstr "Aktiv"
 #. odoo-javascript
 #: code:addons/website_blog/static/src/website_builder/blog_page_option.xml:0
 msgid "Adapt the size of the blog post page"
-msgstr ""
+msgstr "Größe der Blogbeitrag-Seite anpassen"
 
 #. module: website_blog
 #. odoo-javascript
@@ -1256,6 +1256,11 @@ msgid "Comment"
 msgstr "Kommentieren"
 
 #. module: website_blog
+#: model:ir.model.fields,field_description:website_blog.field_blog_post__comment_count
+msgid "Comment count"
+msgstr "Anzahl Kommentare"
+
+#. module: website_blog
 #. odoo-javascript
 #: code:addons/website_blog/static/src/website_builder/blog_page_option.xml:0
 #: model_terms:ir.ui.view,arch_db:website_blog.blog_post_comment_count
@@ -1450,7 +1455,7 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/website_blog/static/src/website_builder/blog_post_page_option.xml:0
 msgid "Display the title on the 'All blogs' page"
-msgstr ""
+msgstr "Titel auf der Seite „Alle Blogs“ anzeigen"
 
 #. module: website_blog
 #: model_terms:ir.ui.view,arch_db:website_blog.index
@@ -1511,7 +1516,7 @@ msgstr "Unternehmertum"
 #. module: website_blog
 #: model_terms:blog.post,content:website_blog.blog_post_6
 msgid "Explore beyond the obvious"
-msgstr ""
+msgstr "Entdecke mehr als das Offensichtliche."
 
 #. module: website_blog
 #: model_terms:blog.post,content:website_blog.blog_post_6
@@ -1519,6 +1524,9 @@ msgid ""
 "Exploring these underrated places not only supports local communities but "
 "also gives you a richer, more personal travel experience."
 msgstr ""
+"Die Erkundung dieser unterschätzten Orte unterstützt nicht nur die lokalen "
+"Gemeinschaften, sondern beschert Ihnen auch ein abwechslungsreiches, "
+"persönlicheres Reiseerlebnis."
 
 #. module: website_blog
 #. odoo-javascript
@@ -2560,7 +2568,7 @@ msgstr "Beitrag bewerben"
 #. module: website_blog
 #: model:ir.module.module,summary:base.module_website_blog
 msgid "Publish blog posts, announces, news"
-msgstr ""
+msgstr "Blogbeiträge, Ankündigungen und Neuigkeiten veröffentlichen"
 
 #. module: website_blog
 #: model_terms:ir.ui.view,arch_db:website_blog.view_blog_post_form
@@ -2794,7 +2802,7 @@ msgstr "Silly-Chico"
 #. odoo-javascript
 #: code:addons/website_blog/static/src/website_builder/blog_post_page_option.xml:0
 msgid "Size"
-msgstr ""
+msgstr "Größe"
 
 #. module: website_blog
 #. odoo-javascript
@@ -2901,7 +2909,7 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/website_blog/static/src/website_builder/blog_post_page_option.xml:0
 msgid "Stats"
-msgstr ""
+msgstr "Statistik"
 
 #. module: website_blog
 #: model:blog.blog,subtitle:website_blog.blog_blog_2
@@ -3036,7 +3044,7 @@ msgstr "Teaser-Inhalt"
 #: model_terms:ir.ui.view,arch_db:website_blog.s_dynamic_snippet_blog_posts_single_circle_preview_data
 #: model_terms:ir.ui.view,arch_db:website_blog.s_dynamic_snippet_blog_posts_single_full_preview_data
 msgid "Technology"
-msgstr ""
+msgstr "Technologie"
 
 #. module: website_blog
 #. odoo-javascript

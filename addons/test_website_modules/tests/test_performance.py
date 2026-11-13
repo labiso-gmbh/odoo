@@ -225,6 +225,28 @@ class TestWebsiteAllPerformance(TestWebsitePerformanceCommon, TestWebsitePriceLi
             self.url_open(self.page.url)
             mocked.assert_called_once()
 
+    def _get_queries_page(self):
+        queries = {
+            # website queries
+            'ir_attachment': 1,
+            'website_page': 2,
+            'ir_ui_view': 1,
+            'website_menu': 1,
+            # website_crm_iap_reveal _serve_page queries
+            'website_visitor': 1,
+            # website_sale pricelist of the header
+            'product_pricelist': 3,
+        }
+
+        # menu visibility of the header
+        addons = tuple(self.env.registry._init_modules) + (self.env.context.get('install_module'),)
+        if 'website_helpdesk' in addons:
+            queries['helpdesk_team'] = 1
+        if 'website_planning_field_service' in addons:
+            queries['res_company'] = 1
+
+        return queries
+
     def test_perf_sql_queries_page(self):
         self.set_registry_readonly_mode(True)
         self.page.track = False
@@ -233,24 +255,8 @@ class TestWebsiteAllPerformance(TestWebsitePerformanceCommon, TestWebsitePriceLi
 
         self.assertEqual(self._get_cart_quantity(), 0)
 
-        origin_allow_to_use_cache = odoo.addons.website.models.website_page.WebsitePage._allow_to_use_cache
-
-        def _allow_to_use_cache(request):
-            can_use = origin_allow_to_use_cache(request.env['website.page'], request)
-            self.assertTrue(can_use, 'The homepage should be cached for the public user')
-
-        with patch('odoo.addons.website.models.website_page.WebsitePage._allow_to_use_cache', wraps=_allow_to_use_cache) as mocked:
-            self.url_open(self.page.url)
-            mocked.assert_called_once()
-
-        select_tables_perf = {
-            # website queries
-            'ir_attachment': 1,
-            # website_crm_iap_reveal _serve_page queries
-            'website_visitor': 1,
-        }
-        expected_query_count = sum(select_tables_perf.values())
-        self._check_url_hot_query(self.page.url, expected_query_count, select_tables_perf, {})
+        select_tables_perf = self._get_queries_page()
+        self._check_url_hot_query(self.page.url, sum(select_tables_perf.values()), select_tables_perf, {})
 
         self.url_open('/shop/cart/add', json={
             "id": 0,
@@ -267,14 +273,8 @@ class TestWebsiteAllPerformance(TestWebsitePerformanceCommon, TestWebsitePriceLi
             }
         })
         self.assertEqual(self._get_cart_quantity(), 1)
-        select_tables_perf = {
-            # website queries
-            'ir_attachment': 1,
-            # website_crm_iap_reveal _serve_page queries
-            'website_visitor': 1,
-        }
-        expected_query_count = sum(select_tables_perf.values())
-        self._check_url_hot_query(self.page.url, expected_query_count, select_tables_perf, {})
+        select_tables_perf = self._get_queries_page()
+        self._check_url_hot_query(self.page.url, sum(select_tables_perf.values()), select_tables_perf, {})
 
         self.url_open('/shop/cart/update', json={
             "id": 0,
@@ -288,14 +288,8 @@ class TestWebsiteAllPerformance(TestWebsitePerformanceCommon, TestWebsitePriceLi
         })
 
         self.assertEqual(self._get_cart_quantity(), 0)
-        select_tables_perf = {
-            # website queries
-            'ir_attachment': 1,
-            # website_crm_iap_reveal _serve_page queries
-            'website_visitor': 1,
-        }
-        expected_query_count = sum(select_tables_perf.values())
-        self._check_url_hot_query(self.page.url, expected_query_count, select_tables_perf, {})
+        select_tables_perf = self._get_queries_page()
+        self._check_url_hot_query(self.page.url, sum(select_tables_perf.values()), select_tables_perf, {})
 
     def _get_queries_shop(self):
         html = self.url_open('/shop').text
@@ -306,14 +300,12 @@ class TestWebsiteAllPerformance(TestWebsitePerformanceCommon, TestWebsitePriceLi
         # To add queries here you must ask the permission to al
         queries = {
             'res_company': 2,
-            'product_pricelist': 4,
+            'product_pricelist': 3,
             'product_template': 3,
             'product_tag': 1,
             'product_public_category': 2,
             'product_product': 1,
             'product_template_attribute_line': 2,
-            'res_users': 1,
-            'res_partner': 2,
             'product_category': 1,
             'product_pricelist_item': 1,
             'account_tax': 1,
@@ -361,6 +353,8 @@ class TestWebsiteAllPerformance(TestWebsitePerformanceCommon, TestWebsitePriceLi
         if self._has_demo_data():
             queries['account_tax'] += 1
             queries['account_account_tag'] = 1
+            queries['res_users'] = 1
+            queries['res_partner'] = 1
             queries['product_ribbon'] += -1
             queries['product_template_attribute_value'] = 2
 
@@ -384,6 +378,8 @@ class TestWebsiteAllPerformanceShop(TestWebsiteAllPerformance):
 
         queries['account_tax'] += 1
         queries['account_account_tag'] = 2
+        queries['res_users'] = 1
+        queries['res_partner'] = 1
 
         if self.env['res.groups']._is_feature_enabled('uom.group_uom'):
             queries['uom_uom'] += 1

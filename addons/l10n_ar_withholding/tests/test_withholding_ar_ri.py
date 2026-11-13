@@ -970,7 +970,7 @@ class TestArWithholdingArRi(TestArCommon):
 
         wizard.withholding_line_ids.filtered(lambda l: l.tax_id == sale_tax).name = 'B-0001'
         payment = wizard._create_payments()
-        self.assertEqual(payment.state, 'paid')
+        self.assertIn(payment.state, payment._valid_payment_states())
         self.assertEqual(payment.withholding_line_ids.filtered(lambda l: l.tax_id == sale_tax).name, 'B-0001')
 
     def test_ar_real_case_check_and_withholding_accumulation(self):
@@ -1170,6 +1170,7 @@ class TestArWithholdingArRi(TestArCommon):
             with pay_form.withholding_line_ids.edit(0) as wth_line:
                 wth_line.amount = 25.0
             self.assertEqual(pay_form.amount, 25.0, "The payment is worth what the certificate withheld")
+            self.assertEqual(pay_form.withholding_line_ids.edit(0).amount, 25.0, "The typed withholding is kept")
 
             # Adjusting the base afterwards levies the rate again, the typed withholding being void.
             with pay_form.withholding_line_ids.edit(0) as wth_line:
@@ -1398,3 +1399,8 @@ class TestArWithholdingArRi(TestArCommon):
             wizard.withholding_line_ids.tax_id,
             self.tax_wth_purchase_iibb_untaxed | self.tax_wth_purchase_iibb_total,
         )
+
+    def test_register_payment_on_draft_invoice_with_no_customer(self):
+        invoice = self.create_invoice(post=False, partner_id=False)
+        wizard = self.create_payment_register(invoice)
+        self.assertEqual(len(wizard.withholding_line_ids), 0)

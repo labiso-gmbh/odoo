@@ -8,10 +8,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 19.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-08-28 17:42+0000\n"
-"PO-Revision-Date: 2026-09-09 13:56+0000\n"
+"POT-Creation-Date: 2026-11-06 17:40+0000\n"
+"PO-Revision-Date: 2026-11-06 13:12+0000\n"
 "Last-Translator: \"Larissa Manderfeld (lman)\" <lman@odoo.com>\n"
-"Language-Team: German <https://translate.odoo.com/projects/odoo-master/"
+"Language-Team: German <https://translate.odoo.com/projects/odoo-20/"
 "pos_glory_cash/de/>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -67,6 +67,7 @@ msgstr "Benutzername der Kasse"
 #. module: pos_glory_cash
 #. odoo-javascript
 #: code:addons/pos_glory_cash/static/src/app/components/cancel_dialog.xml:0
+#: code:addons/pos_glory_cash/static/src/app/components/glory_error_dialog.xml:0
 msgid "Cash machine error"
 msgstr "Fehler der Kasse"
 
@@ -85,6 +86,7 @@ msgstr "Kassenstatus:"
 #. module: pos_glory_cash
 #. odoo-javascript
 #: code:addons/pos_glory_cash/static/src/app/components/cancel_dialog.xml:0
+#: code:addons/pos_glory_cash/static/src/app/components/glory_error_dialog.xml:0
 msgid "Close"
 msgstr "Schließen"
 
@@ -153,9 +155,21 @@ msgstr "Fehler"
 
 #. module: pos_glory_cash
 #. odoo-javascript
+#: code:addons/pos_glory_cash/static/src/app/components/glory_error_dialog.xml:0
+msgid "Error code:"
+msgstr "Fehlermeldung:"
+
+#. module: pos_glory_cash
+#. odoo-javascript
 #: code:addons/pos_glory_cash/static/src/utils/constants.js:0
 msgid "Failed to authenticate"
 msgstr "Authentifizierung fehlgeschlagen"
+
+#. module: pos_glory_cash
+#. odoo-javascript
+#: code:addons/pos_glory_cash/static/src/app/payment_glory.js:0
+msgid "Failed to cancel cash machine transaction."
+msgstr "Stornierung der Transaktion am Geldautomaten fehlgeschlagen."
 
 #. module: pos_glory_cash
 #. odoo-javascript
@@ -203,6 +217,16 @@ msgstr "Wird gestartet"
 #: model:ir.module.module,summary:base.module_pos_glory_cash
 msgid "Integrate your POS with a Glory automatic cash payment device"
 msgstr ""
+"Integration des Kassensystems mit einem automatischen Bargeldzahlungsgerät "
+"von Glory"
+
+#. module: pos_glory_cash
+#. odoo-javascript
+#: code:addons/pos_glory_cash/static/src/utils/socket_io.js:0
+msgid ""
+"Local Network Access for the Glory machine is not supported on this browser. "
+"Please update your browser or disable Local Network Access."
+msgstr ""
 
 #. module: pos_glory_cash
 #. odoo-javascript
@@ -219,7 +243,7 @@ msgstr "Admin-Seite öffnen"
 #. module: pos_glory_cash
 #: model:ir.module.module,shortdesc:base.module_pos_glory_cash
 msgid "POS Glory Cash Machines"
-msgstr ""
+msgstr "Kassensystem & Glory-Automaten"
 
 #. module: pos_glory_cash
 #. odoo-javascript
@@ -229,9 +253,25 @@ msgstr ""
 "Bitte konfigurieren Sie die IP-Adresse, bevor Sie die Admin-Seite öffnen."
 
 #. module: pos_glory_cash
+#. odoo-javascript
+#: code:addons/pos_glory_cash/static/src/app/payment_glory.js:0
+msgid ""
+"Please remove the cash from the exit of the cash machine before starting a "
+"transaction."
+msgstr ""
+"Bitte entnehmen Sie das Bargeld aus der Ausgabe des Geldautomaten, bevor Sie "
+"eine Transaktion starten."
+
+#. module: pos_glory_cash
 #: model:ir.model,name:pos_glory_cash.model_pos_payment_method
 msgid "Point of Sale Payment Method"
 msgstr "Zahlungsmethode am Kassensystem"
+
+#. module: pos_glory_cash
+#. odoo-javascript
+#: code:addons/pos_glory_cash/static/src/app/components/glory_error_dialog.xml:0
+msgid "Reset"
+msgstr "Zurücksetzen"
 
 #. module: pos_glory_cash
 #. odoo-javascript
@@ -280,6 +320,16 @@ msgstr "Dem Automaten fehlen folgende Münzen/Scheine:"
 #. odoo-javascript
 #: code:addons/pos_glory_cash/static/src/app/payment_glory.js:0
 msgid ""
+"The cash machine is busy counting its inventory, please wait a few seconds "
+"and retry."
+msgstr ""
+"Der Geldautomat zählt gerade seinen Bestand, bitte warten Sie ein paar "
+"Sekunden und versuchen Sie es erneut."
+
+#. module: pos_glory_cash
+#. odoo-javascript
+#: code:addons/pos_glory_cash/static/src/app/payment_glory.js:0
+msgid ""
 "The cash machine is busy with another operation. Do you want to cancel it?"
 msgstr ""
 "Der Automat ist mit einem anderen Vorgang beschäftigt. Möchten Sie den "
@@ -309,9 +359,30 @@ msgstr "Ein anderes Kassensystem verwendet den Automaten."
 
 #. module: pos_glory_cash
 #. odoo-javascript
+#: code:addons/pos_glory_cash/static/src/app/payment_glory.js:0
+msgid ""
+"The cash machine is not ready to start a transaction. Check all the covers "
+"are closed and then try again."
+msgstr ""
+"Der Geldautomat ist nicht bereit, eine Transaktion zu starten. Stellen Sie "
+"sicher, dass alle Abdeckungen geschlossen sind und versuchen Sie es dann "
+"erneut."
+
+#. module: pos_glory_cash
+#. odoo-javascript
 #: code:addons/pos_glory_cash/static/src/app/screens/payment_screen/payment_lines/payment_lines.xml:0
 msgid "The cash machine is running low on the following coins/bills:"
 msgstr "Der Automat hat nicht mehr viele der folgenden Münzen/Scheine:"
+
+#. module: pos_glory_cash
+#. odoo-javascript
+#: code:addons/pos_glory_cash/static/src/app/payment_glory.js:0
+msgid ""
+"The cash machine is unable to return the inserted cash, please refund the "
+"client via another method."
+msgstr ""
+"Der Geldautomat kann das eingezahlte Bargeld nicht ausgeben. Bitte erstatten "
+"Sie dem Kunden den Betrag auf anderem Wege."
 
 #. module: pos_glory_cash
 #. odoo-javascript
@@ -338,10 +409,12 @@ msgstr "Die Zahlung ist aus unbekannten Gründen fehlgeschlagen: %s"
 #. module: pos_glory_cash
 #. odoo-javascript
 #: code:addons/pos_glory_cash/static/src/app/payment_glory.js:0
-msgid "There is insufficient cash in the machine to give change."
+msgid ""
+"There is insufficient cash in the machine to give change. You will need to "
+"refund the difference via another method."
 msgstr ""
-"Es befindet sich nicht genügend Bargeld im Automaten, um Wechselgeld "
-"herauszugeben."
+"Es ist nicht genügend Bargeld im Automaten, um Wechselgeld herauszugeben. "
+"Sie müssen die Differenz auf anderem Wege erstatten."
 
 #. module: pos_glory_cash
 #. odoo-javascript
@@ -394,3 +467,8 @@ msgstr "Wartet auf Bargeldeingabe"
 #: code:addons/pos_glory_cash/static/src/utils/constants.js:0
 msgid "Waiting for inventory"
 msgstr "Wartet auf Inventur"
+
+#~ msgid "There is insufficient cash in the machine to give change."
+#~ msgstr ""
+#~ "Es befindet sich nicht genügend Bargeld im Automaten, um Wechselgeld "
+#~ "herauszugeben."

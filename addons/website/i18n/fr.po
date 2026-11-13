@@ -15,13 +15,14 @@
 # "Manon Rondou (ronm)" <ronm@odoo.com>, 2025, 2026.
 # Weblate <noreply-mt-weblate@weblate.org>, 2025.
 # "Cécile Collart (cco)" <cco@odoo.com>, 2026.
+# Bren Driesen <brdri@odoo.com>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-25 17:37+0000\n"
-"PO-Revision-Date: 2026-09-24 12:17+0000\n"
-"Last-Translator: \"Cécile Collart (cco)\" <cco@odoo.com>\n"
+"POT-Creation-Date: 2026-11-06 17:38+0000\n"
+"PO-Revision-Date: 2026-10-14 07:33+0000\n"
+"Last-Translator: Bren Driesen <brdri@odoo.com>\n"
 "Language-Team: French <https://translate.odoo.com/projects/odoo-20/website/"
 "fr/>\n"
 "Language: fr\n"
@@ -287,12 +288,6 @@ msgstr "# de blocs"
 #: model_terms:ir.ui.view,arch_db:website.s_numbers_charts
 msgid "$ 32M"
 msgstr "32 000 €"
-
-#. module: website
-#. odoo-python
-#: code:addons/website/models/ir_ui_view.py:0
-msgid "%(error)s (website: %(website_id)s)"
-msgstr "%(error)s (site web : %(website_id)s)"
 
 #. module: website
 #. odoo-python
@@ -4516,13 +4511,8 @@ msgstr ""
 
 #. module: website
 #. odoo-javascript
-#: code:addons/website/static/src/builder/plugins/options/dynamic_snippet_carousel_option.xml:0
-msgid "Arrow Position"
-msgstr "Position de la flèche"
-
-#. module: website
-#. odoo-javascript
 #: code:addons/website/static/src/builder/plugins/carousel_option.xml:0
+#: code:addons/website/static/src/builder/plugins/options/dynamic_snippet_carousel_option.xml:0
 #: code:addons/website/static/src/builder/plugins/options/image_gallery_option.xml:0
 msgid "Arrows"
 msgstr "Flèches"
@@ -5077,6 +5067,7 @@ msgstr ""
 
 #. module: website
 #. odoo-javascript
+#: code:addons/website/static/src/builder/plugins/font/add_font_dialog.xml:0
 #: code:addons/website/static/src/builder/plugins/options/header/header_navigation_option.xml:0
 #: code:addons/website/static/src/builder/plugins/theme/theme_font_weight_option.xml:0
 #: code:addons/website/static/src/builder/plugins/theme/theme_tab_plugin.js:0
@@ -6138,6 +6129,7 @@ msgstr "Nos clients ont économisé 32 millions de dollars grâce à nos service
 #: model_terms:ir.ui.view,arch_db:website.show_website_info
 #: model_terms:ir.ui.view,arch_db:website.template_header_hamburger
 #: model_terms:ir.ui.view,arch_db:website.template_header_mobile
+#: model_terms:ir.ui.view,arch_db:website.website_info
 msgid "Close"
 msgstr "Fermer"
 
@@ -6780,6 +6772,8 @@ msgid "Countdown is over - Firework"
 msgstr "Le compte à rebours est terminé - Feu d'artifice"
 
 #. module: website
+#. odoo-javascript
+#: code:addons/website/static/src/builder/plugins/options/visibility_option.xml:0
 #: model:ir.model.fields,field_description:website.field_website_visitor__country_id
 #: model_terms:ir.ui.view,arch_db:website.website_visitor_view_search
 msgid "Country"
@@ -7320,8 +7314,8 @@ msgstr "Case à cocher du commutateur par défaut"
 #. module: website
 #. odoo-python
 #: code:addons/website/models/website.py:0
-msgid "Default website changed"
-msgstr "Site web par défaut modifié"
+msgid "Default website changed to %(default_website_name)s."
+msgstr ""
 
 #. module: website
 #. odoo-javascript
@@ -8107,6 +8101,12 @@ msgstr "Double-cliquez sur une icône pour la remplacer par une de votre choix."
 #: code:addons/website/static/src/builder/plugins/options/chart_option.xml:0
 msgid "Doughnut"
 msgstr "Donut"
+
+#. module: website
+#. odoo-javascript
+#: code:addons/website/static/src/builder/plugins/options/popup_option_plugin.js:0
+msgid "Drag blocks here"
+msgstr ""
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.s_mega_menu_dropzone
@@ -9086,6 +9086,12 @@ msgstr "Vue étendue"
 #: model:ir.model.fields,field_description:website.field_website_page__xml_id
 msgid "External ID"
 msgstr "ID externe"
+
+#. module: website
+#. odoo-python
+#: code:addons/website/models/ir_ui_view.py:0
+msgid "External ID can not be loaded: %(error)s (website: %(website_id)s)"
+msgstr ""
 
 #. module: website
 #. odoo-javascript
@@ -12330,6 +12336,8 @@ msgid "Language from the website when visitor has been created"
 msgstr "Langue du site Web lors de la création du visiteur"
 
 #. module: website
+#. odoo-javascript
+#: code:addons/website/static/src/builder/plugins/options/visibility_option.xml:0
 #: model:ir.model.fields,field_description:website.field_res_config_settings__language_ids
 #: model:ir.model.fields,field_description:website.field_website__language_ids
 #: model_terms:ir.ui.view,arch_db:website.res_config_settings_view_form
@@ -12657,6 +12665,7 @@ msgstr "Bibliothèque"
 
 #. module: website
 #. odoo-javascript
+#: code:addons/website/static/src/builder/plugins/font/add_font_dialog.xml:0
 #: code:addons/website/static/src/builder/plugins/options/searchbar_option.xml:0
 #: code:addons/website/static/src/builder/plugins/theme/theme_font_weight_option.xml:0
 #: code:addons/website/static/src/builder/plugins/theme/theme_tab_plugin.js:0
@@ -14168,6 +14177,13 @@ msgstr ""
 "édition."
 
 #. module: website
+#: model_terms:ir.ui.view,arch_db:website.website_info
+msgid ""
+"Note: To view the website information, enable it from the Style tab in edit "
+"mode."
+msgstr ""
+
+#. module: website
 #: model:ir.model.fields,field_description:website.field_website_controller_page__notes
 #: model:ir.model.fields,field_description:website.field_website_page__notes
 msgid "Notes"
@@ -15668,6 +15684,7 @@ msgstr "Portfolio"
 #: code:addons/website/static/src/builder/plugins/image/grid_image_option.xml:0
 #: code:addons/website/static/src/builder/plugins/options/accordion_option.xml:0
 #: code:addons/website/static/src/builder/plugins/options/card_image_option.xml:0
+#: code:addons/website/static/src/builder/plugins/options/dynamic_snippet_carousel_option.xml:0
 #: code:addons/website/static/src/builder/plugins/options/popup_option.xml:0
 #: code:addons/website/static/src/builder/plugins/options/table_of_content_option.xml:0
 #: code:addons/website/static/src/builder/plugins/options/whatsapp_option.xml:0
@@ -16359,6 +16376,7 @@ msgstr "Actualiser la liste des itinéraires"
 #. odoo-javascript
 #: code:addons/website/static/src/builder/plugins/carousel_option.xml:0
 #: code:addons/website/static/src/builder/plugins/content_width_option.xml:0
+#: code:addons/website/static/src/builder/plugins/font/add_font_dialog.xml:0
 #: code:addons/website/static/src/builder/plugins/options/base_visibility_option.xml:0
 #: code:addons/website/static/src/builder/plugins/options/dynamic_snippet_carousel_option.xml:0
 #: code:addons/website/static/src/builder/plugins/options/footer_option.xml:0
@@ -18577,7 +18595,6 @@ msgstr "Structure"
 #: code:addons/website/static/src/builder/plugins/carousel_option.xml:0
 #: code:addons/website/static/src/builder/plugins/options/accordion_option.xml:0
 #: code:addons/website/static/src/builder/plugins/options/blockquote_option.xml:0
-#: code:addons/website/static/src/builder/plugins/options/dynamic_snippet_carousel_option.xml:0
 #: code:addons/website/static/src/builder/plugins/options/image_gallery_option.xml:0
 #: code:addons/website/static/src/builder/plugins/options/language_selector_option.xml:0
 #: code:addons/website/static/src/builder/plugins/options/navtabs_style_option.xml:0
@@ -18879,6 +18896,12 @@ msgid "Template fallback"
 msgstr "Modèle de repli"
 
 #. module: website
+#. odoo-python
+#: code:addons/website/models/ir_ui_view.py:0
+msgid "Template not found: '%(error)s' (website: %(website_id)s)"
+msgstr ""
+
+#. module: website
 #. odoo-javascript
 #: code:addons/website/static/src/builder/plugins/form/form.edit.xml:0
 msgid "Terms & Conditions"
@@ -19163,12 +19186,6 @@ msgid "The form has been sent successfully."
 msgstr "Le formulaire a été envoyé avec succès."
 
 #. module: website
-#. odoo-python
-#: code:addons/website/controllers/form.py:0
-msgid "The form's specified model does not exist"
-msgstr "Le modèle spécifié du formulaire n'existe pas"
-
-#. module: website
 #: model:ir.model.fields,help:website.field_ir_actions_server__website_url
 #: model:ir.model.fields,help:website.field_ir_cron__website_url
 msgid "The full URL to access the server action through the website."
@@ -19289,22 +19306,6 @@ msgstr "Le nom de la page utilisable dans une URL"
 #. module: website
 #. odoo-python
 #: code:addons/website/models/website.py:0
-msgid "The new default website is %(default_website_name)s."
-msgstr ""
-
-#. module: website
-#. odoo-python
-#: code:addons/website/models/website.py:0
-msgid ""
-"The new default website is %(default_website_name)s. The following default "
-"settings were copied from the old default website to the new one: %"
-"(transferred_settings)s. Note that these settings are still present on the "
-"old default website."
-msgstr ""
-
-#. module: website
-#. odoo-python
-#: code:addons/website/models/website.py:0
 msgid "The provided website domain is not a valid URL."
 msgstr "Le domaine du site web fourni n’est pas une URL valide."
 
@@ -19312,7 +19313,7 @@ msgstr "Le domaine du site web fourni n’est pas une URL valide."
 #. odoo-javascript
 #: code:addons/website/static/src/builder/plugins/font/add_font_dialog.js:0
 msgid "The quick brown fox jumps over the lazy dog."
-msgstr "Le vif renard marron saute par-dessus le chien paresseux."
+msgstr "Le vif zéphyr jubile sur les kumquats du clown gracieux."
 
 #. module: website
 #. odoo-python
@@ -19584,6 +19585,13 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/website/static/src/builder/plugins/theme/theme_font_weight_option.js:0
 msgid "This font is missing font weight"
+msgstr ""
+
+#. module: website
+#. odoo-python
+#: code:addons/website/controllers/form.py:0
+msgid ""
+"This form cannot be submitted. Please contact the website administrator."
 msgstr ""
 
 #. module: website
@@ -20387,6 +20395,24 @@ msgstr "L'URL ne peut pas commencer par '#'."
 #: model:ir.model.fields,field_description:website.field_website_rewrite__url_to
 msgid "URL to"
 msgstr "URL vers"
+
+#. module: website
+#. odoo-javascript
+#: code:addons/website/static/src/builder/plugins/options/visibility_option.xml:0
+msgid "UTM Campaign"
+msgstr ""
+
+#. module: website
+#. odoo-javascript
+#: code:addons/website/static/src/builder/plugins/options/visibility_option.xml:0
+msgid "UTM Medium"
+msgstr ""
+
+#. module: website
+#. odoo-javascript
+#: code:addons/website/static/src/builder/plugins/options/visibility_option.xml:0
+msgid "UTM Source"
+msgstr ""
 
 #. module: website
 #. odoo-javascript
@@ -23856,12 +23882,6 @@ msgid "rows"
 msgstr "lignes"
 
 #. module: website
-#. odoo-javascript
-#: code:addons/website/static/src/components/resource_editor/resource_editor.xml:0
-msgid "scope.data.label"
-msgstr ""
-
-#. module: website
 #: model_terms:ir.ui.view,arch_db:website.snippets
 msgid ""
 "scrolling, depth, effect, backgrounds, layer, visual, movement, parallax"
@@ -24041,12 +24061,6 @@ msgstr "cette page"
 
 #. module: website
 #. odoo-javascript
-#: code:addons/website/static/src/components/resource_editor/resource_editor.xml:0
-msgid "this.state.type === 'xml' ? resource.name : resource.label"
-msgstr ""
-
-#. module: website
-#. odoo-javascript
 #: code:addons/website/static/src/builder/plugins/options/animate_option.xml:0
 msgid "to"
 msgstr "au"
@@ -24150,6 +24164,18 @@ msgstr "✽  Pizzas"
 #: model_terms:ir.ui.view,arch_db:website.s_key_benefits
 msgid "✽  What We Offer"
 msgstr "✽  Notre offre"
+
+#~ msgid "%(error)s (website: %(website_id)s)"
+#~ msgstr "%(error)s (site web : %(website_id)s)"
+
+#~ msgid "The form's specified model does not exist"
+#~ msgstr "Le modèle spécifié du formulaire n'existe pas"
+
+#~ msgid "Default website changed"
+#~ msgstr "Site web par défaut modifié"
+
+#~ msgid "Arrow Position"
+#~ msgstr "Position de la flèche"
 
 #~ msgid "Fit text"
 #~ msgstr "Ajuster le texte"

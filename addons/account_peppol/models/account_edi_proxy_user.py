@@ -390,8 +390,22 @@ class Account_Edi_Proxy_ClientUser(models.Model):
         try:
             move._extend_with_attachments(files_data, new=True)
             move._autopost_bill()
-        except Exception:
-            _logger.exception("Unexpected error occurred during the import of bill with id %s", move.id)
+        except Exception as err:
+            _logger.exception(
+                "Unexpected error occurred during the import of bill with id %s (%s uuid: %s, attachment: %s)",
+                move.id, self.proxy_type, uuid, attachment.id,
+            )
+            move._message_log(
+                body=Markup("%s<br/>%s") % (
+                    self.env._(
+                        "Error importing %(proxy_type)s document (UUID: %(uuid)s):",
+                        proxy_type=dict(self._fields['proxy_type']._description_selection(self.env))[self.proxy_type],
+                        uuid=uuid,
+                    ),
+                    str(err)
+                ),
+                attachment_ids=attachment.ids,
+            )
         attachment.write({'res_model': 'account.move', 'res_id': move.id})
         return {'uuid': uuid, 'move': move}
 
@@ -413,7 +427,8 @@ class Account_Edi_Proxy_ClientUser(models.Model):
             'domain': {
                 'direction': 'incoming',
                 'errors': False,
-            }
+            },
+            'limit': job_count,
         }
         for edi_user in self:
             edi_user = edi_user.with_company(edi_user.company_id)
@@ -436,6 +451,7 @@ class Account_Edi_Proxy_ClientUser(models.Model):
                     'Error while receiving the document from Peppol Proxy: %s', e.message)
                 continue
 
+            has_more = messages.get('has_more', False)
             message_uuids = [
                 message['uuid']
                 for message in messages.get('messages', [])
@@ -456,8 +472,7 @@ class Account_Edi_Proxy_ClientUser(models.Model):
             if not message_uuids:
                 continue
 
-            need_retrigger = need_retrigger or len(message_uuids) > job_count
-            message_uuids = message_uuids[:job_count]
+            need_retrigger = need_retrigger or has_more
 
             # retrieve attachments for filtered messages
             all_messages = edi_user._call_peppol_proxy(
@@ -686,13 +701,14 @@ class Account_Edi_Proxy_ClientUser(models.Model):
                 bodies={move.id: log_message for move in reference_moves},
             )
         else:
+            response_info = dict(zip(reference_moves, response.get('messages')))
             responses = self.env['account.peppol.response'].create([{
                     'peppol_message_uuid': message['message_uuid'],
                     'response_code': status,
                     'peppol_state': 'processing',
                     'move_id': move.id,
                 }
-                for message, move in zip(response.get('messages'), reference_moves)
+                for move, message in response_info.items()
                 if message.get('message_uuid')
             ])
 
@@ -714,7 +730,7 @@ class Account_Edi_Proxy_ClientUser(models.Model):
             )
             message_bodies = {
                 **{move.id: sent_message for move in sent_moves},
-                **{move.id: unsent_message for move in unsent_moves},
+                **{move.id: unsent_message + (Markup('<br/>') + error if (error := response_info.get(move, {}).get('error', {}).get('message')) else "") for move in unsent_moves},
             }
             reference_moves._message_log_batch(bodies=message_bodies)
 
@@ -748,6 +764,10 @@ class Account_Edi_Proxy_ClientUser(models.Model):
     # BUSINESS ACTIONS
     # -------------------------------------------------------------------------
 
+    def _get_peppol_supported_document_types(self):
+        self.ensure_one()
+        return self.company_id._peppol_supported_document_types()
+
     def _peppol_register_sender_as_receiver(self):
         self.ensure_one()
         company = self.company_id
@@ -769,7 +789,7 @@ class Account_Edi_Proxy_ClientUser(models.Model):
             endpoint=self._get_peppol_proxy_endpoint('1/register_sender_as_receiver'),
             params={
                 'migration_key': company.sudo().account_peppol_migration_key,
-                'supported_identifiers': list(company._peppol_supported_document_types())
+                'supported_identifiers': list(self._get_peppol_supported_document_types())
             },
         )
         # once we sent the migration key over, we don't need it

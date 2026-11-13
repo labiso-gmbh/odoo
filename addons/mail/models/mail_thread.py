@@ -1722,12 +1722,26 @@ class MailThread(models.AbstractModel):
 
                 filename = part.get_filename()  # I may not properly handle all charsets
 
-                mimetype, _, content_type_params = part.get('Content-Type').partition(';')
+                content_type = part.get('Content-Type')
+                if not content_type:
+                    _logger.warning(
+                        "Message %r has no Content-Type, assuming 'application/octet-stream'",
+                        message.get('Message-ID'),
+                    )
+                    content_type = 'application/octet-stream'
+                    part['Content-Type'] = content_type
+                mimetype, _, content_type_params = content_type.partition(';')
                 if not all(mimetype.partition('/')) or mimetype in BAD_CONTENT_TYPES:
-                    _logger.warning("Message containing an unexpected Content-Type %r, assuming 'application/octet-stream'", mimetype)
+                    _logger.warning(
+                        "Message %r containing an unexpected Content-Type %r, assuming 'application/octet-stream'",
+                        message.get('Message-ID'), mimetype,
+                    )
                     part.replace_header('Content-Type', f'application/octet-stream;{content_type_params}')
                 elif mimetype.startswith('pdf'):
-                    _logger.warning("Message containing an unexpected Content-Type %r, assuming 'application/pdf'", mimetype)
+                    _logger.warning(
+                        "Message %r containing an unexpected Content-Type %r, assuming 'application/pdf'",
+                        message.get('Message-ID'), mimetype,
+                    )
                     part.replace_header('Content-Type', f'application/pdf;{content_type_params}')
 
                 if part.get_content_type().startswith('text/') and not part.get_param('charset'):
@@ -4270,6 +4284,7 @@ class MailThread(models.AbstractModel):
                 'body': html2plaintext(body, include_references=False),
                 'icon': icon,
                 'data': {
+                    "message_id": message.id,
                     'model': message.model or '',
                     'res_id': message.res_id or '',
                 }
@@ -4869,6 +4884,8 @@ class MailThread(models.AbstractModel):
         adding_current = set(partner_ids) == set([self.env.user.partner_id.id])
         customer_ids = [] if adding_current else None
 
+        if adding_current and self.env.user._is_public():
+            return False
         if partner_ids and adding_current:
             try:
                 self.check_access('read')
@@ -5203,7 +5220,12 @@ class MailThread(models.AbstractModel):
                     last_div_element = (
                         children[target_index] if children[target_index].tag in ["div", "p"] else tree
                     )
-                    last_div_element.text = (last_div_element.text or '') + (' ' if last_div_element.text else '')
+                    if len(last_div_element):
+                        last_child = last_div_element[-1]
+                        if last_child.tail and not last_child.tail.endswith(" "):
+                            last_child.tail += " "
+                    elif last_div_element.text and not last_div_element.text.endswith(" "):
+                        last_div_element.text += " "
                     etree.SubElement(last_div_element, "span", attrib={"class": "o-mail-Message-edited", "data-o-datetime": fields.Datetime.to_string(fields.Datetime.now())})
                     msg_values["body"] = (
                         # markup: it is considered safe, as coming from html.fragment_fromstring

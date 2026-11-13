@@ -118,6 +118,28 @@ test("parseFloat", () => {
     expect(() => parseFloat("abbc")).toThrow();
     expect(() => parseFloat("-")).toThrow();
     expect(() => parseFloat("12e22222")).toThrow(); // Too big
+
+    // Mathematical expression with arithmetic operation
+    let operation = parseFloat("+=5", { allowOperation: true });
+    expect(operation.operator).toBe("+");
+    expect(operation.operand).toBe(5);
+    expect(operation.compute(10)).toBe(15);
+
+    // the operand can be a formula
+    operation = parseFloat("*=2*3", { allowOperation: true });
+    expect(operation.operator).toBe("*");
+    expect(operation.operand).toBe(6);
+    expect(operation.compute(10)).toBe(60);
+
+    operation = parseFloat("/ = (1+1)", { allowOperation: true });
+    expect(operation.operator).toBe("/");
+    expect(operation.operand).toBe(2);
+    expect(operation.compute(10)).toBe(5);
+
+    patchWithCleanup(localization, { decimalPoint: ",", thousandsSep: "." });
+    operation = parseFloat("-=1,5+0,5", { allowOperation: true });
+    expect(operation.operator).toBe("-");
+    expect(operation.operand).toBe(2);
 });
 
 test("parseFloatTime", () => {
@@ -167,6 +189,21 @@ test("parseFloatTime", () => {
     // Division by 0 is rejected instead of producing an unformattable Infinity/NaN
     expect(() => parseFloatTime("/=0")).toThrow();
     expect(() => parseFloatTime("=6h/0")).toThrow();
+});
+
+test("parseFloat with digits without decimals", () => {
+    // No decimal point possible: . and , are grouping noise, as for integers
+    expect(parseFloat("2,000", { digits: [69, 0] })).toBe(2000);
+    expect(parseFloat("2.000", { digits: [69, 0] })).toBe(2000);
+    expect(parseFloat("1,234,567", { digits: [69, 0] })).toBe(1234567);
+    expect(parseFloat("-2,000", { digits: [69, 0] })).toBe(-2000);
+    expect(parseFloat("NT$\u00a02,000", { digits: [69, 0] })).toBe(2000);
+    const operation = parseFloat("+=1,000+500", { allowOperation: true, digits: [69, 0] });
+    expect(operation.operand).toBe(1500);
+
+    // Other digits keep the usual parsing
+    expect(parseFloat("2,000", { digits: [69, 2] })).toBe(2);
+    expect(parseFloat("2,000")).toBe(2);
 });
 
 test("parseInteger", () => {

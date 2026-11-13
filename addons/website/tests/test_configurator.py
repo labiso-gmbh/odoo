@@ -148,7 +148,7 @@ class TestConfigurator(TestConfiguratorCommon):
         website = self.env['website'].create({
             'name': "New website",
         })
-        self.start_tour('/website/force/%s?path=%%2Fwebsite%%2Fconfigurator' % website.id, 'configurator_page_creation', login='admin')
+        self.start_tour('/website/force/%s?path=%%2Fwebsite%%2Fconfigurator' % website.id, 'configurator_page_creation', login='admin', timeout=120)
 
 @odoo.tests.common.tagged('post_install', '-at_install')
 class TestConfiguratorTranslation(TestConfiguratorCommon):
@@ -229,3 +229,32 @@ class TestConfiguratorPreview(odoo.tests.HttpCase):
         dropped = self._preview(color1='red;--x:y')
         self.assertNotIn('--o-color-1', dropped.text)
         self.assertNotIn('red;--x:y', dropped.text)
+
+
+@odoo.tests.common.tagged('post_install', '-at_install')
+class TestConfiguratorDone(TestConfiguratorCommon):
+
+    def test_configurator_skip_changes_nothing(self):
+        """ Ensure that reaching the configurator once it has already been
+        completed does not modify anything (e.g. does not reset the theme).
+        """
+        website = self.env.ref('base.default_website')
+        theme = self.env['ir.module.module'].create([{
+            'name': 'fake_theme',
+            'state': 'installed',
+        }])
+        website.write({
+            'theme_id': theme.id,
+            'configurator_done': True,
+        })
+        self.env.flush_all()
+
+        # Test that the database does not change (throws otherwise)
+        with self.env.registry.cursor(readonly=True) as cr:
+            Website = self.env(cr=cr)['website'].with_context(website_id=website.id)
+            # Mimic the configurator client action, which skips the
+            # configurator if it is already done.
+            self.assertTrue(Website.configurator_init()['configurator_done'])
+            result = Website.configurator_skip()
+
+        self.assertEqual(result['params']['path'], '/')

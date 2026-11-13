@@ -529,7 +529,7 @@ def _set_session_and_dbname(request: Request) -> None:
     session.is_dirty = False
     request.session = session
     request.db = dbname
-    threading.current_thread().sess_id = request.session.sid[:8]
+    threading.current_thread().req_ident = ('session', request.session.sid[:8])
 
 
 def _set_request_dispatcher(request: Request, rule: werkzeug.routing.Rule):
@@ -571,7 +571,7 @@ def _serve_ir_http_fallback(request: Request, not_found: NotFound) -> Response:
     provided a response, a generic 404 - Not Found page is returned.
     """
     request.params = request.get_http_params()
-    request.registry['ir.http']._auth_method_public({})
+    request.registry['ir.http']._authenticate_explicit({'auth': 'public'})
     response = request.registry['ir.http']._serve_fallback()
     if response:
         request.registry['ir.http']._post_dispatch(response)

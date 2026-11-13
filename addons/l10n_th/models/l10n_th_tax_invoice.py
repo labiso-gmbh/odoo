@@ -15,11 +15,12 @@ class L10nThTaxInvoice(models.Model):
         comodel_name='account.move',
         ondelete='set null',
         check_company=True,
+        index='btree_not_null',
     )
 
     date = fields.Date(string="Date")
     tax_invoice_number = fields.Char(string="Tax Invoice Number")
-    reference = fields.Char(string="Reference")
+    reference = fields.Char(string="Reference", compute='_compute_reference', store=True)
     total_amount = fields.Monetary(string='Total Amount')
     vat_amount = fields.Monetary(string='VAT Amount')
     amount_residual = fields.Monetary(string='Amount Due')
@@ -54,34 +55,52 @@ class L10nThTaxInvoice(models.Model):
         index=True,
     )
 
+    @api.depends('payment_move_id.name')
+    def _compute_reference(self):
+        for record in self:
+            record.reference = record.payment_move_id.name
+
     def _get_tax_invoice_document_title(self):
         self.ensure_one()
 
         doc_name = self.tax_invoice_number
 
-        if self.reference:
+        if self.state == 'cancel':
+            return self.env._("Cancelled %(doc_name)s", doc_name=doc_name)
+
+        if self.payment_move_id:
             doc_name = self.env._("Receipt / Tax Invoice %(doc_name)s", doc_name=doc_name)
         else:
             doc_name = self.env._("Tax Invoice %(doc_name)s", doc_name=doc_name)
 
         if self.state == 'draft':
             doc_name = self.env._("Draft %(doc_name)s", doc_name=doc_name)
-        if self.state == 'cancel':
-            doc_name = self.env._("Cancelled %(doc_name)s", doc_name=doc_name)
 
         return doc_name
 
     @api.model_create_multi
     def create(self, vals_list):
+        if any(not v.get('tax_invoice_number') for v in vals_list):
+            sequences = self.env['ir.sequence']._read_group(
+                domain=[
+                    ('code', 'in', ('l10n_th.tax.invoice.receipt_tax_invoice_number', 'l10n_th.tax.invoice.tax_invoice_number')),
+                ],
+                groupby=['company_id', 'code'],
+                aggregates=['id:recordset'],
+            )
+            sequences_dict = {(company.id, code): sequence for company, code, sequence in sequences}
+
         for vals in vals_list:
             if not vals.get('tax_invoice_number'):
-                company = self.env['account.move'].browse(vals.get('invoice_move_id')).company_id
-                vals['tax_invoice_number'] = self.env['ir.sequence'].with_company(company).next_by_code(
-                    'l10n_th.tax.invoice.receipt_tax_invoice_number'
-                    if vals.get('payment_move_id')
-                    else 'l10n_th.tax.invoice.tax_invoice_number',
-                    sequence_date=vals.get('date'),
-                )
+                sequence_code = 'l10n_th.tax.invoice.receipt_tax_invoice_number' if vals.get('payment_move_id') else 'l10n_th.tax.invoice.tax_invoice_number'
+                invoice_company = self.env['account.move'].browse(vals.get('invoice_move_id')).company_id
+                # If the company doesn't have a sequence specific to it, find one by going up the hierarchy. Fallback on a general sequence if needed.
+                for company in [*reversed(invoice_company.parent_ids.ids), False]:
+                    sequence = sequences_dict.get((company, sequence_code))
+                    if sequence:
+                        break
+                if sequence:
+                    vals['tax_invoice_number'] = sequence[0].next_by_id(sequence_date=vals.get('date'))
 
         return super().create(vals_list)
 

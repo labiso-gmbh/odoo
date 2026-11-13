@@ -109,14 +109,21 @@ export class DurationParseError extends Error {}
  * Try to extract a float from a string.
  *
  * @param {string} value
+ * @param {Object} [options]
+ * @param {number[]} [options.digits] precision of the value: when it has no decimals
+ *   (e.g. an amount in JPY), "." and "," are grouping noise as for integers
  * @returns {number} a float
  */
-export function parseFloat(value, { allowOperation = false } = {}) {
-    const operation = allowOperation ? ArithmeticOperation.parse(value, parseFloat) : null;
+export function parseFloat(value, { allowOperation = false, digits } = {}) {
+    const operation = allowOperation
+        ? ArithmeticOperation.parse(value, (expr) =>
+              evaluateMathematicalExpression(expr, {}, (v) => parseFloat(v, { digits }))
+          )
+        : null;
     if (operation) {
         return operation;
     }
-    const parsed = parseNumber(value);
+    const parsed = parseNumber(value, { integer: digits?.[1] === 0 });
     if (isNaN(parsed) || !isFinite(parsed)) {
         throw new InvalidNumberError(`"${value}" is not a correct number`);
     }
@@ -138,10 +145,8 @@ export function parseFloat(value, { allowOperation = false } = {}) {
 export function parseFloatTime(value, unit = "hours") {
     // Tolerate a trailing operator (e.g. "1h+"): the user is still typing.
     const evaluateDurationFormula = (expr) => {
-        const result = evaluateMathematicalExpression(
-            expr.replace(/[-+*/]\s*$/, ""),
-            {},
-            (v) => parseFloatTime(v, unit)
+        const result = evaluateMathematicalExpression(expr.replace(/[-+*/]\s*$/, ""), {}, (v) =>
+            parseFloatTime(v, unit)
         );
         if (!Number.isFinite(result)) {
             throw new InvalidNumberError(`"${value}" is not a correct duration`);
@@ -267,7 +272,11 @@ function parseDuration(value, unit = "hours") {
  * @returns {number} an integer
  */
 export function parseInteger(value, { allowOperation = false } = {}) {
-    const operation = allowOperation ? ArithmeticOperation.parse(value, parseInteger) : null;
+    const operation = allowOperation
+        ? ArithmeticOperation.parse(value, (expr) =>
+              evaluateMathematicalExpression(expr, {}, parseInteger)
+          )
+        : null;
     if (operation) {
         return operation;
     }

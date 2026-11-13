@@ -42,11 +42,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-25 17:37+0000\n"
-"PO-Revision-Date: 2026-08-31 21:19+0000\n"
+"POT-Creation-Date: 2026-11-06 17:38+0000\n"
+"PO-Revision-Date: 2026-10-14 13:35+0000\n"
 "Last-Translator: Burkay Yıldızhan <seyil@odoo.com>\n"
-"Language-Team: Turkish <https://translate.odoo.com/projects/odoo-s19-4/stock/"
-"tr/>\n"
+"Language-Team: Turkish <https://translate.odoo.com/projects/odoo-20/stock/tr/"
+">\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -548,23 +548,28 @@ msgstr ""
 "<b>%(destination)s</b> yönüne taşınacaktır."
 
 #. module: stock
-#: model:mail.template,body_html:stock.mail_template_data_stock_move_line_recall
+#: model:mail.template,body_html:stock.mail_template_data_stock_picking_recall
 msgid ""
 "<div style=\"margin: 0px; padding: 0px;\">\n"
-"    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
-"        Dear <t t-out=\"object.picking_partner_id.display_name or ''\"/><br/"
-"><br/>\n"
-"        We would like to issue a product recall regarding the following "
-"product:<br/><br/>\n"
-"        Product:<br/>\n"
-"        <t t-out=\"object.product_id.display_name or ''\"/><br/><br/>\n"
-"        Lot / Serial Number:<br/>\n"
-"        <t t-out=\"object.lot_id.name or object.lot_name or ''\"/><br/><br/"
-">\n"
-"        We apologize for the inconvenience caused.<br/><br/>\n"
-"        Best wishes,\n"
-"    </p>\n"
-"</div>\n"
+"                <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
+"                    Dear <t t-out=\"object.partner_id.display_name or "
+"''\">Marc Demo</t><br><br>\n"
+"                    We would like to issue a product recall regarding the "
+"following items from your delivery\n"
+"                    <strong><t t-out=\"object.name\">WH/OUT/EXAMPLE</t></"
+"strong>:<br><br>\n"
+"\n"
+"                    <strong>Product(s):</strong><br>\n"
+"                    <t t-out=\"ctx.get('recalled_products_dict', "
+"{}).get(str(object.id))\">[EXAMPLE] Drawer</t><br><br>\n"
+"                    <strong>Lot / Serial Number(s):</strong><br>\n"
+"                    <t t-out=\"ctx.get('recalled_lots_dict', "
+"{}).get(str(object.id))\">0000000000029</t><br><br>\n"
+"\n"
+"                    We apologize for the inconvenience caused.<br><br>\n"
+"                    Best wishes,\n"
+"                </p>\n"
+"            </div>\n"
 "        "
 msgstr ""
 
@@ -574,7 +579,7 @@ msgid ""
 "<div style=\"margin: 0px; padding: 0px;\">\n"
 "    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
 "        Hello <t t-out=\"object.partner_id.name or ''\">Brandon Freeman</t>,"
-"<br/><br/>\n"
+"<br><br>\n"
 "        <t t-if=\"hasattr(object, 'delivery_type') and object.delivery_type "
 "== 'in_store'\">\n"
 "            Your order has been collected.\n"
@@ -588,85 +593,36 @@ msgid ""
 "            <strong>\n"
 "            <t t-if=\"object.carrier_tracking_url\">\n"
 "                <t t-set=\"multiple_carrier_tracking\" t-"
-"value=\"object.get_multiple_carrier_tracking()\"/>\n"
+"value=\"object.get_multiple_carrier_tracking()\"></t>\n"
 "                <t t-if=\"multiple_carrier_tracking\">\n"
 "                    <t t-foreach=\"multiple_carrier_tracking\" t-"
 "as=\"line\">\n"
-"                        <br/><a t-att-href=\"line[1]\" target=\"_blank\" t-"
-"out=\"line[0] or ''\"/>\n"
+"                        <br><a t-att-href=\"line[1]\" target=\"_blank\" t-"
+"out=\"line[0] or ''\"></a>\n"
 "                    </t>\n"
 "                </t>\n"
 "                <t t-else=\"\">\n"
 "                    <a t-attf-href=\"{{ object.carrier_tracking_url }}\" "
-"target=\"_blank\" t-out=\"object.carrier_tracking_ref or ''\"/>.\n"
+"target=\"_blank\" t-out=\"object.carrier_tracking_ref or ''\"></a>.\n"
 "                </t>\n"
 "            </t>\n"
 "            <t t-else=\"\">\n"
-"                <t t-out=\"object.carrier_tracking_ref or ''\"/>.\n"
+"                <t t-out=\"object.carrier_tracking_ref or ''\"></t>.\n"
 "            </t>\n"
 "            </strong>\n"
 "        </t>\n"
-"        <br/><br/>\n"
-"        Please find your delivery order attached for more details.<br/><br/"
-">\n"
+"        <br><br>\n"
+"        Please find your delivery order attached for more details.<br><br>\n"
 "        Thank you,\n"
 "        <t t-if=\"user.signature\">\n"
-"            <br/>\n"
-"            <div data-o-mail-quote=\"1\">--<br data-o-mail-quote=\"1\"/><t t-"
+"            <br>\n"
+"            <div data-o-mail-quote=\"1\">--<br data-o-mail-quote=\"1\"><t t-"
 "out=\"user.signature or ''\">Mitchell Admin</t></div>\n"
 "        </t>\n"
 "    </p>\n"
 "</div>\n"
 "        "
 msgstr ""
-"<div style=\"margin: 0px; padding: 0px;\">\n"
-"    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
-"        Merhaba <t t-out=\"object.partner_id.name or ''\">Brandon Freeman</"
-"t>,<br/><br/>\n"
-"       <t t-if=\"hasattr(object, 'delivery_type') and object.delivery_type "
-"== 'in_store'\"> \n"
-"            Siparişiniz teslim alındı.\n"
-"       </t>\n"
-"        <t t-else=\"\"> \n"
-"            Siparişinizin kargoya verildiğini bildirmekten memnuniyet "
-"duyarız.\n"
-"       </t>\n"
-"        <t t-if=\"hasattr(object, 'carrier_tracking_ref') and "
-"object.carrier_tracking_ref\"> \n"
-"            Takip referans numaranız:\n"
-"           <strong>\n"
-"            <t t-if=\"object.carrier_tracking_url\"> \n"
-"               <t t-set=\"multiple_carrier_tracking\" t-"
-"value=\"object.get_multiple_carrier_tracking()\"/>\n"
-"                <t t-if=\"multiple_carrier_tracking\"> \n"
-"                   <t t-foreach=\"multiple_carrier_tracking\" t-"
-"as=\"line\">\n"
-"                        <br/> <a t-att-href=\"line[1]\" target=\"_blank\" t-"
-"out=\"line[0] or ''\"/>\n"
-"                    </t> \n"
-"               </t>\n"
-"                <t t-else=\"\"> \n"
-"                   <a t-attf-href=\"{{ object.carrier_tracking_url }}\" "
-"target=\"_blank\" t-out=\"object.carrier_tracking_ref or ''\"/> .\n"
-"               </t>\n"
-"            </t> \n"
-"           <t t-else=\"\">\n"
-"                <t t-out=\"object.carrier_tracking_ref or ''\"/> .\n"
-"           </t>\n"
-"            </strong> \n"
-"       </t>\n"
-"        <br/> <br/> \n"
-"        Daha fazla ayrıntı için ekteki teslimat siparişinizi "
-"inceleyebilirsiniz.<br/><br/>\n"
-"        Teşekkür ederiz,\n"
-"       <t t-if=\"user.signature\">\n"
-"            <br/> \n"
-"           <div data-o-mail-quote=\"1\"> --<br data-o-mail-quote=\"1\"/><t t-"
-"out=\"user.signature or ''\">Mitchell Admin</t></div>\n"
-"       </t>\n"
-"    </p> \n"
-"</div>\n"
-"        "
 
 #. module: stock
 #: model_terms:ir.ui.view,arch_db:stock.stock_picking_batch_card
@@ -1715,7 +1671,7 @@ msgstr "Sor"
 #. odoo-javascript
 #: code:addons/stock/static/src/stock_forecasted/forecasted_details.xml:0
 msgid "Assign"
-msgstr ""
+msgstr "Ata"
 
 #. module: stock
 #. odoo-javascript
@@ -3983,7 +3939,6 @@ msgstr "Exchange"
 #. module: stock
 #. odoo-javascript
 #: code:addons/stock/static/src/widgets/forecast_widget.xml:0
-#, fuzzy
 msgid "Exp"
 msgstr "Exp"
 
@@ -7601,7 +7556,6 @@ msgstr ""
 #. module: stock
 #. odoo-javascript
 #: code:addons/stock/static/src/widgets/stock_rescheduling_popover.xml:0
-#, fuzzy
 msgid "Preceding operations"
 msgstr "Önceki Operasyonlar"
 
@@ -7947,13 +7901,13 @@ msgid "Product barcode"
 msgstr "Ürün barkodu"
 
 #. module: stock
-#: model:mail.template,description:stock.mail_template_data_stock_move_line_recall
-msgid "Product recall from lot/serial number"
+#: model:mail.template,subject:stock.mail_template_data_stock_picking_recall
+msgid "Product recall for Delivery {{ object.name }}"
 msgstr ""
 
 #. module: stock
-#: model:mail.template,subject:stock.mail_template_data_stock_move_line_recall
-msgid "Product recall: {{ object.product_id.display_name or 'n/a' }}"
+#: model:mail.template,description:stock.mail_template_data_stock_picking_recall
+msgid "Product recall from lot/serial number"
 msgstr ""
 
 #. module: stock
@@ -8784,7 +8738,6 @@ msgstr "Rezervasyon Metodu"
 #: model_terms:ir.ui.view,arch_db:stock.stock_picking_batch_form
 #: model_terms:ir.ui.view,arch_db:stock.view_picking_form
 #: model_terms:ir.ui.view,arch_db:stock.vpicktree
-#, fuzzy
 msgid "Reserve"
 msgstr "Rezerv"
 
@@ -9993,11 +9946,6 @@ msgid "Stock Move"
 msgstr "Stok Hareketi"
 
 #. module: stock
-#: model:mail.template,name:stock.mail_template_data_stock_move_line_recall
-msgid "Stock Move Line: Product Recall"
-msgstr ""
-
-#. module: stock
 #: model:ir.model.fields,field_description:stock.field_stock_picking__move_ids
 #: model:ir.model.fields,field_description:stock.field_stock_reference__move_ids
 #: model_terms:ir.ui.view,arch_db:stock.stock_move_line_view_search
@@ -10110,7 +10058,6 @@ msgstr "Stok hareketi ile Stok Metni Doğrulama"
 #. module: stock
 #. odoo-javascript
 #: code:addons/stock/static/src/stock_forecasted/forecasted_details.xml:0
-#, fuzzy
 msgid "Stock To Reserve:"
 msgstr "Stoklar rezerve edilecek:"
 
@@ -11021,7 +10968,6 @@ msgstr "Zaman Ufku"
 #. module: stock
 #. odoo-javascript
 #: code:addons/stock/static/src/stock_forecasted/forecasted_header.xml:0
-#, fuzzy
 msgid "Time to replenish:"
 msgstr "Yenileme zamanı:"
 
@@ -11349,6 +11295,11 @@ msgid "Transfer:"
 msgstr ""
 
 #. module: stock
+#: model:mail.template,name:stock.mail_template_data_stock_picking_recall
+msgid "Transfer: Product Recall"
+msgstr ""
+
+#. module: stock
 #: model:ir.model.fields,field_description:stock.field_stock_picking__package_history_ids
 msgid "Transfered Packages"
 msgstr "Transfer Edilen Paketler"
@@ -11451,7 +11402,7 @@ msgstr "Tip"
 #: model:ir.model.fields,field_description:stock.field_stock_picking_batch__picking_type_code
 #: model:ir.model.fields,field_description:stock.field_stock_picking_type__code
 msgid "Type of Operation"
-msgstr ""
+msgstr "Operasyon Türü"
 
 #. module: stock
 #: model:ir.model.fields,help:stock.field_stock_lot__activity_exception_decoration
@@ -11464,7 +11415,7 @@ msgstr "Kayıtlardaki istisna etkinliğinin türü."
 #. odoo-javascript
 #: code:addons/stock/static/src/stock_forecasted/forecasted_details.xml:0
 msgid "Unassign"
-msgstr ""
+msgstr "Atamayı Kaldır"
 
 #. module: stock
 #. odoo-python
@@ -11668,7 +11619,6 @@ msgstr ""
 #. module: stock
 #. odoo-javascript
 #: code:addons/stock/static/src/xml/inventory_lines.xml:0
-#, fuzzy
 msgid "Validate Inventory"
 msgstr "Envanteri Onayla"
 
@@ -11853,7 +11803,6 @@ msgstr "Depo Rotaları"
 #. module: stock
 #. odoo-javascript
 #: code:addons/stock/static/src/stock_forecasted/forecasted_warehouse_filter.xml:0
-#, fuzzy
 msgid "Warehouse:"
 msgstr "Depo:"
 
@@ -12661,7 +12610,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:stock.package_zpl_label
 #: model_terms:ir.ui.view,arch_db:stock.picking_type_barcode_zpl_label
 msgid "^FS"
-msgstr ""
+msgstr "^FS"
 
 #. module: stock
 #: model_terms:ir.ui.view,arch_db:stock.package_zpl_label
@@ -12816,7 +12765,6 @@ msgstr "örn. 2 adımda kabul"
 #. module: stock
 #. odoo-javascript
 #: code:addons/stock/static/src/stock_forecasted/forecasted_details.xml:0
-#, fuzzy
 msgid "expected on"
 msgstr "bekleniyor"
 
@@ -12870,7 +12818,6 @@ msgstr "ile ilgili"
 #. module: stock
 #. odoo-javascript
 #: code:addons/stock/static/src/widgets/stock_rescheduling_popover.xml:0
-#, fuzzy
 msgid "planned on"
 msgstr "planlanma"
 
@@ -12953,6 +12900,104 @@ msgstr ""
 msgid ""
 "{{ object.company_id.name }} Delivery Order (Ref {{ object.name or 'n/a' }})"
 msgstr "{{ object.company_id.name }} Teslimat (Ref {{ object.name or 'n/a' }})"
+
+#~ msgid ""
+#~ "<div style=\"margin: 0px; padding: 0px;\">\n"
+#~ "    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
+#~ "        Hello <t t-out=\"object.partner_id.name or ''\">Brandon Freeman</"
+#~ "t>,<br/><br/>\n"
+#~ "        <t t-if=\"hasattr(object, 'delivery_type') and "
+#~ "object.delivery_type == 'in_store'\">\n"
+#~ "            Your order has been collected.\n"
+#~ "        </t>\n"
+#~ "        <t t-else=\"\">\n"
+#~ "            We are glad to inform you that your order has been shipped.\n"
+#~ "        </t>\n"
+#~ "        <t t-if=\"hasattr(object, 'carrier_tracking_ref') and "
+#~ "object.carrier_tracking_ref\">\n"
+#~ "            Your tracking reference is\n"
+#~ "            <strong>\n"
+#~ "            <t t-if=\"object.carrier_tracking_url\">\n"
+#~ "                <t t-set=\"multiple_carrier_tracking\" t-"
+#~ "value=\"object.get_multiple_carrier_tracking()\"/>\n"
+#~ "                <t t-if=\"multiple_carrier_tracking\">\n"
+#~ "                    <t t-foreach=\"multiple_carrier_tracking\" t-"
+#~ "as=\"line\">\n"
+#~ "                        <br/><a t-att-href=\"line[1]\" target=\"_blank\" "
+#~ "t-out=\"line[0] or ''\"/>\n"
+#~ "                    </t>\n"
+#~ "                </t>\n"
+#~ "                <t t-else=\"\">\n"
+#~ "                    <a t-attf-href=\"{{ object.carrier_tracking_url }}\" "
+#~ "target=\"_blank\" t-out=\"object.carrier_tracking_ref or ''\"/>.\n"
+#~ "                </t>\n"
+#~ "            </t>\n"
+#~ "            <t t-else=\"\">\n"
+#~ "                <t t-out=\"object.carrier_tracking_ref or ''\"/>.\n"
+#~ "            </t>\n"
+#~ "            </strong>\n"
+#~ "        </t>\n"
+#~ "        <br/><br/>\n"
+#~ "        Please find your delivery order attached for more details.<br/"
+#~ "><br/>\n"
+#~ "        Thank you,\n"
+#~ "        <t t-if=\"user.signature\">\n"
+#~ "            <br/>\n"
+#~ "            <div data-o-mail-quote=\"1\">--<br data-o-mail-quote=\"1\"/"
+#~ "><t t-out=\"user.signature or ''\">Mitchell Admin</t></div>\n"
+#~ "        </t>\n"
+#~ "    </p>\n"
+#~ "</div>\n"
+#~ "        "
+#~ msgstr ""
+#~ "<div style=\"margin: 0px; padding: 0px;\">\n"
+#~ "    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
+#~ "        Merhaba <t t-out=\"object.partner_id.name or ''\">Brandon "
+#~ "Freeman</t>,<br/><br/>\n"
+#~ "       <t t-if=\"hasattr(object, 'delivery_type') and "
+#~ "object.delivery_type == 'in_store'\"> \n"
+#~ "            Siparişiniz teslim alındı.\n"
+#~ "       </t>\n"
+#~ "        <t t-else=\"\"> \n"
+#~ "            Siparişinizin kargoya verildiğini bildirmekten memnuniyet "
+#~ "duyarız.\n"
+#~ "       </t>\n"
+#~ "        <t t-if=\"hasattr(object, 'carrier_tracking_ref') and "
+#~ "object.carrier_tracking_ref\"> \n"
+#~ "            Takip referans numaranız:\n"
+#~ "           <strong>\n"
+#~ "            <t t-if=\"object.carrier_tracking_url\"> \n"
+#~ "               <t t-set=\"multiple_carrier_tracking\" t-"
+#~ "value=\"object.get_multiple_carrier_tracking()\"/>\n"
+#~ "                <t t-if=\"multiple_carrier_tracking\"> \n"
+#~ "                   <t t-foreach=\"multiple_carrier_tracking\" t-"
+#~ "as=\"line\">\n"
+#~ "                        <br/> <a t-att-href=\"line[1]\" target=\"_blank\" "
+#~ "t-out=\"line[0] or ''\"/>\n"
+#~ "                    </t> \n"
+#~ "               </t>\n"
+#~ "                <t t-else=\"\"> \n"
+#~ "                   <a t-attf-href=\"{{ object.carrier_tracking_url }}\" "
+#~ "target=\"_blank\" t-out=\"object.carrier_tracking_ref or ''\"/> .\n"
+#~ "               </t>\n"
+#~ "            </t> \n"
+#~ "           <t t-else=\"\">\n"
+#~ "                <t t-out=\"object.carrier_tracking_ref or ''\"/> .\n"
+#~ "           </t>\n"
+#~ "            </strong> \n"
+#~ "       </t>\n"
+#~ "        <br/> <br/> \n"
+#~ "        Daha fazla ayrıntı için ekteki teslimat siparişinizi "
+#~ "inceleyebilirsiniz.<br/><br/>\n"
+#~ "        Teşekkür ederiz,\n"
+#~ "       <t t-if=\"user.signature\">\n"
+#~ "            <br/> \n"
+#~ "           <div data-o-mail-quote=\"1\"> --<br data-o-mail-quote=\"1\"/"
+#~ "><t t-out=\"user.signature or ''\">Mitchell Admin</t></div>\n"
+#~ "       </t>\n"
+#~ "    </p> \n"
+#~ "</div>\n"
+#~ "        "
 
 #~ msgid "'Location - %s' % object.name"
 #~ msgstr "'Konum - %s' % object.name"

@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0beta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-18 17:39+0000\n"
-"PO-Revision-Date: 2026-09-22 08:30+0000\n"
+"POT-Creation-Date: 2026-10-09 17:40+0000\n"
+"PO-Revision-Date: 2026-11-05 11:41+0000\n"
 "Last-Translator: \"Noemi Pla Garcia (nopl)\" <nopl@odoo.com>\n"
 "Language-Team: Spanish <https://translate.odoo.com/projects/odoo-20/resource/"
 "es/>\n"
@@ -52,6 +52,14 @@ msgid ""
 "calendar\n"
 "associated to every resource. It also manages the leaves of every resource.\n"
 msgstr ""
+"\n"
+"Módulo para la gestión de recursos.\n"
+"===============================\n"
+"\n"
+"Un recurso representa algo que se puede planificar (un desarrollador en una "
+"tarea o un centro de trabajo en una orden de fabricación). Este módulo "
+"gestiona un calendario asociado a cada recurso. También gestiona las "
+"ausencias de cada recurso.\n"
 
 #. module: resource
 #: model_terms:ir.ui.view,arch_db:resource.view_resource_calendar_tree
@@ -191,7 +199,7 @@ msgstr "Días de cierre"
 #. module: resource
 #: model:ir.model.fields,field_description:resource.field_resource_resource__color
 msgid "Color"
-msgstr ""
+msgstr "Color"
 
 #. module: resource
 #: model:ir.model,name:resource.model_res_company
@@ -224,12 +232,12 @@ msgstr ""
 #. module: resource
 #: model:ir.model.fields,field_description:resource.field_resource_calendar__country_id
 msgid "Country"
-msgstr ""
+msgstr "País"
 
 #. module: resource
 #: model:ir.model.fields,field_description:resource.field_resource_calendar__country_code
 msgid "Country Code"
-msgstr ""
+msgstr "Código de país"
 
 #. module: resource
 #: model:ir.model.fields,field_description:resource.field_resource_calendar__create_uid
@@ -266,7 +274,7 @@ msgstr "Día de la semana"
 #. module: resource
 #: model:ir.model.fields.selection,name:resource.selection__resource_calendar_attendance__recurrency_type__days
 msgid "Days"
-msgstr ""
+msgstr "Días"
 
 #. module: resource
 #: model:ir.model.fields,field_description:resource.field_resource_calendar__days_per_week
@@ -323,7 +331,7 @@ msgstr "Nombre para mostrar"
 #. module: resource
 #: model_terms:ir.ui.view,arch_db:resource.view_resource_calendar_multi_create_form
 msgid "Duration"
-msgstr ""
+msgstr "Duración"
 
 #. module: resource
 #: model:ir.model.fields,field_description:resource.field_resource_calendar_attendance__duration_based
@@ -790,6 +798,8 @@ msgid ""
 "The ISO country code in two chars. \n"
 "You can use this field for quick search."
 msgstr ""
+"EL código ISO del país en dos caracteres.\n"
+"Puede utilizar este campo para la búsqueda rápida."
 
 #. module: resource
 #: model:ir.model.constraint,message:resource.constraint_resource_calendar_attendance_check_duration_hours
@@ -942,14 +952,9 @@ msgstr ""
 
 #. module: resource
 #. odoo-javascript
-#: code:addons/resource/static/src/views/fields/resource_calendar_many2one/resource_calendar_many2one.js:0
-msgid "Variable (%(days)s %(dayLabel)s - %(hours)sh)"
-msgstr ""
-
-#. module: resource
-#. odoo-javascript
 #: code:addons/resource/static/src/views/fields/resource_calendar_hours_by_day/resource_calendar_hours_by_day.js:0
-msgid "Variable (%(days)s days - %(hours)sh)"
+#: code:addons/resource/static/src/views/fields/resource_calendar_many2one/resource_calendar_many2one.js:0
+msgid "Variable (%(hours)sh on %(days)s days / week)"
 msgstr ""
 
 #. module: resource
@@ -968,7 +973,7 @@ msgstr "Miércoles"
 #. module: resource
 #: model:ir.model.fields.selection,name:resource.selection__resource_calendar_attendance__recurrency_type__weeks
 msgid "Weeks"
-msgstr ""
+msgstr "Semanas"
 
 #. module: resource
 #: model:ir.model.fields,help:resource.field_resource_calendar_leaves__count_as
@@ -1071,21 +1076,12 @@ msgid "You cannot compute the intervals without a calendar on no resource."
 msgstr ""
 
 #. module: resource
-#. odoo-javascript
-#: code:addons/resource/static/src/views/fields/resource_calendar_many2one/resource_calendar_many2one.js:0
-msgid "day"
-msgstr ""
-
-#. module: resource
-#. odoo-javascript
-#: code:addons/resource/static/src/views/fields/resource_calendar_many2one/resource_calendar_many2one.js:0
-msgid "days"
-msgstr "días"
-
-#. module: resource
 #: model_terms:ir.ui.view,arch_db:resource.resource_calendar_form
 msgid "from company"
 msgstr ""
+
+#~ msgid "days"
+#~ msgstr "días"
 
 #~ msgid ""
 #~ "Define the working schedule of the resource. If not set, the resource "

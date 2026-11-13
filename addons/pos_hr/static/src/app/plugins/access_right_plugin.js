@@ -3,6 +3,7 @@
 import { PosAccessRightPlugin } from "@point_of_sale/app/plugins/access_right_plugin";
 import { patch } from "@web/core/utils/patch";
 import { _t } from "@web/core/l10n/translation";
+import { user } from "@web/core/user";
 import { NumberPopup } from "@point_of_sale/app/components/popups/number_popup/number_popup";
 import { makeAwaitable } from "@point_of_sale/app/utils/make_awaitable_dialog";
 
@@ -97,22 +98,32 @@ patch(PosAccessRightPlugin.prototype, {
         return this.hasEmployeeRole(["cashier", "manager"]);
     },
     get canGoToBackend() {
-        return this.hasEmployeeRole(["manager"]);
+        if (!this.config.module_pos_hr) {
+            return super.canGoToBackend;
+        }
+        // Only the employee linked to the logged-in user, whatever their role
+        return this.cashier?.user_id?.id === user.userId;
     },
     get disablePartner() {
-        return this.hasEmployeeRole(["cashier", "manager", "restrictive"]);
+        return super.disablePartner || !this.hasEmployeeRole(["cashier", "manager", "restrictive"]);
     },
     get canEditDetails() {
         return this.hasEmployeeRole(["cashier", "manager"]);
     },
     get disableClickPayment() {
-        return this.hasEmployeeRole(["cashier", "manager", "restrictive"]);
+        return (
+            super.disableClickPayment ||
+            !this.hasEmployeeRole(["cashier", "manager", "restrictive"])
+        );
     },
     get canSplitOrder() {
         return this.hasEmployeeRole(["cashier", "manager"]);
     },
     get disableValidateOrder() {
-        return this.hasEmployeeRole(["cashier", "manager", "restrictive"]);
+        return (
+            super.disableValidateOrder ||
+            !this.hasEmployeeRole(["cashier", "manager", "restrictive"])
+        );
     },
     get canAccessButton() {
         return this.hasEmployeeRole(["cashier", "manager", "restrictive"]);
@@ -121,7 +132,7 @@ patch(PosAccessRightPlugin.prototype, {
         return this.hasEmployeeRole(["manager", "cashier"]);
     },
     get disableToggleFavorite() {
-        return this.hasEmployeeRole(["manager", "cashier"]);
+        return super.disableToggleFavorite || !this.hasEmployeeRole(["manager", "cashier"]);
     },
     get canAccessQuotation() {
         return this.hasEmployeeRole(["manager", "cashier"]);
@@ -151,10 +162,10 @@ patch(PosAccessRightPlugin.prototype, {
         return this.hasEmployeeRole(["manager", "cashier"]);
     },
     get disableLinediscount() {
-        return this.hasEmployeeRole(["manager", "cashier"]);
+        return super.disableLinediscount || !this.hasEmployeeRole(["manager", "cashier"]);
     },
     get disablePriceButton() {
-        return this.hasEmployeeRole(["manager", "cashier"]);
+        return super.disablePriceButton || !this.hasEmployeeRole(["manager", "cashier"]);
     },
     get canCancelOrder() {
         return this.hasEmployeeRole(["manager", "cashier"]);
@@ -184,19 +195,24 @@ patch(PosAccessRightPlugin.prototype, {
         return this.hasEmployeeRole(["manager", "cashier", "restrictive"]);
     },
     get disableToggleOrder() {
-        return this.hasEmployeeRole(["manager", "cashier", "restrictive"]);
+        return (
+            super.disableToggleOrder || !this.hasEmployeeRole(["manager", "cashier", "restrictive"])
+        );
     },
     get canClickOrderLine() {
         return this.hasEmployeeRole(["manager", "cashier"]);
     },
     get disableBackSpaceButton() {
-        return this.hasEmployeeRole(["manager", "cashier", "restrictive"]);
+        return (
+            super.disableBackSpaceButton ||
+            !this.hasEmployeeRole(["manager", "cashier", "restrictive"])
+        );
     },
     get canSwitchSign() {
-        return this.hasEmployeeRole(["manager", "cashier"]);
+        return super.canSwitchSign && this.hasEmployeeRole(["manager", "cashier"]);
     },
     get showEditPlanButton() {
-        return this.hasEmployeeRole(["manager"]);
+        return super.showEditPlanButton && this.hasEmployeeRole(["manager"]);
     },
     get canAccessDebugMode() {
         return this.hasEmployeeRole(["manager", "cashier"]);

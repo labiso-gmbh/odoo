@@ -588,10 +588,20 @@ export class Thread extends Component {
         }
     }
 
+    get hasHighlightedMessage() {
+        return this.orderedMessages.some((message) => this.isMessageHighlighted(message));
+    }
+
+    /** @param {import("models").Message} message */
+    isMessageHighlighted(message) {
+        return (
+            !message.isNotification && this.messageHighlight?.highlightedMessageId === message.id
+        );
+    }
+
+    /** @param {import("models").Message} message */
     getMessageClassName(message) {
-        return !message.isNotification && this.messageHighlight?.highlightedMessageId === message.id
-            ? "o-highlighted"
-            : "";
+        return this.isMessageHighlighted(message) ? "o-highlighted" : "";
     }
 
     async jumpToPresent({ immediate = false } = {}) {
@@ -684,6 +694,9 @@ export class Thread extends Component {
     }
 
     saveScroll() {
+        if (this.isSmoothScrolling) {
+            return;
+        }
         const isBottom = this.isAtBottom;
         if (isBottom) {
             this.props.thread.scrollTop = "bottom";
@@ -754,10 +767,21 @@ export class Thread extends Component {
             this.isSmoothScrolling = true;
             const { promise, resolve: resolveSmoothScrolling } = Promise.withResolvers();
             this.smoothScrollingPromise = promise;
+            const thread = this.props.thread;
             const onSmoothScrollingEnd = () => {
                 resolveSmoothScrolling();
                 this.smoothScrollingPromise = undefined;
                 this.isSmoothScrolling = false;
+                const el = this.scrollableRef();
+                if (!el || thread.notEq(this.props.thread)) {
+                    return;
+                }
+                if (Math.abs(el.scrollTop - value) <= 1) {
+                    thread.scrollTop = "bottom";
+                    this.applyScroll();
+                } else {
+                    this.saveScroll();
+                }
             };
             if ("onscrollend" in window) {
                 document.addEventListener("scrollend", onSmoothScrollingEnd, {
@@ -766,7 +790,39 @@ export class Thread extends Component {
                 });
             } else {
                 // To remove when safari will support the "scrollend" event.
-                this.smoothScrollingTimeout = setTimeout(onSmoothScrollingEnd, 250);
+                let lastScrollTop = this.scrollableRef().scrollTop;
+                let previousScrollTop = lastScrollTop;
+                let movedAway = false;
+                const highlightScroll = this.messageHighlight?.scrollPromise;
+                const scrollListener = new AbortController();
+                this.scrollableRef().addEventListener(
+                    "scroll",
+                    (ev) => {
+                        const distance = Math.abs(value - ev.target.scrollTop);
+                        movedAway ||= distance > Math.abs(value - previousScrollTop);
+                        previousScrollTop = ev.target.scrollTop;
+                    },
+                    { signal: scrollListener.signal }
+                );
+                const checkSmoothScrollingEnd = () => {
+                    const el = this.scrollableRef();
+                    if (!el || el.scrollTop === lastScrollTop) {
+                        scrollListener.abort();
+                        if (
+                            el &&
+                            !movedAway &&
+                            thread.eq(this.props.thread) &&
+                            this.messageHighlight?.scrollPromise === highlightScroll
+                        ) {
+                            el.scrollTop = value;
+                        }
+                        onSmoothScrollingEnd();
+                        return;
+                    }
+                    lastScrollTop = el.scrollTop;
+                    this.smoothScrollingTimeout = setTimeout(checkSmoothScrollingEnd, 250);
+                };
+                this.smoothScrollingTimeout = setTimeout(checkSmoothScrollingEnd, 250);
             }
         }
         this.scrollableRef().scrollTo({ behavior: smooth ? "smooth" : undefined, top: value });

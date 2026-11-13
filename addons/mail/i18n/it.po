@@ -18,11 +18,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-25 17:37+0000\n"
-"PO-Revision-Date: 2026-08-31 20:01+0000\n"
+"POT-Creation-Date: 2026-11-06 17:38+0000\n"
+"PO-Revision-Date: 2026-10-23 16:22+0000\n"
 "Last-Translator: \"Marianna Ciofani (cima)\" <cima@odoo.com>\n"
-"Language-Team: Italian <https://translate.odoo.com/projects/odoo-s19-4/mail/"
-"it/>\n"
+"Language-Team: Italian <https://translate.odoo.com/projects/odoo-20/mail/it/"
+">\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -96,6 +96,68 @@ msgid ""
 "For more specific needs, you may also assign custom-defined actions\n"
 "(technically: Server Actions) to be triggered for each incoming mail.\n"
 msgstr ""
+"\n"
+"\n"
+"Chat, gateway e-mail e canale privato.\n"
+"=======================================\n"
+"\n"
+"Comunica con i tuoi colleghi/clienti/ospiti attraverso Odoo.\n"
+"\n"
+"Discuti/chatta\n"
+"------------\n"
+"Funzionalità a portata dell'utente che permettono di comunicare faccia a "
+"faccia o in gruppo\n"
+"(chat/chiamate vocali/videochiamate), invita gli ospiti e condividi "
+"documenti con loro, tutto in tempo reale.\n"
+"\n"
+"Gateway e-mail\n"
+"------------\n"
+"L'invio di informazioni e documenti ora è semplificato. Puoi inviare e-mail\n"
+"dal software stesso, con grandi possibilità. Ad esempio,\n"
+"crea un bellissimo modello di e-mail per le fatture e utilizza lo stesso\n"
+"per tutti i clienti in modo da non doverne creare uno ogni giorno.\n"
+"\n"
+"Chatter\n"
+"-------\n"
+"Tutte le conversazioni contestuali avverrano sul documento stesso. Ad "
+"esempio, puoi postare\n"
+"un aggiornamento direttamente sul profilo del candidato, per inviare un'e-"
+"mail,\n"
+"programmare il prossimo colloquio telefonico, allegare il contratto, "
+"aggiungere il responsabile delle risorse umane\n"
+"alla lista dei seguaci per notificarli (con l'aiuto dei sottotipi),...\n"
+"\n"
+"\n"
+"Recupera le e-mail in arrivo sui server POP/IMAP.\n"
+"============================================\n"
+"Inserisci i parametri dell'account POP/IMAP e qualsiasi e-mail in arrivo su\n"
+"questi account verrà scaricata automaticamente nel sistema di Odoo. Tutti i\n"
+"server POP3/IMAP-compatibili sono supportati, inclusi quelli che richiedono\n"
+"una connessione SSL/TLS crittografata.\n"
+"Questo può essere utilizzato per creare facilmente flussi di lavoro basati "
+"sull'e-mail per molti documenti Odoo abilitati all'invio di e-mail, come ad "
+"esempio:\n"
+"----------------------------------------------------------------------------------------------------------\n"
+" * CRM Contatti/Opportunità\n"
+"    * CRM Reclami\n"
+"    * Problemi relativi ad un progetto\n"
+"    * Attività di un progetto\n"
+"    * Selezione delle risorse umane (Candidati)\n"
+"Installa le applicazioni necessarie così da poter assegnare qualsiasi tipo "
+"di\n"
+"documento (contatti, problemi progetto) agli account delle e-mail in "
+"entrata. Le nuove e-mail\n"
+"genereranno automaticamente nuovi documenti del tipo scelto quindi è facile "
+"creare un'integrazione\n"
+"tra le caselle di posta e Odoo. Meglio ancora: i documenti fungono "
+"direttamente da mini\n"
+"conversazioni sincronizzate via e-mail. È possibile rispondere all'interno "
+"di Odoo: le\n"
+"risposte verranno raccolte automaticamente e allegate\n"
+"allo stesso documento *conversazione*.\n"
+"Per bisogni più specifici, è possibile assegnare azioni specifiche \n"
+"(tecnicamente: azioni dei server) da attivare per ogni e-mail in arrivo.\n"
+"    "
 
 #. module: mail
 #: model:ir.model.fields,help:mail.field_ir_actions_server__followers_type
@@ -1201,7 +1263,7 @@ msgstr ""
 
 #. module: mail
 #. odoo-python
-#: code:addons/mail/__init__.py:0
+#: code:addons/mail/models/discuss/discuss_channel.py:0
 msgid ""
 "A place to connect and exchange news with colleagues across the company."
 msgstr ""
@@ -1788,7 +1850,7 @@ msgstr "Amministratore"
 
 #. module: mail
 #. odoo-python
-#: code:addons/mail/__init__.py:0
+#: code:addons/mail/models/discuss/discuss_channel.py:0
 msgid "Administrators"
 msgstr "Amministratori"
 
@@ -2112,6 +2174,12 @@ msgstr "E 1 altro membro."
 #: model:ir.model.fields,field_description:mail.field_mail_template__model_id
 msgid "Applies to"
 msgstr "Si applica a"
+
+#. module: mail
+#. odoo-javascript
+#: code:addons/mail/static/src/discuss/call/common/call_settings.xml:0
+msgid "Apply a privacy blur to your surroundings."
+msgstr ""
 
 #. module: mail
 #. odoo-javascript
@@ -2493,6 +2561,12 @@ msgstr "Iscrizione automatica"
 
 #. module: mail
 #. odoo-javascript
+#: code:addons/mail/static/src/discuss/call/common/call_settings.xml:0
+msgid "Auto-focus speaker"
+msgstr ""
+
+#. module: mail
+#. odoo-javascript
 #: code:addons/mail/static/src/core/common/message_model.js:0
 msgid "Auto-translate future messages?"
 msgstr ""
@@ -2519,6 +2593,12 @@ msgstr "Attività automatica"
 #: code:addons/mail/static/src/core/common/message.js:0
 msgid "Automated message"
 msgstr "Messaggio automatizzato"
+
+#. module: mail
+#. odoo-javascript
+#: code:addons/mail/static/src/discuss/call/common/call_settings.xml:0
+msgid "Automatically enlarge the person currently speaking."
+msgstr ""
 
 #. module: mail
 #: model_terms:ir.ui.view,arch_db:mail.mail_activity_type_view_form
@@ -2689,6 +2769,12 @@ msgstr ""
 #: code:addons/mail/static/src/discuss/call/common/quick_video_settings.xml:0
 msgid "Blur Background"
 msgstr "Sfocatura sfondo"
+
+#. module: mail
+#. odoo-javascript
+#: code:addons/mail/static/src/discuss/call/common/call_settings.xml:0
+msgid "Blur video background"
+msgstr ""
 
 #. module: mail
 #: model:ir.model.fields,field_description:mail.field_mail_template__body_html
@@ -3190,12 +3276,6 @@ msgstr "Impossibile effettuare la ricerca, troppe attività"
 
 #. module: mail
 #. odoo-python
-#: code:addons/mail/models/mail_message.py:0
-msgid "Cannot search, too many messages"
-msgstr "Impossibile effettuare la ricerca, troppi messaggi"
-
-#. module: mail
-#. odoo-python
 #: code:addons/mail/models/mail_scheduled_message.py:0
 msgid "Cannot search, too many scheduled messages"
 msgstr "Impossibile effettuare la ricerca, troppi messaggi programmati"
@@ -3509,7 +3589,7 @@ msgstr ""
 #. module: mail
 #: model:ir.module.module,summary:base.module_mail
 msgid "Chat, mail gateway and private channels"
-msgstr ""
+msgstr "Chat, posta elettronica e canali privati"
 
 #. module: mail
 #. odoo-javascript
@@ -3612,6 +3692,7 @@ msgstr ""
 #: code:addons/mail/static/src/chatter/web/scheduled_message.js:0
 #: code:addons/mail/static/src/core/common/poll_votes_panel.xml:0
 #: code:addons/mail/static/src/core/common/search_message_input.xml:0
+#: code:addons/mail/static/src/core/web/mention_list.xml:0
 #: code:addons/mail/static/src/discuss/call/common/meeting_ready_banner.xml:0
 #: code:addons/mail/static/src/views/web/fields/scheduled_date_field/scheduled_date_dialog.xml:0
 #: model_terms:ir.ui.view,arch_db:mail.mail_template_preview_view_form
@@ -3666,6 +3747,12 @@ msgstr "Chiudi pannello"
 #: code:addons/mail/static/src/core/common/search_message_input.xml:0
 msgid "Close search"
 msgstr "Chiudi ricerca"
+
+#. module: mail
+#. odoo-javascript
+#: code:addons/mail/static/src/discuss/core/public_web/messaging_menu_model_patch.js:0
+msgid "Collaborate with coworkers and customers in video calls."
+msgstr ""
 
 #. module: mail
 #. odoo-javascript
@@ -5585,6 +5672,12 @@ msgstr "Abilitare monitoraggio ordinato"
 
 #. module: mail
 #. odoo-javascript
+#: code:addons/mail/static/src/discuss/call/common/call_settings.xml:0
+msgid "Enable Push-to-talk"
+msgstr ""
+
+#. module: mail
+#. odoo-javascript
 #: code:addons/mail/static/src/discuss/call/common/call_preview.js:0
 msgid "Enable background blur"
 msgstr "Abilita sfocatura sfondo"
@@ -5753,6 +5846,12 @@ msgstr ""
 #: model:ir.model.constraint,message:mail.constraint_mail_followers_mail_followers_res_partner_res_model_id_uniq
 msgid "Error, a partner cannot follow twice the same object."
 msgstr "Errore, un partner non può seguire lo stesso oggetto due volte."
+
+#. module: mail
+#. odoo-javascript
+#: code:addons/mail/static/src/core/web/mention_list.xml:0
+msgid "Esc"
+msgstr ""
 
 #. module: mail
 #: model:ir.model.fields.selection,name:mail.selection__mail_alias__alias_contact__everyone
@@ -6340,13 +6439,13 @@ msgstr "Gateway"
 
 #. module: mail
 #. odoo-python
-#: code:addons/mail/__init__.py:0
+#: code:addons/mail/models/discuss/discuss_channel.py:0
 msgid "General"
 msgstr "Generale"
 
 #. module: mail
 #. odoo-python
-#: code:addons/mail/__init__.py:0
+#: code:addons/mail/models/discuss/discuss_channel.py:0
 msgid "General channel for administrators."
 msgstr "Canale generale per gli amministratori."
 
@@ -7897,6 +7996,11 @@ msgid "Language"
 msgstr "Lingua"
 
 #. module: mail
+#: model:ir.model.fields,help:mail.field_mail_message_translation__target_lang
+msgid "Language code used as the target for the translation request."
+msgstr ""
+
+#. module: mail
 #: model:ir.model.fields,field_description:mail.field_discuss_channel__last_interest_dt
 #: model:ir.model.fields,field_description:mail.field_discuss_channel_member__last_interest_dt
 msgid "Last Activity"
@@ -8240,6 +8344,12 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:mail.mail_scheduled_message_view_form
 msgid "Log Now"
 msgstr "Registra ora"
+
+#. module: mail
+#. odoo-javascript
+#: code:addons/mail/static/src/discuss/call/common/call_settings.xml:0
+msgid "Log RTC events"
+msgstr ""
 
 #. module: mail
 #: model_terms:ir.ui.view,arch_db:mail.mail_activity_schedule_view_form
@@ -8602,7 +8712,7 @@ msgstr "Modello mass mailing: '%(name)s' (ID: %(record_id)s)"
 #: model:ir.model.fields,help:mail.field_res_partner__activity_type_icon
 #: model:ir.model.fields,help:mail.field_res_users__activity_type_icon
 msgid "Material Symbols icon e.g. checklist"
-msgstr ""
+msgstr "Icona Material Symbols, ad es. elenco di controllo"
 
 #. module: mail
 #: model:ir.model.fields,field_description:mail.field_mail_call_artifact__media_id
@@ -9240,6 +9350,12 @@ msgid "Names of the recipients"
 msgstr "Nomi dei destinatari"
 
 #. module: mail
+#. odoo-javascript
+#: code:addons/mail/static/src/core/web/mention_list.xml:0
+msgid "Navigate"
+msgstr ""
+
+#. module: mail
 #. odoo-python
 #: code:addons/mail/models/res_users.py:0
 msgid "Near %(city)s, %(region)s, %(country)s"
@@ -9454,6 +9570,12 @@ msgstr "Nessuna conversazione selezionata."
 #: code:addons/mail/wizard/mail_followers_edit.py:0
 msgid "No documents found for the selected records."
 msgstr "Nessun documento trovato per i record selezionati."
+
+#. module: mail
+#. odoo-javascript
+#: code:addons/mail/static/src/discuss/core/public_web/messaging_menu_model_patch.js:0
+msgid "No install needed."
+msgstr ""
 
 #. module: mail
 #. odoo-python
@@ -11035,6 +11157,12 @@ msgid "Pop out Attachments"
 msgstr "Allegati pop-out"
 
 #. module: mail
+#. odoo-javascript
+#: code:addons/mail/static/src/core/common/attachment_view.js:0
+msgid "Pop out is not supported on mobile."
+msgstr ""
+
+#. module: mail
 #: model:ir.model.fields,field_description:mail.field_fetchmail_server__port
 msgid "Port"
 msgstr "Porta"
@@ -12153,6 +12281,12 @@ msgstr "Salva come modello"
 
 #. module: mail
 #. odoo-javascript
+#: code:addons/mail/static/src/discuss/call/common/call_settings.xml:0
+msgid "Save detailed RTC connection logs for troubleshooting."
+msgstr ""
+
+#. module: mail
+#. odoo-javascript
 #: code:addons/mail/static/src/core/common/composer.js:0
 #: code:addons/mail/static/src/core/common/composer_actions.js:0
 msgid "Save editing"
@@ -12451,6 +12585,12 @@ msgstr "Visto da tutti"
 #: code:addons/mail/static/src/discuss/core/common/message_seen_indicator.xml:0
 msgid "Seen by:"
 msgstr "Visto da:"
+
+#. module: mail
+#. odoo-javascript
+#: code:addons/mail/static/src/core/web/mention_list.xml:0
+msgid "Select"
+msgstr ""
 
 #. module: mail
 #. odoo-javascript
@@ -12891,13 +13031,6 @@ msgstr "Condiviso con tutti gli utenti"
 #: model:ir.model.fields,field_description:mail.field_mail_canned_response__source
 msgid "Shortcut"
 msgstr "Scorciatoia"
-
-#. module: mail
-#: model:ir.model.fields,help:mail.field_mail_message_translation__target_lang
-msgid "Shortened language code used as the target for the translation request."
-msgstr ""
-"Codice lingua ridotto utilzizato come obiettivo per la richiesta di "
-"traduzione."
 
 #. module: mail
 #. odoo-javascript
@@ -14109,7 +14242,7 @@ msgstr ""
 
 #. module: mail
 #. odoo-python
-#: code:addons/mail/__init__.py:0
+#: code:addons/mail/models/discuss/discuss_channel.py:0
 msgid "This is a space for the whole team to connect and share updates."
 msgstr ""
 "Questo è uno spazio in cui tutto il team può connettersi e condividere "
@@ -14523,6 +14656,14 @@ msgstr "Domani mattina"
 #: code:addons/mail/static/src/core/web/activity.xml:0
 msgid "Tomorrow:"
 msgstr "Domani:"
+
+#. module: mail
+#. odoo-python
+#: code:addons/mail/models/mail_message.py:0
+msgid ""
+"Too many messages to be processed.\n"
+"Please apply additional filters to reduce the number of potential messages."
+msgstr ""
 
 #. module: mail
 #: model_terms:ir.ui.view,arch_db:mail.discuss_channel_view_search
@@ -15757,7 +15898,7 @@ msgstr "Benvenuto in #%(channelName)s!"
 
 #. module: mail
 #. odoo-python
-#: code:addons/mail/__init__.py:0
+#: code:addons/mail/models/discuss/discuss_channel.py:0
 msgid "Welcome to the #General channel 🎉"
 msgstr "Benvenuto nel canale #General 🎉"
 
@@ -16229,6 +16370,14 @@ msgstr ""
 #. odoo-python
 #: code:addons/mail/models/discuss/discuss_channel.py:0
 msgid ""
+"You do not have the rights to change the name, description or avatar as a "
+"regular member of these read-only channels: %(channels)s."
+msgstr ""
+
+#. module: mail
+#. odoo-python
+#: code:addons/mail/models/discuss/discuss_channel.py:0
+msgid ""
 "You do not have the rights to change the read-only state of: %(channels)s."
 msgstr ""
 "Non disponi dei diritti per modificare lo stato di sola lettura di: %"
@@ -16526,12 +16675,6 @@ msgstr "conversazioni"
 #: code:addons/mail/models/discuss/discuss_channel.py:0
 msgid "created this channel."
 msgstr "ha creato questo canale."
-
-#. module: mail
-#. odoo-javascript
-#: code:addons/mail/static/src/js/rotting_mixin/rotting_statusbar.xml:0
-msgid "d"
-msgstr "d"
 
 #. module: mail
 #: model_terms:ir.ui.view,arch_db:mail.account_security_alert
@@ -17154,6 +17297,18 @@ msgstr ""
 #: code:addons/mail/models/mail_canned_response.py:0
 msgid "🔒 Private"
 msgstr "🔒 Privato"
+
+#~ msgid "Cannot search, too many messages"
+#~ msgstr "Impossibile effettuare la ricerca, troppi messaggi"
+
+#~ msgid ""
+#~ "Shortened language code used as the target for the translation request."
+#~ msgstr ""
+#~ "Codice lingua ridotto utilzizato come obiettivo per la richiesta di "
+#~ "traduzione."
+
+#~ msgid "d"
+#~ msgstr "d"
 
 #~ msgid "Search"
 #~ msgstr "Cerca"

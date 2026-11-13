@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 19.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-25 17:37+0000\n"
+"POT-Creation-Date: 2026-11-06 17:38+0000\n"
 "PO-Revision-Date: 2026-08-31 18:52+0000\n"
 "Last-Translator: Anonymous <noreply@weblate.org>\n"
 "Language-Team: Uzbek <https://translate.odoo.com/projects/odoo-s19-4/website/"
@@ -305,13 +305,6 @@ msgstr "# Bloklar soni"
 #, fuzzy
 msgid "$ 32M"
 msgstr "$ 32M"
-
-#. module: website
-#. odoo-python
-#: code:addons/website/models/ir_ui_view.py:0
-#, fuzzy
-msgid "%(error)s (website: %(website_id)s)"
-msgstr "%(website_id)s saytida %(error)s xatosi yuz berdi"
 
 #. module: website
 #. odoo-python
@@ -4657,13 +4650,8 @@ msgstr ""
 
 #. module: website
 #. odoo-javascript
-#: code:addons/website/static/src/builder/plugins/options/dynamic_snippet_carousel_option.xml:0
-msgid "Arrow Position"
-msgstr ""
-
-#. module: website
-#. odoo-javascript
 #: code:addons/website/static/src/builder/plugins/carousel_option.xml:0
+#: code:addons/website/static/src/builder/plugins/options/dynamic_snippet_carousel_option.xml:0
 #: code:addons/website/static/src/builder/plugins/options/image_gallery_option.xml:0
 #, fuzzy
 msgid "Arrows"
@@ -5280,6 +5268,7 @@ msgstr ""
 
 #. module: website
 #. odoo-javascript
+#: code:addons/website/static/src/builder/plugins/font/add_font_dialog.xml:0
 #: code:addons/website/static/src/builder/plugins/options/header/header_navigation_option.xml:0
 #: code:addons/website/static/src/builder/plugins/theme/theme_font_weight_option.xml:0
 #: code:addons/website/static/src/builder/plugins/theme/theme_tab_plugin.js:0
@@ -6444,6 +6433,7 @@ msgstr "Mijozlar bizning xizmatlarimiz orqali 32 million dollar tejashdi."
 #: model_terms:ir.ui.view,arch_db:website.show_website_info
 #: model_terms:ir.ui.view,arch_db:website.template_header_hamburger
 #: model_terms:ir.ui.view,arch_db:website.template_header_mobile
+#: model_terms:ir.ui.view,arch_db:website.website_info
 #, fuzzy
 msgid "Close"
 msgstr "Yopish"
@@ -7143,6 +7133,8 @@ msgid "Countdown is over - Firework"
 msgstr "Sanoq tugadi - Mushakbozlik"
 
 #. module: website
+#. odoo-javascript
+#: code:addons/website/static/src/builder/plugins/options/visibility_option.xml:0
 #: model:ir.model.fields,field_description:website.field_website_visitor__country_id
 #: model_terms:ir.ui.view,arch_db:website.website_visitor_view_search
 #, fuzzy
@@ -7745,7 +7737,7 @@ msgstr "Standart o‘chirish-yoqish katakchasi"
 #. module: website
 #. odoo-python
 #: code:addons/website/models/website.py:0
-msgid "Default website changed"
+msgid "Default website changed to %(default_website_name)s."
 msgstr ""
 
 #. module: website
@@ -8618,6 +8610,12 @@ msgstr ""
 #, fuzzy
 msgid "Doughnut"
 msgstr "Halqasimon diagramma"
+
+#. module: website
+#. odoo-javascript
+#: code:addons/website/static/src/builder/plugins/options/popup_option_plugin.js:0
+msgid "Drag blocks here"
+msgstr ""
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.s_mega_menu_dropzone
@@ -9683,6 +9681,12 @@ msgstr "Kengaytma ko‘rinishi"
 #, fuzzy
 msgid "External ID"
 msgstr "Tashqi ID"
+
+#. module: website
+#. odoo-python
+#: code:addons/website/models/ir_ui_view.py:0
+msgid "External ID can not be loaded: %(error)s (website: %(website_id)s)"
+msgstr ""
 
 #. module: website
 #. odoo-javascript
@@ -13294,6 +13298,8 @@ msgid "Language from the website when visitor has been created"
 msgstr "Tashrif buyuruvchi yaratilganda saytdan olingan til"
 
 #. module: website
+#. odoo-javascript
+#: code:addons/website/static/src/builder/plugins/options/visibility_option.xml:0
 #: model:ir.model.fields,field_description:website.field_res_config_settings__language_ids
 #: model:ir.model.fields,field_description:website.field_website__language_ids
 #: model_terms:ir.ui.view,arch_db:website.res_config_settings_view_form
@@ -13662,6 +13668,7 @@ msgstr "Kutubxona"
 
 #. module: website
 #. odoo-javascript
+#: code:addons/website/static/src/builder/plugins/font/add_font_dialog.xml:0
 #: code:addons/website/static/src/builder/plugins/options/searchbar_option.xml:0
 #: code:addons/website/static/src/builder/plugins/theme/theme_font_weight_option.xml:0
 #: code:addons/website/static/src/builder/plugins/theme/theme_tab_plugin.js:0
@@ -15348,6 +15355,13 @@ msgid "Note: To hide this page, uncheck it from the Style tab in edit mode."
 msgstr ""
 
 #. module: website
+#: model_terms:ir.ui.view,arch_db:website.website_info
+msgid ""
+"Note: To view the website information, enable it from the Style tab in edit "
+"mode."
+msgstr ""
+
+#. module: website
 #: model:ir.model.fields,field_description:website.field_website_controller_page__notes
 #: model:ir.model.fields,field_description:website.field_website_page__notes
 msgid "Notes"
@@ -17003,6 +17017,7 @@ msgstr "Portfolio"
 #: code:addons/website/static/src/builder/plugins/image/grid_image_option.xml:0
 #: code:addons/website/static/src/builder/plugins/options/accordion_option.xml:0
 #: code:addons/website/static/src/builder/plugins/options/card_image_option.xml:0
+#: code:addons/website/static/src/builder/plugins/options/dynamic_snippet_carousel_option.xml:0
 #: code:addons/website/static/src/builder/plugins/options/popup_option.xml:0
 #: code:addons/website/static/src/builder/plugins/options/table_of_content_option.xml:0
 #: code:addons/website/static/src/builder/plugins/options/whatsapp_option.xml:0
@@ -17771,6 +17786,7 @@ msgstr "Yo‘nalishlar ro‘yxatini yangilash"
 #. odoo-javascript
 #: code:addons/website/static/src/builder/plugins/carousel_option.xml:0
 #: code:addons/website/static/src/builder/plugins/content_width_option.xml:0
+#: code:addons/website/static/src/builder/plugins/font/add_font_dialog.xml:0
 #: code:addons/website/static/src/builder/plugins/options/base_visibility_option.xml:0
 #: code:addons/website/static/src/builder/plugins/options/dynamic_snippet_carousel_option.xml:0
 #: code:addons/website/static/src/builder/plugins/options/footer_option.xml:0
@@ -20222,7 +20238,6 @@ msgstr "Tuzilma"
 #: code:addons/website/static/src/builder/plugins/carousel_option.xml:0
 #: code:addons/website/static/src/builder/plugins/options/accordion_option.xml:0
 #: code:addons/website/static/src/builder/plugins/options/blockquote_option.xml:0
-#: code:addons/website/static/src/builder/plugins/options/dynamic_snippet_carousel_option.xml:0
 #: code:addons/website/static/src/builder/plugins/options/image_gallery_option.xml:0
 #: code:addons/website/static/src/builder/plugins/options/language_selector_option.xml:0
 #: code:addons/website/static/src/builder/plugins/options/navtabs_style_option.xml:0
@@ -20563,6 +20578,12 @@ msgid "Template fallback"
 msgstr "Shablon zaxirasi"
 
 #. module: website
+#. odoo-python
+#: code:addons/website/models/ir_ui_view.py:0
+msgid "Template not found: '%(error)s' (website: %(website_id)s)"
+msgstr ""
+
+#. module: website
 #. odoo-javascript
 #: code:addons/website/static/src/builder/plugins/form/form.edit.xml:0
 msgid "Terms & Conditions"
@@ -20862,13 +20883,6 @@ msgid "The form has been sent successfully."
 msgstr ""
 
 #. module: website
-#. odoo-python
-#: code:addons/website/controllers/form.py:0
-#, fuzzy
-msgid "The form's specified model does not exist"
-msgstr "Shaklning ko‘rsatilgan modeli mavjud emas"
-
-#. module: website
 #: model:ir.model.fields,help:website.field_ir_actions_server__website_url
 #: model:ir.model.fields,help:website.field_ir_cron__website_url
 #, fuzzy
@@ -20999,22 +21013,6 @@ msgstr ""
 #, fuzzy
 msgid "The name of the page usable in a URL"
 msgstr "URL manzilda foydalanish mumkin bo‘lgan sahifa nomi"
-
-#. module: website
-#. odoo-python
-#: code:addons/website/models/website.py:0
-msgid "The new default website is %(default_website_name)s."
-msgstr ""
-
-#. module: website
-#. odoo-python
-#: code:addons/website/models/website.py:0
-msgid ""
-"The new default website is %(default_website_name)s. The following default "
-"settings were copied from the old default website to the new one: %"
-"(transferred_settings)s. Note that these settings are still present on the "
-"old default website."
-msgstr ""
 
 #. module: website
 #. odoo-python
@@ -21328,6 +21326,13 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/website/static/src/builder/plugins/theme/theme_font_weight_option.js:0
 msgid "This font is missing font weight"
+msgstr ""
+
+#. module: website
+#. odoo-python
+#: code:addons/website/controllers/form.py:0
+msgid ""
+"This form cannot be submitted. Please contact the website administrator."
 msgstr ""
 
 #. module: website
@@ -22207,6 +22212,27 @@ msgstr "URL '#' bilan boshlanmasligi kerak."
 #, fuzzy
 msgid "URL to"
 msgstr "Maqsad URL"
+
+#. module: website
+#. odoo-javascript
+#: code:addons/website/static/src/builder/plugins/options/visibility_option.xml:0
+#, fuzzy
+msgid "UTM Campaign"
+msgstr "UTM kampaniyasi"
+
+#. module: website
+#. odoo-javascript
+#: code:addons/website/static/src/builder/plugins/options/visibility_option.xml:0
+#, fuzzy
+msgid "UTM Medium"
+msgstr "UTM vositasi"
+
+#. module: website
+#. odoo-javascript
+#: code:addons/website/static/src/builder/plugins/options/visibility_option.xml:0
+#, fuzzy
+msgid "UTM Source"
+msgstr "UTM manbasi"
 
 #. module: website
 #. odoo-javascript
@@ -25925,12 +25951,6 @@ msgid "rows"
 msgstr "qatorlar"
 
 #. module: website
-#. odoo-javascript
-#: code:addons/website/static/src/components/resource_editor/resource_editor.xml:0
-msgid "scope.data.label"
-msgstr ""
-
-#. module: website
 #: model_terms:ir.ui.view,arch_db:website.snippets
 msgid ""
 "scrolling, depth, effect, backgrounds, layer, visual, movement, parallax"
@@ -26114,12 +26134,6 @@ msgstr "ushbu sahifa"
 
 #. module: website
 #. odoo-javascript
-#: code:addons/website/static/src/components/resource_editor/resource_editor.xml:0
-msgid "this.state.type === 'xml' ? resource.name : resource.label"
-msgstr ""
-
-#. module: website
-#. odoo-javascript
 #: code:addons/website/static/src/builder/plugins/options/animate_option.xml:0
 #, fuzzy
 msgid "to"
@@ -26231,6 +26245,14 @@ msgstr "✽ Pitsalar"
 #, fuzzy
 msgid "✽  What We Offer"
 msgstr "✽ Biz nimalarni taklif etamiz"
+
+#, fuzzy
+#~ msgid "%(error)s (website: %(website_id)s)"
+#~ msgstr "%(website_id)s saytida %(error)s xatosi yuz berdi"
+
+#, fuzzy
+#~ msgid "The form's specified model does not exist"
+#~ msgstr "Shaklning ko‘rsatilgan modeli mavjud emas"
 
 #, fuzzy
 #~ msgid "Fit text"
@@ -27324,18 +27346,6 @@ msgstr "✽ Biz nimalarni taklif etamiz"
 #~ msgid "Track visits using Google Analytics or Google Tag Manager"
 #~ msgstr ""
 #~ "Google Analytics yoki Google Tag Manager yordamida tashriflarni kuzatish"
-
-#, fuzzy
-#~ msgid "UTM Campaign"
-#~ msgstr "UTM kampaniyasi"
-
-#, fuzzy
-#~ msgid "UTM Medium"
-#~ msgstr "UTM vositasi"
-
-#, fuzzy
-#~ msgid "UTM Source"
-#~ msgstr "UTM manbasi"
 
 #, fuzzy
 #~ msgid "Add predefined error message"

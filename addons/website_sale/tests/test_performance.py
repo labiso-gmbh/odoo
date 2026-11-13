@@ -67,7 +67,6 @@ class TestWebsiteSalePerformanceNoPricelist(WebsiteSaleCommon, UtilPerf, Product
             "product_attribute": 1,
             "product_attribute_value": 3,
             "product_image": 1,
-            "product_pricelist": 1,
             "product_product": 1,
             "product_public_category": 1,
             "product_ribbon": 1,
@@ -76,7 +75,7 @@ class TestWebsiteSalePerformanceNoPricelist(WebsiteSaleCommon, UtilPerf, Product
             "product_template_attribute_line": 2,
             "res_company": 2,
             "res_currency": 1,
-            "res_partner": 2,
+            "res_partner": 1,
             "res_users": 1,
             "website_menu": 1,
             "website_page": 1,
@@ -113,7 +112,6 @@ class TestWebsiteSalePerformanceNoPricelist(WebsiteSaleCommon, UtilPerf, Product
             "product_attribute_value": 2,
             "product_document": 2,
             "product_image": 2,
-            "product_pricelist": 1,
             "product_product": 2,
             "product_public_category": 2,
             "product_ribbon": 1,
@@ -123,7 +121,7 @@ class TestWebsiteSalePerformanceNoPricelist(WebsiteSaleCommon, UtilPerf, Product
             "product_template_attribute_value": 4,
             "res_company": 2,
             "res_currency": 1,
-            "res_partner": 2,
+            "res_partner": 1,
             "res_users": 1,
             "website_menu": 1,
             "website_page": 1,
@@ -320,6 +318,33 @@ class TestWebsiteSalePerformanceWithPricelistDepth(TestWebsiteSalePerformanceWit
             self.heavy_product.website_url,
             sum(select_queries.values()),
             select_tables_perf=select_queries,
+        )
+
+
+class TestWebsiteSalePerformanceCategoriesSidebar(TestWebsiteSalePerformanceNoPricelist):
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        # Published category with an unpublished child (inaccessible to public/portal users)
+        parent_categ = cls.env["product.public.category"].create({"name": "Published"})
+        cls.env["product.public.category"].create({
+            "name": "Unpublished", "parent_id": parent_categ.id
+        })
+        cls.heavy_product.public_categ_ids = parent_categ
+
+        # Show the categories as a sidebar instead of a top bar
+        cls.env.ref("website_sale.products_categories_top").active = False
+        cls.env.ref("website_sale.products_categories").active = True
+
+    def _get_shop_page_queries(self):
+        res = super()._get_shop_page_queries()
+        res["product_public_category"] += 3
+        return res
+
+    def test_shop_page_generation(self):
+        select_queries = self._get_shop_page_queries()
+        self._check_url_hot_query(
+            "/shop", sum(select_queries.values()), select_tables_perf=select_queries
         )
 
 

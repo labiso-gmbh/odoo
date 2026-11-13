@@ -10,6 +10,7 @@ from odoo.tests import Form, tagged
 
 from odoo.addons.base.tests.files import GIF_RAW
 from odoo.addons.hr_expense.tests.common import TestExpenseCommon
+from odoo.addons.mail.tests.common import mail_new_test_user
 
 
 @tagged('-at_install', 'post_install')
@@ -197,7 +198,7 @@ class TestExpenses(TestExpenseCommon):
         # Unlinking moves
         (payment_1 | payment_2).action_draft()
         (payment_1 | payment_2).move_id.line_ids.remove_move_reconcile()
-        self.assertEqual(first_expense_by_employee.state, 'posted')
+        self.assertEqual(first_expense_by_employee.state, 'approved')
         expenses_by_employee.account_move_id.button_draft()
         expenses_by_employee.account_move_id.unlink()
         self.assertFalse(expenses_by_employee.account_move_id)
@@ -695,6 +696,30 @@ class TestExpenses(TestExpenseCommon):
         expense_data = self.env['hr.expense'].with_user(self.expense_user_employee).get_expense_dashboard()
         self.assertEqual(expense_data['draft']['amount'], 3000.00)
 
+    def test_dashboard_waiting_reimbursement_posted_expense(self):
+        """ Check that an employee-paid expense stays in the "Waiting Reimbursement"
+            total once its move is posted, until the payment is actually made.
+        """
+        expense = self.create_expenses({
+            'name': 'Employee expense',
+            'payment_mode': 'own_account',
+            'total_amount_currency': 1000.00,
+            'employee_id': self.expense_employee.id,
+        })
+        expense.action_submit()
+        expense.action_approve()
+        self.post_expenses(expense)
+
+        self.assertEqual(expense.state, 'approved')
+        expense_data = self.env['hr.expense'].with_user(self.expense_user_employee).get_expense_dashboard()
+        self.assertEqual(expense_data['approved']['amount'], 1000.00)
+
+        self.get_new_payment(expense, 1000.00)
+
+        self.assertIn(expense.state, ('in_payment', 'paid'))
+        expense_data = self.env['hr.expense'].with_user(self.expense_user_employee).get_expense_dashboard()
+        self.assertEqual(expense_data['approved']['amount'], 0.00)
+
     def test_update_expense_price_on_product_standard_price(self):
         """
         Tests that updating the standard price of a product will update all the un-submitted
@@ -1102,13 +1127,42 @@ class TestExpenses(TestExpenseCommon):
             ]
         )
 
-    def test_expense_paid_by_company_with_linked_bill(self):
-        """ Test that linking a bill uses the payable account and reconciles automatically """
+    def test_expense_paid_by_company_with_bill_sent_separately(self):
+        """ Test that an expense whose bill is sent separately uses the vendor payable account, so it can be matched with the bill later """
         other_payable_account = self.company_data['default_account_payable'].copy()
         partner = self.env['res.partner'].create({
             'name': 'test partner',
             'property_account_payable_id': other_payable_account.id,
         })
+
+        # 1. Create an expense whose bill is sent separately, the vendor isn't known yet
+        expense = self.create_expenses({
+            'name': 'Expense with a bill sent separately',
+            'payment_mode': 'company_account',
+            'total_amount_currency': 100.0,
+            'has_existing_bill': True,
+        })
+        self.assertEqual(expense.account_id, expense.company_id.payable_account_id, "Without vendor, the expense account should be the default payable account")
+        expense.action_submit()
+
+        # 2. Set the vendor, the expense can then be approved without waiting for the bill
+        expense.vendor_id = partner
+        self.assertEqual(expense.account_id, other_payable_account, "The expense account should be the vendor payable account")
+        expense.action_approve()
+        self.assertEqual(expense.state, 'paid')
+
+        payment_entry = expense.account_move_id
+        outstanding_payment_account = self.env['account.account'].with_company(self.env.company).search([('name', '=', 'Outstanding Payments')], limit=1)
+        self.assertEqual(
+            set(payment_entry.line_ids.account_id.ids),
+            {other_payable_account.id, outstanding_payment_account.id},
+            "The accounts on the payment entry should be the vendor payable account and the outstanding payment account"
+        )
+        self.assertRecordValues(payment_entry, [{'partner_id': partner.id}])
+        self.assertRecordValues(payment_entry.line_ids, [{'partner_id': partner.id}] * 2)
+        payment_entry.action_post()
+
+        # 3. The bill received afterwards is matched with the payment from its outstanding debits
         bill = self.env['account.move'].create({
             'move_type': 'in_invoice',
             'partner_id': partner.id,
@@ -1117,34 +1171,64 @@ class TestExpenses(TestExpenseCommon):
                 Command.create({
                     'name': 'test bill line',
                     'price_unit': 100.0,
+                    'tax_ids': [],
                 })
             ]
         })
         bill.action_post()
+        payable_move_line = payment_entry.line_ids.filtered(lambda l: l.account_id == other_payable_account)
+        bill.js_assign_outstanding_line(payable_move_line.id)
+        self.assertTrue(bill.payment_state in ('in_payment', 'paid'), "The bill should be marked as paid/in_payment")
+        self.assertTrue(payable_move_line.reconciled, "The payment entry should be reconciled with the bill")
 
-        # 2. Create Expense linked to this bill
+    def test_expense_paid_by_company_with_bill_sent_separately_without_vendor(self):
+        """ Test that an expense whose bill is sent separately can be approved without a vendor, its entry then uses
+        the default payable account and has to be matched manually with the bill, which can't suggest it
+        """
+        # 1. Create and approve an expense whose bill is sent separately, without ever knowing the vendor
         expense = self.create_expenses({
-            'name': 'Expense matched to bill',
+            'name': 'Expense with a bill sent separately',
             'payment_mode': 'company_account',
             'total_amount_currency': 100.0,
             'has_existing_bill': True,
-            'existing_bill_id': bill.id,
         })
-
-        self.assertEqual(expense.account_id, other_payable_account, "The expense account should be the bill's payable account")
-
+        default_payable_account = expense.company_id.payable_account_id
+        self.assertEqual(expense.account_id, default_payable_account, "Without vendor, the expense account should be the default payable account")
         expense.action_submit()
         expense.action_approve()
+        self.assertEqual(expense.state, 'paid')
 
         payment_entry = expense.account_move_id
         outstanding_payment_account = self.env['account.account'].with_company(self.env.company).search([('name', '=', 'Outstanding Payments')], limit=1)
         self.assertEqual(
             set(payment_entry.line_ids.account_id.ids),
-            {other_payable_account.id, outstanding_payment_account.id},
-            "The accounts on the payment entry should be the bill's payable account and the outstanding payment account"
+            {default_payable_account.id, outstanding_payment_account.id},
+            "The accounts on the payment entry should be the default payable account and the outstanding payment account"
         )
+        self.assertRecordValues(payment_entry, [{'partner_id': False}])
+        self.assertRecordValues(payment_entry.line_ids, [{'partner_id': False}] * 2)
+        payment_entry.action_post()
 
-        payable_move_line = payment_entry.line_ids.filtered(lambda l: l.account_id == other_payable_account)
+        # 2. The bill received afterward can't suggest the payment as it has no partner, so they are matched manually
+        partner = self.env['res.partner'].create({'name': 'test partner'})
+        bill = self.env['account.move'].create({
+            'move_type': 'in_invoice',
+            'partner_id': partner.id,
+            'invoice_date': '2026-01-01',
+            'invoice_line_ids': [
+                Command.create({
+                    'name': 'test bill line',
+                    'price_unit': 100.0,
+                    'tax_ids': [],
+                })
+            ]
+        })
+        bill.action_post()
+        self.assertFalse(bill.invoice_has_outstanding)
+
+        payable_move_line = payment_entry.line_ids.filtered(lambda l: l.account_id == default_payable_account)
+        bill_payable_line = bill.line_ids.filtered(lambda l: l.account_id == default_payable_account)
+        (payable_move_line + bill_payable_line).reconcile()
         self.assertTrue(bill.payment_state in ('in_payment', 'paid'), "The bill should be marked as paid/in_payment")
         self.assertTrue(payable_move_line.reconciled, "The payment entry should be reconciled with the bill")
 
@@ -1164,9 +1248,9 @@ class TestExpenses(TestExpenseCommon):
 
     def test_expense_paid_by_employee_with_linked_bill(self):
         """
-        Test the flow of an expense paid by the employee with an existing bill
+        Test the flow of an expense paid by the employee with a bill sent separately
 
-        existing bill (BILL), already created:
+        bill sent separately (BILL):
         account | debit | credit | partner
         ----------------------------------
         product | 75    | 0      |
@@ -1193,8 +1277,8 @@ class TestExpenses(TestExpenseCommon):
         bank        | 0     | 100    |
 
         RECONCILED (02):
-        Reconciliation between the existing bill and the debt transfer entry. Mark the bill as paid
-        and transfer the debt from the vendor to the employee
+        Done by the user once the bill is received, between the bill and the debt transfer entry.
+        Mark the bill as paid and transfer the debt from the vendor to the employee
 
         RECONCILED (01):
         Reconciliation between the payment move and the debt transfer entry. Transfer the debt to the employee
@@ -1226,8 +1310,7 @@ class TestExpenses(TestExpenseCommon):
             'payment_mode': 'own_account',
             'total_amount_currency': 100.0,
             'has_existing_bill': True,
-            'existing_bill_id': bill.id,
-            'vendor_id': bill.partner_id.id,
+            'vendor_id': partner.id,
         })
 
         # post expense
@@ -1244,10 +1327,9 @@ class TestExpenses(TestExpenseCommon):
         )
         self.assertEqual(expense.state, self.env['account.move']._get_invoice_in_payment_state())
 
-        # check the bill is paid and reconciled with the payment move
+        # check the payment entry is reconciled with the debt transfer entry
         payable_move_line = payment_entry.line_ids.filtered(lambda l: l.account_id == other_payable_account)
-        self.assertEqual(bill.payment_state, 'paid', "The bill should be marked as paid")
-        self.assertTrue(payable_move_line.reconciled, "The payment entry should be reconciled with the bill")
+        self.assertTrue(payable_move_line.reconciled, "The payment entry should be reconciled with the debt transfer entry")
 
         # check amounts and partners on debt transfer move
         debt_transfer_move = payable_move_line.reconciled_lines_excluding_exchange_diff_ids.move_id
@@ -1256,6 +1338,12 @@ class TestExpenses(TestExpenseCommon):
             {'debit': 100.0, 'credit': 0.0, 'partner_id': partner.id, 'account_id': other_payable_account.id},
             {'debit': 0.0, 'credit': 100.0, 'partner_id': employee_partner.id, 'account_id': other_payable_account.id},
         ])
+
+        # the bill is matched with the vendor side of the debt transfer entry
+        self.assertEqual(bill.payment_state, 'not_paid')
+        vendor_line = debt_transfer_move.line_ids.filtered(lambda l: l.partner_id == partner)
+        bill.js_assign_outstanding_line(vendor_line.id)
+        self.assertEqual(bill.payment_state, 'paid', "The bill should be marked as paid")
 
         # create a bank statement line and reconcile it with the payment move -> expense should be marked as paid
         payment_entry.origin_payment_id.action_post()
@@ -1266,7 +1354,50 @@ class TestExpenses(TestExpenseCommon):
             'partner_id': employee_partner.id,
             'amount': -100.0,
         })
-        self.env['account.bank.statement.line']._cron_try_auto_reconcile_statement_lines(batch_size=100, company_id=self.env.company)
-        bank_line_reconciled = bank_line.move_id.line_ids.filtered(lambda l: l.account_id.account_type == 'asset_current')
-        self.assertEqual(bank_line_reconciled.reconciled_lines_excluding_exchange_diff_ids.move_id, payment_entry)
+
+        # Reconcile lines to check expense is marked as 'paid'
+        bank_line_to_reconcile = bank_line.move_id.line_ids.filtered(lambda l: l.account_id.account_type == 'asset_current')
+        payment_line_to_reconcile = payment_entry.line_ids.filtered(lambda l: l.account_id.account_type == 'asset_current')
+        bank_line_to_reconcile.account_id = payment_line_to_reconcile.account_id
+        (bank_line_to_reconcile + payment_line_to_reconcile).reconcile()
         self.assertEqual(expense.state, 'paid')
+
+    def test_expense_team_approver_refuse_mixed_selection(self):
+        """
+        - Set up a team approver and a subordinate, creating one submitted expense for each.
+        - Verify the approver cannot approve their own expense, but can approve the subordinate's.
+        - Refuse both expenses together to ensure a `UserError` is raised with a reason only for the invalid expense
+        (own expense), then verify the subordinate's expense opens the refusal wizard successfully.
+        """
+        team_approver = mail_new_test_user(
+            self.env,
+            login='expense_team_approver',
+            groups='base.group_user,hr_expense.group_hr_expense_team_approver',
+        )
+        approver_employee = self.env['hr.employee'].sudo().create({
+            'name': 'approver_employee',
+            'user_id': team_approver.id,
+            'expense_manager_id': self.expense_user_manager.id,
+        })
+        subordinate_employee = self.env['hr.employee'].sudo().create({
+            'name': 'subordinate_employee',
+            'parent_id': approver_employee.id,
+        })
+        own_expense = self.create_expenses({'name': 'Own expense', 'employee_id': approver_employee.id})
+        subordinate_expense = self.create_expenses({'name': 'Subordinate expense', 'employee_id': subordinate_employee.id})
+        expenses = own_expense + subordinate_expense
+        expenses.action_submit()
+        self.assertRecordValues(expenses, [{'state': 'submitted'}, {'state': 'submitted'}])
+
+        own_expense_as_approver = own_expense.with_user(team_approver)
+        subordinate_expense_as_approver = subordinate_expense.with_user(team_approver)
+        self.assertFalse(own_expense_as_approver.can_approve)
+        self.assertTrue(subordinate_expense_as_approver.can_approve)
+
+        with self.assertRaises(UserError) as error:
+            (own_expense_as_approver + subordinate_expense_as_approver).action_refuse()
+        self.assertIn("Own expense: It is your own expense", error.exception.args[0])
+        self.assertNotIn("Subordinate expense", error.exception.args[0])
+
+        action = subordinate_expense_as_approver.action_refuse()
+        self.assertEqual(action['res_model'], 'hr.expense.refuse.wizard')

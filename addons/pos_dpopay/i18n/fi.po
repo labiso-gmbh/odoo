@@ -7,10 +7,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server saas~19.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-08-28 17:41+0000\n"
-"PO-Revision-Date: 2026-09-09 14:12+0000\n"
+"POT-Creation-Date: 2026-10-16 17:41+0000\n"
+"PO-Revision-Date: 2026-11-06 13:12+0000\n"
 "Last-Translator: Saara Hakanen <sahak@odoo.com>\n"
-"Language-Team: Finnish <https://translate.odoo.com/projects/odoo-master/"
+"Language-Team: Finnish <https://translate.odoo.com/projects/odoo-20/"
 "pos_dpopay/fi/>\n"
 "Language: fi\n"
 "MIME-Version: 1.0\n"
@@ -36,6 +36,28 @@ msgid ""
 "* Quick payments by swiping, scanning, or tapping your credit/debit card or "
 "Mobile Money (Airtel Money / M-Pesa) at the payment terminal.\n"
 "* Supported cards: Visa, MasterCard, American Express etc.\n"
+msgstr ""
+"\n"
+"Salli DPO-kassajärjestelmän maksut\n"
+"==============================\n"
+"\n"
+"Tukee kaikkia päätelaitteen tukemia valuuttoja — pääasiassa käytettäväksi "
+"**Afrikan alueella**.\n"
+"Mahdollistaa asiakkaille tilausten maksamisen debit-/luottokorteilla sekä "
+"mobiilimaksulla DPO-kassajärjestelmän päätelaitteiden kautta.\n"
+"Maksutapahtumien käsittelyyn tarvitaan DPO-kauppiasili.\n"
+"Ominaisuudet sisältävät:\n"
+"\n"
+"* Nopeat maksut pyyhkäisemällä, skannaamalla tai napauttamalla luotto-/debit-"
+"korttia tai mobiilimaksua (Airtel Money / M-Pesa) maksupäätteessä.\n"
+"* Tuetut kortit: Visa, MasterCard, American Express, jne.\n"
+
+#. module: pos_dpopay
+#. odoo-python
+#: code:addons/pos_dpopay/models/pos_payment_method.py:0
+msgid ""
+"%s. Please ensure the device is online and confirm that the Merchant ID "
+"(MID) and Terminal ID (TID) are correct."
 msgstr ""
 
 #. module: pos_dpopay
@@ -226,16 +248,6 @@ msgid "Payment is unsuccessful."
 msgstr "Maksu epäonnistui."
 
 #. module: pos_dpopay
-#. odoo-python
-#: code:addons/pos_dpopay/models/pos_payment_method.py:0
-msgid ""
-"Please ensure the device is online and confirm that the Merchant ID (MID) "
-"and Terminal ID (TID) are correct. %s"
-msgstr ""
-"Varmista, että laitteen verkkoyhteys, kauppiastunnus (MID) sekä päätteen "
-"tunnus (TID) ovat oikein. %s"
-
-#. module: pos_dpopay
 #: model:ir.module.module,shortdesc:base.module_pos_dpopay
 msgid "PoS DPO Pay"
 msgstr ""
@@ -310,3 +322,10 @@ msgid ""
 msgstr ""
 "DPO Pay bearer-tunnisteen hakeminen ei onnistu: tarkista asiakastunnus ja "
 "asiakas-salaus."
+
+#~ msgid ""
+#~ "Please ensure the device is online and confirm that the Merchant ID (MID) "
+#~ "and Terminal ID (TID) are correct. %s"
+#~ msgstr ""
+#~ "Varmista, että laitteen verkkoyhteys, kauppiastunnus (MID) sekä päätteen "
+#~ "tunnus (TID) ovat oikein. %s"

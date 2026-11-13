@@ -5,15 +5,16 @@
 # "Dylan Kiss (dyki)" <dyki@odoo.com>, 2025.
 # "Fernanda Alvarez (mfar)" <mfar@odoo.com>, 2025, 2026.
 # "Patricia Gutiérrez (pagc)" <pagc@odoo.com>, 2026.
+# Odoo Translation Bot <c3p@odoo.com>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server saas~18.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-18 17:38+0000\n"
-"PO-Revision-Date: 2026-09-10 18:11+0000\n"
-"Last-Translator: \"Fernanda Alvarez (mfar)\" <mfar@odoo.com>\n"
+"POT-Creation-Date: 2026-11-06 17:38+0000\n"
+"PO-Revision-Date: 2026-10-27 11:33+0000\n"
+"Last-Translator: Odoo Translation Bot <c3p@odoo.com>\n"
 "Language-Team: Spanish (Latin America) <https://translate.odoo.com/projects/"
-"odoo-master/crm/es_419/>\n"
+"odoo-20/crm/es_419/>\n"
 "Language: es_419\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -182,7 +183,7 @@ msgstr "<span class=\"me-1\"> de </span>"
 #. module: crm
 #: model_terms:ir.ui.view,arch_db:crm.crm_lead_view_form
 msgid "<span class=\"mx-3 mb-1\" invisible=\"type == 'lead'\"> at</span>"
-msgstr ""
+msgstr "<span class=\"mx-3 mb-1\" invisible=\"type == 'lead'\"> en</span>"
 
 #. module: crm
 #: model_terms:ir.ui.view,arch_db:crm.crm_lead_view_form
@@ -330,21 +331,21 @@ msgstr "<span>~ </span>"
 msgid ""
 "<t>\n"
 "Hi <t t-out=\"object.partner_id and object.partner_id.name or ''\">Acme "
-"Corporation</t>,<br/><br/>\n"
+"Corporation</t>,<br><br>\n"
 "Welcome to <t t-out=\"object.company_id.name or ''\">My Company (San "
 "Francisco)</t>.\n"
 "It's great to meet you! Now that you're on board, you'll discover what <t t-"
 "out=\"object.company_id.name or ''\">My Company (San Francisco)</t> has to "
 "offer. My name is <t t-out=\"object.user_id.name or ''\">Marc Demo</t> and "
-"I'll help you get the most out of Odoo. Could we plan a quick demo soon?<br/"
-">\n"
-"Feel free to reach out at any time!<br/><br/>\n"
-"Best,<br/>\n"
+"I'll help you get the most out of Odoo. Could we plan a quick demo soon?"
+"<br>\n"
+"Feel free to reach out at any time!<br><br>\n"
+"Best,<br>\n"
 "<t t-if=\"object.user_id\">\n"
 "    <b><t t-out=\"object.user_id.name or ''\">Marc Demo</t></b>\n"
-"    <br/>Email: <t t-out=\"object.user_id.email or "
+"    <br>Email: <t t-out=\"object.user_id.email or "
 "''\">mark.brown23@example.com</t>\n"
-"    <br/>Phone: <t t-out=\"object.user_id.phone or ''\">+1 650-123-4567</t>\n"
+"    <br>Phone: <t t-out=\"object.user_id.phone or ''\">+1 650-123-4567</t>\n"
 "</t>\n"
 "<t t-else=\"\">\n"
 "    <t t-out=\"object.company_id.name or ''\">My Company (San Francisco)</"
@@ -352,30 +353,6 @@ msgid ""
 "</t>\n"
 "        </t>"
 msgstr ""
-"<t>\n"
-"Hola <t t-out=\"object.partner_id and object.partner_id.name or "
-"''\">Corporación Acme</t>,<br/><br/>\n"
-"Te damos la bienvenida a <t t-out=\"object.company_id.name or ''\">Mi "
-"Empresa (San Francisco)</t>.\n"
-"Es un placer conocerte. Ahora es momento de que conozcas todo lo que <t t-"
-"out=\"object.company_id.name or ''\">Mi Empresa (San Francisco)</t> tiene "
-"para ofrecerte. Mi nombre es <t t-out=\"object.user_id.name or ''\">Marc "
-"Demo</t> y te ayudaré a aprovechar Odoo al máximo. ¿Podemos agendar una "
-"demostración rápida pronto?<br/>\n"
-"Siéntete libre de contactarme en cualquier momento.<br/><br/>\n"
-"Saludos,<br/>\n"
-"<t t-if=\"object.user_id\">\n"
-"    <b><t t-out=\"object.user_id.name or ''\">Marc Demo</t></b>\n"
-"    <br/>Correo: <t t-out=\"object.user_id.email or "
-"''\">mark.brown23@ejemplo.com</t>\n"
-"    <br/>Teléfono: <t t-out=\"object.user_id.phone or ''\">+1 650-123-4567</"
-"t>\n"
-"</t>\n"
-"<t t-else=\"\">\n"
-"    <t t-out=\"object.company_id.name or ''\">Mi Empresa (San Francisco)</"
-"t>\n"
-"</t>\n"
-"        </t>"
 
 #. module: crm
 #: model:ir.model.fields,help:crm.field_crm_team__alias_defaults
@@ -437,7 +414,7 @@ msgstr "Aceptar correos electrónicos de"
 #. module: crm
 #: model:ir.model,name:crm.model_res_groups
 msgid "Access Groups"
-msgstr ""
+msgstr "Grupos de acceso"
 
 #. module: crm
 #. odoo-javascript
@@ -635,7 +612,7 @@ msgstr "Modelo con alias"
 #. odoo-javascript
 #: code:addons/crm/static/src/components/team_switcher/team_switcher.js:0
 msgid "All Teams"
-msgstr ""
+msgstr "Todos los equipos"
 
 #. module: crm
 #. odoo-javascript
@@ -666,6 +643,7 @@ msgid ""
 "As you are a member of no Sales Team, you are showed the entire Pipeline.<br/"
 ">"
 msgstr ""
+"Como no formas parte de ningún equipo de ventas, verás todo el flujo.<br/>"
 
 #. module: crm
 #. odoo-javascript
@@ -788,7 +766,7 @@ msgstr "Devuelto"
 #. odoo-javascript
 #: code:addons/crm/static/src/components/promote_mail_plugins_dialog/promote_mail_plugins_dialog.xml:0
 msgid "Bring Odoo into your inbox:"
-msgstr ""
+msgstr "Integra Odoo en tu bandeja de entrada:"
 
 #. module: crm
 #: model:ir.module.module,shortdesc:base.module_crm
@@ -1000,7 +978,7 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/crm/static/src/components/promote_mail_plugins_dialog/promote_mail_plugins_dialog.xml:0
 msgid "Connect to Gmail or Outlook accounts."
-msgstr ""
+msgstr "Conecta tus cuentas de Gmail o de Outlook."
 
 #. module: crm
 #: model_terms:ir.ui.view,arch_db:crm.crm_lead_pls_update_view_form
@@ -1135,7 +1113,7 @@ msgstr "País"
 #. odoo-javascript
 #: code:addons/crm/static/src/components/promote_mail_plugins_dialog/promote_mail_plugins_dialog.xml:0
 msgid "Create Contacts, Leads, Tickets, Projects and Tasks."
-msgstr ""
+msgstr "Crea contactos, leads, tickets, proyectos y tareas."
 
 #. module: crm
 #: model:ir.model.fields,field_description:crm.field_res_config_settings__module_website_crm_iap_reveal
@@ -1198,7 +1176,7 @@ msgstr "Cree una oportunidad para empezar a interactuar con su flujo."
 #. odoo-javascript
 #: code:addons/crm/static/src/js/tours/crm.js:0
 msgid "Create your new contact."
-msgstr ""
+msgstr "Crea tu nuevo contacto."
 
 #. module: crm
 #: model:ir.model.fields,field_description:crm.field_crm_lead2opportunity_partner_mass__create_uid
@@ -1370,7 +1348,7 @@ msgstr "Resumen"
 #. module: crm
 #: model:ir.model,name:crm.model_discuss_channel
 msgid "Discussion Channel"
-msgstr ""
+msgstr "Canal de conversaciones"
 
 #. module: crm
 #: model:ir.model.fields,field_description:crm.field_calendar_event__display_name
@@ -1651,6 +1629,7 @@ msgstr "Campos que se pueden utilizar para predecir la puntuación de los leads"
 #: code:addons/crm/static/src/components/promote_mail_plugins_dialog/promote_mail_plugins_dialog.xml:0
 msgid "Find any Odoo record without leaving your inbox."
 msgstr ""
+"Encuentra cualquier registro de Odoo sin salir de tu bandeja de entrada."
 
 #. module: crm
 #: model_terms:ir.ui.view,arch_db:crm.crm_stage_form
@@ -1745,19 +1724,19 @@ msgstr "Obtener motivo de la pérdida"
 #. odoo-javascript
 #: code:addons/crm/static/src/components/promote_mail_plugins_dialog/promote_mail_plugins_dialog.xml:0
 msgid "Get it for Gmail"
-msgstr ""
+msgstr "Descárgalo para Gmail"
 
 #. module: crm
 #. odoo-javascript
 #: code:addons/crm/static/src/components/promote_mail_plugins_dialog/promote_mail_plugins_dialog.xml:0
 msgid "Get it for Outlook"
-msgstr ""
+msgstr "Descárgalo para Outlook"
 
 #. module: crm
 #. odoo-javascript
 #: code:addons/crm/static/src/components/lead_generation_dropdown/lead_generation_dropdown.js:0
 msgid "Get our Mail Plugins!"
-msgstr ""
+msgstr "¡Descarga nuestros complementos de correo!"
 
 #. module: crm
 #: model_terms:ir.ui.view,arch_db:crm.crm_team_member_view_form
@@ -1768,7 +1747,7 @@ msgstr "Priorizar si"
 #. odoo-javascript
 #: code:addons/crm/static/src/components/promote_mail_plugins_dialog/promote_mail_plugins_dialog.xml:0
 msgid "Gmail"
-msgstr ""
+msgstr "Gmail"
 
 #. module: crm
 #. odoo-python
@@ -2502,7 +2481,7 @@ msgstr "Gestionar planes recurrentes"
 #. odoo-javascript
 #: code:addons/crm/static/src/components/team_switcher/team_switcher.xml:0
 msgid "Manage Teams"
-msgstr ""
+msgstr "Gestiona equipos"
 
 #. module: crm
 #: model_terms:ir.ui.view,arch_db:crm.res_config_settings_view_form
@@ -2695,7 +2674,7 @@ msgstr "Mis leads"
 #. module: crm
 #: model_terms:ir.ui.view,arch_db:crm.view_crm_case_opportunities_filter
 msgid "My Opportunities"
-msgstr ""
+msgstr "Mis oportunidades"
 
 #. module: crm
 #: model:ir.ui.menu,name:crm.menu_crm_opportunities
@@ -3376,7 +3355,7 @@ msgstr "Fuera de rotación"
 #. odoo-javascript
 #: code:addons/crm/static/src/components/promote_mail_plugins_dialog/promote_mail_plugins_dialog.xml:0
 msgid "Outlook"
-msgstr ""
+msgstr "Outlook"
 
 #. module: crm
 #: model:crm.recurring.plan,name:crm.crm_recurring_plan_over_3_years
@@ -3574,6 +3553,8 @@ msgstr "Dominio de asignación preferido"
 #: code:addons/crm/static/src/components/promote_mail_plugins_dialog/promote_mail_plugins_dialog.xml:0
 msgid "Preview records and open their forms in one click."
 msgstr ""
+"Obtén una vista previa de los registros y abre sus formularios con un solo "
+"clic."
 
 #. module: crm
 #: model:ir.model.fields,field_description:crm.field_crm_lead__priority
@@ -3832,7 +3813,7 @@ msgstr "Número depurado"
 #. odoo-javascript
 #: code:addons/crm/static/src/components/promote_mail_plugins_dialog/promote_mail_plugins_dialog.xml:0
 msgid "Save emails and attachments directly to Odoo."
-msgstr ""
+msgstr "Guarda correos y archivos adjuntos directamente en Odoo."
 
 #. module: crm
 #: model_terms:ir.actions.act_window,help:crm.crm_lead_action_my_activities
@@ -4144,7 +4125,7 @@ msgstr "Etiquetas:"
 #. odoo-javascript
 #: code:addons/crm/static/src/views/crm_search_model.js:0
 msgid "Team"
-msgstr ""
+msgstr "Equipo"
 
 #. module: crm
 #: model:ir.ui.menu,name:crm.sales_team_menu_team_pipeline
@@ -4373,7 +4354,7 @@ msgstr "Consejo: no pierda tiempo registrando los datos de los clientes"
 #: model:digest.tip,name:crm.digest_tip_crm_6
 #: model_terms:digest.tip,tip_description:crm.digest_tip_crm_6
 msgid "Tip: Identify Bottlenecks at a glance"
-msgstr "Consejo: Identifique bloqueos de un solo vistazo"
+msgstr "Consejo: Identifica bloqueos con rapidez"
 
 #. module: crm
 #: model:digest.tip,name:crm.digest_tip_crm_3
@@ -4403,7 +4384,7 @@ msgstr "Consejo: convierta una selección de oportunidades en un mapa"
 #. odoo-javascript
 #: code:addons/crm/static/src/components/promote_mail_plugins_dialog/promote_mail_plugins_dialog.xml:0
 msgid "Tired of copy-pasting emails?"
-msgstr ""
+msgstr "¿Te cansaste de copiar y pegar correos?"
 
 #. module: crm
 #: model_terms:ir.ui.view,arch_db:crm.crm_lead_view_list_simplified
@@ -4429,12 +4410,14 @@ msgid ""
 "To work with the CRM, you should <a name=\"%d\" type=\"action\" "
 "tabindex=\"-1\">join a Team.</a>"
 msgstr ""
+"Para trabajar con el CRM debes <a name=\"%d\" type=\"action\" "
+"tabindex=\"-1\">unirte a un equipo.</a>"
 
 #. module: crm
 #. odoo-python
 #: code:addons/crm/models/crm_lead.py:0
 msgid "To work with the CRM, you should be added to a Team."
-msgstr ""
+msgstr "Para trabajar con el CRM debes formar parte de un equipo."
 
 #. module: crm
 #: model_terms:ir.ui.view,arch_db:crm.view_crm_case_leads_filter
@@ -4462,7 +4445,7 @@ msgstr "Principales factores positivos"
 #. module: crm
 #: model:ir.module.module,summary:base.module_crm
 msgid "Track leads and close opportunities"
-msgstr ""
+msgstr "Gestiona tus leads y cierra oportunidades"
 
 #. module: crm
 #: model_terms:ir.ui.view,arch_db:crm.crm_activity_report_view_search
@@ -4871,7 +4854,7 @@ msgstr "asignado)"
 #. module: crm
 #: model_terms:ir.ui.view,arch_db:crm.crm_lead_view_form
 msgid "at"
-msgstr ""
+msgstr "en"
 
 #. module: crm
 #: model_terms:ir.ui.view,arch_db:crm.crm_lead_view_form
@@ -5024,6 +5007,57 @@ msgstr "dirección de correo electrónico válida"
 #: code:addons/crm/static/src/views/crm_form/crm_pls_tooltip_button.xml:0
 msgid "valid phone number"
 msgstr "número de teléfono válido"
+
+#~ msgid ""
+#~ "<t>\n"
+#~ "Hi <t t-out=\"object.partner_id and object.partner_id.name or ''\">Acme "
+#~ "Corporation</t>,<br/><br/>\n"
+#~ "Welcome to <t t-out=\"object.company_id.name or ''\">My Company (San "
+#~ "Francisco)</t>.\n"
+#~ "It's great to meet you! Now that you're on board, you'll discover what <t "
+#~ "t-out=\"object.company_id.name or ''\">My Company (San Francisco)</t> has "
+#~ "to offer. My name is <t t-out=\"object.user_id.name or ''\">Marc Demo</t> "
+#~ "and I'll help you get the most out of Odoo. Could we plan a quick demo "
+#~ "soon?<br/>\n"
+#~ "Feel free to reach out at any time!<br/><br/>\n"
+#~ "Best,<br/>\n"
+#~ "<t t-if=\"object.user_id\">\n"
+#~ "    <b><t t-out=\"object.user_id.name or ''\">Marc Demo</t></b>\n"
+#~ "    <br/>Email: <t t-out=\"object.user_id.email or "
+#~ "''\">mark.brown23@example.com</t>\n"
+#~ "    <br/>Phone: <t t-out=\"object.user_id.phone or ''\">+1 650-123-4567</"
+#~ "t>\n"
+#~ "</t>\n"
+#~ "<t t-else=\"\">\n"
+#~ "    <t t-out=\"object.company_id.name or ''\">My Company (San Francisco)</"
+#~ "t>\n"
+#~ "</t>\n"
+#~ "        </t>"
+#~ msgstr ""
+#~ "<t>\n"
+#~ "Hola <t t-out=\"object.partner_id and object.partner_id.name or "
+#~ "''\">Corporación Acme</t>,<br/><br/>\n"
+#~ "Te damos la bienvenida a <t t-out=\"object.company_id.name or ''\">Mi "
+#~ "Empresa (San Francisco)</t>.\n"
+#~ "Es un placer conocerte. Ahora es momento de que conozcas todo lo que <t t-"
+#~ "out=\"object.company_id.name or ''\">Mi Empresa (San Francisco)</t> tiene "
+#~ "para ofrecerte. Mi nombre es <t t-out=\"object.user_id.name or ''\">Marc "
+#~ "Demo</t> y te ayudaré a aprovechar Odoo al máximo. ¿Podemos agendar una "
+#~ "demostración rápida pronto?<br/>\n"
+#~ "Siéntete libre de contactarme en cualquier momento.<br/><br/>\n"
+#~ "Saludos,<br/>\n"
+#~ "<t t-if=\"object.user_id\">\n"
+#~ "    <b><t t-out=\"object.user_id.name or ''\">Marc Demo</t></b>\n"
+#~ "    <br/>Correo: <t t-out=\"object.user_id.email or "
+#~ "''\">mark.brown23@ejemplo.com</t>\n"
+#~ "    <br/>Teléfono: <t t-out=\"object.user_id.phone or ''\">+1 "
+#~ "650-123-4567</t>\n"
+#~ "</t>\n"
+#~ "<t t-else=\"\">\n"
+#~ "    <t t-out=\"object.company_id.name or ''\">Mi Empresa (San Francisco)</"
+#~ "t>\n"
+#~ "</t>\n"
+#~ "        </t>"
 
 #~ msgid ""
 #~ "<i class=\"oi\" data-icon=\"east\"/>\n"

@@ -93,6 +93,27 @@ class TestName(TransactionCase):
         self.assertIn(variant_1.id, res_variants_ids)
         self.assertIn(variant_2.id, res_variants_ids)
 
+    def test_name_search_partial_code_match_keeps_name_matches(self):
+        """ Doing a name search should return :
+        - Only the default_code or barcode exact matches if any
+        - Both default_code and name partial matches otherwise
+        """
+        product_code, product_name = self.env['product.product'].create([
+            {'name': 'Plank 1', 'default_code': 'OAK-01'},
+            {'name': 'Oak'},
+        ])
+        res = self.env['product.product'].name_search(name='Oak')
+        res_ids = [r[0] for r in res]
+        self.assertIn(product_code.id, res_ids)
+        self.assertIn(product_name.id, res_ids)
+
+        product_exact = self.env['product.product'].create({
+            'name': 'Plank', 'default_code': 'OAK',
+        })
+        res = self.env['product.product'].name_search(name='Oak')
+        res_ids = [r[0] for r in res]
+        self.assertEqual(res_ids, [product_exact.id])
+
     def test_product_product_name_search(self):
         attribute = self.env['product.attribute'].create({
             'name': 'Attribute',
@@ -116,3 +137,48 @@ class TestName(TransactionCase):
             ('display_name', '=', 'HOHO'),
         ])
         self.assertEqual(variant1, product_search)
+
+    def test_custom_attribute_value_name_follows_lang(self):
+        self.env['res.lang']._activate_lang('fr_FR')
+        attribute = self.env['product.attribute'].create({
+            'name': 'Size',
+            'create_variant': 'no_variant',
+            'value_ids': [Command.create({'name': 'Custom', 'is_custom': True})],
+        })
+        attribute.with_context(lang='fr_FR').name = 'Taille'
+        template = self.env['product.template'].create({
+            'name': 'Rug',
+            'attribute_line_ids': [Command.create({
+                'attribute_id': attribute.id,
+                'value_ids': [Command.set(attribute.value_ids.ids)],
+            })],
+        })
+        custom_value = self.env['product.attribute.custom.value'].create({
+            'custom_product_template_attribute_value_id': template.attribute_line_ids.product_template_value_ids.id,
+            'custom_value': '3 x 4 m',
+        })
+        self.assertEqual(custom_value.with_context(lang='fr_FR').display_name, 'Taille: Custom: 3 x 4 m')
+        self.assertEqual(custom_value.with_context(lang='en_US').display_name, 'Size: Custom: 3 x 4 m')
+
+    def test_product_product_name_search_favorite_first(self):
+        # `is_favorite` was removed from product.product's `_order` for name_search
+        # performance reasons; name_search must still surface favorites first when
+        # called without a search term (e.g. opening a many2one dropdown).
+        Product = self.env['product.product']
+        favorite = Product.create({'name': 'ZZZFavTest Favorite'})
+        non_favorite = Product.create({'name': 'AAAFavTest NonFavorite'})
+        favorite.product_tmpl_id.is_favorite = True
+
+        domain = [('id', 'in', (favorite + non_favorite).ids)]
+        res = Product.name_search(name='', domain=domain, limit=1)
+        self.assertEqual(
+            [r[0] for r in res], [favorite.id],
+            "The favorite product should be suggested first even though it sorts "
+            "after the non-favorite one alphabetically.",
+        )
+        res = Product.name_search(name='', domain=domain, limit=2)
+        self.assertEqual(
+            [r[0] for r in res], [favorite.id, non_favorite.id],
+            "The non-favorite product should still be suggested once the "
+            "favorite one(s) have been listed.",
+        )

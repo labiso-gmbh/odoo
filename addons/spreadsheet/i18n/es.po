@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-25 17:39+0000\n"
-"PO-Revision-Date: 2026-09-21 11:34+0000\n"
+"POT-Creation-Date: 2026-10-30 17:40+0000\n"
+"PO-Revision-Date: 2026-11-05 11:42+0000\n"
 "Last-Translator: \"Noemi Pla Garcia (nopl)\" <nopl@odoo.com>\n"
 "Language-Team: Spanish <https://translate.odoo.com/projects/odoo-20/"
 "spreadsheet/es/>\n"
@@ -447,6 +447,12 @@ msgstr "1 columna"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "1 for one-tailed, 2 for two-tailed."
+msgstr ""
+
+#. module: spreadsheet
+#. odoo-javascript
+#: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
+msgid "1 is hidden"
 msgstr ""
 
 #. module: spreadsheet
@@ -1512,7 +1518,7 @@ msgstr "Automático"
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
-msgid "Automatic evaluation is disabled. Press F9 to recalculate."
+msgid "Automatic evaluation is disabled. Press"
 msgstr ""
 
 #. module: spreadsheet
@@ -1986,7 +1992,7 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Calendar"
-msgstr ""
+msgstr "Calendario"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -4019,7 +4025,7 @@ msgstr "No cambiar a la amortización lineal"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 msgid "Domain"
-msgstr ""
+msgstr "Dominio"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -6129,12 +6135,12 @@ msgstr "Las etiquetas no son válidas"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Landscape"
-msgstr ""
+msgstr "Paisaje"
 
 #. module: spreadsheet
 #: model:ir.model,name:spreadsheet.model_res_lang
 msgid "Language"
-msgstr ""
+msgstr "Idioma"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -6809,7 +6815,7 @@ msgstr ""
 #. module: spreadsheet
 #: model:ir.model,name:spreadsheet.model_ir_model
 msgid "Model"
-msgstr ""
+msgstr "Modelo"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -7097,6 +7103,12 @@ msgstr "No se han encontrado coincidencias."
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "No numeric values to display."
+msgstr ""
+
+#. module: spreadsheet
+#. odoo-javascript
+#: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
+msgid "No region is available"
 msgstr ""
 
 #. module: spreadsheet
@@ -7547,7 +7559,7 @@ msgstr "Ordenar por"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 msgid "Orientation"
-msgstr ""
+msgstr "Orientación"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -7719,7 +7731,7 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Pivot"
-msgstr ""
+msgstr "Tabla dinámica"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -8214,6 +8226,12 @@ msgstr "Referencia a la celda que se comprobará si está vacía."
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 msgid "Region"
 msgstr "Región"
+
+#. module: spreadsheet
+#. odoo-javascript
+#: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
+msgid "Region %(region)s is not available"
+msgstr ""
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -8874,7 +8892,7 @@ msgstr "Dispersión"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Scientific"
-msgstr ""
+msgstr "Científico"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -9586,7 +9604,7 @@ msgstr "La división sobrescribirá el contenido existente"
 #: model:ir.module.module,shortdesc:base.module_spreadsheet
 #: model:ir.module.module,summary:base.module_spreadsheet
 msgid "Spreadsheet"
-msgstr ""
+msgstr "Hoja de cálculo"
 
 #. module: spreadsheet
 #: model:ir.model.fields,field_description:spreadsheet.field_spreadsheet_mixin__spreadsheet_data
@@ -10471,6 +10489,12 @@ msgstr "El carácter dentro de text_to_search en el que iniciar la búsqueda."
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "The chart definition is invalid for an unknown reason"
 msgstr "La definición de la gráfica no es válida por un motivo desconocido"
+
+#. module: spreadsheet
+#. odoo-javascript
+#: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
+msgid "The chart is deactivated"
+msgstr ""
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -14092,6 +14116,14 @@ msgstr "Esta operación no se permite con selecciones múltiples."
 
 #. module: spreadsheet
 #. odoo-javascript
+#: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
+msgid ""
+"This operation would cause tables to overlap. Move or remove the conflicting "
+"table and try again."
+msgstr ""
+
+#. module: spreadsheet
+#. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 msgid "This pivot has no cell missing on this sheet"
 msgstr "Esta tabla dinámica no tiene ninguna celda faltante en esta hoja"
@@ -15700,6 +15732,12 @@ msgstr "fecha exacta"
 
 #. module: spreadsheet
 #. odoo-javascript
+#: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
+msgid "here"
+msgstr ""
+
+#. module: spreadsheet
+#. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "in the past month"
 msgstr "durante el mes pasado"
@@ -15799,6 +15837,12 @@ msgstr "hace un año"
 #: code:addons/spreadsheet/static/src/global_filters/helpers.js:0
 msgid "or"
 msgstr "o/u"
+
+#. module: spreadsheet
+#. odoo-javascript
+#: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
+msgid "or F9 to recalculate."
+msgstr ""
 
 #. module: spreadsheet
 #. odoo-javascript

@@ -25,11 +25,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-25 17:37+0000\n"
-"PO-Revision-Date: 2026-08-31 20:07+0000\n"
+"POT-Creation-Date: 2026-11-06 17:38+0000\n"
+"PO-Revision-Date: 2026-10-30 03:33+0000\n"
 "Last-Translator: Nusara Boonma <nuboo@odoo.com>\n"
-"Language-Team: Thai <https://translate.odoo.com/projects/odoo-s19-4/mail/th/"
-">\n"
+"Language-Team: Thai <https://translate.odoo.com/projects/odoo-20/mail/th/>\n"
 "Language: th\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -102,6 +101,58 @@ msgid ""
 "For more specific needs, you may also assign custom-defined actions\n"
 "(technically: Server Actions) to be triggered for each incoming mail.\n"
 msgstr ""
+"\n"
+"\n"
+"แชท Mail Gateway และช่องทางส่วนตัว\n"
+"=======================================\n"
+"\n"
+"สื่อสารกับเพื่อนร่วมงาน/ลูกค้า/แขกของคุณภายใน Odoo\n"
+"\n"
+"แชท/สนทนา\n"
+"------------\n"
+"ฟีเจอร์ \"แชท\" ที่ใช้งานง่ายซึ่งช่วยให้สามารถสื่อสารแบบส่วนตัวหรือแบบกลุ่มได้\n"
+"(แชทข้อความ/สนทนาทางเสียง/สนทนาทางวิดีโอ) เชิญผู้เข้าร่วมและแชร์เอกสารกับ\n"
+"พวกเขาทั้งหมดแบบเรียลไทม์\n"
+"\n"
+"Mail gateway\n"
+"------------\n"
+"การส่งข้อมูลและเอกสารทำได้ง่ายขึ้น คุณสามารถส่งอีเมล\n"
+"จาก Odoo เอง และนั่นก็มีความเป็นไปได้มากมายเช่นกัน ตัวอย่างเช่น\n"
+"ออกแบบเทมเพลตอีเมลที่สวยงามสำหรับใบแจ้งหนี้ และใช้เทมเพลตเดียวกัน\n"
+"ให้กับลูกค้าของคุณทุกคน ไม่จำเป็นต้องทำแบบเดียวกันซ้ำๆ\n"
+"\n"
+"แชท\n"
+"-------\n"
+"พูดคุยตามบริบททั้งหมดในเอกสาร ตัวอย่างเช่น\n"
+"ผู้สมัคร โพสต์การอัปเดตโดยตรงเพื่อส่งอีเมลถึงผู้สมัคร\n"
+"นัดสัมภาษณ์ครั้งต่อไป แนบสัญญา เพิ่มเจ้าหน้าที่ฝ่ายทรัพยากรบุคคล\n"
+"สู่รายชื่อผู้ติดตามเพื่อแจ้งเตือนเหตุการณ์สำคัญ (ด้วย\n"
+"ชนิดย่อย)\n"
+"\n"
+"\n"
+"รับอีเมลขาเข้าบนเซิร์ฟเวอร์ POP/IMAP\n"
+"============================================\n"
+"กรอกพารามิเตอร์ของบัญชี POP/IMAP ของคุณ และอีเมลขาเข้า\n"
+"บัญชีเหล่านี้จะถูกดาวน์โหลดลงในระบบ Odoo ของคุณโดยอัตโนมัติ\n"
+"รองรับเซิร์ฟเวอร์ที่รองรับ POP3/IMAP ทั้งหมด รวมถึงเซิร์ฟเวอร์ที่ต้องใช้การเชื่อมต่อ SSL/TLS "
+"ที่เข้ารหัส\n"
+"สามารถใช้เพื่อสร้างเวิร์กโฟลว์ทางอีเมลสำหรับเอกสาร Odoo ที่เปิดใช้งานอีเมลจำนวนมาก เช่น:\n"
+"\n"
+"* ข้อมูลลูกค้าเป้าหมาย/โอกาสทางธุรกิจจาก CRM\n"
+"* การอ้างสิทธิ์ของลูกค้าสัมพันธ์\n"
+"* ปัญหาโปรเจกต์\n"
+"* งานโปรเจกต์\n"
+"* รับสมัครบุคลากร (ผู้สมัคร)\n"
+"\n"
+"เพียงติดตั้งแอปพลิเคชันที่เกี่ยวข้อง คุณสามารถกำหนดประเภทเอกสารเหล่านี้ได้\n"
+"(ลูกค้าเป้าหมาย ปัญหาของโปรเจกต์) ไปยังบัญชีอีเมลขาเข้าของคุณ อีเมลใหม่จะ\n"
+"วางเอกสารใหม่ในประเภทที่เลือกโดยอัตโนมัติ ดังนั้นจึงเป็นเรื่องง่ายที่จะสร้าง\n"
+"การผสานรวมกล่องจดหมายกับ Odoo ยิ่งไปกว่านั้น: เอกสารเหล่านี้ทำหน้าที่\n"
+"เป็นเอกสารขนาดเล็กโดยตรง\n"
+"การสนทนาที่ซิงโครไนซ์ทางอีเมล คุณสามารถตอบกลับจากภายใน Odoo และ\n"
+"คำตอบจะถูกรวบรวมโดยอัตโนมัติเมื่อพวกเขากลับมาและแนบไปกับเอกสาร *การสนทนา* เดียวกัน\n"
+"สำหรับความต้องการเฉพาะเจาะจงมากขึ้น คุณยังอาจกำหนดการดำเนินการแบบกำหนดเองได้อีกด้วย\n"
+"(ในทางเทคนิค: การดำเนินการของเซิร์ฟเวอร์) ที่จะทริกเกอร์สำหรับอีเมลขาเข้าแต่ละฉบับ\n"
 
 #. module: mail
 #: model:ir.model.fields,help:mail.field_ir_actions_server__followers_type
@@ -1141,7 +1192,7 @@ msgstr ""
 
 #. module: mail
 #. odoo-python
-#: code:addons/mail/__init__.py:0
+#: code:addons/mail/models/discuss/discuss_channel.py:0
 msgid ""
 "A place to connect and exchange news with colleagues across the company."
 msgstr ""
@@ -1715,7 +1766,7 @@ msgstr ""
 
 #. module: mail
 #. odoo-python
-#: code:addons/mail/__init__.py:0
+#: code:addons/mail/models/discuss/discuss_channel.py:0
 msgid "Administrators"
 msgstr ""
 
@@ -2034,6 +2085,12 @@ msgstr "และสมาชิกอีก 1 คน"
 #: model:ir.model.fields,field_description:mail.field_mail_template__model_id
 msgid "Applies to"
 msgstr "ใช้กับ"
+
+#. module: mail
+#. odoo-javascript
+#: code:addons/mail/static/src/discuss/call/common/call_settings.xml:0
+msgid "Apply a privacy blur to your surroundings."
+msgstr ""
 
 #. module: mail
 #. odoo-javascript
@@ -2405,6 +2462,12 @@ msgstr "สมัครสมาชิกอัตโนมัติ"
 
 #. module: mail
 #. odoo-javascript
+#: code:addons/mail/static/src/discuss/call/common/call_settings.xml:0
+msgid "Auto-focus speaker"
+msgstr ""
+
+#. module: mail
+#. odoo-javascript
 #: code:addons/mail/static/src/core/common/message_model.js:0
 msgid "Auto-translate future messages?"
 msgstr ""
@@ -2431,6 +2494,12 @@ msgstr "กิจกรรมอัตโนมัติ"
 #: code:addons/mail/static/src/core/common/message.js:0
 msgid "Automated message"
 msgstr "ข้อความอัตโนมัติ"
+
+#. module: mail
+#. odoo-javascript
+#: code:addons/mail/static/src/discuss/call/common/call_settings.xml:0
+msgid "Automatically enlarge the person currently speaking."
+msgstr ""
 
 #. module: mail
 #: model_terms:ir.ui.view,arch_db:mail.mail_activity_type_view_form
@@ -2599,6 +2668,12 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/mail/static/src/discuss/call/common/quick_video_settings.xml:0
 msgid "Blur Background"
+msgstr ""
+
+#. module: mail
+#. odoo-javascript
+#: code:addons/mail/static/src/discuss/call/common/call_settings.xml:0
+msgid "Blur video background"
 msgstr ""
 
 #. module: mail
@@ -3084,12 +3159,6 @@ msgstr ""
 
 #. module: mail
 #. odoo-python
-#: code:addons/mail/models/mail_message.py:0
-msgid "Cannot search, too many messages"
-msgstr ""
-
-#. module: mail
-#. odoo-python
 #: code:addons/mail/models/mail_scheduled_message.py:0
 msgid "Cannot search, too many scheduled messages"
 msgstr ""
@@ -3501,6 +3570,7 @@ msgstr ""
 #: code:addons/mail/static/src/chatter/web/scheduled_message.js:0
 #: code:addons/mail/static/src/core/common/poll_votes_panel.xml:0
 #: code:addons/mail/static/src/core/common/search_message_input.xml:0
+#: code:addons/mail/static/src/core/web/mention_list.xml:0
 #: code:addons/mail/static/src/discuss/call/common/meeting_ready_banner.xml:0
 #: code:addons/mail/static/src/views/web/fields/scheduled_date_field/scheduled_date_dialog.xml:0
 #: model_terms:ir.ui.view,arch_db:mail.mail_template_preview_view_form
@@ -3555,6 +3625,12 @@ msgstr "ปิดแผงควบคุม"
 #: code:addons/mail/static/src/core/common/search_message_input.xml:0
 msgid "Close search"
 msgstr "ปิดการค้นหา"
+
+#. module: mail
+#. odoo-javascript
+#: code:addons/mail/static/src/discuss/core/public_web/messaging_menu_model_patch.js:0
+msgid "Collaborate with coworkers and customers in video calls."
+msgstr ""
 
 #. module: mail
 #. odoo-javascript
@@ -5437,6 +5513,12 @@ msgstr "เปิดใช้การติดตามคำสั่งซื
 
 #. module: mail
 #. odoo-javascript
+#: code:addons/mail/static/src/discuss/call/common/call_settings.xml:0
+msgid "Enable Push-to-talk"
+msgstr ""
+
+#. module: mail
+#. odoo-javascript
 #: code:addons/mail/static/src/discuss/call/common/call_preview.js:0
 msgid "Enable background blur"
 msgstr ""
@@ -5602,6 +5684,12 @@ msgstr "เกิดข้อผิดพลาดโดยไม่มีข้
 #: model:ir.model.constraint,message:mail.constraint_mail_followers_mail_followers_res_partner_res_model_id_uniq
 msgid "Error, a partner cannot follow twice the same object."
 msgstr "เกิดข้อผิดพลาด พาร์ทเนอร์ไม่สามารถติดตามวัตถุเดียวกันสองครั้งได้"
+
+#. module: mail
+#. odoo-javascript
+#: code:addons/mail/static/src/core/web/mention_list.xml:0
+msgid "Esc"
+msgstr ""
 
 #. module: mail
 #: model:ir.model.fields.selection,name:mail.selection__mail_alias__alias_contact__everyone
@@ -6172,13 +6260,13 @@ msgstr "เกตเวย์"
 
 #. module: mail
 #. odoo-python
-#: code:addons/mail/__init__.py:0
+#: code:addons/mail/models/discuss/discuss_channel.py:0
 msgid "General"
 msgstr ""
 
 #. module: mail
 #. odoo-python
-#: code:addons/mail/__init__.py:0
+#: code:addons/mail/models/discuss/discuss_channel.py:0
 msgid "General channel for administrators."
 msgstr ""
 
@@ -7668,6 +7756,11 @@ msgid "Language"
 msgstr "ภาษา"
 
 #. module: mail
+#: model:ir.model.fields,help:mail.field_mail_message_translation__target_lang
+msgid "Language code used as the target for the translation request."
+msgstr ""
+
+#. module: mail
 #: model:ir.model.fields,field_description:mail.field_discuss_channel__last_interest_dt
 #: model:ir.model.fields,field_description:mail.field_discuss_channel_member__last_interest_dt
 msgid "Last Activity"
@@ -8010,6 +8103,12 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:mail.mail_scheduled_message_view_form
 msgid "Log Now"
 msgstr "บันทึกตอนนี้"
+
+#. module: mail
+#. odoo-javascript
+#: code:addons/mail/static/src/discuss/call/common/call_settings.xml:0
+msgid "Log RTC events"
+msgstr ""
 
 #. module: mail
 #: model_terms:ir.ui.view,arch_db:mail.mail_activity_schedule_view_form
@@ -8988,6 +9087,12 @@ msgid "Names of the recipients"
 msgstr ""
 
 #. module: mail
+#. odoo-javascript
+#: code:addons/mail/static/src/core/web/mention_list.xml:0
+msgid "Navigate"
+msgstr ""
+
+#. module: mail
 #. odoo-python
 #: code:addons/mail/models/res_users.py:0
 msgid "Near %(city)s, %(region)s, %(country)s"
@@ -9201,6 +9306,12 @@ msgstr "ไม่ได้เลือกการสนทนา"
 #. odoo-python
 #: code:addons/mail/wizard/mail_followers_edit.py:0
 msgid "No documents found for the selected records."
+msgstr ""
+
+#. module: mail
+#. odoo-javascript
+#: code:addons/mail/static/src/discuss/core/public_web/messaging_menu_model_patch.js:0
+msgid "No install needed."
 msgstr ""
 
 #. module: mail
@@ -10733,6 +10844,12 @@ msgid "Pop out Attachments"
 msgstr "เปิดไฟล์แนบออกมา"
 
 #. module: mail
+#. odoo-javascript
+#: code:addons/mail/static/src/core/common/attachment_view.js:0
+msgid "Pop out is not supported on mobile."
+msgstr ""
+
+#. module: mail
 #: model:ir.model.fields,field_description:mail.field_fetchmail_server__port
 msgid "Port"
 msgstr "พอร์ต"
@@ -11054,7 +11171,7 @@ msgstr ""
 #: code:addons/mail/static/src/discuss/core/public_web/discuss_command_palette.xml:0
 #: model:ir.model.fields,field_description:mail.field_discuss_channel__is_readonly
 msgid "Read-only"
-msgstr ""
+msgstr "อ่านอย่างเดียว"
 
 #. module: mail
 #: model:ir.model.fields.selection,name:mail.selection__mail_notification__notification_status__ready
@@ -11817,6 +11934,12 @@ msgstr ""
 
 #. module: mail
 #. odoo-javascript
+#: code:addons/mail/static/src/discuss/call/common/call_settings.xml:0
+msgid "Save detailed RTC connection logs for troubleshooting."
+msgstr ""
+
+#. module: mail
+#. odoo-javascript
 #: code:addons/mail/static/src/core/common/composer.js:0
 #: code:addons/mail/static/src/core/common/composer_actions.js:0
 msgid "Save editing"
@@ -12110,6 +12233,12 @@ msgstr "ทุกคนได้มองเห็น"
 #: code:addons/mail/static/src/discuss/core/common/message_seen_indicator.xml:0
 msgid "Seen by:"
 msgstr "มองเห็นโดย:"
+
+#. module: mail
+#. odoo-javascript
+#: code:addons/mail/static/src/core/web/mention_list.xml:0
+msgid "Select"
+msgstr ""
 
 #. module: mail
 #. odoo-javascript
@@ -12541,11 +12670,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:mail.field_mail_canned_response__source
 msgid "Shortcut"
 msgstr "ทางลัด"
-
-#. module: mail
-#: model:ir.model.fields,help:mail.field_mail_message_translation__target_lang
-msgid "Shortened language code used as the target for the translation request."
-msgstr "รหัสภาษาแบบย่อที่ใช้เป็นเป้าหมายสำหรับคำขอการแปล"
 
 #. module: mail
 #. odoo-javascript
@@ -13705,7 +13829,7 @@ msgstr ""
 
 #. module: mail
 #. odoo-python
-#: code:addons/mail/__init__.py:0
+#: code:addons/mail/models/discuss/discuss_channel.py:0
 msgid "This is a space for the whole team to connect and share updates."
 msgstr ""
 
@@ -14103,6 +14227,14 @@ msgstr ""
 #: code:addons/mail/static/src/core/web/activity.xml:0
 msgid "Tomorrow:"
 msgstr "พรุ่งนี้:"
+
+#. module: mail
+#. odoo-python
+#: code:addons/mail/models/mail_message.py:0
+msgid ""
+"Too many messages to be processed.\n"
+"Please apply additional filters to reduce the number of potential messages."
+msgstr ""
 
 #. module: mail
 #: model_terms:ir.ui.view,arch_db:mail.discuss_channel_view_search
@@ -15309,7 +15441,7 @@ msgstr ""
 
 #. module: mail
 #. odoo-python
-#: code:addons/mail/__init__.py:0
+#: code:addons/mail/models/discuss/discuss_channel.py:0
 msgid "Welcome to the #General channel 🎉"
 msgstr ""
 
@@ -15741,6 +15873,14 @@ msgstr "คุณไม่มีสิทธิ์เข้าถึงอีเ
 #. odoo-python
 #: code:addons/mail/models/discuss/discuss_channel.py:0
 msgid ""
+"You do not have the rights to change the name, description or avatar as a "
+"regular member of these read-only channels: %(channels)s."
+msgstr ""
+
+#. module: mail
+#. odoo-python
+#: code:addons/mail/models/discuss/discuss_channel.py:0
+msgid ""
 "You do not have the rights to change the read-only state of: %(channels)s."
 msgstr ""
 
@@ -16025,12 +16165,6 @@ msgstr ""
 #: code:addons/mail/models/discuss/discuss_channel.py:0
 msgid "created this channel."
 msgstr "สร้างช่องนี้"
-
-#. module: mail
-#. odoo-javascript
-#: code:addons/mail/static/src/js/rotting_mixin/rotting_statusbar.xml:0
-msgid "d"
-msgstr ""
 
 #. module: mail
 #: model_terms:ir.ui.view,arch_db:mail.account_security_alert
@@ -16644,3 +16778,7 @@ msgstr ""
 #: code:addons/mail/models/mail_canned_response.py:0
 msgid "🔒 Private"
 msgstr ""
+
+#~ msgid ""
+#~ "Shortened language code used as the target for the translation request."
+#~ msgstr "รหัสภาษาแบบย่อที่ใช้เป็นเป้าหมายสำหรับคำขอการแปล"

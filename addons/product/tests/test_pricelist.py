@@ -67,6 +67,43 @@ class TestPricelist(ProductVariantsCommon):
         cls.env.user.group_ids += cls.env.ref('product.group_product_pricelist')
         cls.uom_ton = cls.env.ref('uom.product_uom_ton')
 
+    def test_pricelist_item_ids_hides_archived_products(self):
+        archived_variant = self.env['product.product'].create({'name': 'Archived variant'})
+        archived_template = self.env['product.template'].create({'name': 'Archived template'})
+        pricelist = self.env['product.pricelist'].create({
+            'name': 'Visibility pricelist',
+            'item_ids': [
+                Command.create({'applied_on': '3_global', 'fixed_price': 1}),
+                Command.create({
+                    'applied_on': '0_product_variant',
+                    'product_id': self.usb_adapter.id,
+                    'fixed_price': 2,
+                }),
+                Command.create({
+                    'applied_on': '0_product_variant',
+                    'product_id': archived_variant.id,
+                    'fixed_price': 3,
+                }),
+                Command.create({
+                    'applied_on': '1_product',
+                    'product_tmpl_id': self.usb_adapter.product_tmpl_id.id,
+                    'fixed_price': 4,
+                }),
+                Command.create({
+                    'applied_on': '1_product',
+                    'product_tmpl_id': archived_template.id,
+                    'fixed_price': 5,
+                }),
+            ],
+        })
+        archived_variant.active = False
+        archived_template.active = False
+        pricelist.invalidate_recordset(['item_ids'])
+        self.assertEqual(
+            sorted(pricelist.item_ids.mapped('fixed_price')),
+            [1, 2, 4],
+        )
+
     def test_10_discount(self):
         # Make sure the price using a pricelist is the same than without after
         # applying the computation manually
@@ -732,3 +769,50 @@ class TestPricelist(ProductVariantsCommon):
         self.assertEqual(item.applied_on, "0_product_variant")
         self.assertEqual(item.product_id, sofa_1)
         self.assertEqual(item.product_tmpl_id, self.product_template_sofa)
+
+    def test_fixed_price_with_attribute_extra_price(self):
+        """A fixed pricelist price should still be topped up with the attribute
+        extra price of the selected variant, instead of ignoring it."""
+        self.product_sofa_red.product_template_attribute_value_ids.price_extra = 15
+
+        pricelist = self.env['product.pricelist'].create({
+            'name': "Fixed Price Pricelist",
+            'item_ids': [Command.create({
+                'applied_on': '1_product',
+                'product_tmpl_id': self.product_template_sofa.id,
+                'compute_price': 'fixed',
+                'fixed_price': 100,
+            })],
+        })
+
+        self.assertEqual(pricelist._get_product_price(self.product_sofa_red, 1.0), 115)
+        self.assertEqual(pricelist._get_product_price(self.product_sofa_blue, 1.0), 100)
+
+    def test_fixed_price_keeps_template_vs_variant_price_ratio(self):
+        self.product_template_sofa.list_price = 100
+        self.product_sofa_red.product_template_attribute_value_ids.price_extra = 15
+        self.product_sofa_red.lst_price = 120
+
+        pricelist = self.env['product.pricelist'].create({
+            'name': "Fixed Price Pricelist",
+            'item_ids': [Command.create({
+                'applied_on': '1_product',
+                'product_tmpl_id': self.product_template_sofa.id,
+                'compute_price': 'fixed',
+                'fixed_price': 100,
+            })],
+        })
+
+        self.assertEqual(pricelist._get_product_price(self.product_sofa_red, 1.0), 120)
+        self.assertEqual(pricelist._get_product_price(self.product_sofa_blue, 1.0), 100)
+
+        pricelist.item_ids = [Command.create({
+            'applied_on': '0_product_variant',
+            'product_tmpl_id': self.product_template_sofa.id,
+            'product_id': self.product_sofa_red.id,
+            'compute_price': 'fixed',
+            'fixed_price': 125,
+        })]
+
+        self.assertEqual(pricelist._get_product_price(self.product_sofa_red, 1.0), 125)
+        self.assertEqual(pricelist._get_product_price(self.product_sofa_blue, 1.0), 100)

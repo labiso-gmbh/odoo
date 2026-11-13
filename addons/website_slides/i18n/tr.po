@@ -37,10 +37,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-11 17:41+0000\n"
-"PO-Revision-Date: 2026-08-31 15:43+0000\n"
+"POT-Creation-Date: 2026-11-06 17:38+0000\n"
+"PO-Revision-Date: 2026-10-14 13:35+0000\n"
 "Last-Translator: Burkay Yıldızhan <seyil@odoo.com>\n"
-"Language-Team: Turkish <https://translate.odoo.com/projects/odoo-s19-4/"
+"Language-Team: Turkish <https://translate.odoo.com/projects/odoo-20/"
 "website_slides/tr/>\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
@@ -177,7 +177,6 @@ msgstr "(örneğin, https://drive.google.com/file/d/ABC/view)."
 #. module: website_slides
 #. odoo-javascript
 #: code:addons/website_slides/static/src/js/public/components/slide_upload_dialog/slide_upload_dialog.xml:0
-#, fuzzy
 msgid "(e.g., https://drive.google.com/file/d/ABC/view?usp=sharing)."
 msgstr "(örneğin, https://drive.google.com/file/d/ABC/view?usp=sharing)."
 
@@ -270,11 +269,10 @@ msgstr "<b>Kategorize edilmemiş</b>"
 
 #. module: website_slides
 #: model:mail.template,body_html:website_slides.mail_template_slide_channel_enroll
-#, fuzzy
 msgid ""
 "<div style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
 "    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
-"        Hello<br/><br/>\n"
+"        Hello<br><br>\n"
 "        You have been enrolled to a new course: <t t-"
 "out=\"object.channel_id.name or ''\">Basics of Gardening</t>.\n"
 "    </p>\n"
@@ -293,34 +291,13 @@ msgid ""
 "<div>&amp;nbsp;</div>\n"
 "            "
 msgstr ""
-"<div style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
-"    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
-"        Merhaba<br/><br/>\n"
-"        Yeni bir kursa kaydoldunuz: <t t-out=\"object.channel_id.name or "
-"''\">Bahçe Tasarımı Temelleri</t>.\n"
-"   </p>\n"
-"</div> \n"
-"<div style=\"margin: 32px 0px 32px 0px;\">\n"
-"    <a t-att-href=\"object.invitation_link\" style=\"background-color: "
-"#875A7B; padding: 8px 16px 8px 16px; text-decoration: none; color: #fff; "
-"border-radius: 5px; font-size:13px;\">\n"
-"       <t t-if=\"enroll_mode\"> Kursu başlatmak için buraya tıklayın </t> <t "
-"t-else=\"\"> Başlamak için buraya tıklayın </t>\n"
-"    </a>\n"
-"</div>\n"
-"<div style=\"margin: 0px; padding: 0px; font-size:13px;\">\n"
-"    Bu özel içeriğin keyfini çıkarın!\n"
-"</div>\n"
-"<div>&amp;nbsp;</div> \n"
-"            "
 
 #. module: website_slides
 #: model:mail.template,body_html:website_slides.mail_template_slide_channel_invite
-#, fuzzy
 msgid ""
 "<div style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
 "    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
-"        Hello<br/><br/>\n"
+"        Hello<br><br>\n"
 "        You have been invited to check out this course: <t t-"
 "out=\"object.channel_id.name or ''\">Basics of Gardening</t>.\n"
 "    </p>\n"
@@ -339,40 +316,19 @@ msgid ""
 "<div>&amp;nbsp;</div>\n"
 "            "
 msgstr ""
-"<div style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
-"    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
-"        Merhaba<br/><br/>\n"
-"        Bu kursu incelemeye davet edildiniz: <t t-"
-"out=\"object.channel_id.name or ''\">Bahçe Tasarımı Temelleri</t>.\n"
-"   </p>\n"
-"</div> \n"
-"<div style=\"margin: 32px 0px 32px 0px;\">\n"
-"    <a t-att-href=\"object.invitation_link\" style=\"background-color: "
-"#875A7B; padding: 8px 16px 8px 16px; text-decoration: none; color: #fff; "
-"border-radius: 5px; font-size:13px;\">\n"
-"       <t t-if=\"enroll_mode\"> Kursu başlatmak için buraya tıklayın </t> <t "
-"t-else=\"\"> Başlamak için buraya tıklayın </t>\n"
-"    </a>\n"
-"</div>\n"
-"<div style=\"margin: 0px; padding: 0px; font-size:13px;\">\n"
-"    Bu özel içeriğin keyfini çıkarın!\n"
-"</div>\n"
-"<div>&amp;nbsp;</div> \n"
-"            "
 
 #. module: website_slides
 #: model:mail.template,body_html:website_slides.mail_template_channel_completed
-#, fuzzy
 msgid ""
 "<div style=\"margin: 0px; padding: 0px;\">\n"
 "                    <div style=\"margin: 0px; padding: 0px; font-size: 13px;"
 "\">\n"
 "                        <p style=\"margin: 0px;\">Hello <t t-"
-"out=\"object.partner_id.name or ''\">Brandon Freeman</t>,</p><br/>\n"
+"out=\"object.partner_id.name or ''\">Brandon Freeman</t>,</p><br>\n"
 "                        <p><b>Congratulations!</b></p>\n"
 "                        <p>You've completed the course <b t-"
 "out=\"object.channel_id.name or ''\">Basics of Gardening</b></p>\n"
-"                        <p>Check out the other available courses.</p><br/>\n"
+"                        <p>Check out the other available courses.</p><br>\n"
 "\n"
 "                        <div style=\"padding: 16px 8px 16px 8px; text-align: "
 "center;\">\n"
@@ -386,45 +342,15 @@ msgid ""
 "                        </div>\n"
 "                        Enjoy this exclusive content!\n"
 "                        <t t-if=\"object.channel_id.user_id.signature\">\n"
-"                            <br/>\n"
+"                            <br>\n"
 "                            <div data-o-mail-quote=\"1\">--<br data-o-mail-"
-"quote=\"1\"/><t t-out=\"object.channel_id.user_id.signature or ''\">Mitchell "
+"quote=\"1\"><t t-out=\"object.channel_id.user_id.signature or ''\">Mitchell "
 "Admin</t></div>\n"
 "                        </t>\n"
 "                    </div>\n"
 "                </div>\n"
 "            "
 msgstr ""
-"<div style=\"margin: 0px; padding: 0px;\">\n"
-"                    <div style=\"margin: 0px; padding: 0px; font-size: 13px;"
-"\">\n"
-"                       <p style=\"margin: 0px;\"> Merhaba <t t-"
-"out=\"object.partner_id.name or ''\">Brandon Freeman</t>,</p><br/>\n"
-"                       <p><b> Tebrikler!</b></p>\n"
-"                       <p> Kursu tamamladınız <b t-"
-"out=\"object.channel_id.name or ''\">Bahçe Tasarımı Temelleri</b></p>\n"
-"                       <p> Diğer mevcut kurslara göz atın.</p><br/>\n"
-"\n"
-"                       <div style=\"padding: 16px 8px 16px 8px; text-align: "
-"center;\">\n"
-"                            <a href=\"/slides\" t-attf-style=\"background-"
-"color: {{object.channel_id.user_id.company_id.email_secondary_color or "
-"'#875A7B'}}; padding: 8px 16px 8px 16px; text-decoration: none; color: "
-"{{object.channel_id.user_id.company_id.email_primary_color or '#FFFFFF'}}; "
-"border-radius: 5px;\"> \n"
-"                                Kursları keşfedin\n"
-"                           </a>\n"
-"                        </div> \n"
-"                        Bu özel içeriğin keyfini çıkarın!\n"
-"                       <t t-if=\"object.channel_id.user_id.signature\">\n"
-"                            <br/> \n"
-"                           <div data-o-mail-quote=\"1\"> --<br data-o-mail-"
-"quote=\"1\"/><t t-out=\"object.channel_id.user_id.signature or ''\">Mitchell "
-"Admin</t></div>\n"
-"                       </t>\n"
-"                    </div> \n"
-"               </div> \n"
-"            "
 
 #. module: website_slides
 #: model:mail.template,body_html:website_slides.mail_template_channel_shared
@@ -432,7 +358,7 @@ msgid ""
 "<div style=\"margin: 0px; padding: 0px;\">\n"
 "                    <p style=\"margin: 0px; padding: 0px; font-size: 13px;"
 "\">\n"
-"                        Hello<br/><br/>\n"
+"                        Hello<br><br>\n"
 "                        <t t-out=\"user.name or ''\">Mitchell Admin</t> "
 "shared the <strong t-out=\"object.name or ''\">document</strong> with you!\n"
 "                        </p><div style=\"margin: 16px 8px 16px 8px; text-"
@@ -440,7 +366,7 @@ msgid ""
 "                            <a t-att-href=\"object.website_absolute_url\">\n"
 "                                <img t-att-alt=\"object.name\" t-attf-"
 "src=\"{{ ctx.get('base_url') }}/web/image/slide.channel/{{ object.id }}/"
-"image_256\" style=\"height:auto; width:150px; margin: 16px;\"/>\n"
+"image_256\" style=\"height:auto; width:150px; margin: 16px;\">\n"
 "                            </a>\n"
 "                        </div>\n"
 "                        <div style=\"padding: 16px 8px 16px 8px; text-align: "
@@ -454,9 +380,9 @@ msgid ""
 "''\">Document</strong></a>\n"
 "                        </div>\n"
 "                        <t t-if=\"user.signature\">\n"
-"                            <br/>\n"
+"                            <br>\n"
 "                            <div data-o-mail-quote=\"1\">--<br data-o-mail-"
-"quote=\"1\"/><t t-out=\"user.signature or ''\">Mitchell Admin</t></div>\n"
+"quote=\"1\"><t t-out=\"user.signature or ''\">Mitchell Admin</t></div>\n"
 "                        </t>\n"
 "                    \n"
 "                </div>\n"
@@ -469,7 +395,7 @@ msgid ""
 "<div style=\"margin: 0px; padding: 0px;\">\n"
 "                    <p style=\"margin: 0px; padding: 0px; font-size: 13px;"
 "\">\n"
-"                        Hello<br/><br/>\n"
+"                        Hello<br><br>\n"
 "                        <t t-out=\"user.name or ''\">Mitchell Admin</t> "
 "shared the <t t-out=\"object.slide_category or ''\">document</t> <strong t-"
 "out=\"object.name or ''\">Trees</strong> with you!\n"
@@ -477,9 +403,9 @@ msgid ""
 "align: center;\">\n"
 "                            <a t-att-href=\"(object.website_share_url + '?"
 "fullscreen=1') if ctx.get('fullscreen') else object.website_share_url\">\n"
-"                                <img t-att-alt=\"object.name\" t-attf-"
-"src=\"{{ ctx.get('base_url') }}/web/image/slide.slide/{{ object.id }}/"
-"image_1024\" style=\"height:auto; width:150px; margin: 16px;\"/>\n"
+"                                <img t-att-alt=\"object.name\" t-att-"
+"src=\"object.get_image_1024_src()\" style=\"height:auto; width:150px; "
+"margin: 16px;\">\n"
 "                            </a>\n"
 "                        </div>\n"
 "                        <div style=\"padding: 16px 8px 16px 8px; text-align: "
@@ -492,68 +418,34 @@ msgid ""
 "\">View <strong t-out=\"object.name or ''\">Trees</strong></a>\n"
 "                        </div>\n"
 "                        <t t-if=\"user.signature\">\n"
-"                            <br/>\n"
+"                            <br>\n"
 "                            <div data-o-mail-quote=\"1\">--<br data-o-mail-"
-"quote=\"1\"/><t t-out=\"user.signature or ''\">Mitchell Admin</t></div>\n"
+"quote=\"1\"><t t-out=\"user.signature or ''\">Mitchell Admin</t></div>\n"
 "                        </t>\n"
 "                    \n"
 "                </div>\n"
 "            "
 msgstr ""
-"<div style=\"margin: 0px; padding: 0px;\">\n"
-"                    <p style=\"margin: 0px; padding: 0px; font-size: 13px;"
-"\">\n"
-"                        Merhaba<br/><br/>\n"
-"                       <t t-out=\"user.name or ''\"> Mitchell Admin</t>, <t "
-"t-out=\"object.slide_category or ''\">belgesini</t> <strong t-"
-"out=\"object.name or ''\">Ağaçları</strong> sizinle paylaştı!\n"
-"                       </p><div style=\"margin: 16px 8px 16px 8px; text-"
-"align: center;\"> \n"
-"                           <a t-att-href=\"(object.website_share_url + '?"
-"fullscreen=1') if ctx.get('fullscreen') else object.website_share_url\">\n"
-"                                <img t-att-alt=\"object.name\" t-attf-"
-"src=\"{{ ctx.get('base_url') }}/web/image/slide.slide/{{ object.id }}/"
-"image_1024\" style=\"height:auto; width:150px; margin: 16px;\"/> \n"
-"                           </a>\n"
-"                        </div> \n"
-"                       <div style=\"padding: 16px 8px 16px 8px; text-align: "
-"center;\">\n"
-"                            <a t-att-href=\"(object.website_share_url + '?"
-"fullscreen=1') if ctx.get('fullscreen') else object.website_share_url\" t-"
-"attf-style=\"background-color: {{user.company_id.email_secondary_color or "
-"'#875A7B'}}; padding: 8px 16px 8px 16px; text-decoration: none; color: "
-"{{user.company_id.email_primary_color or '#FFFFFF'}}; border-radius: 5px;\"> "
-"<strong t-out=\"object.name or ''\"> Ağaçlarını</strong></a>görüntüleyin \n"
-"                       </div>\n"
-"                        <t t-if=\"user.signature\"> \n"
-"                           <br/>\n"
-"                            <div data-o-mail-quote=\"1\"> --<br data-o-mail-"
-"quote=\"1\"/><t t-out=\"user.signature or ''\">Mitchell Admin</t></div>\n"
-"                       </t>\n"
-"                    \n"
-"                </div> \n"
-"            "
 
 #. module: website_slides
 #: model:mail.template,body_html:website_slides.slide_template_published
-#, fuzzy
 msgid ""
 "<div style=\"margin: 0px; padding: 0px;\">\n"
 "                    <p style=\"margin: 0px; padding: 0px; font-size: 13px;"
 "\">\n"
-"                        Hello<br/><br/>\n"
+"                        Hello<br><br>\n"
 "                        There is something new in the course <strong t-"
 "out=\"object.channel_id.name or ''\">Trees, Wood and Gardens</strong> you "
-"are following:<br/><br/>\n"
+"are following:<br><br>\n"
 "                        </p><center><strong t-out=\"object.name or "
 "''\">Trees</strong></center>\n"
 "                        <t t-if=\"object.image_1024\">\n"
 "                            <div style=\"padding: 16px 8px 16px 8px; text-"
 "align: center;\">\n"
 "                                <a t-att-href=\"object.website_share_url\">\n"
-"                                <img t-att-alt=\"object.name\" t-attf-"
-"src=\"{{ ctx.get('base_url') }}/web/image/slide.slide/{{ object.id }}/"
-"image_1024\" style=\"height:auto; width:150px; margin: 16px;\"/>\n"
+"                                <img t-att-alt=\"object.name\" t-att-"
+"src=\"object.get_image_1024_src()\" style=\"height:auto; width:150px; "
+"margin: 16px;\">\n"
 "                            </a>\n"
 "                        </div>\n"
 "                        </t>\n"
@@ -568,50 +460,14 @@ msgid ""
 "                        </div>\n"
 "                        Enjoy this exclusive content!\n"
 "                        <t t-if=\"user.signature\">\n"
-"                            <br/>\n"
+"                            <br>\n"
 "                            <div data-o-mail-quote=\"1\">--<br data-o-mail-"
-"quote=\"1\"/><t t-out=\"user.signature or ''\">Mitchell Admin</t></div>\n"
+"quote=\"1\"><t t-out=\"user.signature or ''\">Mitchell Admin</t></div>\n"
 "                        </t>\n"
 "                    \n"
 "                </div>\n"
 "            "
 msgstr ""
-"<div style=\"margin: 0px; padding: 0px;\">\n"
-"                    <p style=\"margin: 0px; padding: 0px; font-size: 13px;"
-"\">\n"
-"                        Merhaba<br/><br/>\n"
-"                        Takip ettiğiniz \" <strong t-"
-"out=\"object.channel_id.name or ''\">\" kursunda yeni bir şey var:</"
-"strong><br/><br/> \n"
-"                       </p><center> <strong t-out=\"object.name or ''\"> "
-"Trees</strong></center>\n"
-"                       <t t-if=\"object.image_1024\">\n"
-"                            <div style=\"padding: 16px 8px 16px 8px; text-"
-"align: center;\"> \n"
-"                               <a t-att-href=\"object.website_share_url\">\n"
-"                                <img t-att-alt=\"object.name\" t-attf-"
-"src=\"{{ ctx.get('base_url') }}/web/image/slide.slide/{{ object.id }}/"
-"image_1024\" style=\"height:auto; width:150px; margin: 16px;\"/> \n"
-"                           </a>\n"
-"                        </div> \n"
-"                       </t>\n"
-"                        <div style=\"padding: 16px 8px 16px 8px; text-align: "
-"center;\"> \n"
-"                           <a t-att-href=\"object.website_share_url\" t-attf-"
-"style=\"background-color: {{object.user_id.company_id.email_secondary_color "
-"or '#875A7B'}}; padding: 8px 16px 8px 16px; text-decoration: none; color: "
-"{{object.user_id.company_id.email_primary_color or '#FFFFFF'}}; border-"
-"radius: 5px;\"> İçeriği görüntüle</a>\n"
-"                        </div>\n"
-"                        Bu özel içeriğin keyfini çıkarın!\n"
-"                       <t t-if=\"user.signature\">\n"
-"                            <br/> \n"
-"                           <div data-o-mail-quote=\"1\"> --<br data-o-mail-"
-"quote=\"1\"/><t t-out=\"user.signature or ''\">Mitchell Admin</t></div>\n"
-"                       </t>\n"
-"                    \n"
-"                </div> \n"
-"            "
 
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.course_slides_list
@@ -1955,7 +1811,6 @@ msgstr "Bahçeciliğin Temelleri"
 #. module: website_slides
 #. odoo-javascript
 #: code:addons/website_slides/static/src/js/public/components/slide_unsubscribe_dialog/slide_unsubscribe_dialog.xml:0
-#, fuzzy
 msgid "Be notified when a new content is added."
 msgstr "Yeni bir içerik eklendiğinde haberdar olun."
 
@@ -2127,7 +1982,6 @@ msgstr "Kopya kağıdı"
 #. module: website_slides
 #. odoo-javascript
 #: code:addons/website_slides/static/src/js/public/components/slide_quiz_finish_dialog/slide_quiz_finish_dialog.xml:0
-#, fuzzy
 msgid "Check Profile"
 msgstr "Profili Kontrol Et"
 
@@ -2438,7 +2292,6 @@ msgstr "İletişim Sorumlusu"
 #. module: website_slides
 #. odoo-javascript
 #: code:addons/website_slides/static/src/xml/slide_quiz.xml:0
-#, fuzzy
 msgid "Contact the responsible to enroll."
 msgstr "Kaydolmak için sorumluyla iletişime geçin."
 
@@ -2533,7 +2386,6 @@ msgstr "Bağlantıyı kopyala"
 #. module: website_slides
 #. odoo-javascript
 #: code:addons/website_slides/static/src/js/public/components/slide_upload_dialog/slide_upload_dialog.xml:0
-#, fuzzy
 msgid "Copy the shareable link"
 msgstr "Paylaşılabilir bağlantıyı kopyalayın"
 
@@ -2777,14 +2629,12 @@ msgstr "Kapak Özellikleri"
 #. module: website_slides
 #. odoo-javascript
 #: code:addons/website_slides/static/src/js/public/components/slide_upload_dialog/slide_upload_category.xml:0
-#, fuzzy
 msgid "Create New Category \""
 msgstr "Yeni Kategori Oluştur \""
 
 #. module: website_slides
 #. odoo-javascript
 #: code:addons/website_slides/static/src/js/public/components/slide_upload_dialog/slide_upload_category.xml:0
-#, fuzzy
 msgid "Create New Tag \""
 msgstr "Yeni Etiket Oluştur \""
 
@@ -2818,14 +2668,12 @@ msgstr "E-Öğreniminiz için yeni içerikler oluşturun"
 #. module: website_slides
 #. odoo-javascript
 #: code:addons/website_slides/static/src/js/public/components/course_tag_add_dialog/course_tag_add_dialog.xml:0
-#, fuzzy
 msgid "Create this tag \""
 msgstr "Bu etiketi oluştur \""
 
 #. module: website_slides
 #. odoo-javascript
 #: code:addons/website_slides/static/src/js/public/components/course_tag_add_dialog/course_tag_add_dialog.xml:0
-#, fuzzy
 msgid "Create this tag group\""
 msgstr "Bu etiket grubunu oluştur\""
 
@@ -3605,7 +3453,6 @@ msgstr "Google Drive:"
 #. module: website_slides
 #. odoo-javascript
 #: code:addons/website_slides/static/src/core/web/activity_patch.xml:0
-#, fuzzy
 msgid "Grant Access"
 msgstr "Erişim Ver"
 
@@ -3938,7 +3785,6 @@ msgstr "Yükle"
 #. module: website_slides
 #. odoo-javascript
 #: code:addons/website_slides/static/src/js/public/components/slide_upload_dialog/slide_upload_dialog_select.xml:0
-#, fuzzy
 msgid "Install the"
 msgstr "Yükle"
 
@@ -4080,7 +3926,6 @@ msgstr "Bu katılımcı için davet beklemede mi."
 #. module: website_slides
 #. odoo-javascript
 #: code:addons/website_slides/static/src/js/public/components/slide_upload_dialog/slide_upload_dialog.xml:0
-#, fuzzy
 msgid "It should look similar to"
 msgstr "Şuna benzemelidir:"
 
@@ -4108,7 +3953,6 @@ msgstr "İlgili eğitime katıl"
 #. module: website_slides
 #. odoo-javascript
 #: code:addons/website_slides/static/src/xml/slide_quiz.xml:0
-#, fuzzy
 msgid "Join the course to take the quiz and verify your answers!"
 msgstr "Testi çözmek ve cevaplarınızı doğrulamak için kursa katılın!"
 
@@ -5286,7 +5130,6 @@ msgstr "Alıcılar"
 #. module: website_slides
 #. odoo-javascript
 #: code:addons/website_slides/static/src/core/web/activity_patch.xml:0
-#, fuzzy
 msgid "Refuse Access"
 msgstr "Erişimi Reddet"
 
@@ -5343,7 +5186,6 @@ msgstr "Requesting Partner"
 #. module: website_slides
 #. odoo-javascript
 #: code:addons/website_slides/static/src/xml/slide_quiz.xml:0
-#, fuzzy
 msgid "Reset"
 msgstr "Sıfırla"
 
@@ -5383,7 +5225,6 @@ msgstr "Sorumlu Kullanıcı"
 #. module: website_slides
 #. odoo-javascript
 #: code:addons/website_slides/static/src/xml/slide_quiz.xml:0
-#, fuzzy
 msgid "Responsible already contacted."
 msgstr "Sorumlu zaten temasa geçti."
 
@@ -5409,7 +5250,6 @@ msgstr "Yinele"
 
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.profile_access_denied
-#, fuzzy
 msgid "Return to the course."
 msgstr "Kursa geri dön."
 
@@ -5683,14 +5523,12 @@ msgstr "Sıralama"
 #. module: website_slides
 #. odoo-javascript
 #: code:addons/website_slides/static/src/js/public/components/slide_upload_dialog/slide_upload_dialog.xml:0
-#, fuzzy
 msgid "Set file permissions to"
 msgstr "Dosya izinlerini şu şekilde ayarlayın"
 
 #. module: website_slides
 #. odoo-javascript
 #: code:addons/website_slides/static/src/js/public/components/slide_upload_dialog/slide_upload_dialog.xml:0
-#, fuzzy
 msgid "Set permissions to"
 msgstr "İzinleri şu şekilde ayarlayın"
 
@@ -5820,7 +5658,6 @@ msgstr "Kaydolun!"
 #. module: website_slides
 #. odoo-javascript
 #: code:addons/website_slides/static/src/xml/slide_quiz.xml:0
-#, fuzzy
 msgid "Sign in and join the course to verify your answers!"
 msgstr "Yanıtlarınızı doğrulamak için oturum açın ve kursa katılın!"
 
@@ -6281,7 +6118,6 @@ msgstr "Bu kurs yayımlanmamış. Katılımcılar içeriğine erişemeyebilir."
 #. module: website_slides
 #. odoo-javascript
 #: code:addons/website_slides/static/src/xml/slide_quiz.xml:0
-#, fuzzy
 msgid "This course is private."
 msgstr "Bu kurs özeldir."
 
@@ -6543,7 +6379,6 @@ msgstr ""
 #. module: website_slides
 #. odoo-javascript
 #: code:addons/website_slides/static/src/js/public/components/slide_upload_dialog/slide_upload_dialog.xml:0
-#, fuzzy
 msgid "Upload as"
 msgstr "Olarak yükle"
 
@@ -6596,7 +6431,6 @@ msgstr "Şablonu Kullan"
 #. module: website_slides
 #. odoo-javascript
 #: code:addons/website_slides/static/src/js/public/components/slide_upload_dialog/slide_upload_dialog.xml:0
-#, fuzzy
 msgid "Use the"
 msgstr "Kullan"
 
@@ -7098,7 +6932,6 @@ msgstr "Oy vermek için yeterli karmanız yok"
 #. module: website_slides
 #. odoo-javascript
 #: code:addons/website_slides/static/src/js/public/components/slide_quiz_finish_dialog/slide_quiz_finish_dialog.xml:0
-#, fuzzy
 msgid "You gained"
 msgstr "Kazandın"
 
@@ -7207,7 +7040,6 @@ msgstr ""
 #. module: website_slides
 #. odoo-javascript
 #: code:addons/website_slides/static/src/js/public/components/slide_share_dialog/email_sharing_input.xml:0
-#, fuzzy
 msgid "Your email(s) will arrive shortly."
 msgstr "E-postalarınız kısa süre içinde ulaşacaktır."
 
@@ -7272,7 +7104,6 @@ msgstr "her neyse"
 #. module: website_slides
 #. odoo-javascript
 #: code:addons/website_slides/static/src/js/public/components/slide_upload_dialog/slide_upload_dialog_select.xml:0
-#, fuzzy
 msgid "app."
 msgstr "uyg."
 
@@ -7284,14 +7115,12 @@ msgstr "içerik haritası"
 #. module: website_slides
 #. odoo-javascript
 #: code:addons/website_slides/static/src/js/public/components/slide_upload_dialog/slide_upload_dialog.xml:0
-#, fuzzy
 msgid "button to get a link"
 msgstr "bağlantı almak için düğme"
 
 #. module: website_slides
 #. odoo-javascript
 #: code:addons/website_slides/static/src/js/public/components/slide_share_dialog/email_sharing_input.xml:0
-#, fuzzy
 msgid "by email."
 msgstr "eposta ile."
 
@@ -7509,14 +7338,12 @@ msgstr "sorumlu kişiyle iletişim kurmak için"
 #. module: website_slides
 #. odoo-javascript
 #: code:addons/website_slides/static/src/xml/slide_quiz.xml:0
-#, fuzzy
 msgid "to enroll."
 msgstr "kayıt olmak."
 
 #. module: website_slides
 #. odoo-javascript
 #: code:addons/website_slides/static/src/js/public/components/course_join_popup/course_join_popup.xml:0
-#, fuzzy
 msgid "to join this course"
 msgstr "bu kursa katılmak için"
 
@@ -7528,7 +7355,6 @@ msgstr "erişim talep etmek için"
 #. module: website_slides
 #. odoo-javascript
 #: code:addons/website_slides/static/src/js/public/components/slide_share_dialog/email_sharing_input.xml:0
-#, fuzzy
 msgid "to share this"
 msgstr "bunu paylaşmak için"
 
@@ -7558,3 +7384,310 @@ msgstr "{{ user.name }} sizinle bir {{ object.slide_category }} paylaştı!"
 #: model_terms:ir.ui.view,arch_db:website_slides.course_nav
 msgid "└<span class=\"ms-1\">Uncategorized</span>"
 msgstr "└<span class=\"ms-1\">Kategorize edilmemiş</span>"
+
+#, fuzzy
+#~ msgid ""
+#~ "<div style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
+#~ "    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
+#~ "        Hello<br/><br/>\n"
+#~ "        You have been enrolled to a new course: <t t-"
+#~ "out=\"object.channel_id.name or ''\">Basics of Gardening</t>.\n"
+#~ "    </p>\n"
+#~ "</div>\n"
+#~ "<div style=\"margin: 32px 0px 32px 0px;\">\n"
+#~ "    <a t-att-href=\"object.invitation_link\" style=\"background-color: "
+#~ "#875A7B; padding: 8px 16px 8px 16px; text-decoration: none; color: #fff; "
+#~ "border-radius: 5px; font-size:13px;\">\n"
+#~ "        <t t-if=\"enroll_mode\"> Click here to start the course </t> <t t-"
+#~ "else=\"\"> Click here to get started </t>\n"
+#~ "    </a>\n"
+#~ "</div>\n"
+#~ "<div style=\"margin: 0px; padding: 0px; font-size:13px;\">\n"
+#~ "    Enjoy this exclusive content!\n"
+#~ "</div>\n"
+#~ "<div>&amp;nbsp;</div>\n"
+#~ "            "
+#~ msgstr ""
+#~ "<div style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
+#~ "    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
+#~ "        Merhaba<br/><br/>\n"
+#~ "        Yeni bir kursa kaydoldunuz: <t t-out=\"object.channel_id.name or "
+#~ "''\">Bahçe Tasarımı Temelleri</t>.\n"
+#~ "   </p>\n"
+#~ "</div> \n"
+#~ "<div style=\"margin: 32px 0px 32px 0px;\">\n"
+#~ "    <a t-att-href=\"object.invitation_link\" style=\"background-color: "
+#~ "#875A7B; padding: 8px 16px 8px 16px; text-decoration: none; color: #fff; "
+#~ "border-radius: 5px; font-size:13px;\">\n"
+#~ "       <t t-if=\"enroll_mode\"> Kursu başlatmak için buraya tıklayın </t> "
+#~ "<t t-else=\"\"> Başlamak için buraya tıklayın </t>\n"
+#~ "    </a>\n"
+#~ "</div>\n"
+#~ "<div style=\"margin: 0px; padding: 0px; font-size:13px;\">\n"
+#~ "    Bu özel içeriğin keyfini çıkarın!\n"
+#~ "</div>\n"
+#~ "<div>&amp;nbsp;</div> \n"
+#~ "            "
+
+#, fuzzy
+#~ msgid ""
+#~ "<div style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
+#~ "    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
+#~ "        Hello<br/><br/>\n"
+#~ "        You have been invited to check out this course: <t t-"
+#~ "out=\"object.channel_id.name or ''\">Basics of Gardening</t>.\n"
+#~ "    </p>\n"
+#~ "</div>\n"
+#~ "<div style=\"margin: 32px 0px 32px 0px;\">\n"
+#~ "    <a t-att-href=\"object.invitation_link\" style=\"background-color: "
+#~ "#875A7B; padding: 8px 16px 8px 16px; text-decoration: none; color: #fff; "
+#~ "border-radius: 5px; font-size:13px;\">\n"
+#~ "        <t t-if=\"enroll_mode\"> Click here to start the course </t> <t t-"
+#~ "else=\"\"> Click here to get started </t>\n"
+#~ "    </a>\n"
+#~ "</div>\n"
+#~ "<div style=\"margin: 0px; padding: 0px; font-size:13px;\">\n"
+#~ "    Enjoy this exclusive content!\n"
+#~ "</div>\n"
+#~ "<div>&amp;nbsp;</div>\n"
+#~ "            "
+#~ msgstr ""
+#~ "<div style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
+#~ "    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
+#~ "        Merhaba<br/><br/>\n"
+#~ "        Bu kursu incelemeye davet edildiniz: <t t-"
+#~ "out=\"object.channel_id.name or ''\">Bahçe Tasarımı Temelleri</t>.\n"
+#~ "   </p>\n"
+#~ "</div> \n"
+#~ "<div style=\"margin: 32px 0px 32px 0px;\">\n"
+#~ "    <a t-att-href=\"object.invitation_link\" style=\"background-color: "
+#~ "#875A7B; padding: 8px 16px 8px 16px; text-decoration: none; color: #fff; "
+#~ "border-radius: 5px; font-size:13px;\">\n"
+#~ "       <t t-if=\"enroll_mode\"> Kursu başlatmak için buraya tıklayın </t> "
+#~ "<t t-else=\"\"> Başlamak için buraya tıklayın </t>\n"
+#~ "    </a>\n"
+#~ "</div>\n"
+#~ "<div style=\"margin: 0px; padding: 0px; font-size:13px;\">\n"
+#~ "    Bu özel içeriğin keyfini çıkarın!\n"
+#~ "</div>\n"
+#~ "<div>&amp;nbsp;</div> \n"
+#~ "            "
+
+#, fuzzy
+#~ msgid ""
+#~ "<div style=\"margin: 0px; padding: 0px;\">\n"
+#~ "                    <div style=\"margin: 0px; padding: 0px; font-size: "
+#~ "13px;\">\n"
+#~ "                        <p style=\"margin: 0px;\">Hello <t t-"
+#~ "out=\"object.partner_id.name or ''\">Brandon Freeman</t>,</p><br/>\n"
+#~ "                        <p><b>Congratulations!</b></p>\n"
+#~ "                        <p>You've completed the course <b t-"
+#~ "out=\"object.channel_id.name or ''\">Basics of Gardening</b></p>\n"
+#~ "                        <p>Check out the other available courses.</p><br/"
+#~ ">\n"
+#~ "\n"
+#~ "                        <div style=\"padding: 16px 8px 16px 8px; text-"
+#~ "align: center;\">\n"
+#~ "                            <a href=\"/slides\" t-attf-style=\"background-"
+#~ "color: {{object.channel_id.user_id.company_id.email_secondary_color or "
+#~ "'#875A7B'}}; padding: 8px 16px 8px 16px; text-decoration: none; color: "
+#~ "{{object.channel_id.user_id.company_id.email_primary_color or "
+#~ "'#FFFFFF'}}; border-radius: 5px;\">\n"
+#~ "                                Explore courses\n"
+#~ "                            </a>\n"
+#~ "                        </div>\n"
+#~ "                        Enjoy this exclusive content!\n"
+#~ "                        <t t-if=\"object.channel_id.user_id.signature\">\n"
+#~ "                            <br/>\n"
+#~ "                            <div data-o-mail-quote=\"1\">--<br data-o-"
+#~ "mail-quote=\"1\"/><t t-out=\"object.channel_id.user_id.signature or "
+#~ "''\">Mitchell Admin</t></div>\n"
+#~ "                        </t>\n"
+#~ "                    </div>\n"
+#~ "                </div>\n"
+#~ "            "
+#~ msgstr ""
+#~ "<div style=\"margin: 0px; padding: 0px;\">\n"
+#~ "                    <div style=\"margin: 0px; padding: 0px; font-size: "
+#~ "13px;\">\n"
+#~ "                       <p style=\"margin: 0px;\"> Merhaba <t t-"
+#~ "out=\"object.partner_id.name or ''\">Brandon Freeman</t>,</p><br/>\n"
+#~ "                       <p><b> Tebrikler!</b></p>\n"
+#~ "                       <p> Kursu tamamladınız <b t-"
+#~ "out=\"object.channel_id.name or ''\">Bahçe Tasarımı Temelleri</b></p>\n"
+#~ "                       <p> Diğer mevcut kurslara göz atın.</p><br/>\n"
+#~ "\n"
+#~ "                       <div style=\"padding: 16px 8px 16px 8px; text-"
+#~ "align: center;\">\n"
+#~ "                            <a href=\"/slides\" t-attf-style=\"background-"
+#~ "color: {{object.channel_id.user_id.company_id.email_secondary_color or "
+#~ "'#875A7B'}}; padding: 8px 16px 8px 16px; text-decoration: none; color: "
+#~ "{{object.channel_id.user_id.company_id.email_primary_color or "
+#~ "'#FFFFFF'}}; border-radius: 5px;\"> \n"
+#~ "                                Kursları keşfedin\n"
+#~ "                           </a>\n"
+#~ "                        </div> \n"
+#~ "                        Bu özel içeriğin keyfini çıkarın!\n"
+#~ "                       <t t-if=\"object.channel_id.user_id.signature\">\n"
+#~ "                            <br/> \n"
+#~ "                           <div data-o-mail-quote=\"1\"> --<br data-o-"
+#~ "mail-quote=\"1\"/><t t-out=\"object.channel_id.user_id.signature or "
+#~ "''\">Mitchell Admin</t></div>\n"
+#~ "                       </t>\n"
+#~ "                    </div> \n"
+#~ "               </div> \n"
+#~ "            "
+
+#~ msgid ""
+#~ "<div style=\"margin: 0px; padding: 0px;\">\n"
+#~ "                    <p style=\"margin: 0px; padding: 0px; font-size: 13px;"
+#~ "\">\n"
+#~ "                        Hello<br/><br/>\n"
+#~ "                        <t t-out=\"user.name or ''\">Mitchell Admin</t> "
+#~ "shared the <t t-out=\"object.slide_category or ''\">document</t> <strong "
+#~ "t-out=\"object.name or ''\">Trees</strong> with you!\n"
+#~ "                        </p><div style=\"margin: 16px 8px 16px 8px; text-"
+#~ "align: center;\">\n"
+#~ "                            <a t-att-href=\"(object.website_share_url + '?"
+#~ "fullscreen=1') if ctx.get('fullscreen') else object.website_share_url\">\n"
+#~ "                                <img t-att-alt=\"object.name\" t-attf-"
+#~ "src=\"{{ ctx.get('base_url') }}/web/image/slide.slide/{{ object.id }}/"
+#~ "image_1024\" style=\"height:auto; width:150px; margin: 16px;\"/>\n"
+#~ "                            </a>\n"
+#~ "                        </div>\n"
+#~ "                        <div style=\"padding: 16px 8px 16px 8px; text-"
+#~ "align: center;\">\n"
+#~ "                            <a t-att-href=\"(object.website_share_url + '?"
+#~ "fullscreen=1') if ctx.get('fullscreen') else object.website_share_url\" t-"
+#~ "attf-style=\"background-color: {{user.company_id.email_secondary_color or "
+#~ "'#875A7B'}}; padding: 8px 16px 8px 16px; text-decoration: none; color: "
+#~ "{{user.company_id.email_primary_color or '#FFFFFF'}}; border-radius: 5px;"
+#~ "\">View <strong t-out=\"object.name or ''\">Trees</strong></a>\n"
+#~ "                        </div>\n"
+#~ "                        <t t-if=\"user.signature\">\n"
+#~ "                            <br/>\n"
+#~ "                            <div data-o-mail-quote=\"1\">--<br data-o-"
+#~ "mail-quote=\"1\"/><t t-out=\"user.signature or ''\">Mitchell Admin</t></"
+#~ "div>\n"
+#~ "                        </t>\n"
+#~ "                    \n"
+#~ "                </div>\n"
+#~ "            "
+#~ msgstr ""
+#~ "<div style=\"margin: 0px; padding: 0px;\">\n"
+#~ "                    <p style=\"margin: 0px; padding: 0px; font-size: 13px;"
+#~ "\">\n"
+#~ "                        Merhaba<br/><br/>\n"
+#~ "                       <t t-out=\"user.name or ''\"> Mitchell Admin</t>, "
+#~ "<t t-out=\"object.slide_category or ''\">belgesini</t> <strong t-"
+#~ "out=\"object.name or ''\">Ağaçları</strong> sizinle paylaştı!\n"
+#~ "                       </p><div style=\"margin: 16px 8px 16px 8px; text-"
+#~ "align: center;\"> \n"
+#~ "                           <a t-att-href=\"(object.website_share_url + '?"
+#~ "fullscreen=1') if ctx.get('fullscreen') else object.website_share_url\">\n"
+#~ "                                <img t-att-alt=\"object.name\" t-attf-"
+#~ "src=\"{{ ctx.get('base_url') }}/web/image/slide.slide/{{ object.id }}/"
+#~ "image_1024\" style=\"height:auto; width:150px; margin: 16px;\"/> \n"
+#~ "                           </a>\n"
+#~ "                        </div> \n"
+#~ "                       <div style=\"padding: 16px 8px 16px 8px; text-"
+#~ "align: center;\">\n"
+#~ "                            <a t-att-href=\"(object.website_share_url + '?"
+#~ "fullscreen=1') if ctx.get('fullscreen') else object.website_share_url\" t-"
+#~ "attf-style=\"background-color: {{user.company_id.email_secondary_color or "
+#~ "'#875A7B'}}; padding: 8px 16px 8px 16px; text-decoration: none; color: "
+#~ "{{user.company_id.email_primary_color or '#FFFFFF'}}; border-radius: 5px;"
+#~ "\"> <strong t-out=\"object.name or ''\"> Ağaçlarını</strong></"
+#~ "a>görüntüleyin \n"
+#~ "                       </div>\n"
+#~ "                        <t t-if=\"user.signature\"> \n"
+#~ "                           <br/>\n"
+#~ "                            <div data-o-mail-quote=\"1\"> --<br data-o-"
+#~ "mail-quote=\"1\"/><t t-out=\"user.signature or ''\">Mitchell Admin</t></"
+#~ "div>\n"
+#~ "                       </t>\n"
+#~ "                    \n"
+#~ "                </div> \n"
+#~ "            "
+
+#, fuzzy
+#~ msgid ""
+#~ "<div style=\"margin: 0px; padding: 0px;\">\n"
+#~ "                    <p style=\"margin: 0px; padding: 0px; font-size: 13px;"
+#~ "\">\n"
+#~ "                        Hello<br/><br/>\n"
+#~ "                        There is something new in the course <strong t-"
+#~ "out=\"object.channel_id.name or ''\">Trees, Wood and Gardens</strong> you "
+#~ "are following:<br/><br/>\n"
+#~ "                        </p><center><strong t-out=\"object.name or "
+#~ "''\">Trees</strong></center>\n"
+#~ "                        <t t-if=\"object.image_1024\">\n"
+#~ "                            <div style=\"padding: 16px 8px 16px 8px; text-"
+#~ "align: center;\">\n"
+#~ "                                <a t-att-"
+#~ "href=\"object.website_share_url\">\n"
+#~ "                                <img t-att-alt=\"object.name\" t-attf-"
+#~ "src=\"{{ ctx.get('base_url') }}/web/image/slide.slide/{{ object.id }}/"
+#~ "image_1024\" style=\"height:auto; width:150px; margin: 16px;\"/>\n"
+#~ "                            </a>\n"
+#~ "                        </div>\n"
+#~ "                        </t>\n"
+#~ "                        <div style=\"padding: 16px 8px 16px 8px; text-"
+#~ "align: center;\">\n"
+#~ "                            <a t-att-href=\"object.website_share_url\" t-"
+#~ "attf-style=\"background-color: "
+#~ "{{object.user_id.company_id.email_secondary_color or '#875A7B'}}; "
+#~ "padding: 8px 16px 8px 16px; text-decoration: none; color: "
+#~ "{{object.user_id.company_id.email_primary_color or '#FFFFFF'}}; border-"
+#~ "radius: 5px;\">View content</a>\n"
+#~ "                        </div>\n"
+#~ "                        Enjoy this exclusive content!\n"
+#~ "                        <t t-if=\"user.signature\">\n"
+#~ "                            <br/>\n"
+#~ "                            <div data-o-mail-quote=\"1\">--<br data-o-"
+#~ "mail-quote=\"1\"/><t t-out=\"user.signature or ''\">Mitchell Admin</t></"
+#~ "div>\n"
+#~ "                        </t>\n"
+#~ "                    \n"
+#~ "                </div>\n"
+#~ "            "
+#~ msgstr ""
+#~ "<div style=\"margin: 0px; padding: 0px;\">\n"
+#~ "                    <p style=\"margin: 0px; padding: 0px; font-size: 13px;"
+#~ "\">\n"
+#~ "                        Merhaba<br/><br/>\n"
+#~ "                        Takip ettiğiniz \" <strong t-"
+#~ "out=\"object.channel_id.name or ''\">\" kursunda yeni bir şey var:</"
+#~ "strong><br/><br/> \n"
+#~ "                       </p><center> <strong t-out=\"object.name or ''\"> "
+#~ "Trees</strong></center>\n"
+#~ "                       <t t-if=\"object.image_1024\">\n"
+#~ "                            <div style=\"padding: 16px 8px 16px 8px; text-"
+#~ "align: center;\"> \n"
+#~ "                               <a t-att-"
+#~ "href=\"object.website_share_url\">\n"
+#~ "                                <img t-att-alt=\"object.name\" t-attf-"
+#~ "src=\"{{ ctx.get('base_url') }}/web/image/slide.slide/{{ object.id }}/"
+#~ "image_1024\" style=\"height:auto; width:150px; margin: 16px;\"/> \n"
+#~ "                           </a>\n"
+#~ "                        </div> \n"
+#~ "                       </t>\n"
+#~ "                        <div style=\"padding: 16px 8px 16px 8px; text-"
+#~ "align: center;\"> \n"
+#~ "                           <a t-att-href=\"object.website_share_url\" t-"
+#~ "attf-style=\"background-color: "
+#~ "{{object.user_id.company_id.email_secondary_color or '#875A7B'}}; "
+#~ "padding: 8px 16px 8px 16px; text-decoration: none; color: "
+#~ "{{object.user_id.company_id.email_primary_color or '#FFFFFF'}}; border-"
+#~ "radius: 5px;\"> İçeriği görüntüle</a>\n"
+#~ "                        </div>\n"
+#~ "                        Bu özel içeriğin keyfini çıkarın!\n"
+#~ "                       <t t-if=\"user.signature\">\n"
+#~ "                            <br/> \n"
+#~ "                           <div data-o-mail-quote=\"1\"> --<br data-o-"
+#~ "mail-quote=\"1\"/><t t-out=\"user.signature or ''\">Mitchell Admin</t></"
+#~ "div>\n"
+#~ "                       </t>\n"
+#~ "                    \n"
+#~ "                </div> \n"
+#~ "            "

@@ -5,17 +5,22 @@ import lxml.html
 from urllib.parse import urlparse
 
 from odoo.addons.http_routing.tests.common import MockRequest
+from odoo.addons.website.tests.common import set_url_code
 from odoo.tests import HttpCase, tagged
 
 
 class TestLangUrlCommon(HttpCase):
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        set_url_code(cls.env.ref('base.lang_fr'))
+
     def setUp(self):
         super().setUp()
 
         # Simulate multi lang without loading translations
         self.website = self.env.ref('base.default_website')
         self.lang_fr = self.env['res.lang']._activate_lang('fr_FR')
-        self.lang_fr.write({'url_code': 'fr'})
         self.website.language_ids = self.env.ref('base.lang_en') + self.lang_fr
         self.website.default_lang_id = self.env.ref('base.lang_en')
 
@@ -120,6 +125,30 @@ class TestLangUrl(TestLangUrlCommon):
         res = self.url_open('/_not_a_lang', allow_redirects=False)
         self.assertEqual(res.status_code, 404, "Should not consider /_not_a_lang as a lang")
         self.assertURLEqual(res.url, '/_not_a_lang', "Should use /_not_a_lang as the path and not a lang")
+
+    def test_08_translation_hash_in_session_info(self):
+        """ Once cached, the session info gives the hash of the translations
+        served by /website/translations, so the client doesn't need to fetch
+        them when its cached version is up to date. On a cold cache, the page
+        doesn't compute it: the client gets no hash and fetches them. """
+        def get_session_info(url):
+            r = self.url_open(url)
+            self.assertEqual(r.status_code, 200)
+            for line in r.text.splitlines():
+                _, match, session_info_str = line.partition('odoo.__session_info__ = ')
+                if match:
+                    return json.loads(session_info_str[:-1])
+            raise ValueError('Session info not found in web page')
+
+        for url, lang in [('/contactus', 'en_US'), ('/fr/contactus', 'fr_FR')]:
+            with self.subTest(lang=lang):
+                self.env.transaction.invalidate_ormcache()
+                session_info = get_session_info(url)
+                self.assertEqual(session_info['bundle_params']['lang'], lang)
+                self.assertEqual(session_info['translation_hash'], '')
+
+                r = self.url_open('/website/translations', params={'lang': lang})
+                self.assertEqual(get_session_info(url)['translation_hash'], r.json()['hash'])
 
 
 @tagged('-at_install', 'post_install')

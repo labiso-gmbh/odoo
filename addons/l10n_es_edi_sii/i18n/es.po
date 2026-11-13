@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-25 18:27+0000\n"
-"PO-Revision-Date: 2026-09-22 08:30+0000\n"
+"POT-Creation-Date: 2026-11-06 18:24+0000\n"
+"PO-Revision-Date: 2026-11-05 11:43+0000\n"
 "Last-Translator: \"Noemi Pla Garcia (nopl)\" <nopl@odoo.com>\n"
 "Language-Team: Spanish <https://translate.odoo.com/projects/odoo-20/"
 "l10n_es_edi_sii/es/>\n"
@@ -38,6 +38,27 @@ msgid ""
 "\n"
 "You need to configure your certificate and the tax agency.\n"
 msgstr ""
+"\n"
+"Este módulo envía información tributaria (principalmente sobre el IVA) de "
+"las\n"
+"        facturas de proveedores y clientes al SII. Se llama \n"
+"        Procedimiento G417 - IVA. Llevanza de libros registro.  Este "
+"procedimiento \n"
+"        es obligatorio para toda empresa que tenga una facturación +6M€ y "
+"otros pueden \n"
+"        usarlo.  Las facturas se envían automáticamente\n"
+"        después de la validación.  \n"
+"        \n"
+"        Dependiendo de la configuración que se ponga en los impuestos se "
+"enviará \n"
+"        la información a la SII. Los impuestos \n"
+"        que estaban en la plantilla del plan (l10n_es) se configuran\n"
+"        automáticamente para que tengan el tipo correcto. Sin embargo, es "
+"posible\n"
+"        que se tengan que crear impuestos en operaciones exentas o no "
+"sujetas a IVA.\n"
+"        \n"
+"        Necesita configurar su certificado y la agencia tributaria.\n"
 
 #. module: l10n_es_edi_sii
 #: model:ir.model.fields.selection,name:l10n_es_edi_sii.selection__l10n_es_edi_sii_document__state__accepted
@@ -45,6 +66,7 @@ msgid "Accepted"
 msgstr ""
 
 #. module: l10n_es_edi_sii
+#: model:ir.model.fields.selection,name:l10n_es_edi_sii.selection__account_move__l10n_es_edi_sii_state__accepted_with_errors
 #: model:ir.model.fields.selection,name:l10n_es_edi_sii.selection__l10n_es_edi_sii_document__state__accepted_with_errors
 msgid "Accepted with Errors"
 msgstr ""
@@ -134,7 +156,7 @@ msgstr "Creado el"
 #. module: l10n_es_edi_sii
 #: model_terms:ir.ui.view,arch_db:l10n_es_edi_sii.view_move_form_inherit_l10n_es_edi
 msgid "Date"
-msgstr ""
+msgstr "Fecha"
 
 #. module: l10n_es_edi_sii
 #: model:ir.model.fields,help:l10n_es_edi_sii.field_account_bank_statement_line__l10n_es_registration_date
@@ -143,8 +165,10 @@ msgid "Date when the invoice was registered in the SII system."
 msgstr ""
 
 #. module: l10n_es_edi_sii
+#: model:ir.model.fields,field_description:l10n_es_edi_sii.field_account_journal__display_name
 #: model:ir.model.fields,field_description:l10n_es_edi_sii.field_account_move__display_name
 #: model:ir.model.fields,field_description:l10n_es_edi_sii.field_account_move_send__display_name
+#: model:ir.model.fields,field_description:l10n_es_edi_sii.field_account_move_send_batch_wizard__display_name
 #: model:ir.model.fields,field_description:l10n_es_edi_sii.field_account_move_send_wizard__display_name
 #: model:ir.model.fields,field_description:l10n_es_edi_sii.field_certificate_certificate__display_name
 #: model:ir.model.fields,field_description:l10n_es_edi_sii.field_l10n_es_edi_sii_document__display_name
@@ -170,14 +194,9 @@ msgid "Duplicated/Already processed."
 msgstr ""
 
 #. module: l10n_es_edi_sii
-#: model_terms:ir.ui.view,arch_db:l10n_es_edi_sii.view_invoice_tree_inherit_l10n_es_edi_sii
-msgid "Edi Blocking Level"
-msgstr ""
-
-#. module: l10n_es_edi_sii
-#: model_terms:ir.ui.view,arch_db:l10n_es_edi_sii.view_invoice_tree_inherit_l10n_es_edi_sii
-msgid "Electronic invoicing"
-msgstr ""
+#: model:ir.model.fields.selection,name:l10n_es_edi_sii.selection__account_journal__l10n_es_sii_kanban_state__error
+msgid "Error"
+msgstr "Error"
 
 #. module: l10n_es_edi_sii
 #. odoo-python
@@ -201,8 +220,10 @@ msgid "Hacienda Foral de Navarra"
 msgstr ""
 
 #. module: l10n_es_edi_sii
+#: model:ir.model.fields,field_description:l10n_es_edi_sii.field_account_journal__id
 #: model:ir.model.fields,field_description:l10n_es_edi_sii.field_account_move__id
 #: model:ir.model.fields,field_description:l10n_es_edi_sii.field_account_move_send__id
+#: model:ir.model.fields,field_description:l10n_es_edi_sii.field_account_move_send_batch_wizard__id
 #: model:ir.model.fields,field_description:l10n_es_edi_sii.field_account_move_send_wizard__id
 #: model:ir.model.fields,field_description:l10n_es_edi_sii.field_certificate_certificate__id
 #: model:ir.model.fields,field_description:l10n_es_edi_sii.field_l10n_es_edi_sii_document__id
@@ -237,6 +258,11 @@ msgid "JSON Filename"
 msgstr ""
 
 #. module: l10n_es_edi_sii
+#: model:ir.model,name:l10n_es_edi_sii.model_account_journal
+msgid "Journal"
+msgstr ""
+
+#. module: l10n_es_edi_sii
 #: model:ir.model,name:l10n_es_edi_sii.model_account_move
 msgid "Journal Entry"
 msgstr "Asiento contable"
@@ -246,6 +272,22 @@ msgstr "Asiento contable"
 #: model:ir.model.fields,field_description:l10n_es_edi_sii.field_res_config_settings__l10n_es_sii_certificate_ids
 msgid "L10N Es Sii Certificate"
 msgstr "L10N ES Certificado SII"
+
+#. module: l10n_es_edi_sii
+#: model:ir.model.fields,field_description:l10n_es_edi_sii.field_account_journal__l10n_es_sii_kanban_state
+msgid "L10N Es Sii Kanban State"
+msgstr ""
+
+#. module: l10n_es_edi_sii
+#: model:ir.model.fields,field_description:l10n_es_edi_sii.field_account_journal__l10n_es_sii_pending_count
+msgid "L10N Es Sii Pending Count"
+msgstr ""
+
+#. module: l10n_es_edi_sii
+#: model:ir.model.fields,field_description:l10n_es_edi_sii.field_account_bank_statement_line__l10n_es_edi_sii_last_document_id
+#: model:ir.model.fields,field_description:l10n_es_edi_sii.field_account_move__l10n_es_edi_sii_last_document_id
+msgid "Last SII Document"
+msgstr ""
 
 #. module: l10n_es_edi_sii
 #: model:ir.model.fields,field_description:l10n_es_edi_sii.field_l10n_es_edi_sii_document__write_uid
@@ -320,11 +362,6 @@ msgid "Registration Date"
 msgstr "Fecha de registro"
 
 #. module: l10n_es_edi_sii
-#: model_terms:ir.ui.view,arch_db:l10n_es_edi_sii.res_config_settings_view_form
-msgid "Registro de Libros connection SII"
-msgstr "Conexión con el Registro de Libros mediante SII"
-
-#. module: l10n_es_edi_sii
 #: model:ir.actions.server,name:l10n_es_edi_sii.action_request_cancel
 msgid "Request SII Cancellation"
 msgstr ""
@@ -367,6 +404,7 @@ msgstr ""
 #. module: l10n_es_edi_sii
 #: model:ir.model.fields,field_description:l10n_es_edi_sii.field_account_bank_statement_line__l10n_es_edi_sii_error
 #: model:ir.model.fields,field_description:l10n_es_edi_sii.field_account_move__l10n_es_edi_sii_error
+#: model_terms:ir.ui.view,arch_db:l10n_es_edi_sii.view_invoice_tree_inherit_l10n_es_edi_sii
 msgid "SII Error"
 msgstr ""
 
@@ -378,6 +416,11 @@ msgstr ""
 #. module: l10n_es_edi_sii
 #: model:ir.model.fields,field_description:l10n_es_edi_sii.field_l10n_es_edi_sii_document__attachment_id
 msgid "SII JSON Payload"
+msgstr ""
+
+#. module: l10n_es_edi_sii
+#: model_terms:ir.ui.view,arch_db:l10n_es_edi_sii.view_invoice_tree_inherit_l10n_es_edi_sii
+msgid "SII Send State"
 msgstr ""
 
 #. module: l10n_es_edi_sii
@@ -394,12 +437,17 @@ msgstr "Certificados SII"
 #. module: l10n_es_edi_sii
 #: model:ir.model.fields,help:l10n_es_edi_sii.field_account_bank_statement_line__l10n_es_edi_csv
 #: model:ir.model.fields,help:l10n_es_edi_sii.field_account_move__l10n_es_edi_csv
-msgid "Secure Verification Code of the last accepted document"
+msgid "Secure Verification Code of the last document"
 msgstr ""
 
 #. module: l10n_es_edi_sii
 #: model:ir.model.fields,help:l10n_es_edi_sii.field_l10n_es_edi_sii_document__csv
 msgid "Secure Verification Code returned by the SII"
+msgstr ""
+
+#. module: l10n_es_edi_sii
+#: model:ir.model,name:l10n_es_edi_sii.model_account_move_send_batch_wizard
+msgid "Send Invoice Batch Wizard"
 msgstr ""
 
 #. module: l10n_es_edi_sii
@@ -434,7 +482,7 @@ msgstr ""
 #. module: l10n_es_edi_sii
 #: model:ir.module.module,shortdesc:base.module_l10n_es_edi_sii
 msgid "Spain - SII EDI Suministro de Libros"
-msgstr ""
+msgstr "España - SII EDI Suministro de libros"
 
 #. module: l10n_es_edi_sii
 #: model:ir.ui.menu,name:l10n_es_edi_sii.menu_l10n_es_edi_sii_root
@@ -450,7 +498,7 @@ msgstr ""
 #. module: l10n_es_edi_sii
 #: model:ir.model.fields,field_description:l10n_es_edi_sii.field_l10n_es_edi_sii_document__state
 msgid "State"
-msgstr ""
+msgstr "Provincia"
 
 #. module: l10n_es_edi_sii
 #. odoo-python
@@ -521,6 +569,7 @@ msgid "The web service is not responding"
 msgstr "El servicio web no responde"
 
 #. module: l10n_es_edi_sii
+#: model:ir.model.fields.selection,name:l10n_es_edi_sii.selection__account_move__l10n_es_edi_sii_state__to_cancel
 #: model:ir.model.fields.selection,name:l10n_es_edi_sii.selection__l10n_es_edi_sii_document__state__to_cancel
 msgid "To Cancel"
 msgstr ""
@@ -533,6 +582,14 @@ msgstr ""
 
 #. module: l10n_es_edi_sii
 #. odoo-python
+#: code:addons/l10n_es_edi_sii/models/account_journal.py:0
+#: model_terms:ir.ui.view,arch_db:l10n_es_edi_sii.account_journal_dashboard_kanban_view_sii
+#: model_terms:ir.ui.view,arch_db:l10n_es_edi_sii.view_account_invoice_filter_inherit_l10n_es_edi_sii
+msgid "To Send to SII"
+msgstr ""
+
+#. module: l10n_es_edi_sii
+#. odoo-python
 #: code:addons/l10n_es_edi_sii/models/l10n_es_edi_sii_document.py:0
 msgid "Unknown Error"
 msgstr ""
@@ -541,6 +598,11 @@ msgstr ""
 #. odoo-python
 #: code:addons/l10n_es_edi_sii/models/l10n_es_edi_sii_document.py:0
 msgid "Unknown response state"
+msgstr ""
+
+#. module: l10n_es_edi_sii
+#: model:ir.model.fields.selection,name:l10n_es_edi_sii.selection__account_journal__l10n_es_sii_kanban_state__urgent
+msgid "Urgent"
 msgstr ""
 
 #. module: l10n_es_edi_sii
@@ -576,3 +638,6 @@ msgstr ""
 #: code:addons/l10n_es_edi_sii/models/l10n_es_edi_sii_document.py:0
 msgid "[%(error_code)s] %(error_message)s"
 msgstr "[%(error_code)s] %(error_message)s"
+
+#~ msgid "Registro de Libros connection SII"
+#~ msgstr "Conexión con el Registro de Libros mediante SII"

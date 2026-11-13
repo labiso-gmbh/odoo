@@ -1510,22 +1510,22 @@ class TransactionCase(BaseCase):
             case_instance = self
 
             def _patched_run_wkhtmltopdf(self, args):
+                http_request_key = case_instance.http_request_key
                 with (
-                    patch.object(case_instance, 'http_request_key', 'wkhtmltopdf'),
                     release_test_lock(),
                     patch('odoo.tests.common._disable_flushing_cursor', True),
                 ):
-                    args = ['--cookie', TEST_CURSOR_COOKIE_NAME, 'wkhtmltopdf', *args]
+                    args = ['--cookie', TEST_CURSOR_COOKIE_NAME, http_request_key, *args]
                     return old_run_wkhtmltopdf(self, args)
 
             report_model = self.env.registry['ir.actions.report']
             try:
-                old_run_wkhtmltopdf = report_model._run_wkhtmltopdf
+                old_run_wkhtmltopdf = report_model._run_wkhtmltopdf__
             except AttributeError:
                 pass
             else:
                 stack.enter_context(
-                    patch.object(report_model, '_run_wkhtmltopdf', _patched_run_wkhtmltopdf),
+                    patch.object(report_model, '_run_wkhtmltopdf__', _patched_run_wkhtmltopdf),
                 )
             yield
 
@@ -2644,22 +2644,22 @@ class HttpCase(TransactionCase):
         case_instance = self
 
         def _patched_run_wkhtmltopdf(self, args):
+            http_request_key = case_instance.http_request_key
             with (
-                patch.object(case_instance, 'http_request_key', 'wkhtmltopdf'),
                 release_test_lock(),
                 patch('odoo.tests.common._disable_flushing_cursor', True),
             ):
-                args = ['--cookie', TEST_CURSOR_COOKIE_NAME, 'wkhtmltopdf', *args]
+                args = ['--cookie', TEST_CURSOR_COOKIE_NAME, http_request_key, *args]
                 return old_run_wkhtmltopdf(self, args)
 
         report_model = self.env.registry['ir.actions.report']
         try:
-            old_run_wkhtmltopdf = report_model._run_wkhtmltopdf
+            old_run_wkhtmltopdf = report_model._run_wkhtmltopdf__
         except AttributeError:
             pass
         else:
             self.startPatcher(
-                patch.object(report_model, '_run_wkhtmltopdf', _patched_run_wkhtmltopdf),
+                patch.object(report_model, '_run_wkhtmltopdf__', _patched_run_wkhtmltopdf),
             )
 
     @contextmanager
@@ -2758,6 +2758,8 @@ class HttpCase(TransactionCase):
 
         while real_time() < end_time:
             time.sleep(0.1)
+            if not get_http_request_threads():
+                break
 
         request_threads = get_http_request_threads()
         for thread in request_threads:
@@ -2767,6 +2769,8 @@ class HttpCase(TransactionCase):
         if request_threads:
             self._logger.info('remaining requests')
             odoo.tools.misc.dumpstacks()
+        else:
+            self._logger.info('All HTTP requests finished')
 
     def logout(self, keep_db=True):
         logout(self.session, keep_db=keep_db)

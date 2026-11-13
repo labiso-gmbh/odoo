@@ -43,9 +43,7 @@ export class PaymentScreen extends Component {
     }
 
     get isForcedToInvoice() {
-        // When using customer account, is now mandatory to create an invoice.
-        const payments = this.currentOrder.payment_ids;
-        return payments.some((p) => p.payment_method_id.type === "pay_later");
+        return false;
     }
 
     get configPaymentMethods() {
@@ -63,12 +61,18 @@ export class PaymentScreen extends Component {
         }
 
         //Activate the invoice option for refund orders if the original order was invoiced.
-        if (
-            this.currentOrder.isRefund &&
-            this.currentOrder.lines[0].refunded_orderline_id?.order_id?.isToInvoice()
-        ) {
-            this.currentOrder.setToInvoice(true);
+        const currentOrder = this.currentOrder;
+        if (currentOrder.isRefund) {
+            this.pos.ensureRefundedOrderLoaded(currentOrder).then(() => {
+                if (this.shouldInvoiceRefund(currentOrder)) {
+                    currentOrder.setToInvoice(true);
+                }
+            });
         }
+    }
+
+    shouldInvoiceRefund(order) {
+        return Boolean(order.refunded_order_id?.isToInvoice());
     }
 
     getNumpadButtons() {
@@ -104,6 +108,49 @@ export class PaymentScreen extends Component {
                 paymentMethod.payment_interface.supports_refunds ||
                 false)
         );
+    }
+
+    get displayedPaymentMethods() {
+        const groups = this.pos.paymentMethods.defaultGroups;
+        const displayed = [];
+        const seenProviders = new Set();
+        for (const pm of this.payment_methods_from_config) {
+            if (!this.showPaymentMethod(pm)) {
+                continue;
+            }
+            if (!groups[pm.payment_provider]?.includes(pm)) {
+                displayed.push(pm);
+                continue;
+            }
+            const provider = pm.payment_provider;
+            if (seenProviders.has(provider)) {
+                continue;
+            }
+            seenProviders.add(provider);
+            displayed.push(
+                this.pos.paymentMethods.getDefault(provider) || this.getProviderButton(pm)
+            );
+        }
+        return displayed;
+    }
+
+    getProviderButton(paymentMethod) {
+        const provider = paymentMethod.payment_provider;
+        return {
+            id: `provider_${provider}`,
+            isProvider: true,
+            provider,
+            name: paymentMethod._payment_provider_name,
+            paymentMethod,
+        };
+    }
+
+    async onClickProvider(provider) {
+        const confirmed = await this.pos.paymentMethods.selectDefaults([provider]);
+        const paymentMethod = confirmed && this.pos.paymentMethods.getDefault(provider);
+        if (paymentMethod) {
+            await this.addNewPaymentLine(paymentMethod);
+        }
     }
 
     get _getNumberBufferConfig() {
@@ -175,8 +222,11 @@ export class PaymentScreen extends Component {
         }
     }
     updateSelectedPaymentline(amount = false) {
-        if (this.paymentLines.every((line) => line.paid)) {
-            this.currentOrder.addPaymentline(this.payment_methods_from_config[0]);
+        if (!this.paymentLines.length) {
+            const pm = this.payment_methods_from_config[0];
+            this.currentOrder.addPaymentline(
+                this.pos.paymentMethods.getDefault(pm.payment_provider) || pm
+            );
         }
         if (!this.selectedPaymentLine) {
             return;
@@ -239,7 +289,7 @@ export class PaymentScreen extends Component {
                 this.onNewTip({ newValue, type, currentTipAmount: tip.amount, change }),
             formatDisplayedValue: (value, type) => {
                 if (type === "fixed") {
-                    return this.pos.formatCurrency(parseFloat(value));
+                    return this.pos.formatCurrency(this.pos.parseCurrency(value));
                 }
                 if (type === "percent") {
                     return `${value} %`;
@@ -276,7 +326,10 @@ export class PaymentScreen extends Component {
         pLine.setAmount(pLine.getAmount() + tipToAdd);
     }
     computeNewTip({ value, type, currentTipAmount = 0 }) {
-        const valueParsed = typeof value === "string" ? parseFloat(value) : value;
+        let valueParsed = value;
+        if (typeof value === "string") {
+            valueParsed = type === "fixed" ? this.pos.parseCurrency(value) : parseFloat(value);
+        }
         if (isNaN(valueParsed)) {
             return 0;
         }
@@ -304,7 +357,13 @@ export class PaymentScreen extends Component {
         const status = line.getPaymentStatus();
         const cancelableStatuses = ["waiting", "waitingCard", "waitingScan", "timeout"];
         if (cancelableStatuses.includes(status)) {
-            line.cancelPayment(this.currentOrder).then((success) => success && finalizeDeletion());
+            line.cancelPayment(this.currentOrder).then((success) => {
+                if (success) {
+                    finalizeDeletion();
+                } else {
+                    line.setPaymentStatus(status);
+                }
+            });
         } else if (status !== "waitingCancel") {
             finalizeDeletion();
         }
@@ -387,6 +446,10 @@ export class PaymentScreen extends Component {
             (this.pos.config.iface_tipproduct && this.pos.config.tip_product_id) ||
             this.pos.canOpenCashdrawer
         );
+    }
+
+    get orderTotalDue() {
+        return this.currentOrder.paymentAmountInCurrency;
     }
 }
 

@@ -58,7 +58,7 @@ class TestExpensesStates(TestExpenseCommon, MailCase):
         # STEP 4: Post draft move from employee expense
         self.post_expenses(self.expenses_all)
         self.assertRecordValues(self.expenses_all, [
-            {'payment_mode': 'own_account',     'state': 'posted'},
+            {'payment_mode': 'own_account',     'state': 'approved'},
             {'payment_mode': 'company_account', 'state': 'paid'},
         ])
         self.assertRecordValues(self.expenses_all.account_move_id, [
@@ -200,7 +200,7 @@ class TestExpensesStates(TestExpenseCommon, MailCase):
         self.expenses_all.action_submit()
         self.assertSequenceEqual(['approved', 'paid'], self.expenses_all.mapped('state'))
         self.post_expenses(self.expenses_all)
-        self.assertSequenceEqual(['posted', 'paid'], self.expenses_all.mapped('state'))
+        self.assertSequenceEqual(['approved', 'paid'], self.expenses_all.mapped('state'))
 
     def test_expense_next_activity(self):
         """ Test next activity is assigned to the right manager, no notification is sent, but validation email is sent"""

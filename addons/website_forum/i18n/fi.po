@@ -35,10 +35,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-11 17:44+0000\n"
-"PO-Revision-Date: 2026-09-09 13:58+0000\n"
+"POT-Creation-Date: 2026-10-30 17:40+0000\n"
+"PO-Revision-Date: 2026-10-07 07:42+0000\n"
 "Last-Translator: Saara Hakanen <sahak@odoo.com>\n"
-"Language-Team: Finnish <https://translate.odoo.com/projects/odoo-master/"
+"Language-Team: Finnish <https://translate.odoo.com/projects/odoo-20/"
 "website_forum/fi/>\n"
 "Language: fi\n"
 "MIME-Version: 1.0\n"
@@ -2849,6 +2849,12 @@ msgstr "Loukkaavat julkaisut"
 
 #. module: website_forum
 #. odoo-javascript
+#: code:addons/website_forum/static/src/interactions/website_forum.js:0
+msgid "Oh no! Please sign in to perform this action"
+msgstr ""
+
+#. module: website_forum
+#. odoo-javascript
 #: code:addons/website_forum/static/src/xml/public_templates.xml:0
 msgid "On average,"
 msgstr "Keskimäärin,"
@@ -4495,7 +4501,7 @@ msgstr ""
 #. module: website_forum
 #: model_terms:ir.ui.view,arch_db:website_forum.faq_karma
 msgid "your biography can be seen as tooltip"
-msgstr "kucausta itsestäsi voidaan nähdä työkaluvinkkinä"
+msgstr "biografiasi voidaan nähdä työkaluvihjeenä"
 
 #. module: website_forum
 #: model_terms:ir.ui.view,arch_db:website_forum.follow_button

@@ -16,10 +16,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-11 17:41+0000\n"
-"PO-Revision-Date: 2026-08-31 15:24+0000\n"
-"Last-Translator: \"Tiffany Chang (tic)\" <tic@odoo.com>\n"
-"Language-Team: Indonesian <https://translate.odoo.com/projects/odoo-s19-4/"
+"POT-Creation-Date: 2026-11-06 17:38+0000\n"
+"PO-Revision-Date: 2026-10-26 09:02+0000\n"
+"Last-Translator: \"Nurul Aini Akrima Sabila (nuaas)\" <nuaas@odoo.com>\n"
+"Language-Team: Indonesian <https://translate.odoo.com/projects/odoo-20/"
 "pos_restaurant/id/>\n"
 "Language: id\n"
 "MIME-Version: 1.0\n"
@@ -41,12 +41,23 @@ msgid ""
 "bar printers\n"
 "\n"
 msgstr ""
+"\n"
+"\n"
+"Modul ini menambahkan beberapa fitur ke Point of Sale yang spesifik untuk "
+"manajemen restoran:\n"
+"- Pencetakan bon: Memungkinkan Anda untuk mencetak struk sebelum pesanan "
+"dibayar\n"
+"- Pemisahan bon: Memungkinkan Anda untuk memisah pesanan menjadi beberapa "
+"struk berbeda\n"
+"- Pencetakan Order Dapur: Memungkinkan Anda untuk mencetak update pesanan ke "
+"dapur atau printer bar\n"
+"\n"
 
 #. module: pos_restaurant
 #. odoo-javascript
 #: code:addons/pos_restaurant/static/src/app/models/restaurant_table.js:0
 msgid "%s'"
-msgstr ""
+msgstr "%s'"
 
 #. module: pos_restaurant
 #. odoo-javascript
@@ -58,13 +69,13 @@ msgstr "%s, dikirim ke dapur"
 #. odoo-javascript
 #: code:addons/pos_restaurant/static/src/app/models/restaurant_table.js:0
 msgid "%sh"
-msgstr ""
+msgstr "%sj"
 
 #. module: pos_restaurant
 #. odoo-javascript
 #: code:addons/pos_restaurant/static/src/app/models/restaurant_table.js:0
 msgid "%sh%s'"
-msgstr ""
+msgstr "%sj%s'"
 
 #. module: pos_restaurant
 #: model_terms:ir.ui.view,arch_db:pos_restaurant.pos_order_receipt_header
@@ -100,7 +111,7 @@ msgstr ""
 #. module: pos_restaurant
 #: model_terms:ir.ui.view,arch_db:pos_restaurant.pos_order_change_receipt
 msgid "<span class=\"text-bold\">T </span>"
-msgstr ""
+msgstr "<span class=\"text-bold\">T </span>"
 
 #. module: pos_restaurant
 #: model_terms:ir.ui.view,arch_db:pos_restaurant.pos_restaurant_pos_category_kanban_view
@@ -259,7 +270,7 @@ msgstr "Bacon Burger"
 #. module: pos_restaurant
 #: model:pos.config,name:pos_restaurant.pos_config_main_bar
 msgid "Bar"
-msgstr ""
+msgstr "Bar"
 
 #. module: pos_restaurant
 #: model:product.attribute.value,name:pos_restaurant.pav_sides_fries
@@ -406,6 +417,7 @@ msgstr "Course"
 
 #. module: pos_restaurant
 #. odoo-javascript
+#: code:addons/pos_restaurant/static/src/app/models/pos_order.js:0
 #: code:addons/pos_restaurant/static/src/app/screens/split_bill_screen/split_bill_screen.js:0
 #: code:addons/pos_restaurant/static/src/app/services/pos_store.js:0
 msgid "Course "
@@ -553,7 +565,7 @@ msgstr "Gandakan"
 #. module: pos_restaurant
 #: model:ir.model.fields,field_description:pos_restaurant.field_pos_order__duration
 msgid "Duration"
-msgstr ""
+msgstr "Durasi"
 
 #. module: pos_restaurant
 #: model:ir.model,name:pos_restaurant.model_pos_preset
@@ -571,6 +583,12 @@ msgstr "Edit Lantai"
 #: code:addons/pos_restaurant/static/src/app/screens/floor_screen/floor_screen.xml:0
 msgid "Edit Floor Plan"
 msgstr "Edit Denah Lantai"
+
+#. module: pos_restaurant
+#. odoo-javascript
+#: code:addons/pos_restaurant/static/src/app/components/navbar/navbar.xml:0
+msgid "Edit Plan"
+msgstr "Edit Rencana"
 
 #. module: pos_restaurant
 #. odoo-javascript
@@ -743,6 +761,7 @@ msgstr "Grilled vegetables"
 #. module: pos_restaurant
 #. odoo-javascript
 #: code:addons/pos_restaurant/static/src/app/screens/product_screen/control_buttons/control_buttons.xml:0
+#: code:addons/pos_restaurant/static/src/app/services/pos_store.js:0
 #: model:ir.model.fields,field_description:pos_restaurant.field_pos_preset__use_guest
 #: model_terms:ir.ui.view,arch_db:pos_restaurant.pos_order_change_receipt
 msgid "Guest"
@@ -800,7 +819,7 @@ msgstr "Gambar-Gambar"
 #. module: pos_restaurant
 #: model_terms:ir.ui.view,arch_db:pos_restaurant.res_config_settings_view_form
 msgid "Include the products when printing a fired course ticket"
-msgstr ""
+msgstr "Sertakan produk saat mencetak tiket giliran masak"
 
 #. module: pos_restaurant
 #. odoo-javascript
@@ -1202,7 +1221,7 @@ msgstr "Meja Restoran"
 #. module: pos_restaurant
 #: model:ir.module.module,summary:base.module_pos_restaurant
 msgid "Restaurant extensions for the Point of Sale "
-msgstr ""
+msgstr "Extension restoran untuk POS "
 
 #. module: pos_restaurant
 #: model:ir.model.fields.selection,name:pos_restaurant.selection__restaurant_table__parent_side__right
@@ -1283,6 +1302,8 @@ msgid ""
 "Self-orders cannot be transferred or merged, whether they are the order "
 "being moved or the one receiving it."
 msgstr ""
+"Order mandiri tidak dapat ditransfer atau digabungkan, baik sebagai order "
+"yang dipindahkan maupun yang menerimanya."
 
 #. module: pos_restaurant
 #. odoo-javascript
@@ -1317,9 +1338,10 @@ msgstr "Urutan"
 
 #. module: pos_restaurant
 #. odoo-javascript
+#: code:addons/pos_restaurant/static/src/app/screens/product_screen/control_buttons/control_buttons.xml:0
 #: code:addons/pos_restaurant/static/src/app/services/pos_store.js:0
 msgid "Set Order Name"
-msgstr ""
+msgstr "Tetapkan Nama Order"
 
 #. module: pos_restaurant
 #. odoo-javascript
@@ -1355,23 +1377,23 @@ msgstr "Bentuk-Bentuk"
 #: model:ir.model.fields,field_description:pos_restaurant.field_pos_config__use_show_items_on_course_ticket
 #: model:ir.model.fields,field_description:pos_restaurant.field_res_config_settings__pos_use_show_items_on_course_ticket
 msgid "Show Items on Fired Course Ticket"
-msgstr ""
+msgstr "Tampilkan Item pada Tiket Giliran Masak"
 
 #. module: pos_restaurant
 #: model:ir.model.fields,help:pos_restaurant.field_pos_config__use_show_items_on_course_ticket
 #: model:ir.model.fields,help:pos_restaurant.field_res_config_settings__pos_use_show_items_on_course_ticket
 msgid "Show items again on the fired course ticket in preparation printer"
-msgstr ""
+msgstr "Tampilkan kembali item pada tiket giliran masak di printer persiapan"
 
 #. module: pos_restaurant
 #: model_terms:ir.ui.view,arch_db:pos_restaurant.res_config_settings_view_form
 msgid "Show items on fired course ticket"
-msgstr ""
+msgstr "Tampilkan item pada tiket giliran masak"
 
 #. module: pos_restaurant
 #: model:ir.model.fields,help:pos_restaurant.field_pos_order__duration
 msgid "Shows how long the table has been occupied."
-msgstr ""
+msgstr "Menunjukkan berapa lama meja telah ditempati."
 
 #. module: pos_restaurant
 #. odoo-javascript
@@ -1399,6 +1421,12 @@ msgstr "Solid"
 #: model:product.template,name:pos_restaurant.pos_food_tuna_product_template
 msgid "Spicy Tuna Sandwich"
 msgstr "Spicy Tuna Sandwich"
+
+#. module: pos_restaurant
+#. odoo-javascript
+#: code:addons/pos_restaurant/static/src/app/screens/product_screen/control_buttons/control_buttons.xml:0
+msgid "Split"
+msgstr "Pisahkan"
 
 #. module: pos_restaurant
 #. odoo-javascript
@@ -1435,6 +1463,12 @@ msgstr "Sweet potato fries"
 
 #. module: pos_restaurant
 #. odoo-javascript
+#: code:addons/pos_restaurant/static/src/app/components/navbar/navbar.xml:0
+msgid "Switch Floor View"
+msgstr "Ganti Tampilan Lantai"
+
+#. module: pos_restaurant
+#. odoo-javascript
 #: code:addons/pos_restaurant/static/src/app/screens/ticket_screen/order_details_dialog/order_details_dialog.js:0
 #: code:addons/pos_restaurant/static/src/app/screens/ticket_screen/ticket_screen.xml:0
 #: model:ir.model.fields,field_description:pos_restaurant.field_pos_order__table_id
@@ -1462,7 +1496,7 @@ msgstr "Meja"
 #. module: pos_restaurant
 #: model:pos.preset,name:pos_restaurant.pos_takeout_preset
 msgid "Takeout"
-msgstr "Takeout"
+msgstr "Bawa Pulang"
 
 #. module: pos_restaurant
 #: model:product.template,description_sale:pos_restaurant.product_margarita_product_template
@@ -1732,12 +1766,6 @@ msgstr "item"
 msgid "product(s) selected"
 msgstr "produk dipilih"
 
-#~ msgid "Edit Plan"
-#~ msgstr "Edit Rencana"
-
-#~ msgid "Switch Floor View"
-#~ msgstr "Ganti Tampilan Lantai"
-
 #~ msgid "Options"
 #~ msgstr "Opsi"
 
@@ -1752,6 +1780,3 @@ msgstr "produk dipilih"
 
 #~ msgid "Note"
 #~ msgstr "Catatan"
-
-#~ msgid "Split"
-#~ msgstr "Pisahkan"

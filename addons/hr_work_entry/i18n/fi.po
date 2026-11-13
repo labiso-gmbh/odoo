@@ -9,10 +9,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server saas~18.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-25 17:37+0000\n"
-"PO-Revision-Date: 2026-09-09 13:59+0000\n"
+"POT-Creation-Date: 2026-11-06 17:39+0000\n"
+"PO-Revision-Date: 2026-11-05 08:15+0000\n"
 "Last-Translator: Saara Hakanen <sahak@odoo.com>\n"
-"Language-Team: Finnish <https://translate.odoo.com/projects/odoo-master/"
+"Language-Team: Finnish <https://translate.odoo.com/projects/odoo-20/"
 "hr_work_entry/fi/>\n"
 "Language: fi\n"
 "MIME-Version: 1.0\n"
@@ -47,42 +47,42 @@ msgstr ""
 #. odoo-python
 #: code:addons/hr_work_entry/models/resource_calendar_attendance.py:0
 msgid "%(duration)s hours %(work_entry_type)s"
-msgstr ""
+msgstr "%(duration)s tuntia %(work_entry_type)s"
 
 #. module: hr_work_entry
 #. odoo-python
 #: code:addons/hr_work_entry/models/hr_time_rule.py:0
 msgid "%(from)s-%(to)s"
-msgstr ""
+msgstr "%(from)s-%(to)s"
 
 #. module: hr_work_entry
 #. odoo-python
 #: code:addons/hr_work_entry/models/resource_calendar_attendance.py:0
 msgid "%(hour_from)s - %(hour_to)s (%(duration)s) %(work_entry_type)s"
-msgstr ""
+msgstr "%(hour_from)s - %(hour_to)s (%(duration)s) %(work_entry_type)s"
 
 #. module: hr_work_entry
 #. odoo-python
 #: code:addons/hr_work_entry/models/hr_time_rule.py:0
 msgid "%(op)s %(hours)gh/%(period)s"
-msgstr ""
+msgstr "%(op)s %(hours)gh/%(period)s"
 
 #. module: hr_work_entry
 #. odoo-python
 #: code:addons/hr_work_entry/models/hr_time_rule.py:0
 msgid "%(op)s schedule/%(period)s"
-msgstr ""
+msgstr "%(op)s aikataulu/%(period)s"
 
 #. module: hr_work_entry
 #. odoo-python
 #: code:addons/hr_work_entry/models/hr_time_rule.py:0
 msgid "%s (copy)"
-msgstr ""
+msgstr "%s (kopio)"
 
 #. module: hr_work_entry
 #: model_terms:ir.ui.view,arch_db:hr_work_entry.hr_work_entry_type_view_form
 msgid "<span class=\"fw-bold\">Availability</span>"
-msgstr ""
+msgstr "<span class=\"fw-bold\">Saatavuus</span>"
 
 #. module: hr_work_entry
 #: model_terms:ir.ui.view,arch_db:hr_work_entry.hr_time_rule_view_form
@@ -153,6 +153,7 @@ msgstr ""
 #: model:hr.work.entry.type,display_code:hr_work_entry.ch_work_entry_type_attendance
 #: model:hr.work.entry.type,display_code:hr_work_entry.eg_work_entry_type_attendance
 #: model:hr.work.entry.type,display_code:hr_work_entry.fr_work_entry_type_attendance
+#: model:hr.work.entry.type,display_code:hr_work_entry.ge_work_entry_type_attendance
 #: model:hr.work.entry.type,display_code:hr_work_entry.generic_work_entry_type_attendance
 #: model:hr.work.entry.type,display_code:hr_work_entry.hk_work_entry_type_attendance
 #: model:hr.work.entry.type,display_code:hr_work_entry.id_work_entry_type_attendance
@@ -179,6 +180,7 @@ msgstr ""
 #: model:hr.work.entry.type,display_code:hr_work_entry.us_work_entry_type_attendance
 #: model:hr.work.entry.type,display_code:hr_work_entry.uz_work_entry_type_attendance
 #: model:hr.work.entry.type,display_code:hr_work_entry.vn_work_entry_type_attendance
+#: model:hr.work.entry.type,display_code:hr_work_entry.za_work_entry_type_attendance
 msgid "A"
 msgstr "A"
 
@@ -186,6 +188,7 @@ msgstr "A"
 #: model:ir.model.constraint,message:hr_work_entry.constraint_hr_time_rule_at_least_one_day
 msgid "A time rule must apply on at least one day or on public holidays."
 msgstr ""
+"Aikasäännön on koskettava vähintään yhtä päivää tai yleisiä vapaapäiviä."
 
 #. module: hr_work_entry
 #. odoo-python
@@ -193,6 +196,11 @@ msgstr ""
 msgid ""
 "A working schedule not linked to a company cannot have a country defined on "
 "one of its work entry types."
+msgstr ""
+
+#. module: hr_work_entry
+#: model:hr.work.entry.type,display_code:hr_work_entry.l10n_ge_work_entry_type_adoption_leave
+msgid "ADL"
 msgstr ""
 
 #. module: hr_work_entry
@@ -221,8 +229,23 @@ msgid "AH2"
 msgstr ""
 
 #. module: hr_work_entry
+#: model:hr.work.entry.type,display_code:hr_work_entry.ge_work_entry_type_legal_leave
+msgid "AL"
+msgstr ""
+
+#. module: hr_work_entry
 #: model:hr.work.entry.type,display_code:hr_work_entry.l10n_be_work_entry_type_common_law_illness_ami
 msgid "AMI"
+msgstr ""
+
+#. module: hr_work_entry
+#: model:hr.work.entry.type,display_code:hr_work_entry.l10n_ge_work_entry_type_additional_parental_leave
+msgid "APA"
+msgstr ""
+
+#. module: hr_work_entry
+#: model:hr.work.entry.type,display_code:hr_work_entry.l10n_ge_work_entry_type_additional_leave
+msgid "APL"
 msgstr ""
 
 #. module: hr_work_entry
@@ -233,12 +256,12 @@ msgstr ""
 #. module: hr_work_entry
 #: model:ir.model.fields.selection,name:hr_work_entry.selection__hr_work_entry_type__count_as__absence
 msgid "Absence"
-msgstr ""
+msgstr "Poissaolo"
 
 #. module: hr_work_entry
 #: model_terms:ir.ui.view,arch_db:hr_work_entry.hr_work_entry_type_view_search
 msgid "Absence Time"
-msgstr ""
+msgstr "Poissaoloaika"
 
 #. module: hr_work_entry
 #: model:hr.work.entry.type,name:hr_work_entry.l10n_be_work_entry_type_solicitation_time_off
@@ -290,6 +313,21 @@ msgstr ""
 #. module: hr_work_entry
 #: model:ir.model.fields,field_description:hr_work_entry.field_hr_work_entry_type__activity_type_icon
 msgid "Activity Type Icon"
+msgstr "Toimenpidetyypin kuvake"
+
+#. module: hr_work_entry
+#: model:hr.work.entry.type,name:hr_work_entry.l10n_ge_work_entry_type_additional_leave
+msgid "Additional Paid Leave"
+msgstr ""
+
+#. module: hr_work_entry
+#: model:hr.work.entry.type,name:hr_work_entry.l10n_ge_work_entry_type_additional_parental_leave
+msgid "Additional Parental Leave"
+msgstr ""
+
+#. module: hr_work_entry
+#: model:hr.work.entry.type,name:hr_work_entry.l10n_ge_work_entry_type_adoption_leave
+msgid "Adoption Leave"
 msgstr ""
 
 #. module: hr_work_entry
@@ -341,6 +379,7 @@ msgid "Annual Labor Leave (Sunday)"
 msgstr ""
 
 #. module: hr_work_entry
+#: model:hr.work.entry.type,name:hr_work_entry.ge_work_entry_type_legal_leave
 #: model:hr.work.entry.type,name:hr_work_entry.l10n_au_work_entry_type_annual_leave
 #: model:hr.work.entry.type,name:hr_work_entry.l10n_kw_work_entry_type_annual_leave
 #: model:hr.work.entry.type,name:hr_work_entry.vn_work_entry_type_legal_leave
@@ -370,7 +409,7 @@ msgstr ""
 #. module: hr_work_entry
 #: model:ir.model.fields,field_description:hr_work_entry.field_hr_time_rule__apply_on_public_holidays
 msgid "Apply On Public Holidays"
-msgstr ""
+msgstr "Sovella yleisiin vapaapäiviin"
 
 #. module: hr_work_entry
 #: model:ir.model.fields,field_description:hr_work_entry.field_hr_time_rule__apply_saturday
@@ -414,6 +453,7 @@ msgid "Attachment Count"
 msgstr ""
 
 #. module: hr_work_entry
+#: model:hr.work.entry.type,name:hr_work_entry.za_work_entry_type_attendance
 #: model_terms:ir.ui.view,arch_db:hr_work_entry.view_resource_calendar_multi_create_form
 msgid "Attendance"
 msgstr "Läsnäolo"
@@ -464,6 +504,7 @@ msgid "Availability time not considered as working time"
 msgstr ""
 
 #. module: hr_work_entry
+#: model:hr.work.entry.type,display_code:hr_work_entry.l10n_be_work_entry_type_death_close_family
 #: model:hr.work.entry.type,display_code:hr_work_entry.l10n_tr_work_entry_type_bereavement_leave
 msgid "BER"
 msgstr ""
@@ -602,6 +643,7 @@ msgstr ""
 #: model:hr.work.entry.type,display_code:hr_work_entry.uae_work_entry_type_compensatory
 #: model:hr.work.entry.type,display_code:hr_work_entry.uz_work_entry_type_compensatory
 #: model:hr.work.entry.type,display_code:hr_work_entry.vn_work_entry_type_compensatory
+#: model:hr.work.entry.type,display_code:hr_work_entry.za_work_entry_type_compensatory
 msgid "CTO"
 msgstr "Teknologiajohtaja"
 
@@ -623,12 +665,12 @@ msgstr ""
 #. module: hr_work_entry
 #: model:hr.work.entry.type,name:hr_work_entry.l10n_be_work_entry_type_postponed_paid_time_off_n1
 msgid "Carried over leave (incapacity)"
-msgstr ""
+msgstr "Siirretyt vapaat (työkyvyttömyys)"
 
 #. module: hr_work_entry
 #: model:hr.work.entry.type,name:hr_work_entry.l10n_be_work_entry_type_postponed_paid_time_off_n2
 msgid "Carried over leave (incapacity) - Counter Year-2"
-msgstr ""
+msgstr "Siirretyt vapaat (työkyvyttömyys) - Vuosi 2"
 
 #. module: hr_work_entry
 #: model:hr.work.entry.type,name:hr_work_entry.l10n_uz_work_entry_type_child_support_leave
@@ -738,6 +780,7 @@ msgstr ""
 #: model:hr.work.entry.type,name:hr_work_entry.uae_work_entry_type_compensatory
 #: model:hr.work.entry.type,name:hr_work_entry.uz_work_entry_type_compensatory
 #: model:hr.work.entry.type,name:hr_work_entry.vn_work_entry_type_compensatory
+#: model:hr.work.entry.type,name:hr_work_entry.za_work_entry_type_compensatory
 msgid "Compensatory Time Off"
 msgstr "Korvaava vapaa-aika"
 
@@ -1239,7 +1282,7 @@ msgstr ""
 #. module: hr_work_entry
 #: model:ir.model.fields.selection,name:hr_work_entry.selection__hr_time_rule__week_start__4
 msgid "Friday"
-msgstr ""
+msgstr "Perjantai"
 
 #. module: hr_work_entry
 #: model:ir.model.fields,field_description:hr_work_entry.field_hr_time_rule__timing_start
@@ -1252,6 +1295,7 @@ msgstr ""
 #: model:hr.work.entry.type,display_code:hr_work_entry.ch_work_entry_type_leave
 #: model:hr.work.entry.type,display_code:hr_work_entry.eg_work_entry_type_leave
 #: model:hr.work.entry.type,display_code:hr_work_entry.fr_work_entry_type_leave
+#: model:hr.work.entry.type,display_code:hr_work_entry.ge_work_entry_type_leave
 #: model:hr.work.entry.type,display_code:hr_work_entry.generic_work_entry_type_leave
 #: model:hr.work.entry.type,display_code:hr_work_entry.hk_work_entry_type_leave
 #: model:hr.work.entry.type,display_code:hr_work_entry.id_work_entry_type_leave
@@ -1277,6 +1321,7 @@ msgstr ""
 #: model:hr.work.entry.type,display_code:hr_work_entry.uae_work_entry_type_leave
 #: model:hr.work.entry.type,display_code:hr_work_entry.uz_work_entry_type_leave
 #: model:hr.work.entry.type,display_code:hr_work_entry.vn_work_entry_type_leave
+#: model:hr.work.entry.type,display_code:hr_work_entry.za_work_entry_type_leave
 msgid "GTO"
 msgstr "Yleinen vapaa"
 
@@ -1291,6 +1336,7 @@ msgstr ""
 #: model:hr.work.entry.type,name:hr_work_entry.ch_work_entry_type_leave
 #: model:hr.work.entry.type,name:hr_work_entry.eg_work_entry_type_leave
 #: model:hr.work.entry.type,name:hr_work_entry.fr_work_entry_type_leave
+#: model:hr.work.entry.type,name:hr_work_entry.ge_work_entry_type_leave
 #: model:hr.work.entry.type,name:hr_work_entry.generic_work_entry_type_leave
 #: model:hr.work.entry.type,name:hr_work_entry.hk_work_entry_type_leave
 #: model:hr.work.entry.type,name:hr_work_entry.id_work_entry_type_leave
@@ -1317,6 +1363,7 @@ msgstr ""
 #: model:hr.work.entry.type,name:hr_work_entry.uae_work_entry_type_leave
 #: model:hr.work.entry.type,name:hr_work_entry.uz_work_entry_type_leave
 #: model:hr.work.entry.type,name:hr_work_entry.vn_work_entry_type_leave
+#: model:hr.work.entry.type,name:hr_work_entry.za_work_entry_type_leave
 msgid "Generic Time Off"
 msgstr "Yleinen vapaa-aika"
 
@@ -1386,6 +1433,7 @@ msgstr ""
 #: model:hr.work.entry.type,display_code:hr_work_entry.ch_work_entry_type_home_working
 #: model:hr.work.entry.type,display_code:hr_work_entry.eg_work_entry_type_home_working
 #: model:hr.work.entry.type,display_code:hr_work_entry.fr_work_entry_type_home_working
+#: model:hr.work.entry.type,display_code:hr_work_entry.ge_work_entry_type_home_working
 #: model:hr.work.entry.type,display_code:hr_work_entry.generic_work_entry_type_home_working
 #: model:hr.work.entry.type,display_code:hr_work_entry.hk_work_entry_type_home_working
 #: model:hr.work.entry.type,display_code:hr_work_entry.id_work_entry_type_home_working
@@ -1412,6 +1460,7 @@ msgstr ""
 #: model:hr.work.entry.type,display_code:hr_work_entry.us_work_entry_type_home_working
 #: model:hr.work.entry.type,display_code:hr_work_entry.uz_work_entry_type_home_working
 #: model:hr.work.entry.type,display_code:hr_work_entry.vn_work_entry_type_home_working
+#: model:hr.work.entry.type,display_code:hr_work_entry.za_work_entry_type_home_working
 msgid "HW"
 msgstr "Etätyö"
 
@@ -1449,6 +1498,11 @@ msgid "Holiday senior worker"
 msgstr ""
 
 #. module: hr_work_entry
+#: model:hr.work.entry.type,name:hr_work_entry.za_work_entry_type_home_working
+msgid "Home Working"
+msgstr "Etätyö"
+
+#. module: hr_work_entry
 #: model:hr.work.entry.type,name:hr_work_entry.l10n_ch_swissdec_hourly_wt
 msgid "Hourly Salary"
 msgstr "Tuntipalkka"
@@ -1476,6 +1530,11 @@ msgstr "Tuntipalkka asepalveluksen suorittamisen loman aikana"
 #. module: hr_work_entry
 #: model:hr.work.entry.type,name:hr_work_entry.l10n_be_work_entry_type_justified_reason_paid
 msgid "Hours no worked (paid)"
+msgstr ""
+
+#. module: hr_work_entry
+#: model:hr.work.entry.type,display_code:hr_work_entry.l10n_be_work_entry_type_work_incapacity_worker_second_week_short_term_employee
+msgid "I2W"
 msgstr ""
 
 #. module: hr_work_entry
@@ -1526,11 +1585,6 @@ msgid "IW2"
 msgstr ""
 
 #. module: hr_work_entry
-#: model:hr.work.entry.type,display_code:hr_work_entry.l10n_be_work_entry_type_work_incapacity_worker_second_week_short_term_employee
-msgid "IW2EMP"
-msgstr ""
-
-#. module: hr_work_entry
 #: model:ir.model.fields,field_description:hr_work_entry.field_hr_work_entry_type__activity_exception_icon
 msgid "Icon"
 msgstr ""
@@ -1538,7 +1592,7 @@ msgstr ""
 #. module: hr_work_entry
 #: model:ir.model.fields,help:hr_work_entry.field_hr_work_entry_type__activity_exception_icon
 msgid "Icon to indicate an exception activity."
-msgstr ""
+msgstr "Poikkeustoimenpiteeseen viittaava kuvake."
 
 #. module: hr_work_entry
 #: model:hr.work.entry.type,name:hr_work_entry.l10n_om_work_entry_type_iddah
@@ -1617,6 +1671,8 @@ msgid ""
 "Incapacity for work paid by the employer until the sickness credit is "
 "exhausted (education and public sector)"
 msgstr ""
+"Työnantajan maksama työkyvyttömyyskorvaus, kunnes sairauspäiväraha on "
+"käytetty loppuun (koulutus- ja julkinen sektori)"
 
 #. module: hr_work_entry
 #: model:hr.work.entry.type,name:hr_work_entry.l10n_be_work_entry_type_work_incapacity_worker_second_week_short_term_employee
@@ -1624,6 +1680,8 @@ msgid ""
 "Incapacity for work with guaranteed salary system for workers - 2nd week "
 "(Short Term Employee)"
 msgstr ""
+"Työkyvyttömyys ja työntekijöiden palkkatakuujärjestelmä - toinen viikko "
+"(määräaikainen työntekijä)"
 
 #. module: hr_work_entry
 #: model:hr.work.entry.type,name:hr_work_entry.l10n_be_work_entry_type_work_accident_unassimilated
@@ -1761,6 +1819,7 @@ msgstr ""
 #: model:hr.work.entry.type,name:hr_work_entry.ch_work_entry_type_unpaid_leave
 #: model:hr.work.entry.type,name:hr_work_entry.eg_work_entry_type_unpaid_leave
 #: model:hr.work.entry.type,name:hr_work_entry.fr_work_entry_type_unpaid_leave
+#: model:hr.work.entry.type,name:hr_work_entry.ge_work_entry_type_unpaid_leave
 #: model:hr.work.entry.type,name:hr_work_entry.generic_work_entry_type_unpaid_leave
 #: model:hr.work.entry.type,name:hr_work_entry.hk_work_entry_type_unpaid_leave
 #: model:hr.work.entry.type,name:hr_work_entry.id_work_entry_type_unpaid_leave
@@ -1866,6 +1925,7 @@ msgstr ""
 #: model:hr.work.entry.type,display_code:hr_work_entry.l10n_be_work_entry_type_maternity
 #: model:hr.work.entry.type,display_code:hr_work_entry.l10n_jo_work_entry_type_maternity
 #: model:hr.work.entry.type,display_code:hr_work_entry.l10n_tr_work_entry_type_maternity_leave
+#: model:hr.work.entry.type,display_code:hr_work_entry.za_work_entry_type_maternity_leave
 msgid "MAT"
 msgstr ""
 
@@ -1877,6 +1937,11 @@ msgstr ""
 #. module: hr_work_entry
 #: model:hr.work.entry.type,display_code:hr_work_entry.l10n_be_work_entry_type_militia_obligation
 msgid "MIL"
+msgstr ""
+
+#. module: hr_work_entry
+#: model:hr.work.entry.type,display_code:hr_work_entry.l10n_ge_work_entry_type_maternity_leave
+msgid "ML"
 msgstr ""
 
 #. module: hr_work_entry
@@ -1897,7 +1962,7 @@ msgstr ""
 #. module: hr_work_entry
 #: model:ir.module.module,summary:base.module_hr_work_entry
 msgid "Manage work entries"
-msgstr ""
+msgstr "Hallitse työkirjauksia"
 
 #. module: hr_work_entry
 #: model:ir.model.fields.selection,name:hr_work_entry.selection__hr_export_work_entries__reference_month__3
@@ -1916,7 +1981,7 @@ msgstr "Avioliiton solmimisen loma"
 #. module: hr_work_entry
 #: model:ir.model.fields,help:hr_work_entry.field_hr_work_entry_type__activity_type_icon
 msgid "Material Symbols icon e.g. checklist"
-msgstr ""
+msgstr "Material Symbols -kuvake, esim. muistilista"
 
 #. module: hr_work_entry
 #: model:hr.work.entry.type,name:hr_work_entry.l10n_mx_work_entry_type_maternity_imss
@@ -1925,6 +1990,7 @@ msgstr "Äitiysloma (IMSS)"
 
 #. module: hr_work_entry
 #: model:hr.work.entry.type,name:hr_work_entry.l10n_eg_work_entry_type_maternity
+#: model:hr.work.entry.type,name:hr_work_entry.l10n_ge_work_entry_type_maternity_leave
 #: model:hr.work.entry.type,name:hr_work_entry.l10n_hk_work_entry_type_maternity_leave
 #: model:hr.work.entry.type,name:hr_work_entry.l10n_id_work_entry_type_maternity_leave
 #: model:hr.work.entry.type,name:hr_work_entry.l10n_jo_work_entry_type_maternity
@@ -1934,6 +2000,7 @@ msgstr "Äitiysloma (IMSS)"
 #: model:hr.work.entry.type,name:hr_work_entry.l10n_ph_hr_payroll_mat_leave
 #: model:hr.work.entry.type,name:hr_work_entry.l10n_sa_work_entry_type_maternity
 #: model:hr.work.entry.type,name:hr_work_entry.l10n_tr_work_entry_type_maternity_leave
+#: model:hr.work.entry.type,name:hr_work_entry.za_work_entry_type_maternity_leave
 msgid "Maternity Leave"
 msgstr "Äitiysloma"
 
@@ -2026,6 +2093,11 @@ msgid "NDI"
 msgstr ""
 
 #. module: hr_work_entry
+#: model:hr.work.entry.type,display_code:hr_work_entry.l10n_be_work_entry_type_overtime_no_onss_horeca
+msgid "NOH"
+msgstr ""
+
+#. module: hr_work_entry
 #: model:hr.work.entry.type,display_code:hr_work_entry.l10n_be_work_entry_type_non_taxable_political_service
 msgid "NTS"
 msgstr ""
@@ -2057,7 +2129,7 @@ msgstr ""
 #. module: hr_work_entry
 #: model:ir.model.fields,field_description:hr_work_entry.field_hr_work_entry_type__activity_summary
 msgid "Next Activity Summary"
-msgstr ""
+msgstr "Seuraavan toimenpiteen yhteenveto"
 
 #. module: hr_work_entry
 #: model:ir.model.fields,field_description:hr_work_entry.field_hr_work_entry_type__activity_type_id
@@ -2206,6 +2278,7 @@ msgstr ""
 #: model:hr.work.entry.type,display_code:hr_work_entry.ch_work_entry_type_overtime
 #: model:hr.work.entry.type,display_code:hr_work_entry.eg_work_entry_type_overtime
 #: model:hr.work.entry.type,display_code:hr_work_entry.fr_work_entry_type_overtime
+#: model:hr.work.entry.type,display_code:hr_work_entry.ge_work_entry_type_overtime
 #: model:hr.work.entry.type,display_code:hr_work_entry.generic_work_entry_type_overtime
 #: model:hr.work.entry.type,display_code:hr_work_entry.hk_work_entry_type_overtime
 #: model:hr.work.entry.type,display_code:hr_work_entry.id_work_entry_type_overtime
@@ -2240,7 +2313,7 @@ msgstr "Ylityöt"
 
 #. module: hr_work_entry
 #: model:hr.work.entry.type,display_code:hr_work_entry.l10n_be_work_entry_type_overtime_recoverable
-msgid "OT26"
+msgid "OT5"
 msgstr ""
 
 #. module: hr_work_entry
@@ -2255,6 +2328,7 @@ msgstr ""
 #: model:hr.work.entry.type,display_code:hr_work_entry.ch_hr_work_entry_type_out_of_contract
 #: model:hr.work.entry.type,display_code:hr_work_entry.eg_hr_work_entry_type_out_of_contract
 #: model:hr.work.entry.type,display_code:hr_work_entry.fr_hr_work_entry_type_out_of_contract
+#: model:hr.work.entry.type,display_code:hr_work_entry.ge_hr_work_entry_type_out_of_contract
 #: model:hr.work.entry.type,display_code:hr_work_entry.generic_hr_work_entry_type_out_of_contract
 #: model:hr.work.entry.type,display_code:hr_work_entry.hk_hr_work_entry_type_out_of_contract
 #: model:hr.work.entry.type,display_code:hr_work_entry.id_hr_work_entry_type_out_of_contract
@@ -2280,6 +2354,7 @@ msgstr ""
 #: model:hr.work.entry.type,display_code:hr_work_entry.uae_hr_work_entry_type_out_of_contract
 #: model:hr.work.entry.type,display_code:hr_work_entry.uz_hr_work_entry_type_out_of_contract
 #: model:hr.work.entry.type,display_code:hr_work_entry.vn_hr_work_entry_type_out_of_contract
+#: model:hr.work.entry.type,display_code:hr_work_entry.za_hr_work_entry_type_out_of_contract
 msgid "OoC"
 msgstr "Sopimuksen ulkopuolinen"
 
@@ -2295,6 +2370,7 @@ msgstr ""
 #: model:hr.work.entry.type,name:hr_work_entry.ch_hr_work_entry_type_out_of_contract
 #: model:hr.work.entry.type,name:hr_work_entry.eg_hr_work_entry_type_out_of_contract
 #: model:hr.work.entry.type,name:hr_work_entry.fr_hr_work_entry_type_out_of_contract
+#: model:hr.work.entry.type,name:hr_work_entry.ge_hr_work_entry_type_out_of_contract
 #: model:hr.work.entry.type,name:hr_work_entry.generic_hr_work_entry_type_out_of_contract
 #: model:hr.work.entry.type,name:hr_work_entry.hk_hr_work_entry_type_out_of_contract
 #: model:hr.work.entry.type,name:hr_work_entry.id_hr_work_entry_type_out_of_contract
@@ -2325,6 +2401,12 @@ msgid "Out Of Contract"
 msgstr ""
 
 #. module: hr_work_entry
+#: model:hr.work.entry.type,name:hr_work_entry.za_hr_work_entry_type_out_of_contract
+msgid "Out of Contract"
+msgstr "Sopimuksen ulkopuolella"
+
+#. module: hr_work_entry
+#: model:hr.work.entry.type,name:hr_work_entry.ge_work_entry_type_overtime
 #: model:hr.work.entry.type,name:hr_work_entry.l10n_sa_work_entry_type_overtime
 #: model:hr.work.entry.type,name:hr_work_entry.vn_work_entry_type_overtime
 msgid "Overtime"
@@ -2348,6 +2430,16 @@ msgstr ""
 #. module: hr_work_entry
 #: model:hr.work.entry.type,name:hr_work_entry.be_work_entry_type_additional_hours_100
 msgid "Overtime (part-time workers) 200%"
+msgstr ""
+
+#. module: hr_work_entry
+#: model:hr.work.entry.type,name:hr_work_entry.za_work_entry_type_overtime_public_holidays
+msgid "Overtime - Public Holidays"
+msgstr "Ylityöt - yleiset vapaapäivät"
+
+#. module: hr_work_entry
+#: model:hr.work.entry.type,name:hr_work_entry.za_work_entry_type_overtime_work_days
+msgid "Overtime - Work Days"
 msgstr ""
 
 #. module: hr_work_entry
@@ -2523,6 +2615,7 @@ msgstr ""
 #. module: hr_work_entry
 #: model:hr.work.entry.type,display_code:hr_work_entry.l10n_jo_work_entry_type_paternity
 #: model:hr.work.entry.type,display_code:hr_work_entry.l10n_tr_work_entry_type_paternity_leave
+#: model:hr.work.entry.type,display_code:hr_work_entry.za_work_entry_type_paternity_leave
 msgid "PAT"
 msgstr ""
 
@@ -2541,6 +2634,7 @@ msgstr ""
 #: model:hr.work.entry.type,display_code:hr_work_entry.bd_work_entry_type_public_holiday
 #: model:hr.work.entry.type,display_code:hr_work_entry.eg_work_entry_type_public_holiday
 #: model:hr.work.entry.type,display_code:hr_work_entry.fr_work_entry_type_public_holiday
+#: model:hr.work.entry.type,display_code:hr_work_entry.ge_work_entry_type_public_holiday
 #: model:hr.work.entry.type,display_code:hr_work_entry.generic_work_entry_type_public_holiday
 #: model:hr.work.entry.type,display_code:hr_work_entry.in_work_entry_type_public_holiday
 #: model:hr.work.entry.type,display_code:hr_work_entry.iq_work_entry_type_public_holiday
@@ -2589,6 +2683,11 @@ msgstr ""
 #: model:hr.work.entry.type,display_code:hr_work_entry.l10n_be_work_entry_type_partial_incapacity
 #: model:hr.work.entry.type,display_code:hr_work_entry.l10n_be_work_entry_type_partial_incapacity_unassimilated
 msgid "PIN"
+msgstr ""
+
+#. module: hr_work_entry
+#: model:hr.work.entry.type,display_code:hr_work_entry.l10n_ge_work_entry_type_parental_leave
+msgid "PL"
 msgstr ""
 
 #. module: hr_work_entry
@@ -2665,8 +2764,9 @@ msgstr ""
 #: model:hr.work.entry.type,display_code:hr_work_entry.uae_work_entry_type_legal_leave
 #: model:hr.work.entry.type,display_code:hr_work_entry.us_work_entry_type_legal_leave
 #: model:hr.work.entry.type,display_code:hr_work_entry.vn_work_entry_type_legal_leave
+#: model:hr.work.entry.type,display_code:hr_work_entry.za_work_entry_type_legal_leave
 msgid "PTO"
-msgstr "Palkallinen vapaa"
+msgstr ""
 
 #. module: hr_work_entry
 #: model:hr.work.entry.type,display_code:hr_work_entry.l10n_be_work_entry_type_public_holiday_temporary_unemployment
@@ -2685,14 +2785,24 @@ msgid "Paid Sick Time off"
 msgstr "Palkallinen sairausloma"
 
 #. module: hr_work_entry
+#: model:hr.work.entry.type,name:hr_work_entry.za_work_entry_type_legal_leave
+msgid "Paid Time Off"
+msgstr "Palkallinen vapaa"
+
+#. module: hr_work_entry
 #: model:hr.work.entry.type,name:hr_work_entry.l10n_be_work_entry_type_paid_absence
 msgid "Paid days and hours"
+msgstr "Palkalliset päivät ja tunnit"
+
+#. module: hr_work_entry
+#: model:hr.work.entry.type,name:hr_work_entry.l10n_ge_work_entry_type_parental_leave
+msgid "Parental Leave"
 msgstr ""
 
 #. module: hr_work_entry
 #: model:hr.work.entry.type,name:hr_work_entry.hr_work_entry_type_dv
 msgid "Parental Leaves"
-msgstr ""
+msgstr "Vanhempainvapaat"
 
 #. module: hr_work_entry
 #: model:hr.work.entry.type,name:hr_work_entry.l10n_sk_work_entry_type_parental_time_off
@@ -2707,12 +2817,12 @@ msgstr ""
 #. module: hr_work_entry
 #: model:hr.work.entry.type,name:hr_work_entry.l10n_be_work_entry_type_parental_time_off
 msgid "Parental leave"
-msgstr ""
+msgstr "Vanhempainvapaa"
 
 #. module: hr_work_entry
 #: model:hr.work.entry.type,name:hr_work_entry.l10n_uz_work_entry_type_partially_paid_leave
 msgid "Partially Paid Leave"
-msgstr ""
+msgstr "Osittain palkallinen loma"
 
 #. module: hr_work_entry
 #: model:hr.work.entry.type,name:hr_work_entry.l10n_hk_work_entry_type_paternity_leave
@@ -2722,13 +2832,14 @@ msgstr ""
 #: model:hr.work.entry.type,name:hr_work_entry.l10n_ph_hr_payroll_pat_leave
 #: model:hr.work.entry.type,name:hr_work_entry.l10n_sa_work_entry_type_paternity
 #: model:hr.work.entry.type,name:hr_work_entry.l10n_tr_work_entry_type_paternity_leave
+#: model:hr.work.entry.type,name:hr_work_entry.za_work_entry_type_paternity_leave
 msgid "Paternity Leave"
 msgstr "Isyysloma"
 
 #. module: hr_work_entry
 #: model:hr.work.entry.type,name:hr_work_entry.l10n_vn_work_entry_type_paternity_leave
 msgid "Paternity Leave (Social Insurance)"
-msgstr ""
+msgstr "Isyysloma (sosiaalivakuutus)"
 
 #. module: hr_work_entry
 #: model:hr.work.entry.type,name:hr_work_entry.l10n_hk_work_entry_type_paternity_leave_80
@@ -2738,7 +2849,7 @@ msgstr "Isyysvapaa 80%"
 #. module: hr_work_entry
 #: model_terms:ir.ui.view,arch_db:hr_work_entry.hr_work_entry_type_view_form
 msgid "Pay Rate"
-msgstr ""
+msgstr "Palkkataso"
 
 #. module: hr_work_entry
 #: model_terms:ir.ui.view,arch_db:hr_work_entry.hr_work_entry_type_view_form
@@ -2753,12 +2864,12 @@ msgstr "Palkanlaskennan koodi"
 #. module: hr_work_entry
 #: model:ir.model.fields,field_description:hr_work_entry.field_hr_export_work_entries__period_start
 msgid "Period Start"
-msgstr ""
+msgstr "Jakson alku"
 
 #. module: hr_work_entry
 #: model:ir.model.fields,field_description:hr_work_entry.field_hr_export_work_entries__period_stop
 msgid "Period Stop"
-msgstr ""
+msgstr "Jakson loppu"
 
 #. module: hr_work_entry
 #: model:hr.work.entry.type,name:hr_work_entry.l10n_au_work_entry_type_personal_leave
@@ -2768,7 +2879,7 @@ msgstr "Henkilökohtainen vapaa"
 #. module: hr_work_entry
 #: model:hr.work.entry.type,name:hr_work_entry.l10n_jo_work_entry_type_pilgrimage
 msgid "Pilgrimage Leave"
-msgstr ""
+msgstr "Pyhiinvaellusvapaa"
 
 #. module: hr_work_entry
 #: model:hr.work.entry.type,name:hr_work_entry.l10n_be_work_entry_type_political_leave
@@ -2791,8 +2902,10 @@ msgid "Provide a description of the Time Type, in which case should it be used"
 msgstr ""
 
 #. module: hr_work_entry
+#: model:hr.work.entry.type,name:hr_work_entry.ge_work_entry_type_public_holiday
 #: model:hr.work.entry.type,name:hr_work_entry.uz_work_entry_type_public_holiday
 #: model:hr.work.entry.type,name:hr_work_entry.vn_work_entry_type_public_holiday
+#: model:hr.work.entry.type,name:hr_work_entry.za_work_entry_type_public_holiday
 msgid "Public Holiday"
 msgstr "Yleinen vapaapäivä"
 
@@ -2819,12 +2932,12 @@ msgstr ""
 #. module: hr_work_entry
 #: model_terms:ir.ui.view,arch_db:hr_work_entry.hr_time_rule_view_form
 msgid "Public Holidays"
-msgstr ""
+msgstr "Yleiset vapaapäivät"
 
 #. module: hr_work_entry
 #: model:hr.work.entry.type,name:hr_work_entry.l10n_jo_work_entry_type_public_holidays_overtime
 msgid "Public Holidays Overtime"
-msgstr ""
+msgstr "Yleisten vapaapäivien ylityöt"
 
 #. module: hr_work_entry
 #: model:hr.work.entry.type,name:hr_work_entry.iq_work_entry_type_public_duty
@@ -2969,12 +3082,12 @@ msgstr ""
 #. module: hr_work_entry
 #: model:hr.work.entry.type,name:hr_work_entry.l10n_om_work_entry_type_overtime_rest_days
 msgid "Restday(s) & public holidays Overtime"
-msgstr ""
+msgstr "Lepopäivien & yleisten vapaapäivien ylityöt"
 
 #. module: hr_work_entry
 #: model:hr.work.entry.type,name:hr_work_entry.l10n_om_work_entry_type_overtime_special_rest_days
 msgid "Restday(s) & public holidays Special Overtime"
-msgstr ""
+msgstr "Lepopäivien & yleisten vapaapäivien erityiset ylityöt"
 
 #. module: hr_work_entry
 #: model:hr.work.entry.type,name:hr_work_entry.l10n_au_work_entry_type_rostered_days_off
@@ -3005,6 +3118,11 @@ msgstr ""
 #. module: hr_work_entry
 #: model:hr.work.entry.type,display_code:hr_work_entry.l10n_be_work_entry_type_sailor_time_off
 msgid "SEA"
+msgstr ""
+
+#. module: hr_work_entry
+#: model:hr.work.entry.type,display_code:hr_work_entry.ge_work_entry_type_sick_leave
+msgid "SL"
 msgstr ""
 
 #. module: hr_work_entry
@@ -3068,6 +3186,7 @@ msgstr ""
 #: model:hr.work.entry.type,display_code:hr_work_entry.us_work_entry_type_sick_leave
 #: model:hr.work.entry.type,display_code:hr_work_entry.uz_work_entry_type_sick_leave
 #: model:hr.work.entry.type,display_code:hr_work_entry.vn_work_entry_type_sick_leave
+#: model:hr.work.entry.type,display_code:hr_work_entry.za_work_entry_type_sick_leave
 msgid "STO"
 msgstr "Sairausloma"
 
@@ -3201,6 +3320,7 @@ msgid "Seventh Day"
 msgstr ""
 
 #. module: hr_work_entry
+#: model:hr.work.entry.type,name:hr_work_entry.ge_work_entry_type_sick_leave
 #: model:hr.work.entry.type,name:hr_work_entry.l10n_kw_work_entry_type_sick_leave
 msgid "Sick Leave"
 msgstr ""
@@ -3240,6 +3360,11 @@ msgstr "Sairausloma (palkaton)"
 #: model:hr.work.entry.type,name:hr_work_entry.l10n_hk_work_entry_type_sick_leave_80
 msgid "Sick Leave 80%"
 msgstr "Sairasloma 80%"
+
+#. module: hr_work_entry
+#: model:hr.work.entry.type,name:hr_work_entry.za_work_entry_type_sick_leave
+msgid "Sick Time Off"
+msgstr "Sairauspoissaolot"
 
 #. module: hr_work_entry
 #: model:hr.work.entry.type,name:hr_work_entry.l10n_pl_work_entry_type_sick_leave
@@ -3319,6 +3444,10 @@ msgid ""
 "Today: Activity date is today\n"
 "Planned: Future activities."
 msgstr ""
+"Tila toimenpiteiden perusteella\n"
+"Myöhässä: Eräpäivä on jo mennyt\n"
+"Tänään: Toimenpiteen päivämäärä on tänään\n"
+"Suunniteltu: Tulevat toimenpiteet."
 
 #. module: hr_work_entry
 #: model:hr.work.entry.type,name:hr_work_entry.l10n_hk_work_entry_type_statutory_holiday
@@ -3362,6 +3491,11 @@ msgstr ""
 #. module: hr_work_entry
 #: model:hr.work.entry.type,display_code:hr_work_entry.l10n_be_work_entry_type_environmental_protection
 msgid "TME"
+msgstr ""
+
+#. module: hr_work_entry
+#: model:hr.work.entry.type,display_code:hr_work_entry.ge_work_entry_type_compensatory
+msgid "TOIL"
 msgstr ""
 
 #. module: hr_work_entry
@@ -3554,6 +3688,11 @@ msgid "Thursday"
 msgstr ""
 
 #. module: hr_work_entry
+#: model:hr.work.entry.type,name:hr_work_entry.ge_work_entry_type_compensatory
+msgid "Time Off in Lieu of Overtime"
+msgstr ""
+
+#. module: hr_work_entry
 #: model:ir.model,name:hr_work_entry.model_hr_time_rule
 msgid "Time Rule"
 msgstr ""
@@ -3575,6 +3714,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:hr_work_entry.field_resource_calendar_leaves__work_entry_type_id
 #: model_terms:ir.ui.view,arch_db:hr_work_entry.hr_time_rule_view_form
 #: model_terms:ir.ui.view,arch_db:hr_work_entry.hr_work_entry_type_view_form
+#: model_terms:ir.ui.view,arch_db:hr_work_entry.hr_work_entry_type_view_search
 #: model_terms:ir.ui.view,arch_db:hr_work_entry.resource_calendar_leaves_view_search_inherit
 msgid "Time Type"
 msgstr ""
@@ -3643,7 +3783,7 @@ msgstr ""
 #. module: hr_work_entry
 #: model:ir.model.fields,help:hr_work_entry.field_hr_work_entry_type__activity_exception_decoration
 msgid "Type of the exception activity on record."
-msgstr ""
+msgstr "Kirjatun poikkeustoimenpiteen tyyppi."
 
 #. module: hr_work_entry
 #: model:hr.work.entry.type,display_code:hr_work_entry.l10n_be_work_entry_type_unjustified_reason
@@ -3667,6 +3807,7 @@ msgstr ""
 #: model:hr.work.entry.type,display_code:hr_work_entry.ch_work_entry_type_unpaid_leave
 #: model:hr.work.entry.type,display_code:hr_work_entry.eg_work_entry_type_unpaid_leave
 #: model:hr.work.entry.type,display_code:hr_work_entry.fr_work_entry_type_unpaid_leave
+#: model:hr.work.entry.type,display_code:hr_work_entry.ge_work_entry_type_unpaid_leave
 #: model:hr.work.entry.type,display_code:hr_work_entry.generic_work_entry_type_unpaid_leave
 #: model:hr.work.entry.type,display_code:hr_work_entry.hk_work_entry_type_unpaid_leave
 #: model:hr.work.entry.type,display_code:hr_work_entry.id_work_entry_type_unpaid_leave
@@ -3694,6 +3835,7 @@ msgstr ""
 #: model:hr.work.entry.type,display_code:hr_work_entry.us_work_entry_type_unpaid_leave
 #: model:hr.work.entry.type,display_code:hr_work_entry.uz_work_entry_type_unpaid_leave
 #: model:hr.work.entry.type,display_code:hr_work_entry.vn_work_entry_type_unpaid_leave
+#: model:hr.work.entry.type,display_code:hr_work_entry.za_work_entry_type_unpaid_leave
 msgid "UN"
 msgstr "Palkaton vapaa"
 
@@ -3743,6 +3885,11 @@ msgid "Union obligations (unpaid)"
 msgstr ""
 
 #. module: hr_work_entry
+#: model:hr.work.entry.type,name:hr_work_entry.za_work_entry_type_unpaid_leave
+msgid "Unpaid"
+msgstr "Maksamaton"
+
+#. module: hr_work_entry
 #: model:hr.work.entry.type,name:hr_work_entry.l10n_ch_swissdec_unpaid_wt
 msgid "Unpaid Salary"
 msgstr "Palkaton"
@@ -3783,6 +3930,11 @@ msgid "V20"
 msgstr ""
 
 #. module: hr_work_entry
+#: model:hr.work.entry.type,display_code:hr_work_entry.l10n_be_work_entry_type_overtime_no_onss
+msgid "VNH"
+msgstr ""
+
+#. module: hr_work_entry
 #: model:hr.work.entry.type,display_code:hr_work_entry.l10n_be_work_entry_type_voluntary_overtime_net
 msgid "VNO"
 msgstr ""
@@ -3813,6 +3965,11 @@ msgid "Voluntary extra hours - 200%"
 msgstr ""
 
 #. module: hr_work_entry
+#: model:hr.work.entry.type,display_code:hr_work_entry.l10n_be_work_entry_type_work_accident_second_week_short_term_employee
+msgid "W2A"
+msgstr ""
+
+#. module: hr_work_entry
 #: model:hr.work.entry.type,display_code:hr_work_entry.l10n_be_work_entry_type_work_accident_first_week
 msgid "WA1"
 msgstr ""
@@ -3825,11 +3982,6 @@ msgstr ""
 #. module: hr_work_entry
 #: model:hr.work.entry.type,display_code:hr_work_entry.l10n_be_work_entry_type_work_accident_second_week
 msgid "WAS"
-msgstr ""
-
-#. module: hr_work_entry
-#: model:hr.work.entry.type,display_code:hr_work_entry.l10n_be_work_entry_type_work_accident_second_week_short_term_employee
-msgid "WASEMP"
 msgstr ""
 
 #. module: hr_work_entry
@@ -3923,6 +4075,7 @@ msgstr ""
 #: model:hr.work.entry.type,name:hr_work_entry.ch_work_entry_type_attendance
 #: model:hr.work.entry.type,name:hr_work_entry.eg_work_entry_type_attendance
 #: model:hr.work.entry.type,name:hr_work_entry.fr_work_entry_type_attendance
+#: model:hr.work.entry.type,name:hr_work_entry.ge_work_entry_type_attendance
 #: model:hr.work.entry.type,name:hr_work_entry.generic_work_entry_type_attendance
 #: model:hr.work.entry.type,name:hr_work_entry.hk_work_entry_type_attendance
 #: model:hr.work.entry.type,name:hr_work_entry.id_work_entry_type_attendance
@@ -3961,7 +4114,7 @@ msgstr "Työn yksityiskohdat"
 #. module: hr_work_entry
 #: model:ir.module.module,shortdesc:base.module_hr_work_entry
 msgid "Work Entries"
-msgstr ""
+msgstr "Työkirjaukset"
 
 #. module: hr_work_entry
 #: model:ir.model,name:hr_work_entry.model_hr_user_work_entry_employee
@@ -3992,6 +4145,7 @@ msgstr ""
 #: model:hr.work.entry.type,name:hr_work_entry.ch_work_entry_type_home_working
 #: model:hr.work.entry.type,name:hr_work_entry.eg_work_entry_type_home_working
 #: model:hr.work.entry.type,name:hr_work_entry.fr_work_entry_type_home_working
+#: model:hr.work.entry.type,name:hr_work_entry.ge_work_entry_type_home_working
 #: model:hr.work.entry.type,name:hr_work_entry.generic_work_entry_type_home_working
 #: model:hr.work.entry.type,name:hr_work_entry.hk_work_entry_type_home_working
 #: model:hr.work.entry.type,name:hr_work_entry.id_work_entry_type_home_working
@@ -4102,9 +4256,8 @@ msgid "You cannot have the same employee twice."
 msgstr "Sama työntekijää ei voi valita kahteen kertaan."
 
 #. module: hr_work_entry
-#. odoo-javascript
-#: code:addons/hr_work_entry/static/src/components/work_entry_type_field/work_entry_type_field.xml:0
-msgid "autoCompleteItemScope.label"
+#: model:hr.work.entry.type,display_code:hr_work_entry.za_work_entry_type_public_holiday
+msgid "ZA"
 msgstr ""
 
 #. module: hr_work_entry
@@ -4165,12 +4318,6 @@ msgid "the weekly schedule"
 msgstr ""
 
 #. module: hr_work_entry
-#. odoo-javascript
-#: code:addons/hr_work_entry/static/src/components/work_entry_type_field/work_entry_type_field.xml:0
-msgid "this.props.record.data.name"
-msgstr ""
-
-#. module: hr_work_entry
 #. odoo-python
 #: code:addons/hr_work_entry/models/hr_time_rule.py:0
 msgid "week"
@@ -4212,9 +4359,6 @@ msgstr ""
 #~ msgid "Flemish Educational Time Off"
 #~ msgstr "Flaamilainen opintovapaa"
 
-#~ msgid "Home Working"
-#~ msgstr "Etätyö"
-
 #~ msgid "Long Term Sick"
 #~ msgstr "Pitkäaikaissairaus"
 
@@ -4227,14 +4371,8 @@ msgstr ""
 #~ msgid "Notice (Unprovided)"
 #~ msgstr "Ilmoitus (ei annettu)"
 
-#~ msgid "Out of Contract"
-#~ msgstr "Sopimuksen ulkopuolella"
-
 #~ msgid "Overtime Hours"
 #~ msgstr "Ylityötunnit"
-
-#~ msgid "Paid Time Off"
-#~ msgstr "Palkallinen vapaa"
 
 #~ msgid "Partial Incapacity (due to illness)"
 #~ msgstr "Osittainen työkyvyttömyys (sairauden vuoksi)"
@@ -4248,9 +4386,6 @@ msgstr ""
 #~ msgid "Recovery Bank Holiday"
 #~ msgstr "Korvaava vapaapäivä"
 
-#~ msgid "Sick Time Off"
-#~ msgstr "Sairauspoissaolot"
-
 #~ msgid "Sick Time Off (Without Guaranteed Salary)"
 #~ msgstr "Sairausloma (ilman taattua palkkaa)"
 
@@ -4262,9 +4397,6 @@ msgstr ""
 
 #~ msgid "Unjustified Reason"
 #~ msgstr "Perusteeton syy"
-
-#~ msgid "Unpaid"
-#~ msgstr "Maksamaton"
 
 #~ msgid "Brief Holiday (Birth)"
 #~ msgstr "Lyhyt loma (syntymä)"

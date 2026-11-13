@@ -160,6 +160,39 @@ class TestWebsiteSaleCart(ProductVariantsCommon, WebsiteSaleCommon, HttpCase):
 
         self.assertEqual(request.cart.order_line.product_no_variant_attribute_value_ids, ptav)
 
+    def test_add_to_cart_combo_product_with_prevent_zero_price_sale(self):
+        """Ensure that a public user can add a non-zero-priced combo product to cart when the sale
+        of zero-priced products is prevented.
+        """
+        self.website.write({"prevent_sale": True, "prevent_sale_for": "zero_price"})
+        combo_item = self._create_product(name="Combo item")
+        combo = self.env["product.combo"].create({
+            "name": "Test combo",
+            "combo_item_ids": [Command.create({"product_id": combo_item.id})],
+        })
+        combo_product = self._create_product(
+            name="Combo product", type="combo", combo_ids=[Command.link(combo.id)]
+        )
+        website = self.website.with_user(self.public_user)
+
+        with self.mock_request(website=website) as request:
+            self.WebsiteSaleCartController.add_to_cart(
+                product_template_id=combo_product.product_tmpl_id.id,
+                product_id=combo_product.id,
+                quantity=1,
+                linked_products=[{
+                    "product_template_id": combo_item.product_tmpl_id.id,
+                    "parent_product_template_id": combo_product.product_tmpl_id.id,
+                    "product_id": combo_item.id,
+                    "combo_item_id": combo.combo_item_ids.id,
+                    "product_custom_attribute_values": [],
+                    "no_variant_attribute_value_ids": [],
+                    "quantity": 1,
+                }],
+            )
+
+        self.assertEqual(request.cart.order_line.product_id, combo_product + combo_item)
+
     def test_zero_price_after_pricelist_recompute_blocks_payment(self):
         """
         A cart line whose price becomes 0 after a pricelist recompute (e.g. the customer's country
@@ -277,6 +310,70 @@ class TestWebsiteSaleCart(ProductVariantsCommon, WebsiteSaleCommon, HttpCase):
             self.WebsiteSaleCartController.update_cart(line_id=sale_order.order_line.id, quantity=0)
             self.assertEqual(sale_order.cart_quantity, 0.0)
             self.assertEqual(sale_order.order_line, SaleOrderLine)
+
+    def test_add_to_cart_fractional_linked_product_qty(self):
+        """Check that adding linked products to the cart rounds their quantity like the main
+        product's, so that a linked product can't be bought for a fraction of its price."""
+        optional_product_1, optional_product_2 = self.env["product.product"].create([{
+            "name": name,
+            "list_price": 500.0,
+            "website_published": True,
+        } for name in ("Optional Product 1", "Optional Product 2")])
+        self.product.optional_product_ids = [
+            Command.link(optional_product_1.product_tmpl_id.id),
+            Command.link(optional_product_2.product_tmpl_id.id),
+        ]
+
+        with self.mock_request(user=self.user_portal) as request:
+            self.WebsiteSaleCartController.add_to_cart(
+                product_template_id=self.product.product_tmpl_id.id,
+                product_id=self.product.id,
+                quantity=1,
+                linked_products=[{
+                    "product_id": prod.id,
+                    "product_template_id": prod.product_tmpl_id.id,
+                    "parent_product_template_id": self.product.product_tmpl_id.id,
+                    "quantity": quantity,
+                    "product_custom_attribute_values": [],
+                    "no_variant_attribute_value_ids": [],
+                } for prod, quantity in ((optional_product_1, 0.99), (optional_product_2, 1.99))],
+            )
+            self.assertRecordValues(request.cart.order_line, [
+                {"product_id": self.product.id, "product_uom_qty": 1.0},
+                {"product_id": optional_product_1.id, "product_uom_qty": 1.0},
+                {"product_id": optional_product_2.id, "product_uom_qty": 1.0},
+            ])
+
+    def test_add_to_cart_fractional_combo_qty(self):
+        """Check that adding a combo product to the cart with a quantity below one adds it with
+        its combo items, all with a quantity of one."""
+        combos = self.env["product.combo"].create([{
+            "name": f"Combo {suffix}",
+            "combo_item_ids": [Command.create({"product_id": self._create_product().id})],
+        } for suffix in ("A", "B")])
+        combo_product = self._create_product(type="combo", combo_ids=[Command.set(combos.ids)])
+        item_a, item_b = combos.combo_item_ids
+
+        with self.mock_request(user=self.user_portal) as request:
+            self.WebsiteSaleCartController.add_to_cart(
+                product_template_id=combo_product.product_tmpl_id.id,
+                product_id=combo_product.id,
+                quantity=0.5,
+                linked_products=[{
+                    "product_id": item.product_id.id,
+                    "product_template_id": item.product_id.product_tmpl_id.id,
+                    "parent_product_template_id": combo_product.product_tmpl_id.id,
+                    "combo_item_id": item.id,
+                    "quantity": 0.5,
+                    "product_custom_attribute_values": [],
+                    "no_variant_attribute_value_ids": [],
+                } for item in (item_a, item_b)],
+            )
+            self.assertRecordValues(request.cart.order_line, [
+                {"product_id": combo_product.id, "product_uom_qty": 1.0},
+                {"product_id": item_a.product_id.id, "product_uom_qty": 1.0},
+                {"product_id": item_b.product_id.id, "product_uom_qty": 1.0},
+            ])
 
     def test_unpublished_accessory_product_visibility(self):
         # Check if unpublished product is shown to public user
@@ -621,3 +718,35 @@ class TestWebsiteSaleCart(ProductVariantsCommon, WebsiteSaleCommon, HttpCase):
             # We shouldn't find any abandonned cart if the customer isn't allowed to
             # buy from this website (because their contact belongs to another company)
             self.assertFalse(request.cart)
+
+    def test_update_cart_on_deleted_cart(self):
+        """Updating a cart line shouldn't crash if the cart no longer exists, e.g. it was
+        deleted while the customer still had it open in another tab."""
+        cart_id, line_id = self.cart.id, self.cart.order_line[0].id
+        self.cart.unlink()
+
+        with self.mock_request(sale_order_id=cart_id):
+            res = self.WebsiteSaleCartController.update_cart(line_id=line_id, quantity=0)
+
+            self.assertEqual(res["cart_quantity"], 0)
+            self.assertEqual(res["amount"], 0.0)
+            self.assertEqual(res["minor_amount"], 0)
+            self.assertIn("warning", res)
+
+    def test_order_history_hides_public_partner_orders(self):
+        self.product.is_published = True
+        self._create_so(partner_id=self.public_partner.id).action_confirm()
+        with self.mock_request():
+            order_history = self.WebsiteSaleCartController._prepare_order_history()
+        self.assertEqual(order_history, {"order_history": []})
+
+    def test_order_history_lists_own_confirmed_orders(self):
+        self.product.is_published = True
+        order = self._create_so(partner_id=self.user_portal.partner_id.id)
+        order.action_confirm()
+        with self.mock_request(user=self.user_portal):
+            order_history = self.WebsiteSaleCartController._prepare_order_history()
+        history_lines = self.env["sale.order.line"].concat(
+            *(group["lines"] for group in order_history["order_history"]),
+        )
+        self.assertEqual(history_lines, order.order_line)

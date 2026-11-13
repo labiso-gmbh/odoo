@@ -86,19 +86,32 @@ class TestDiscussFullPerformance(HttpCase, MailCommon):
     #           - select the current db snapshot
     _query_count_init_messaging = 35
     # Queries for _query_count_messaging_menu_channels (in order):
-    #   2: self_member_id of the current user (first occurrence)
-    #       - fetch res_users
-    #       - search discuss_channel JOIN member
-    #   8: load more, twice per tab (the priority domain first, then the rest) for the
-    #      chat, channel, meeting and livechat tabs:
-    #       - search_fetch discuss_channel
+    #   5: chat tab:
+    #       - fetch res_users (current persona, first occurrence)
+    #       - search_fetch discuss_channel_member (pinned channel ids)
+    #       - search discuss_channel JOIN member (is_member, first occurrence)
+    #       2: load more (the priority domain first, then the rest):
+    #           - search_fetch discuss_channel
+    #   4: channel tab:
+    #       - search_fetch discuss_channel_member (pinned channel ids)
+    #       - read group mail_message (needaction channel ids)
+    #       2: load more:
+    #           - search_fetch discuss_channel
+    #   3: meeting tab:
+    #       - search_fetch discuss_channel_member (pinned channel ids)
+    #       2: load more:
+    #           - search_fetch discuss_channel
+    #   4: livechat tab:
+    #       - search_fetch discuss_channel_member (pinned channel ids, tab domain)
+    #       - search_fetch discuss_channel_member (pinned channel ids, priority domain)
+    #       2: load more:
+    #           - search_fetch discuss_channel
     #   1: read group member (prefetch _compute_self_member_id)
     #   1: search discuss_channel (last message of each channel, add_channels_last_message)
     #   1: search mail_message (_compute_message_needaction)
     #   1: search discuss_channel (add_channels_last_needaction)
-    #   37: channel _to_store_defaults:
+    #   35: channel _to_store_defaults:
     #       - read group member (_compute_invited_member_ids)
-    #       - fetch discuss_channel_member (invited member)
     #       - search discuss_channel_rtc_session
     #       - fetch discuss_channel_rtc_session
     #       - search member (channel_member_ids)
@@ -131,7 +144,6 @@ class TestDiscussFullPerformance(HttpCase, MailCommon):
     #       - fetch ir_attachment (_compute_avatar_128)
     #       - [calendar] search calendar_event (meeting_ids, resolved upfront for the
     #         whole recordset)
-    #       - fetch ir_attachment (image_128, _compute_avatar_128 of the chat correspondent)
     #       - count discuss_channel_member (member_count)
     #       - search discuss_channel_res_groups_rel (group_ids)
     #         [enterprise] fetch discuss_channel (sudo fields, ai_agent_id)
@@ -141,12 +153,13 @@ class TestDiscussFullPerformance(HttpCase, MailCommon):
     #       - _compute_message_unread
     #       - fetch res_groups (group_ids)
     #       - fetch im_livechat_channel
-    #   23: store add message:
+    #   25: store add message:
     #       - search mail_message_reaction
     #       - search mail_message (_filter_accessible_from_query)
     #       - search mail_message (_filter_accessible_from_query, ordered)
     #       - fetch mail_message
     #       - search mail_message_schedule
+    #       - search discuss_channel (linkedSubChannel)
     #       - search mail_message_res_partner_bookmarked_rel
     #       - search message_attachment_rel
     #       - search mail_message_res_partner_rel
@@ -165,8 +178,9 @@ class TestDiscussFullPerformance(HttpCase, MailCommon):
     #       - fetch discuss_call_history
     #       - search_fetch mail_call_artifact (_compute_recording_media)
     #       - search mail_message_schedule (last message of the needaction message)
+    #       - search discuss_channel (linkedSubChannel of the needaction message)
     #   1: select the current db snapshot
-    _query_count_messaging_menu_channels = 75
+    _query_count_messaging_menu_channels = 81
 
     def setUp(self):
         super().setUp()
@@ -995,6 +1009,7 @@ class TestDiscussFullPerformance(HttpCase, MailCommon):
                 "last_interest_dt": last_interest_dt,
                 "livechat_end_dt": False,
                 "livechat_lang_id": self.channel_livechat_1.livechat_lang_id.id,
+                "livechat_channel_has_agents": True,
                 "livechat_channel_id": self.im_livechat_channel.id,
                 "livechat_channel_member_history_ids": self.channel_livechat_1.livechat_channel_member_history_ids.ids,
                 "livechat_note": False,
@@ -1031,6 +1046,7 @@ class TestDiscussFullPerformance(HttpCase, MailCommon):
                 "last_interest_dt": last_interest_dt,
                 "livechat_end_dt": False,
                 "livechat_lang_id": self.channel_livechat_2.livechat_lang_id.id,
+                "livechat_channel_has_agents": True,
                 "livechat_channel_id": self.im_livechat_channel.id,
                 "livechat_channel_member_history_ids": self.channel_livechat_2.livechat_channel_member_history_ids.ids,
                 "livechat_note": False,
@@ -1510,6 +1526,7 @@ class TestDiscussFullPerformance(HttpCase, MailCommon):
                 "id": last_message.id,
                 "incoming_email_cc": False,
                 "incoming_email_to": False,
+                "linkedSubChannel": False,
                 "message_link_preview_ids": [],
                 "message_type": "comment",
                 "model": "discuss.channel",
@@ -1544,6 +1561,7 @@ class TestDiscussFullPerformance(HttpCase, MailCommon):
                 "id": last_message.id,
                 "incoming_email_cc": False,
                 "incoming_email_to": False,
+                "linkedSubChannel": False,
                 "message_link_preview_ids": [],
                 "message_type": "comment",
                 "model": "discuss.channel",
@@ -1581,6 +1599,7 @@ class TestDiscussFullPerformance(HttpCase, MailCommon):
                 "id": last_message.id,
                 "incoming_email_cc": False,
                 "incoming_email_to": False,
+                "linkedSubChannel": False,
                 "message_link_preview_ids": [],
                 "message_type": "notification",
                 "model": "discuss.channel",
@@ -1619,6 +1638,7 @@ class TestDiscussFullPerformance(HttpCase, MailCommon):
                 "id": last_message.id,
                 "incoming_email_cc": False,
                 "incoming_email_to": False,
+                "linkedSubChannel": False,
                 "message_link_preview_ids": [],
                 "message_type": "notification",
                 "model": "discuss.channel",
@@ -1656,6 +1676,7 @@ class TestDiscussFullPerformance(HttpCase, MailCommon):
                 "id": last_message.id,
                 "incoming_email_cc": False,
                 "incoming_email_to": False,
+                "linkedSubChannel": False,
                 "message_link_preview_ids": [],
                 "message_type": "notification",
                 "model": "discuss.channel",
@@ -1691,6 +1712,7 @@ class TestDiscussFullPerformance(HttpCase, MailCommon):
                 "incoming_email_cc": False,
                 "incoming_email_to": False,
                 "is_bookmarked": False,
+                "linkedSubChannel": False,
                 "message_link_preview_ids": [],
                 "message_type": "comment",
                 "model": "discuss.channel",

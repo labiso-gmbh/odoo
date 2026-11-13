@@ -872,3 +872,37 @@ class TestEdiJson(TestEGEdiCommon):
         )
         invoice.action_post()
         self.assertEqual(invoice.state, "posted")
+
+    def test_11_eta_codes_portal_url(self):
+        for mode, expected_url in (
+            ('production', 'https://invoicing.eta.gov.eg/codeusages'),
+            ('preproduction', 'https://preprod.invoicing.eta.gov.eg/codeusages'),
+        ):
+            with self.subTest(mode=mode):
+                self.env.company.l10n_eg_edi_api_mode = mode
+                expected_action = {
+                    'type': 'ir.actions.act_url',
+                    'url': expected_url,
+                    'target': 'new',
+                }
+                self.assertEqual(self.product_a.action_open_eta_codes_portal(), expected_action)
+                self.assertEqual(self.product_a.product_tmpl_id.action_open_eta_codes_portal(), expected_action)
+
+    def test_12_debit_note_document_type(self):
+        invoice = self._create_invoice_eg(
+            partner_id=self.partner_a.id,
+            invoice_line_ids=[
+                {
+                    'product_id': self.product_a.id,
+                    'price_unit': 100.0,
+                    'quantity': 1.0,
+                    'product_uom_id': self.env.ref('uom.product_uom_unit').id,
+                    'tax_ids': [Command.set(self.env.ref(f'account.{self.env.company.id}_eg_standard_sale_14').ids)],
+                },
+            ],
+        )
+        invoice.action_post()
+        debit_note = self._create_debit_note(invoice, post=True, reason='Price correction')
+
+        self.assertEqual(invoice._generate_l10n_eg_edi_json(is_demo=True)['documentType'], 'i')
+        self.assertEqual(debit_note._generate_l10n_eg_edi_json(is_demo=True)['documentType'], 'd')

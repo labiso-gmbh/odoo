@@ -3,9 +3,7 @@ from odoo.exceptions import UserError, ValidationError
 from odoo.fields import Command, Domain
 from odoo.tools import frozendict, groupby, html2plaintext, is_html_empty, split_every, SQL
 from odoo.tools.float_utils import float_is_zero, float_repr, float_round, float_compare
-from odoo.tools.misc import clean_context, formatLang
 from odoo.tools.translate import html_translate, adapt_translated_field_value
-
 from collections import defaultdict
 from collections.abc import Iterable
 from markupsafe import Markup
@@ -90,6 +88,7 @@ class AccountTax(models.Model):
         column1='dest_tax_id',  # This Replacement tax
         column2='src_tax_id',  # Domestic Tax to replace
         string="Replaces",
+        copy=False,
         domain="""[
             ('type_tax_use', '=', type_tax_use),
             ('is_domestic', '=', True),
@@ -333,14 +332,18 @@ class AccountTax(models.Model):
 
     @api.depends('account_move_line_ids', 'account_reconcile_model_line_ids')
     def _compute_is_used(self):
-        used_taxes = set(self.sudo().search([
-            ('id', 'in', self.ids),
-            '|',
+        TaxesSudo = self.env['account.tax'].sudo()
+        used_taxes = TaxesSudo.search([
+            ('id', 'in', self._origin.ids),
             ('account_move_line_ids', '!=', False),
-            ('account_reconcile_model_line_ids', '!=', False),
-        ]))
+        ])
+        if taxes_to_check := self._origin - used_taxes:
+            used_taxes |= TaxesSudo.search([
+                ('id', 'in', taxes_to_check.ids),
+                ('account_reconcile_model_line_ids', '!=', False),
+            ])
         for tax in self:
-            tax.is_used = tax in used_taxes
+            tax.is_used = tax._origin in used_taxes
 
     @api.depends('is_used', 'repartition_line_ids.account_id', 'repartition_line_ids.sequence', 'repartition_line_ids.factor_percent', 'repartition_line_ids.use_in_tax_closing', 'repartition_line_ids.tag_ids')
     def _compute_repartition_lines_str(self):
@@ -613,7 +616,12 @@ class AccountTax(models.Model):
     @api.model_create_multi
     def create(self, vals_list):
         self.env.cr.cache.pop('retrieved_tax_map', None)
-        context = clean_context(self.env.context)
+        # Remove all 'default_*' keys from the context except 'default_type_tax_use'
+        # so that taxes quick-created from views retain the expected tax type.
+        context = {
+            k: v for k, v in self.env.context.items()
+            if not k.startswith('default_') or k == 'default_type_tax_use'
+        }
         context.update({
             'mail_create_nosubscribe': True,  # At create or message_post, do not subscribe the current user to the record thread
             'mail_auto_subscribe_no_notify': True,  # Do no notify users set as followers of the mail thread
@@ -1463,7 +1471,8 @@ class AccountTax(models.Model):
     def _reverse_quantity_base_line_extra_tax_data(self, extra_tax_data):
         """ Reverse all sign in extra_tax_data using the quantity.
 
-        [!] Only added python-side.
+        [!] Mirror of the same method in account_tax.js.
+        PLZ KEEP BOTH METHODS CONSISTENT WITH EACH OTHERS.
 
         :param extra_tax_data: The manual taxes data stored on records.
         :return: The extra_tax_data but reversed.
@@ -3301,17 +3310,17 @@ class AccountTax(models.Model):
 
         factors = self._normalize_target_factors(target_factors)['plus_factors']
 
-        new_taxes_data = []
+        new_taxes_data = [None] * len(factors)
 
         # Distribution of raw amounts.
-        for _index, factor in factors:
-            new_taxes_data.append({
+        for index, factor in factors:
+            new_taxes_data[index] = {
                 **tax_data,
                 'raw_tax_amount_currency': factor * tax_data['raw_tax_amount_currency'],
                 'raw_tax_amount': factor * tax_data['raw_tax_amount'],
                 'raw_base_amount_currency': factor * tax_data['raw_base_amount_currency'],
                 'raw_base_amount': factor * tax_data['raw_base_amount'],
-            })
+            }
 
         # Distribution of rounded amounts.
         new_target_factors = [
@@ -3357,11 +3366,11 @@ class AccountTax(models.Model):
 
         factors = self._normalize_target_factors(target_factors)['plus_factors']
 
-        new_tax_details_list = []
+        new_tax_details_list = [None] * len(factors)
 
         # Distribution of raw amounts.
-        for _index, factor in factors:
-            new_tax_details_list.append({
+        for index, factor in factors:
+            new_tax_details_list[index] = {
                 'raw_total_excluded_currency': factor * tax_details['raw_total_excluded_currency'],
                 'raw_total_excluded': factor * tax_details['raw_total_excluded'],
                 'raw_total_included_currency': factor * tax_details['raw_total_included_currency'],
@@ -3369,7 +3378,7 @@ class AccountTax(models.Model):
                 'delta_total_excluded_currency': 0.0,
                 'delta_total_excluded': 0.0,
                 'taxes_data': [],
-            })
+            }
 
         # Manage 'taxes_data'.
         for tax_data in tax_details['taxes_data']:
@@ -3436,7 +3445,8 @@ class AccountTax(models.Model):
 
         # Split 'base_line'.
         new_base_lines = [None] * len(factors)
-        for (index, factor), new_tax_details, target_factor in zip(factors, new_tax_details_list, target_factors):
+        for index, factor in factors:
+            new_tax_details, target_factor = new_tax_details_list[index], target_factors[index]
             kwargs = {
                 'price_unit': factor * base_line['price_unit'],
                 'tax_details': new_tax_details,
@@ -4993,8 +5003,8 @@ class AccountTax(models.Model):
     def _fix_tax_included_price_company(self, price, prod_taxes, line_taxes, company_id, document_tax_mode=None):
         if company_id:
             #To keep the same behavior as in _compute_tax_id
-            prod_taxes = prod_taxes.filtered(lambda tax: tax.company_id == company_id)
-            line_taxes = line_taxes.filtered(lambda tax: tax.company_id == company_id)
+            prod_taxes = prod_taxes._filter_taxes_by_company(company_id)
+            line_taxes = line_taxes._filter_taxes_by_company(company_id)
         return self._fix_tax_included_price(price, prod_taxes, line_taxes, document_tax_mode)
 
     def _get_description_plaintext(self):
@@ -5056,6 +5066,53 @@ class AccountTax(models.Model):
         return {'criteria': criteria}
 
     @api.model
+    def _import_retrieve_tax_from_fixed_allowance_charge(self, tax_values):
+        if tax_values.get('amount_type') != 'fixed':
+            return
+
+        invoice = tax_values.get('invoice_predictive', {}).get('invoice')
+        company_id = invoice.company_id.id if invoice else self.env.company.id
+        calculated_amount = tax_values.get('amount', 0.0)
+        reason = (tax_values.get('name') or '').strip().lower()
+        type_tax_use = tax_values.get('type_tax_use')
+
+        # ignore values param as it has a flawed static_domain, but we have to use it in the function signature
+        def search_fixed_tax_fuzzy(values):
+            candidate_taxes = self.search([
+                ('company_id', 'in', [company_id, False]),
+                ('amount_type', '=', 'fixed'),
+                ('type_tax_use', '=', type_tax_use),
+                ('amount', '>=', calculated_amount - 0.01),
+                ('amount', '<=', calculated_amount + 0.01),
+            ])
+
+            if not candidate_taxes:
+                return self
+
+            if len(candidate_taxes) == 1:
+                return candidate_taxes[0]
+
+            for tax in candidate_taxes:
+                tax_name = tax.name.strip().lower()
+                if reason in tax_name or tax_name in reason:
+                    return tax
+            return self
+
+        cache_key = (
+            company_id,
+            type_tax_use,
+            calculated_amount,
+            reason,
+        )
+
+        return {
+            'criteria': [{
+                'search_method': search_fixed_tax_fuzzy,
+                'cache_key': cache_key,
+            }],
+        }
+
+    @api.model
     def _import_retrieve_tax(self, search_plan, company, tax_values_list):
         cache = self.env.cr.cache.setdefault('retrieved_tax_map', {}).setdefault(company.id, {})
 
@@ -5075,6 +5132,13 @@ class AccountTax(models.Model):
                 # tax itself isn't, so ignore the amount and rely on the category code instead.
                 tax_domain &= Domain('ubl_cii_tax_category_code', '=', 'AE')
             orders = ['sequence', 'id']
+            if invoice_predictive := tax_values.get('invoice_predictive'):
+                fiscal_position = tax_values.get('fiscal_position')
+                if fiscal_position and fiscal_position.foreign_vat:
+                    country = fiscal_position.country_id
+                else:
+                    country = invoice_predictive['invoice'].tax_country_id
+                tax_domain &= Domain('country_id', '=', country.id)
             if name := tax_values.get('name'):
                 tax_domain &= Domain('name', '=', name)
             if tax_exigibility := tax_values.get('tax_exigibility'):

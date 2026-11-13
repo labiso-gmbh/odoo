@@ -358,7 +358,7 @@ class TestLoyalty(TransactionCase):
         )
         product = reward.discount_line_product_id
         translations = {"en_US": "Test Discount EN", "fr_FR": "Test Discount FR"}
-        reward.update_field_translations("description", translations)
+        reward._update_field_translations("description", translations)
         product.invalidate_recordset(["name"])
         self.assertEqual(product.with_context(lang="en_US").name, "Test Discount EN")
         self.assertEqual(product.with_context(lang="fr_FR").name, "Test Discount FR")
@@ -378,4 +378,20 @@ class TestLoyalty(TransactionCase):
             program.reward_ids.discount,
             5.0,
             "The discount update should be successfully saved to the database.",
+        )
+
+    def test_inverse_points_records_balance_difference_in_history(self):
+        """Writing `points`, when importing cards for instance, records the difference
+        between the written balance and the current one in the card's history.
+        """
+        card = self.env["loyalty.card"].create({"program_id": self.program.id, "points": 100})
+        self.env.invalidate_all()
+        self.assertEqual(card.points, 100, "The balance should be stored in the history")
+        self.assertRecordValues(card.history_ids, [{"issued": 100, "used": 0}])
+
+        card.write({"points": 40})
+        self.env.invalidate_all()
+        self.assertEqual(card.points, 40, "The updated balance should be stored in the history")
+        self.assertRecordValues(
+            card.history_ids.sorted("id"), [{"issued": 100, "used": 0}, {"issued": 0, "used": 60}]
         )

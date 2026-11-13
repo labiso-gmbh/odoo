@@ -1,5 +1,6 @@
 from datetime import datetime, time, timedelta, timezone
 from zoneinfo import ZoneInfo
+from freezegun import freeze_time
 
 from odoo import fields
 from odoo.tests import tagged
@@ -453,6 +454,38 @@ class TestLeaveAttendanceReport(TestHrHolidaysCommon):
             'difference_hours': -round(calendar.hours_per_day, 2),
         }])
 
+    def test_attendance_validated_and_local_date(self):
+        """ Only the validated attendances count, on the local day of the employee. """
+        emp = self.employee_emp
+        today = fields.Date.today()
+        monday = today - timedelta(days=today.weekday() + 7 * 8)
+        tuesday = monday + timedelta(days=1)
+        emp.contract_date_start = monday - timedelta(days=7)
+        emp.version_id.tz = 'Pacific/Auckland'
+        Report = self.env['hr.leave.attendance.report']
+
+        def row(d):
+            return Report.search([('employee_id', '=', emp.id), ('date', '=', d)])
+
+        tz = ZoneInfo('Pacific/Auckland')
+
+        def local(d, hour):
+            return datetime.combine(d, time(hour), tzinfo=tz).astimezone(timezone.utc).replace(tzinfo=None)
+
+        # Monday 8:00-12:00 in Auckland is still Sunday in UTC
+        validated = self.env['hr.attendance'].create({
+            'employee_id': emp.id, 'check_in': local(monday, 8), 'check_out': local(monday, 12)})
+        refused = self.env['hr.attendance'].create({
+            'employee_id': emp.id, 'check_in': local(tuesday, 8), 'check_out': local(tuesday, 12)})
+        validated.state = 'validated'
+        refused.state = 'refused'
+        self.env.flush_all()
+
+        self.assertEqual(row(monday).worked_hours, round(validated.worked_hours, 2))
+        self.assertEqual(row(monday).attendance_ids, validated)
+        self.assertEqual(row(tuesday).worked_hours, 0.0)
+        self.assertFalse(row(tuesday).attendance_ids)
+
     def test_overlap_leave_and_public_holiday_excluded(self):
         """ When the leave type excludes public holidays from its duration,
             the holiday is dropped from the leave's pro-rated working-day
@@ -497,3 +530,44 @@ class TestLeaveAttendanceReport(TestHrHolidaysCommon):
             'leave_hours': 8.0,
             'difference_hours': 0.0,
         } for _ in range(2)])
+
+    def test_automatic_checkout_working_time_leave(self):
+        """
+        Checks that when an employee has no contract, and they take a leave considered as working time, the automatic
+        checkout action doesn't check the employee out, as they're supposed to be working during the entire day.
+        """
+        self.env.company.write({
+            'auto_check_out': True,
+            'auto_check_out_tolerance': 2
+        })
+        employee = self.env['hr.employee'].create({
+            'name': 'Test User Without Version',
+            'company_id': self.env.company.id,
+            'resource_calendar_id': self.employee_emp.resource_calendar_id.id
+        })
+        homework_type = self.env['hr.work.entry.type'].create({
+            'name': 'Homework Time',
+            'code': 'Test homework Time',
+            'count_as': 'working_time',
+            'requires_allocation': False,
+        })
+        with freeze_time('2025-09-01 10:00:00'):
+            leave = self.env['hr.leave'].create({
+                'name': 'Some leave',
+                'work_entry_type_id': homework_type.id,
+                'employee_id': employee.id,
+                'request_date_from': '2025-09-01',
+                'request_date_to': '2025-09-01',
+            })
+            self.env['resource.calendar.leaves'].create({
+                'resource_id': employee.resource_id.id,
+                'calendar_id': employee.resource_calendar_id.id,
+                'date_from': datetime(2025, 9, 1, 8),
+                'date_to': datetime(2025, 9, 1, 17),
+                'holiday_id': leave.id
+            })
+            attendance = self.env['hr.attendance'].create(
+                {'employee_id': employee.id, 'check_in': datetime(2025, 9, 1, 9, 0, 0)}
+            )
+            self.env['hr.attendance']._cron_auto_check_out()
+        self.assertFalse(attendance.check_out)

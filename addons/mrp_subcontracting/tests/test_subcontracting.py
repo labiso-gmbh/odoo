@@ -1214,6 +1214,41 @@ class TestSubcontractingFlows(TestMrpSubcontractingCommon):
         self.assertEqual(avail_qty_comp2, -1)
         self.assertEqual(avail_qty_finished, 1)
 
+    def test_flow_tracked_picked_receipt_edit_lot(self):
+        """ The receipt of a lot-tracked subcontracted product, whose component is resupplied on
+        order, is picked before its lot is set on the existing move line in the detailed operations.
+        Validating the receipt produces the subcontracted product and consumes the components.
+        """
+        self.finished.tracking = 'lot'
+        resupply_route = self.env.ref('mrp_subcontracting.route_resupply_subcontractor_mto')
+        resupply_route.product_selectable = True
+        self.comp1.route_ids = [Command.link(resupply_route.id)]
+        self.env['stock.quant']._update_available_quantity(self.comp1, self.warehouse.lot_stock_id, 1)
+        picking_receipt = self.env['stock.picking'].create({
+            'picking_type_id': self.warehouse.in_type_id.id,
+            'partner_id': self.subcontractor_partner1.id,
+            'move_ids': [Command.create({
+                'product_id': self.finished.id,
+                'product_uom_qty': 1.0,
+            })],
+        })
+        picking_receipt.action_confirm()
+        self.env['mrp.production'].search([('bom_id', '=', self.bom.id)]).picking_ids.button_validate()
+
+        picking_receipt.move_ids.picked = True
+        lot = self.env['stock.lot'].create({'name': 'lot1', 'product_id': self.finished.id})
+        with Form.from_action(self.env, picking_receipt.move_ids.action_show_details()) as move_form:
+            with move_form.move_line_ids.edit(0) as move_line:
+                move_line.lot_id = lot
+        picking_receipt.button_validate()
+
+        mo = self.env['mrp.production'].search([('bom_id', '=', self.bom.id)])
+        self.assertRecordValues(mo, [{'state': 'done', 'lot_producing_ids': lot.ids}])
+        self.assertRecordValues(mo.move_raw_ids, [
+            {'product_id': self.comp1.id, 'quantity': 1.0, 'state': 'done'},
+            {'product_id': self.comp2.id, 'quantity': 1.0, 'state': 'done'},
+        ])
+
     def test_flow_tracked_only_finished(self):
         """ Test when only the finished product is tracked """
         self.finished.tracking = "serial"
@@ -1780,7 +1815,8 @@ class TestSubcontractingSerialMassReceipt(TransactionCase):
             {'name': 'TEST0000001'},
             {'name': 'TEST0000002'},
         ])
-        self.assertEqual(self.finished.serial_prefix_format + self.finished.next_serial, 'TEST0000003')
+        self.assertEqual(self.finished.next_serial, '0000003')
+        self.assertEqual(self.finished.with_context(complete_next_serial=True).next_serial, 'TEST0000003')
 
         second_receipt, second_mo = self.generate_subcontracting_receipt_and_mo(5, warehouse)
         second_serials_wizard = Form.from_action(self.env, second_mo.action_generate_serial())
@@ -1846,6 +1882,7 @@ class TestSubcontractingSerialMassReceipt(TransactionCase):
             {'name': '03-02-0000002'},
         ])
         self.assertEqual(self.finished.next_serial, '0000003')
+        self.assertEqual(self.finished.with_context(complete_next_serial=True).next_serial, '03-02-0000003')
 
     def test_subcontract_move_lines_are_linked_to_picking(self):
         """Test to ensure that when we generate mass serial numbers for a

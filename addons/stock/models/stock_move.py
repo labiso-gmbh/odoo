@@ -713,9 +713,10 @@ Please change the quantity done or the rounding precision in your settings.""",
                     for quant in quants_to_reserve:
                         if reserved and product.uom_id.compare(extra_uom_qty, 0.0) <= 0:
                             break
-                        if not quant.lot_id or product.uom_id.compare(quant.available_quantity, 0.0) <= 0:
+                        quant_qty = quant.quantity if move.is_scrap else quant.available_quantity
+                        if not quant.lot_id or product.uom_id.compare(quant_qty, 0.0) <= 0:
                             continue
-                        quantity_to_reserve = min(quant.available_quantity, max(extra_uom_qty if reserved else extra_uom_qty + 1, 1))
+                        quantity_to_reserve = min(quant_qty, max(extra_uom_qty if reserved else extra_uom_qty + 1, 1))
                         if product.uom_id.compare(quantity_to_reserve, 0.0) > 0:
                             move_line_vals = self._prepare_move_line_vals(quantity=quantity_to_reserve, reserved_quant=quant)
                             move_line_vals.update({'lot_id': lot.id, 'lot_name': lot.name})
@@ -933,7 +934,7 @@ Please change the quantity done or the rounding precision in your settings.""",
             self._update_orderpoints()
         if 'picking_id' in vals:
             self._set_references()
-        if self.env.user.has_group('stock.group_stock_picking_batch') and\
+        if self.env['stock.picking']._is_batch_feature_enabled() and\
            'state' in vals and vals['state'] in ('partially_available', 'assigned'):
             for picking in self.picking_id:
                 if picking.state != 'assigned':
@@ -1613,7 +1614,7 @@ Please change the quantity done or the rounding precision in your settings.""",
         if self.partner_id:
             picking_partner_id = self._get_picking_partner().id
             domain = Domain.AND([domain, [('partner_id', '=', picking_partner_id)]])
-        if self.env.user.has_group('stock.group_stock_picking_batch'):
+        if self.env['stock.picking']._is_batch_feature_enabled():
             domain = Domain.AND([
                 domain,
                 ['|', ('batch_id', '=', False), ('batch_id.is_wave', '=', False)],
@@ -1674,7 +1675,7 @@ Please change the quantity done or the rounding precision in your settings.""",
         return vals
 
     def _assign_picking_post_process(self, new=False):
-        if self.env.user.has_group('stock.group_stock_picking_batch'):
+        if self.env['stock.picking']._is_batch_feature_enabled():
             for picking in self.picking_id:
                 picking._find_auto_batch()
         pass
@@ -2273,7 +2274,7 @@ Please change the quantity done or the rounding precision in your settings.""",
             self.picking_id._check_entire_pack()
         StockMove.browse(moves_to_redirect).move_line_ids._apply_putaway_strategy()
 
-        if self.env.user.has_group('stock.group_stock_picking_batch'):
+        if self.env['stock.picking']._is_batch_feature_enabled():
             self.move_line_ids._auto_wave()
 
     def _action_cancel(self):
@@ -2710,9 +2711,15 @@ Please change the quantity done or the rounding precision in your settings.""",
                     ('location_dest_id', '=', move.location_dest_id.id),
                     ('action', '!=', 'push')
                 ]
+                warehouse = move.warehouse_id or move.picking_type_id.warehouse_id
+                rule = self.env['stock.rule']
                 if picking_type_code:
                     domain.append(('picking_type_id.code', '=', picking_type_code))
-                rule = self.env['stock.rule']._search_rule(False, move.packaging_uom_id, product_id, move.warehouse_id or move.picking_type_id.warehouse_id, domain)
+                elif move.picking_type_id:
+                    # Several rules can match, prefer one of the same operation type as the move.
+                    rule = self.env['stock.rule']._search_rule(False, move.packaging_uom_id, product_id, warehouse, domain + [('picking_type_id.code', '=', move.picking_type_id.code)])
+                if not rule:
+                    rule = self.env['stock.rule']._search_rule(False, move.packaging_uom_id, product_id, warehouse, domain)
                 if rule:
                     break
                 location = location.location_id

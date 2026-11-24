@@ -1,6 +1,7 @@
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
 from datetime import timedelta
+from freezegun import freeze_time
 
 from odoo.addons.mrp.tests.common import TestMrpCommon
 from odoo.addons.mrp_account.tests.common import TestBomPriceCommon, TestBomPriceOperationCommon
@@ -237,6 +238,27 @@ class TestMrpAccount(TestBomPriceCommon, TestMrpCommon):
         self.assertEqual(mo_data['summary']['mo_cost'], 4580)
         self.assertEqual(mo_data['extras']['total_mo_cost'], 5725)
         self.assertEqual(mo_data['byproducts']['summary']['mo_cost'], 1145)
+
+    def test_compute_price_from_bom_extra_cost_per_unit(self):
+        """ The BoM extra cost is a cost per manufactured unit: computing the product
+        cost from a BoM producing several units must add it once per unit, like the
+        manufacturing order valuation does. """
+        product = self._create_product('Batch Product', 0, quantity=0, category=self.category_fifo_auto)
+        bom = self.Bom.sudo().create({
+            'product_id': product.id,
+            'product_tmpl_id': product.product_tmpl_id.id,
+            'product_qty': 10,
+            'type': 'normal',
+            'extra_cost': 5,
+            'bom_line_ids': [Command.create({'product_id': self.screw.id, 'product_qty': 10})],
+        })
+        # 10 screws at 10 for 10 units + 5 of extra cost per unit -> 15 per unit
+        product.sudo().button_bom_cost()
+        self.assertEqual(product.standard_price, 15)
+
+        mo = self._create_mo(bom, 10)
+        mo.button_mark_done()
+        self.assertEqual(mo.move_finished_ids.value, 150)
 
     def test_mo_overview_comp_different_uom(self):
         """ Test that the overview takes into account the uom of the component in the price computation
@@ -795,5 +817,6 @@ class TestMrpAccountWorkorder(TestBomPriceOperationCommon):
         mo_1 = self._create_mo(self.bom_1, 1)
 
         mo_1.workorder_ids[0].workcenter_id.analytic_distribution = {str(wc_analytic_account.id): 100.0}
-        mo_1.with_user(mrp_user).button_mark_done()
+        with freeze_time(fields.Datetime.now(), auto_tick_seconds=1):
+            mo_1.with_user(mrp_user).button_mark_done()
         self.assertEqual(mo_1.state, 'done')

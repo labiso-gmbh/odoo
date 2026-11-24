@@ -259,7 +259,7 @@ class SaleOrder(models.Model):
         precompute=True,
         readonly=False,
         check_company=True,
-        domain="[('payment_type', '=', 'inbound'), ('company_id', '=', company_id)]",
+        domain=[('payment_type', '=', 'inbound')],
     )
     pricelist_id = fields.Many2one(
         comodel_name="product.pricelist",
@@ -1728,7 +1728,7 @@ class SaleOrder(models.Model):
             cron._trigger()
         else:  # Async emails are disabled, either by the user or we are in the cron job.
             # Send the email synchronously.
-            self.with_context(force_send=True).message_post_with_source(
+            self.with_context(mail_notify_force_send=True).message_post_with_source(
                 mail_template,
                 email_layout_xmlid="mail.mail_notification_light",
                 subtype_xmlid="mail.mt_comment",
@@ -1944,6 +1944,7 @@ class SaleOrder(models.Model):
             "fiscal_position_id",
             "invoice_incoterm_id",
             "incoterm_location",
+            "document_tax_mode",
         ]
 
     def _nothing_to_invoice_error_message(self):

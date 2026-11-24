@@ -24,21 +24,22 @@
 # Weblate <noreply-mt-weblate@weblate.org>, 2025, 2026.
 # Odoo Translation Bot <c3p@odoo.com>, 2026.
 # Sarbó Gergely <sarbo.gergely@gmail.com>, 2026.
+# Kalman Stipta <stiptak@tech-mobile.hu>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-06 17:38+0000\n"
-"PO-Revision-Date: 2026-08-31 15:51+0000\n"
-"Last-Translator: Anonymous <noreply@weblate.org>\n"
-"Language-Team: Hungarian <https://translate.odoo.com/projects/odoo-s19-4/"
+"POT-Creation-Date: 2026-11-20 17:36+0000\n"
+"PO-Revision-Date: 2026-11-17 20:33+0000\n"
+"Last-Translator: Kalman Stipta <stiptak@tech-mobile.hu>\n"
+"Language-Team: Hungarian <https://translate.odoo.com/projects/odoo-20/"
 "account/hu/>\n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 2026.8.1\n"
+"X-Generator: Weblate 2026.11.2\n"
 
 #. module: account
 #: model:ir.model.fields,help:account.field_account_journal__type
@@ -1021,7 +1022,7 @@ msgstr "<span class=\"o_stat_text\">Naplótétel</span>"
 #: model_terms:ir.ui.view,arch_db:account.view_account_journal_form
 #: model_terms:ir.ui.view,arch_db:account.view_move_form
 msgid "<span class=\"o_stat_text\">Journal Items</span>"
-msgstr ""
+msgstr "<span class=\"o_stat_text\">Könyvelési tételek</span>"
 
 #. module: account
 #: model_terms:ir.ui.view,arch_db:account.view_move_form
@@ -1174,13 +1175,6 @@ msgid "<span> Bill</span>"
 msgstr "<span> Számla</span>"
 
 #. module: account
-#: model_terms:ir.ui.view,arch_db:account.view_account_accrued_orders_wizard
-msgid ""
-"<span> already exists for this period. Posting this entry will replace it.</"
-"span>"
-msgstr ""
-
-#. module: account
 #: model_terms:ir.ui.view,arch_db:account.report_invoice_document
 msgid "<span> due on </span>"
 msgstr "<span> esedékes ekkor: </span>"
@@ -1218,11 +1212,6 @@ msgstr "<span>Összeg pénznemben</span>"
 #: model_terms:ir.ui.view,arch_db:account.report_payment_receipt_document
 msgid "<span>Amount</span>"
 msgstr "<span>Összeg</span>"
-
-#. module: account
-#: model_terms:ir.ui.view,arch_db:account.view_account_accrued_orders_wizard
-msgid "<span>An accrual entry of </span>"
-msgstr ""
 
 #. module: account
 #: model_terms:ir.ui.view,arch_db:account.account_journal_dashboard_kanban_view
@@ -1378,7 +1367,7 @@ msgstr "<strong>Záró egyenleg</strong>"
 #. module: account
 #: model_terms:ir.ui.view,arch_db:account.report_invoice_document
 msgid "<strong>Incoterm</strong>"
-msgstr "<strong>Incoterm</strong>"
+msgstr "<strong>Paritás (Incoterm)</strong>"
 
 #. module: account
 #: model_terms:ir.ui.view,arch_db:account.bill_preview
@@ -1418,7 +1407,7 @@ msgstr "<strong>Részösszeg</strong>"
 #. module: account
 #: model_terms:ir.ui.view,arch_db:account.report_invoice_document
 msgid "<strong>Taxable Supply</strong>"
-msgstr ""
+msgstr "<strong>Teljesítés kelte</strong>"
 
 #. module: account
 #: model_terms:ir.ui.view,arch_db:account.bill_preview
@@ -2869,7 +2858,7 @@ msgstr ""
 #. module: account
 #: model_terms:ir.ui.view,arch_db:account.res_config_settings_view_form
 msgid "Add QR-code link on PDF"
-msgstr ""
+msgstr "QR-kód hivatkozás hozzáadása a PDF-hez"
 
 #. module: account
 #. odoo-javascript
@@ -4422,7 +4411,7 @@ msgstr ""
 #. module: account
 #: model_terms:ir.ui.view,arch_db:account.view_partner_property_form
 msgid "Bank accounts"
-msgstr ""
+msgstr "Bankszámlák"
 
 #. module: account
 #: model:ir.actions.act_window,name:account.action_account_moves_journal_bank_cash
@@ -4945,12 +4934,12 @@ msgstr "Érvénytelenített számla"
 #. module: account
 #: model_terms:ir.ui.view,arch_db:account.report_invoice_document
 msgid "Cancelled Proforma Credit Note"
-msgstr ""
+msgstr "Sztornózott proforma jóváíró számla"
 
 #. module: account
 #: model_terms:ir.ui.view,arch_db:account.report_invoice_document
 msgid "Cancelled Proforma Invoice"
-msgstr ""
+msgstr "Sztornózott proforma számla"
 
 #. module: account
 #. odoo-python
@@ -5405,7 +5394,7 @@ msgstr "Bezárás"
 #. module: account
 #: model:ir.ui.menu,name:account.account_closing_menu
 msgid "Closing"
-msgstr ""
+msgstr "Zárás"
 
 #. module: account
 #. odoo-python
@@ -5900,7 +5889,7 @@ msgstr ""
 #. module: account
 #: model_terms:ir.ui.view,arch_db:account.product_template_form_view
 msgid "Cost and Revenue"
-msgstr ""
+msgstr "Költség és árbevétel"
 
 #. module: account
 #: model:account.account,name:account.21_cost_of_goods_sold
@@ -7216,7 +7205,7 @@ msgstr "Halasztott bevétel"
 #. odoo-python
 #: code:addons/account/models/account_move.py:0
 msgid "Define a default in the settings"
-msgstr ""
+msgstr "Adjon meg egy alapértelmezett értéket a beállításokban"
 
 #. module: account
 #: model:onboarding.onboarding.step,description:account.onboarding_onboarding_step_fiscal_year
@@ -7832,7 +7821,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:account.field_res_company__document_sequence_editable
 #: model:ir.model.fields,field_description:account.field_res_config_settings__document_sequence_editable
 msgid "Document's sequence editable"
-msgstr ""
+msgstr "Bizonylat sorszáma szerkeszthető"
 
 #. module: account
 #. odoo-python
@@ -7953,12 +7942,12 @@ msgstr "Piszkozat fizetés"
 #. module: account
 #: model_terms:ir.ui.view,arch_db:account.report_invoice_document
 msgid "Draft Proforma Credit Note"
-msgstr ""
+msgstr "Piszkozat proforma jóváíró számla"
 
 #. module: account
 #: model_terms:ir.ui.view,arch_db:account.report_invoice_document
 msgid "Draft Proforma Invoice"
-msgstr ""
+msgstr "Piszkozat proforma számla"
 
 #. module: account
 #. odoo-python
@@ -8194,7 +8183,7 @@ msgstr ""
 #. module: account
 #: model_terms:ir.ui.view,arch_db:account.res_config_settings_view_form
 msgid "Early payment discounts:"
-msgstr ""
+msgstr "Korai fizetési kedvezmények (skontó):"
 
 #. module: account
 #: model:ir.model.fields,help:account.field_account_bank_statement_line__tax_totals
@@ -8595,7 +8584,7 @@ msgstr ""
 #. module: account
 #: model_terms:ir.ui.view,arch_db:account.res_config_settings_view_form
 msgid "Exchange difference entries:"
-msgstr ""
+msgstr "Árfolyamkülönbözet tételek:"
 
 #. module: account
 #: model:ir.model.fields,help:account.field_account_bank_statement_line__no_followup
@@ -9271,7 +9260,7 @@ msgstr "Forrás"
 #. module: account
 #: model_terms:ir.ui.view,arch_db:account.product_template_form_view
 msgid "From Category"
-msgstr ""
+msgstr "Kategóriából"
 
 #. module: account
 #: model:ir.model.fields,field_description:account.field_base_document_layout__from_invoice
@@ -10469,7 +10458,7 @@ msgstr ""
 #. module: account
 #: model_terms:ir.ui.view,arch_db:account.res_config_settings_view_form
 msgid "Initial Setup"
-msgstr ""
+msgstr "Kezdeti beállítások"
 
 #. module: account
 #. odoo-python
@@ -11022,7 +11011,7 @@ msgstr ""
 #. module: account
 #: model_terms:ir.ui.view,arch_db:account.res_config_settings_view_form
 msgid "Invoice line discounts:"
-msgstr ""
+msgstr "Számlatétel kedvezmények:"
 
 #. module: account
 #: model:ir.model.fields,field_description:account.field_account_bank_statement_line__invoice_line_ids
@@ -13074,7 +13063,7 @@ msgstr ""
 #. module: account
 #: model:ir.model.fields.selection,name:account.selection__account_move__review_state__no_review
 msgid "No Review"
-msgstr ""
+msgstr "Nincs felülvizsgálat"
 
 #. module: account
 #. odoo-python
@@ -14140,7 +14129,7 @@ msgstr "Részleges"
 #. module: account
 #: model:res.groups,name:account.group_partial_purchase_deductibility
 msgid "Partial Purchase Deductibility"
-msgstr ""
+msgstr "Részleges beszerzési adólevonhatóság"
 
 #. module: account
 #: model:ir.model,name:account.model_account_partial_reconcile
@@ -15245,7 +15234,7 @@ msgstr ""
 #. module: account
 #: model_terms:ir.ui.view,arch_db:account.report_invoice_document
 msgid "Proforma Credit Note"
-msgstr ""
+msgstr "Proforma jóváíró számla"
 
 #. module: account
 #: model_terms:ir.ui.view,arch_db:account.report_invoice_document
@@ -15256,12 +15245,12 @@ msgstr "Díjbekérő"
 #. module: account
 #: model_terms:ir.ui.view,arch_db:account.report_invoice_document
 msgid "Proforma Vendor Bill"
-msgstr ""
+msgstr "Szállítói proforma számla"
 
 #. module: account
 #: model_terms:ir.ui.view,arch_db:account.report_invoice_document
 msgid "Proforma Vendor Credit Note"
-msgstr ""
+msgstr "Szállítói proforma jóváírás"
 
 #. module: account
 #: model:ir.model.fields,field_description:account.field_res_partner__property_inbound_payment_method_line_id
@@ -16128,7 +16117,7 @@ msgstr "Megfordított"
 #: code:addons/account/static/src/components/account_payment_field/account_payment.xml:0
 #: model_terms:ir.ui.view,arch_db:account.report_invoice_document
 msgid "Reversed on"
-msgstr ""
+msgstr "Sztornózva ekkor:"
 
 #. module: account
 #: model:ir.model.fields,field_description:account.field_account_bank_statement_line__review_state
@@ -16220,7 +16209,7 @@ msgstr "Tételenkénti kerekítés"
 #. module: account
 #: model:ir.model.fields.selection,name:account.selection__res_company__tax_calculation_rounding_method__round_globally
 msgid "Round per Tax"
-msgstr ""
+msgstr "Kerekítés adónként"
 
 #. module: account
 #. odoo-javascript
@@ -17981,7 +17970,7 @@ msgstr ""
 #. module: account
 #: model:ir.model.fields.selection,name:account.selection__account_move__document_tax_mode__tax_excluded
 msgid "Tax Excl."
-msgstr ""
+msgstr "Nettó"
 
 #. module: account
 #: model:ir.model.fields.selection,name:account.selection__account_tax__price_include_override__tax_excluded
@@ -18034,7 +18023,7 @@ msgstr ""
 #. module: account
 #: model:ir.model.fields.selection,name:account.selection__account_move__document_tax_mode__tax_included
 msgid "Tax Incl."
-msgstr ""
+msgstr "Bruttó"
 
 #. module: account
 #: model:ir.model.fields.selection,name:account.selection__account_tax__price_include_override__tax_included
@@ -18194,7 +18183,7 @@ msgstr "Adók"
 #. module: account
 #: model:ir.ui.menu,name:account.account_reports_taxes_and_fiscal_menu
 msgid "Taxes & Fiscal"
-msgstr ""
+msgstr "Adók és pénzügyek"
 
 #. module: account
 #: model_terms:ir.ui.view,arch_db:account.view_move_form

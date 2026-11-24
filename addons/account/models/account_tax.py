@@ -140,7 +140,9 @@ class AccountTax(models.Model):
     tax_group_id = fields.Many2one(
         comodel_name='account.tax.group',
         string="Tax Group",
-        compute='_compute_tax_group_id', readonly=False, store=True,
+        compute='_compute_tax_group_id',
+        inverse='_inverse_tax_group_id',
+        readonly=False, store=True,
         required=True, precompute=True,
         domain="[('country_id', 'in', (country_id, False))]")
     # Technical field to make the 'tax_exigibility' field invisible if the same named field is set to false in 'res.company' model
@@ -249,6 +251,14 @@ class AccountTax(models.Model):
             if record.tax_group_id.country_id and record.tax_group_id.country_id != record.country_id:
                 raise ValidationError(_("The tax group must have the same country_id as the tax using it."))
 
+    @api.constrains('type_tax_use', 'company_id')
+    def _check_default_taxes(self):
+        for tax in self:
+            if tax.company_id.account_sale_tax_id == tax and tax.type_tax_use != 'sale':
+                raise ValidationError(_("Default Sale Tax must be a tax with 'Sales' type."))
+            if tax.company_id.account_purchase_tax_id == tax and tax.type_tax_use != 'purchase':
+                raise ValidationError(_("Default Purchase Tax must be a tax with 'Purchases' type."))
+
     @api.model
     @api.readonly
     def name_search(self, name='', domain=None, operator='ilike', limit=100):
@@ -273,18 +283,19 @@ class AccountTax(models.Model):
     @api.depends('company_id')
     def _compute_country_id(self):
         for tax in self:
-            tax.country_id = tax.company_id.account_fiscal_country_id or tax.company_id.country_id or tax.country_id
+            tax.country_id = tax.tax_group_id.country_id or tax.company_id.account_fiscal_country_id or tax.company_id.country_id or tax.country_id
 
     @api.depends('company_id', 'country_id')
     def _compute_tax_group_id(self):
         by_country_company = defaultdict(self.browse)
         for tax in self:
+            country = tax.country_id or tax.company_id.account_fiscal_country_id or tax.company_id.country_id
             if (
                 not tax.tax_group_id
-                or tax.tax_group_id.country_id != tax.country_id
+                or tax.tax_group_id.country_id != country
                 or tax.tax_group_id.company_id != tax.company_id
             ):
-                by_country_company[(tax.country_id, tax.company_id)] += tax
+                by_country_company[country, tax.company_id] += tax
         for (country, company), taxes in by_country_company.items():
             taxes.tax_group_id = self.env['account.tax.group'].search([
                 *self.env['account.tax.group']._check_company_domain(company),
@@ -293,6 +304,11 @@ class AccountTax(models.Model):
                 *self.env['account.tax.group']._check_company_domain(company),
                 ('country_id', '=', False),
             ], limit=1)
+
+    def _inverse_tax_group_id(self):
+        for tax in self:
+            if tax.tax_group_id.country_id:
+                tax.country_id = tax.tax_group_id.country_id
 
     @api.depends('price_include_override')
     def _compute_price_include(self):
@@ -4678,6 +4694,25 @@ class AccountTax(models.Model):
         suffix_currency = base_lines[0]['currency_id'] if in_foreign_currency else company.currency_id
         suffix = '_currency' if in_foreign_currency else ''
 
+        def distribute_delta_on_rounding_residuals(field, delta_amount):
+            # Give each cent to the line whose rounding moved it the farthest from its raw amount in the opposite direction.
+            # That way, each rounded amount stays within one cent of its raw amount and the rounding of 'gross_total_excluded'
+            # and 'discount_amount' can't accumulate in opposite directions on the same line (PEPPOL-EN16931-R040).
+            nb_of_errors = round(abs(delta_amount) / suffix_currency.rounding)
+            if not nb_of_errors:
+                return
+            sign = -1 if delta_amount < 0.0 else 1
+            sorted_base_lines = sorted(
+                base_lines,
+                key=lambda base_line: float_round(
+                    sign * (base_line['tax_details'][f'raw_{field}{suffix}'] - base_line['tax_details'][f'{field}{suffix}']),
+                    precision_digits=6,
+                ),
+                reverse=True,
+            )
+            for i in range(nb_of_errors):
+                sorted_base_lines[i % len(sorted_base_lines)]['tax_details'][f'{field}{suffix}'] += sign * suffix_currency.rounding
+
         # Raw rounding.
         current_gross_total_excluded = 0.0
         current_discount_amount = 0.0
@@ -4716,33 +4751,11 @@ class AccountTax(models.Model):
             value=current_raw_discount_amount,
             precision_rounding=suffix_currency.rounding,
         )
-
-        target_factors = [
-            {
-                'factor': 1.0,  # By default, we avoid to have more than one cent as a difference per line.
-                'base_line': base_line,
-            }
-            for base_line in base_lines
-        ]
-        amounts_to_distribute = self._distribute_delta_amount_smoothly(
-            precision_digits=suffix_currency.decimal_places,
-            delta_amount=expected_gross_total_excluded - current_gross_total_excluded,
-            target_factors=target_factors,
-        )
-        for target_factor, amount_to_distribute in zip(target_factors, amounts_to_distribute):
-            base_line = target_factor['base_line']
-            base_line['tax_details'][f'gross_total_excluded{suffix}'] += amount_to_distribute
+        distribute_delta_on_rounding_residuals('gross_total_excluded', expected_gross_total_excluded - current_gross_total_excluded)
 
         # Fix rounding issues for 'discount_amount'.
         expected_discount_amount = expected_gross_total_excluded - expected_total_excluded
-        amounts_to_distribute = self._distribute_delta_amount_smoothly(
-            precision_digits=suffix_currency.decimal_places,
-            delta_amount=expected_discount_amount - current_discount_amount,
-            target_factors=target_factors,
-        )
-        for target_factor, amount_to_distribute in zip(target_factors, amounts_to_distribute):
-            base_line = target_factor['base_line']
-            base_line['tax_details'][f'discount_amount{suffix}'] += amount_to_distribute
+        distribute_delta_on_rounding_residuals('discount_amount', expected_discount_amount - current_discount_amount)
 
     @api.model
     def _round_raw_tax_amounts(

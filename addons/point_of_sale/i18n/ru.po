@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-06 17:38+0000\n"
+"POT-Creation-Date: 2026-11-20 17:37+0000\n"
 "PO-Revision-Date: 2026-08-31 13:54+0000\n"
 "Last-Translator: \"Anastasiia Koroleva (koan)\" <koan@odoo.com>\n"
 "Language-Team: Russian <https://translate.odoo.com/projects/odoo-s19-4/"
@@ -10195,6 +10195,15 @@ msgstr ""
 #. module: point_of_sale
 #. odoo-python
 #: code:addons/point_of_sale/models/pos_order.py:0
+msgid ""
+"The order was validated with a total of %(paid)s, but its lines now amount "
+"to %(total)s because they were changed on another device. The order stays "
+"open until the difference is settled."
+msgstr ""
+
+#. module: point_of_sale
+#. odoo-python
+#: code:addons/point_of_sale/models/pos_order.py:0
 msgid "The paid amount is different from the total amount of the order."
 msgstr "Сумма оплаты не совпадает с общей суммой заказа."
 
@@ -10214,6 +10223,15 @@ msgstr ""
 #: code:addons/point_of_sale/static/src/backend/lna_checklist/lna_checklist.xml:0
 msgid "The password is located on the back of the printer (remove covers)."
 msgstr "Пароль находится на задней панели принтера (снимите крышку)."
+
+#. module: point_of_sale
+#. odoo-python
+#: code:addons/point_of_sale/models/pos_payment_method.py:0
+msgid ""
+"The payment method %(payment_method)s has no outstanding account, its "
+"payments cannot be posted.\n"
+"Set an outstanding account on it."
+msgstr ""
 
 #. module: point_of_sale
 #. odoo-python
@@ -10378,6 +10396,11 @@ msgstr "Сессию закрывает другой пользователь. �
 #: code:addons/point_of_sale/models/pos_preset.py:0
 msgid "The start time must be before the end time."
 msgstr "Время начала должно быть раньше времени окончания."
+
+#. module: point_of_sale
+#: model_terms:ir.ui.view,arch_db:point_of_sale.res_config_settings_view_form
+msgid "The time at which the POS will post its accounting entries."
+msgstr ""
 
 #. module: point_of_sale
 #. odoo-javascript
@@ -10722,6 +10745,12 @@ msgid ""
 "This orderline has already been sent to the kitchen and cannot be edited."
 msgstr ""
 "Эта строка заказа уже отправлена на кухню и не может быть отредактирована."
+
+#. module: point_of_sale
+#. odoo-javascript
+#: code:addons/point_of_sale/static/src/app/models/pos_payment_method.js:0
+msgid "This payment method is currently in use."
+msgstr ""
 
 #. module: point_of_sale
 #. odoo-python

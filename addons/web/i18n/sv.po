@@ -31,8 +31,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-06 17:40+0000\n"
-"PO-Revision-Date: 2026-11-05 15:33+0000\n"
+"POT-Creation-Date: 2026-11-20 17:39+0000\n"
+"PO-Revision-Date: 2026-11-18 08:33+0000\n"
 "Last-Translator: Hanna Kharraziha <hakha@odoo.com>\n"
 "Language-Team: Swedish <https://translate.odoo.com/projects/odoo-20/web/sv/"
 ">\n"
@@ -41,7 +41,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 2026.8.1\n"
+"X-Generator: Weblate 2026.11.2\n"
 
 #. module: web
 #: model:ir.module.module,description:base.module_web
@@ -1021,7 +1021,7 @@ msgstr "Aktivera utvecklarläge (med testresurser)"
 #. odoo-javascript
 #: code:addons/web/static/src/core/session/check_identity.xml:0
 msgid "Active"
-msgstr ""
+msgstr "Aktiv"
 
 #. module: web
 #. odoo-javascript
@@ -1614,7 +1614,7 @@ msgstr "Tillbaka till “%s”"
 #. odoo-javascript
 #: code:addons/web/static/src/search/breadcrumbs/breadcrumbs.js:0
 msgid "Back to “%s” form"
-msgstr "Tillbaka till “%s” formulär"
+msgstr "Tillbaka till formuläret “%s”"
 
 #. module: web
 #. odoo-javascript
@@ -1692,6 +1692,12 @@ msgstr ""
 #: code:addons/web/static/src/views/fields/image/image_field.js:0
 msgid "Binary file"
 msgstr "Binärfil"
+
+#. module: web
+#. odoo-javascript
+#: code:addons/web/static/src/views/fields/selection/filterable_selection_field.js:0
+msgid "Blacklisted Values"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -2891,7 +2897,7 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/web/static/src/webclient/offline_systray/offline_systray.js:0
 msgid "Deleted"
-msgstr ""
+msgstr "Raderad"
 
 #. module: web
 #. odoo-javascript
@@ -3309,7 +3315,7 @@ msgstr "Redigera domän"
 #. odoo-javascript
 #: code:addons/web/static/src/views/form/form_controller.js:0
 msgid "Edit Properties"
-msgstr ""
+msgstr "Redigera egenskaper"
 
 #. module: web
 #. odoo-javascript
@@ -3664,7 +3670,7 @@ msgstr "Fil"
 #. odoo-javascript
 #: code:addons/web/static/src/search/custom_favorite_item/custom_favorite_item.xml:0
 msgid "Filter name"
-msgstr ""
+msgstr "Filternamn"
 
 #. module: web
 #. odoo-javascript
@@ -6106,7 +6112,7 @@ msgstr "Öppna i formulärvy"
 #. odoo-javascript
 #: code:addons/web/static/src/search/search_panel/search_panel.xml:0
 msgid "Open sidebar"
-msgstr ""
+msgstr "Öppna sidofält"
 
 #. module: web
 #. odoo-javascript
@@ -9056,6 +9062,18 @@ msgid ""
 "Whether or not this Property Field is displayed in the Calendar, Cards & "
 "Kanban views"
 msgstr "Huruvida detta egenskapsfält visas i vyerna Kalender, Kort & Kanban"
+
+#. module: web
+#. odoo-javascript
+#: code:addons/web/static/src/views/fields/selection/filterable_selection_field.js:0
+msgid "Whitelisted Values"
+msgstr ""
+
+#. module: web
+#. odoo-javascript
+#: code:addons/web/static/src/views/fields/selection/filterable_selection_field.js:0
+msgid "Whitelisted field name"
+msgstr ""
 
 #. module: web
 #. odoo-javascript

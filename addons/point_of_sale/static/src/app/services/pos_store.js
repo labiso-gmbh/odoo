@@ -170,6 +170,7 @@ export class PosStore extends WithLazyGetterTrap {
         this.debounceUpdateCustomerDisplay = debounce(() => this.sendOrderToCustomerDisplay(), 100);
 
         this.syncingOrders = new Set();
+        this.deletingOrders = new Set();
         await this.initServerData();
 
         this.closeOtherTabs();
@@ -788,29 +789,50 @@ export class PosStore extends WithLazyGetterTrap {
         return true;
     }
     async onDeleteOrder(order) {
+        if (this.isOrderDeleting(order)) {
+            return false;
+        }
         const canDelete = await this.beforeDeleteOrder(order);
-        if (!canDelete) {
+        if (!canDelete || this.isOrderDeleting(order)) {
             return false;
         }
-        const refundedOrderLines = order.lines
-            .filter((line) => line.refunded_orderline_id?.order_id)
-            .map((line) => ({
-                order: line.refunded_orderline_id.order_id,
-                uuid: line.refunded_orderline_id.uuid,
-            }));
+        if (this.isOrderSyncing(order, false)) {
+            this.notification.add(
+                _t("This order is currently syncing, please wait a moment before cancelling it.")
+            );
+            return false;
+        }
+        this.deletingOrders.add(order.uuid);
+        try {
+            this.onDeleteOrderConfirmed(order);
+            const refundedOrderLines = order.lines
+                .filter((line) => line.refunded_orderline_id?.order_id)
+                .map((line) => ({
+                    order: line.refunded_orderline_id.order_id,
+                    uuid: line.refunded_orderline_id.uuid,
+                }));
 
-        const orderIsDeleted = await this.deleteOrders([order]);
-        if (!orderIsDeleted) {
-            return false;
-        }
-        // Delete refunded lines linked to the current order
-        for (const refundedLine of refundedOrderLines) {
-            delete refundedLine.order?.uiState?.lineToRefund[refundedLine.uuid];
+            const orderIsDeleted = await this.deleteOrders([order]);
+            if (!orderIsDeleted) {
+                return false;
+            }
+            // Delete refunded lines linked to the current order
+            for (const refundedLine of refundedOrderLines) {
+                delete refundedLine.order?.uiState?.lineToRefund[refundedLine.uuid];
+            }
+        } finally {
+            this.deletingOrders.delete(order.uuid);
         }
 
         await this.afterOrderDeletion();
         return true;
     }
+
+    // Overrided inside "pos_restaurant"
+    onDeleteOrderConfirmed(_) {
+        return;
+    }
+
     async afterOrderDeletion() {
         if (!this.config.module_pos_restaurant) {
             const newOrder = this.getOpenOrders().at(-1) || this.addNewOrder();
@@ -861,6 +883,9 @@ export class PosStore extends WithLazyGetterTrap {
                 await actionPosOrderCancelCall([
                     ...new Set(serverIds.filter((id) => typeof id === "number")),
                 ]);
+                for (const id of serverIds) {
+                    this.pendingOrder.delete.delete(id);
+                }
             }
         } finally {
             // Remove orders locally at the end to avoid reactivity during the async process
@@ -933,7 +958,7 @@ export class PosStore extends WithLazyGetterTrap {
         // Adding the not synced paid orders to the pending orders
         const paidUnsyncedOrders = this.models["pos.order"].filter((order) => order.isUnsyncedPaid);
         // Orders known by the server aren't dirty after a reload, they would be skipped by the sync
-        paidUnsyncedOrders.forEach((order) => order._markDirty());
+        paidUnsyncedOrders.forEach((order) => order.markDirty());
         const paidUnsyncedOrderIds = paidUnsyncedOrders.map((order) => order.id);
 
         if (paidUnsyncedOrderIds.length > 0) {
@@ -1756,13 +1781,24 @@ export class PosStore extends WithLazyGetterTrap {
         const orderIdsToDelete = this.getOrderIdsToDelete();
 
         let orders = options.orders || [...orderToCreate, ...orderToUpdate];
+        // Skip an order being deleted, unless the caller asked to sync it explicitely (`options.orders`)
+        const isBackgroundSync = !options.orders;
         orders = orders.filter(
-            (order) => !this.syncingOrders.has(order.uuid) && (order.isDirty() || options.force)
+            (order) =>
+                !this.syncingOrders.has(order.uuid) &&
+                !(isBackgroundSync && this.deletingOrders.has(order.uuid)) &&
+                (order.isDirty() || options.force)
         );
 
         // Delete orders first
         if (orderIdsToDelete.length > 0) {
-            await this.deleteOrders([], orderIdsToDelete);
+            try {
+                await this.deleteOrders([], orderIdsToDelete);
+            } catch (error) {
+                if (options.throw || !(error instanceof ConnectionLostError)) {
+                    throw error;
+                }
+            }
         }
 
         // Allow us to force the sync of the orders In the case of
@@ -1823,6 +1859,7 @@ export class PosStore extends WithLazyGetterTrap {
                 }
 
                 if (error instanceof ConnectionLostError) {
+                    this.addPendingOrder([order.id]);
                     logPosMessage(
                         "Store",
                         "syncAllOrders",
@@ -2153,7 +2190,19 @@ export class PosStore extends WithLazyGetterTrap {
         await this.checkPreparationStateAndSentOrderInPreparation(o, opts);
     }
 
+    isOrderDeleting(order, notify = true) {
+        const isDeleting = !!order && this.deletingOrders.has(order.uuid);
+        if (isDeleting && notify) {
+            this.notification.add(_t("This order is being cancelled, please wait a moment."));
+        }
+        return isDeleting;
+    }
+
     isOrderSyncing(order, notify = true) {
+        // An order being deleted is considered as syncing
+        if (this.isOrderDeleting(order, notify)) {
+            return true;
+        }
         const isSyncing = !!order && this.syncingOrders.has(order?.uuid);
         if (isSyncing && notify) {
             this.notification.add(
@@ -2540,6 +2589,10 @@ export class PosStore extends WithLazyGetterTrap {
         return false;
     }
 
+    getQRCodeValueContext(_payment) {
+        return {};
+    }
+
     async showQR(payment) {
         if (this.currency.isZero(payment.amount)) {
             this.notification.add(_t("Can't create a QR for a zero amount"), { type: "warning" });
@@ -2548,14 +2601,19 @@ export class PosStore extends WithLazyGetterTrap {
         payment.setPaymentStatus("waiting");
         let qrCodeValue;
         try {
-            qrCodeValue = await this.data.call("pos.payment.method", "get_qr_code_value", [
-                [payment.payment_method_id.id],
-                payment.amount,
-                payment.pos_order_id.name + " " + payment.pos_order_id.tracking_number,
-                "",
-                this.currency.id,
-                payment.pos_order_id.partner_id?.id,
-            ]);
+            qrCodeValue = await this.data.call(
+                "pos.payment.method",
+                "get_qr_code_value",
+                [
+                    [payment.payment_method_id.id],
+                    payment.amount,
+                    payment.pos_order_id.name + " " + payment.pos_order_id.tracking_number,
+                    "",
+                    this.currency.id,
+                    payment.pos_order_id.partner_id?.id,
+                ],
+                { context: this.getQRCodeValueContext(payment) }
+            );
         } catch (error) {
             qrCodeValue = payment.payment_method_id.default_qr;
             if (!qrCodeValue) {

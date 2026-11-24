@@ -24,13 +24,16 @@
 # Odoo Translation Bot <c3p@odoo.com>, 2026.
 # "Larissa Manderfeld (lman)" <lman@odoo.com>, 2026.
 # Cristina Paniagua Ramiro <crpan@odoo.com>, 2026.
+# OpenAI <noreply-mt-openai@weblate.org>, 2026.
+# Weblate Translation Memory <noreply-mt-weblate-translation-memory@weblate.org>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-06 17:38+0000\n"
-"PO-Revision-Date: 2026-11-04 16:37+0000\n"
-"Last-Translator: Cristina Paniagua Ramiro <crpan@odoo.com>\n"
+"POT-Creation-Date: 2026-11-13 17:38+0000\n"
+"PO-Revision-Date: 2026-11-19 09:18+0000\n"
+"Last-Translator: Weblate Translation Memory <noreply-mt-weblate-translation-"
+"memory@weblate.org>\n"
 "Language-Team: Portuguese <https://translate.odoo.com/projects/odoo-20/"
 "website_sale/pt/>\n"
 "Language: pt\n"
@@ -39,7 +42,7 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=3; plural=(n == 0 || n == 1) ? 0 : ((n != 0 && n % "
 "1000000 == 0) ? 1 : 2);\n"
-"X-Generator: Weblate 2026.8.1\n"
+"X-Generator: Weblate 2026.11.2\n"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.products
@@ -2364,7 +2367,7 @@ msgstr ""
 #. module: website_sale
 #: model:ir.model,name:website_sale.model_res_company
 msgid "Company"
-msgstr ""
+msgstr "Empresa"
 
 #. module: website_sale
 #. odoo-javascript
@@ -2430,7 +2433,7 @@ msgstr ""
 #. module: website_sale
 #: model:ir.model,name:website_sale.model_res_config_settings
 msgid "Config Settings"
-msgstr "Configurações"
+msgstr "Definições"
 
 #. module: website_sale
 #. odoo-javascript
@@ -2818,7 +2821,7 @@ msgstr ""
 #. module: website_sale
 #: model:ir.model,name:website_sale.model_delivery_carrier
 msgid "Delivery Method"
-msgstr ""
+msgstr "Método de entrega"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.delivery_address_list
@@ -3000,14 +3003,13 @@ msgstr "Mostrar"
 #: model:ir.model.fields,field_description:website_sale.field_website_checkout_alert_mixin__display_name
 #: model:ir.model.fields,field_description:website_sale.field_website_checkout_step__display_name
 #: model:ir.model.fields,field_description:website_sale.field_website_menu__display_name
-#: model:ir.model.fields,field_description:website_sale.field_website_page__display_name
 #: model:ir.model.fields,field_description:website_sale.field_website_sale_extra_field__display_name
 #: model:ir.model.fields,field_description:website_sale.field_website_snippet_filter__display_name
 #: model:ir.model.fields,field_description:website_sale.field_website_track__display_name
 #: model:ir.model.fields,field_description:website_sale.field_website_visitor__display_name
 #: model:ir.model.fields,field_description:website_sale.field_withdrawal_request__display_name
 msgid "Display Name"
-msgstr "Nome"
+msgstr "Nome a apresentar"
 
 #. module: website_sale
 #. odoo-javascript
@@ -3637,7 +3639,7 @@ msgstr ""
 #. module: website_sale
 #: model:ir.model,name:website_sale.model_ir_http
 msgid "HTTP Routing"
-msgstr "Rotas HTTP"
+msgstr "Encaminhamento HTTP"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.wishlist_button
@@ -3764,7 +3766,6 @@ msgstr "Eu concordo com o"
 #: model:ir.model.fields,field_description:website_sale.field_website_checkout_alert_mixin__id
 #: model:ir.model.fields,field_description:website_sale.field_website_checkout_step__id
 #: model:ir.model.fields,field_description:website_sale.field_website_menu__id
-#: model:ir.model.fields,field_description:website_sale.field_website_page__id
 #: model:ir.model.fields,field_description:website_sale.field_website_sale_extra_field__id
 #: model:ir.model.fields,field_description:website_sale.field_website_snippet_filter__id
 #: model:ir.model.fields,field_description:website_sale.field_website_track__id
@@ -4070,7 +4071,7 @@ msgstr ""
 #. module: website_sale
 #: model:ir.model,name:website_sale.model_account_move
 msgid "Journal Entry"
-msgstr "Lançamento de Diário"
+msgstr "Lançamento contabilístico"
 
 #. module: website_sale
 #: model:product.public.category,name:website_sale.public_category_cabinets_kitchen
@@ -4252,6 +4253,12 @@ msgid "Link URL"
 msgstr ""
 
 #. module: website_sale
+#. odoo-python
+#: code:addons/website_sale/controllers/cart.py:0
+msgid "Linked lines must be added to the cart with their parent."
+msgstr ""
+
+#. module: website_sale
 #: model:ir.model.fields.selection,name:website_sale.selection__website__ecommerce_access__logged_in
 msgid "Logged in users"
 msgstr "Usuários conectados"
@@ -4335,7 +4342,7 @@ msgstr "Médio"
 #. module: website_sale
 #: model:ir.model.fields,field_description:website_sale.field_withdrawal_request__log_message
 msgid "Message"
-msgstr ""
+msgstr "Mensagem"
 
 #. module: website_sale
 #: model:ir.model.fields,field_description:website_sale.field_product_feed__message_has_error
@@ -5117,11 +5124,6 @@ msgid "Packaging"
 msgstr "Embalagem"
 
 #. module: website_sale
-#: model:ir.model,name:website_sale.model_website_page
-msgid "Page"
-msgstr "Página"
-
-#. module: website_sale
 #. odoo-javascript
 #: code:addons/website_sale/static/src/website_builder/product_page_option.xml:0
 msgid "Page Width"
@@ -5606,7 +5608,7 @@ msgstr "Mod do produto"
 #. module: website_sale
 #: model:ir.model,name:website_sale.model_product_product
 msgid "Product Variant"
-msgstr "Variante de Artigo"
+msgstr "Variante de produto"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.res_config_settings_view_form
@@ -6205,7 +6207,7 @@ msgstr "Descrição das Vendas"
 #. module: website_sale
 #: model:ir.model,name:website_sale.model_sale_order
 msgid "Sales Order"
-msgstr "Ordem de Vendas"
+msgstr "Ordem de venda"
 
 #. module: website_sale
 #: model:ir.model,name:website_sale.model_sale_order_line
@@ -8035,6 +8037,12 @@ msgid "You can't use a video as the template's main image."
 msgstr ""
 
 #. module: website_sale
+#. odoo-python
+#: code:addons/website_sale/controllers/cart.py:0
+msgid "You cannot add a combo item separately from its combo."
+msgstr ""
+
+#. module: website_sale
 #: model_terms:ir.actions.act_window,help:website_sale.sale_report_action_carts
 #: model_terms:ir.actions.act_window,help:website_sale.sale_report_action_dashboard
 msgid "You don't have any order from the website"
@@ -8416,6 +8424,9 @@ msgstr ""
 #: model:mail.template,subject:website_sale.email_template_back_in_stock
 msgid "{{ object.name or 'Product' }} is back in stock"
 msgstr ""
+
+#~ msgid "Page"
+#~ msgstr "Página"
 
 #~ msgid ""
 #~ "<div style=\"margin: 0px; padding: 0px;\">\n"

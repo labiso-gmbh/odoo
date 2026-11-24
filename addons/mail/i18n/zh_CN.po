@@ -25,7 +25,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-06 17:38+0000\n"
+"POT-Creation-Date: 2026-11-20 17:37+0000\n"
 "PO-Revision-Date: 2026-10-11 06:33+0000\n"
 "Last-Translator: 张飞虎 <feihu.zhang@live.com>\n"
 "Language-Team: Chinese (Simplified Han script) <https://translate.odoo.com/"
@@ -308,6 +308,12 @@ msgid ""
 "%(count)s activities on \"%(res_name)s\" (%(model_description)s) assigned to "
 "you"
 msgstr "分配给您在“%(res_name)s”（%(model_description)s）上的 %(count)s 个活动"
+
+#. module: mail
+#. odoo-javascript
+#: code:addons/mail/static/src/discuss/core/public_web/messaging_menu_empty_channel.js:0
+msgid "%(count)s followers"
+msgstr ""
 
 #. module: mail
 #. odoo-python
@@ -744,6 +750,12 @@ msgstr "1 位关注者"
 #: code:addons/mail/static/src/discuss/core/public_web/sub_channel_preview.js:0
 msgid "1 Message"
 msgstr "1 条消息"
+
+#. module: mail
+#. odoo-javascript
+#: code:addons/mail/static/src/discuss/core/public_web/messaging_menu_empty_channel.js:0
+msgid "1 follower"
+msgstr ""
 
 #. module: mail
 #. odoo-javascript
@@ -2625,6 +2637,12 @@ msgstr "返回上一个面板"
 #: code:addons/mail/static/src/discuss/call/common/blur_performance_warning.xml:0
 msgid "Background Blur Performance Warning"
 msgstr "背景虚化性能警告"
+
+#. module: mail
+#. odoo-javascript
+#: code:addons/mail/static/src/discuss/call/common/blur_manager.js:0
+msgid "Background blur could not be loaded"
+msgstr ""
 
 #. module: mail
 #. odoo-javascript
@@ -12808,6 +12826,14 @@ msgstr "仅显示前 %(limit)s 位成员。缩小搜索范围以查看更多。"
 
 #. module: mail
 #. odoo-javascript
+#: code:addons/mail/static/src/core/common/search_message_result.js:0
+msgid ""
+"Showing the first %(count)s messages found. Narrow your search or scroll to "
+"see more."
+msgstr ""
+
+#. module: mail
+#. odoo-javascript
 #: code:addons/mail/static/src/discuss/core/common/channel_invitation.js:0
 msgid ""
 "Showing the first %(search_limit)s results. Narrow your search to see more "
@@ -16451,12 +16477,6 @@ msgstr "电子邮件收件人"
 
 #. module: mail
 #. odoo-javascript
-#: code:addons/mail/static/src/discuss/core/public_web/messaging_menu_empty_channel.xml:0
-msgid "followers"
-msgstr "关注者"
-
-#. module: mail
-#. odoo-javascript
 #: code:addons/mail/static/src/core/web/activity.xml:0
 msgid "for"
 msgstr "于"
@@ -16847,6 +16867,9 @@ msgstr ""
 #: code:addons/mail/models/mail_canned_response.py:0
 msgid "🔒 Private"
 msgstr "🔒 私密"
+
+#~ msgid "followers"
+#~ msgstr "关注者"
 
 #~ msgid "Cannot search, too many messages"
 #~ msgstr "无法搜索，消息过多"

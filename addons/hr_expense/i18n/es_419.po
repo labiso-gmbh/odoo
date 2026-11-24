@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server saas~18.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-06 17:38+0000\n"
-"PO-Revision-Date: 2026-11-05 19:33+0000\n"
+"POT-Creation-Date: 2026-11-20 17:37+0000\n"
+"PO-Revision-Date: 2026-11-19 19:36+0000\n"
 "Last-Translator: \"Fernanda Alvarez (mfar)\" <mfar@odoo.com>\n"
 "Language-Team: Spanish (Latin America) <https://translate.odoo.com/projects/"
 "odoo-20/hr_expense/es_419/>\n"
@@ -21,7 +21,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 2026.8.1\n"
+"X-Generator: Weblate 2026.11.2\n"
 
 #. module: hr_expense
 #: model:ir.module.module,description:base.module_hr_expense
@@ -185,11 +185,12 @@ msgstr "<span class=\"o_stat_text\">Pago</span>"
 msgid ""
 "<span class=\"text-muted\" invisible=\"standard_price\">Per expense</span>"
 msgstr ""
+"<span class=\"text-muted\" invisible=\"standard_price\">Por gasto</span>"
 
 #. module: hr_expense
 #: model_terms:ir.ui.view,arch_db:hr_expense.hr_expense_view_form
 msgid "<span class=\"text-muted\">A bill is sent separately</span>"
-msgstr ""
+msgstr "<span class=\"text-muted\">La factura se envía por separado</span>"
 
 #. module: hr_expense
 #: model_terms:ir.ui.view,arch_db:hr_expense.res_config_settings_view_form
@@ -199,7 +200,7 @@ msgstr "<span>@</span>"
 #. module: hr_expense
 #: model_terms:ir.ui.view,arch_db:hr_expense.report_expense
 msgid "<span>Approver:</span>"
-msgstr ""
+msgstr "<span>Aprobador:</span>"
 
 #. module: hr_expense
 #: model_terms:ir.ui.view,arch_db:hr_expense.report_expense
@@ -427,7 +428,7 @@ msgstr "Aprobado"
 #. module: hr_expense
 #: model:ir.model.fields,field_description:hr_expense.field_hr_expense__manager_id
 msgid "Approver"
-msgstr ""
+msgstr "Aprobador"
 
 #. module: hr_expense
 #: model_terms:ir.ui.view,arch_db:hr_expense.product_product_expense_form_view
@@ -477,7 +478,7 @@ msgstr "Validación automática"
 #. module: hr_expense
 #: model_terms:ir.ui.view,arch_db:hr_expense.hr_expense_view_form
 msgid "Bill"
-msgstr ""
+msgstr "Factura"
 
 #. module: hr_expense
 #: model:ir.model.fields,field_description:hr_expense.field_account_bank_statement_line__bill_paid_by_employee
@@ -554,7 +555,7 @@ msgstr "Empresa"
 #. module: hr_expense
 #: model:ir.model.fields.selection,name:hr_expense.selection__hr_expense__payment_mode__company_account
 msgid "Company Card"
-msgstr ""
+msgstr "Tarjeta de la empresa"
 
 #. module: hr_expense
 #: model:ir.model,name:hr_expense.model_res_config_settings
@@ -705,6 +706,7 @@ msgstr "Digitalice sus recibos con OCR e inteligencia artificial"
 #: model:ir.model.fields,field_description:hr_expense.field_ir_attachment__display_name
 #: model:ir.model.fields,field_description:hr_expense.field_product_product__display_name
 #: model:ir.model.fields,field_description:hr_expense.field_product_template__display_name
+#: model:ir.model.fields,field_description:hr_expense.field_publisher_warranty_contract__display_name
 #: model:ir.model.fields,field_description:hr_expense.field_res_company__display_name
 #: model:ir.model.fields,field_description:hr_expense.field_res_config_settings__display_name
 msgid "Display Name"
@@ -1194,6 +1196,7 @@ msgstr "Dominio del alias de gastos para RR. HH."
 #: model:ir.model.fields,field_description:hr_expense.field_ir_attachment__id
 #: model:ir.model.fields,field_description:hr_expense.field_product_product__id
 #: model:ir.model.fields,field_description:hr_expense.field_product_template__id
+#: model:ir.model.fields,field_description:hr_expense.field_publisher_warranty_contract__id
 #: model:ir.model.fields,field_description:hr_expense.field_res_company__id
 #: model:ir.model.fields,field_description:hr_expense.field_res_config_settings__id
 msgid "ID"
@@ -1332,7 +1335,7 @@ msgstr "Restablecer asiento contable a borrador"
 #. module: hr_expense
 #: model:ir.model.fields,field_description:hr_expense.field_hr_expense__account_move_state
 msgid "Journal Entry Status"
-msgstr ""
+msgstr "Estado del asiento contable"
 
 #. module: hr_expense
 #: model:ir.model,name:hr_expense.model_account_move_line
@@ -1515,7 +1518,7 @@ msgstr "Mitchell Admin"
 #. odoo-python
 #: code:addons/hr_expense/models/ir_actions_report.py:0
 msgid "Multiple Approvers"
-msgstr ""
+msgstr "Varios aprobadores"
 
 #. module: hr_expense
 #. odoo-python
@@ -1776,12 +1779,12 @@ msgstr "Pagado"
 #: model:ir.model.fields,field_description:hr_expense.field_hr_expense__payment_mode
 #: model_terms:ir.ui.view,arch_db:hr_expense.hr_expense_view_search
 msgid "Paid by"
-msgstr ""
+msgstr "Pagado por"
 
 #. module: hr_expense
 #: model_terms:ir.ui.view,arch_db:hr_expense.hr_expense_view_search
 msgid "Paid by Company card"
-msgstr ""
+msgstr "Pagado con la tarjeta de la empresa"
 
 #. module: hr_expense
 #: model_terms:ir.ui.view,arch_db:hr_expense.hr_expense_view_search
@@ -1917,6 +1920,11 @@ msgstr "Producto: No encontrado"
 #: model:ir.model,name:hr_expense.model_hr_employee_public
 msgid "Public Employee"
 msgstr "Empleado público"
+
+#. module: hr_expense
+#: model:ir.model,name:hr_expense.model_publisher_warranty_contract
+msgid "Publisher Warranty Contract"
+msgstr ""
 
 #. module: hr_expense
 #: model:ir.model.fields,field_description:hr_expense.field_hr_expense__quantity
@@ -2289,7 +2297,7 @@ msgstr "Impuestos"
 #. module: hr_expense
 #: model_terms:ir.ui.view,arch_db:hr_expense.hr_expense_view_form
 msgid "Taxes included"
-msgstr ""
+msgstr "Impuestos incluidos"
 
 #. module: hr_expense
 #: model:res.groups,name:hr_expense.group_hr_expense_team_approver
@@ -2332,6 +2340,8 @@ msgid ""
 "The current user has no related employee. Please, create one in %(company)s, "
 "or switch to a company where they have one."
 msgstr ""
+"El usuario actual no tiene ningún empleado relacionado. Crea uno en %"
+"(company)s o cambia a una empresa donde tenga uno."
 
 #. module: hr_expense
 #. odoo-python

@@ -1,4 +1,5 @@
 from odoo import _, api, models
+from odoo.addons.account_edi_ubl_cii.models.account_edi_common import FloatFmt
 
 PDP_CUSTOMIZATION_ID = 'urn:cen.eu:en16931:2017'  # Not accepted by SuperPDP due to missing validator
 
@@ -173,11 +174,23 @@ class AccountEdiXmlUbl21Fr(models.AbstractModel):
     def _get_invoice_line_price_vals(self, line):
         price_vals = super()._get_invoice_line_price_vals(line)
         currency = price_vals['currency']
+        price_vals['price_amount'] = FloatFmt(price_vals['price_amount'], min_dp=1, max_dp=6)
         price_vals['allowance_charge_vals_list'] = [{
             'charge_indicator': 'false',
-            'currency_dp': price_vals['product_price_dp'],
+            'currency_dp': min(price_vals['product_price_dp'], 6),
             'currency_name': currency.name,
             'amount': 0,  # Discount amount
             'base_amount': price_vals['price_amount'],  # Pre-discount amount
         }]
         return price_vals
+
+    def _get_invoice_line_vals(self, line, line_id, taxes_vals):
+        # EXTENDS account.edi.xml.ubl_bis3
+        vals = super()._get_invoice_line_vals(line, line_id, taxes_vals)
+        price_vals = vals['price_vals']
+        # For negative unit prices, ubl_bis3 inverts the sign of the net price (BT-146), turning it into
+        # a plain float: restore the 6 decimals rounding and align the gross price (BT-148) on it (BR-28).
+        price_vals['price_amount'] = FloatFmt(price_vals['price_amount'], min_dp=1, max_dp=6)
+        for allowance_charge_vals in price_vals['allowance_charge_vals_list']:
+            allowance_charge_vals['base_amount'] = price_vals['price_amount']
+        return vals

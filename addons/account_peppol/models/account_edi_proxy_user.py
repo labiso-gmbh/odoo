@@ -96,12 +96,16 @@ class AccountEdiProxyClientUser(models.Model):
     # BUSINESS ACTIONS
     # -------------------------------------------------------------------------
 
+    def _get_peppol_supported_document_types(self):
+        self.ensure_one()
+        return self.company_id._peppol_supported_document_types()
+
     def _peppol_register_receiver(self):
         # remove in master
         self.ensure_one()
         params = {
             'company_details': self._get_company_details(),
-            'supported_identifiers': list(self.company_id._peppol_supported_document_types())
+            'supported_identifiers': list(self._get_peppol_supported_document_types())
         }
         self._call_peppol_proxy(
             endpoint=self._get_peppol_proxy_endpoint('1/register_receiver'),
@@ -182,7 +186,8 @@ class AccountEdiProxyClientUser(models.Model):
             'domain': {
                 'direction': 'incoming',
                 'errors': False,
-            }
+            },
+            'limit': job_count
         }
         for edi_user in self:
             params['domain']['receiver_identifier'] = edi_user.edi_identification
@@ -198,6 +203,7 @@ class AccountEdiProxyClientUser(models.Model):
                 continue
 
             received_messages = messages.get('messages', [])
+            has_more = messages.get('has_more', False)
             # Edge case: self-addressed messages (sender == receiver), i.e. a company genuinely
             # invoicing itself. The outgoing invoice already carries the message UUID, so the
             # duplicate check would wrongly discard the incoming document.
@@ -232,8 +238,7 @@ class AccountEdiProxyClientUser(models.Model):
             if not message_uuids:
                 continue
 
-            need_retrigger = need_retrigger or len(message_uuids) > job_count
-            message_uuids = message_uuids[:job_count]
+            need_retrigger = need_retrigger or has_more
 
             # retrieve attachments for filtered messages
             all_messages = edi_user._make_request(

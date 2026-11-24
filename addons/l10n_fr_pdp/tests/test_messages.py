@@ -10,6 +10,9 @@ from odoo import Command
 from odoo.exceptions import UserError
 from odoo.tests.common import tagged
 from odoo.tools.misc import file_open
+from odoo.tools import mute_logger
+
+from odoo.addons.l10n_fr_pdp.models.account_edi_proxy_user import PROCESS_CONDITION_CODE_TO_RESPONSE_CODE
 
 from .common import FAKE_UUID, FILE_PATH
 from .messages_common import TestPdpMessagesCommon
@@ -262,7 +265,7 @@ class TestPdpMessage(TestPdpMessagesCommon):
         self.assertEqual(len(move.message_ids), message_count + 2)
         body = move.message_ids[0].body
         self.assertIn('PPF Status:</strong> Error', body)
-        self.assertIn('Errors from PPF Invoice:', body)
+        self.assertIn('PPF Invoice:', body)
         self.assertIn('The detailed PPF error message', body)
         self.assertIn('PA Status:</strong> Done', move.message_ids[1].body)
 
@@ -286,9 +289,9 @@ class TestPdpMessage(TestPdpMessagesCommon):
         )
 
         self.assertEqual(len(move.message_ids), message_count + 2)
-        self.assertIn('Errors from PPF Lifecycle:', move.message_ids[0].body)
+        self.assertIn('PPF Lifecycle:', move.message_ids[0].body)
         self.assertIn('The detailed PPF error message', move.message_ids[0].body)
-        self.assertIn('Errors from PA Lifecycle:', move.message_ids[1].body)
+        self.assertIn('PA Lifecycle:', move.message_ids[1].body)
         self.assertIn('The detailed PA error message', move.message_ids[1].body)
 
     def test_pdp_einvoicing_chatter_empty_error_keeps_source(self):
@@ -302,7 +305,7 @@ class TestPdpMessage(TestPdpMessagesCommon):
             error_source='PA Lifecycle',
         )
 
-        self.assertIn('Errors from PA Lifecycle:', move.message_ids[0].body)
+        self.assertIn('PA Lifecycle:', move.message_ids[0].body)
 
     def test_pdp_einvoicing_pa_error_does_not_start_ppf(self):
         move = self._create_french_invoice()
@@ -319,7 +322,7 @@ class TestPdpMessage(TestPdpMessagesCommon):
         self.assertIn('PA Status:', body)
         self.assertIn('Error', body)
         self.assertNotIn('PPF Status:', body)
-        self.assertIn('Errors from PA Invoice:', body)
+        self.assertIn('PA Invoice:', body)
         self.assertIn('The detailed IAP error message', body)
         self.assertNotIn('Tax Extraction Error', body)
 
@@ -340,7 +343,7 @@ class TestPdpMessage(TestPdpMessagesCommon):
         body = move.message_ids[0].body
         self.assertIn('PPF Status:', body)
         self.assertNotIn('PA Status:', body)
-        self.assertIn('Errors from PPF Invoice:', body)
+        self.assertIn('PPF Invoice:', body)
         self.assertIn('The detailed PPF error message', body)
 
     def test_pdp_einvoicing_ppf_lifecycle_error(self):
@@ -364,7 +367,7 @@ class TestPdpMessage(TestPdpMessagesCommon):
 
         self.assertEqual(response.pdp_ppf_state, 'error')
         body = move.message_ids[0].body
-        self.assertIn('Errors from PPF Lifecycle:', body)
+        self.assertIn('PPF Lifecycle:', body)
         self.assertNotIn('PA Status:', body)
         self.assertIn('The detailed lifecycle error message', body)
 
@@ -427,6 +430,49 @@ class TestPdpMessage(TestPdpMessagesCommon):
         self.assertIn('[TRANSAC_INC] Unknown transaction', body)
         self.assertIn('Lifecycle note', body)
         self.assertEqual(self.env['ir.attachment'].search_count(attachment_domain), attachment_count)
+
+    def test_pdp_receive_every_lifecycle_status_code(self):
+        # All the status codes allowed by the CDAR schematron (BR-FR-CDV-CL-06)
+        pa_codes = [
+            '200', '201', '202', '203', '204', '205', '206', '207', '208', '209', '210', '211', '212', '213', '214',
+            '220', '221', '224', '225', '226', '227', '228',
+        ]
+        ppf_codes = ['250', '251', '300', '301', '400', '401', '500', '501', '601']
+        move = self._create_french_invoice()
+        move.action_post()
+        move.peppol_message_uuid = FAKE_UUID[0]
+        move.peppol_move_state = 'done'
+        proxy_model = self.env.registry[self.proxy_user._name]
+
+        for code in pa_codes + ppf_codes:
+            with self.subTest(code=code):
+                document = f'''<?xml version="1.0" encoding="UTF-8"?>
+                    <rsm:CrossDomainAcknowledgementAndResponse
+                        xmlns:rsm="urn:un:unece:uncefact:data:standard:CrossDomainAcknowledgementAndResponse:100"
+                        xmlns:ram="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100"
+                        xmlns:udt="urn:un:unece:uncefact:data:standard:UnqualifiedDataType:100">
+                        <rsm:AcknowledgementDocument>
+                            <ram:IssueDateTime>
+                                <udt:DateTimeString format="204">20241205000000</udt:DateTimeString>
+                            </ram:IssueDateTime>
+                            <ram:ReferenceReferencedDocument>
+                                <ram:ProcessConditionCode>{code}</ram:ProcessConditionCode>
+                            </ram:ReferenceReferencedDocument>
+                        </rsm:AcknowledgementDocument>
+                    </rsm:CrossDomainAcknowledgementAndResponse>'''.encode()
+                with patch.object(proxy_model, '_peppol_get_decoded_document', return_value=document):
+                    response = self.proxy_user._pdp_import_incoming_response(f'lifecycle-{code}', {
+                        'flow_number': '2' if code in pa_codes else '6',
+                        'origin_ref_status_code': None if code in pa_codes else '210',
+                        'origin_peppol_lifecycle_uuid': None,
+                        'state': 'done',
+                    }, move)
+                self.env.flush_all()
+
+                self.assertTrue(response)
+                self.assertEqual(response.response_code, PROCESS_CONDITION_CODE_TO_RESPONSE_CODE[code])
+                self.assertNotIn('Failed to process incoming response', move.message_ids[0].body)
+                self.assertNotIn('PA Status:</strong> Error', move.message_ids[0].body)
 
     def test_pdp_send_invalid_edi_user(self):
         # an invalid edi user should not be able to send invoices via pdp
@@ -755,6 +801,97 @@ class TestPdpMessage(TestPdpMessagesCommon):
             ],
             'move_id': move.id,
         }])
+
+    def test_paid_lifecycle_cron_response_not_created(self):
+        def mocked_pdp_send_response(self, reference_moves, status, additional_info=None):
+            # Do not do anything; i.e. do not create responses
+            return None
+
+        move = self._create_french_invoice()
+        move.action_post()
+
+        send_wizard = self.create_send_and_print(move)
+        send_wizard.action_send_and_print()
+        self.env['account_edi_proxy_client.user']._cron_peppol_get_message_status()
+        self.assertEqual(move.peppol_move_state, 'done')
+        self._pay(move)
+        # We only sent the payment lifecycle automatically in case the Flow 1 succeeded
+        move.pdp_ppf_move_state = 'sent'
+        self.assertEqual(move.payment_state, 'paid')
+        self.assertEqual(move.pdp_lifecycle_residual, move.amount_total)
+        self.assertFalse(move.peppol_response_ids)
+
+        with patch(
+            'odoo.addons.l10n_fr_pdp.models.account_edi_proxy_user.AccountEdiProxyClientUser._pdp_send_response',
+            mocked_pdp_send_response,
+        ):
+            self.env.ref('l10n_fr_pdp.ir_cron_pdp_send_lifecycles').method_direct_trigger()
+
+        paid_response = move.peppol_response_ids
+        self.assertRecordValues(paid_response, [{
+            'peppol_state': 'error',
+            'pdp_flow_number': '2',
+            'response_code': 'PD',
+            'pdp_ppf_state': False,
+            'pdp_payment_info': [
+                {'amount_changed': False, 'type_code': 'MEN', 'amount': '600.00', 'currency': 'EUR', 'tax_percent': '20.00'},
+                {'amount_changed': False, 'type_code': 'MEN', 'amount': '1085.00', 'currency': 'EUR', 'tax_percent': '8.50'},
+            ],
+            'move_id': move.id,
+        }])
+        self.assertEqual(move.pdp_lifecycle_residual, 0)
+        self.assertFalse(self.env['account_edi_proxy_client.user']._pdp_get_send_lifecycles_moves(move.company_id, 100))
+
+        with patch(
+            'odoo.addons.l10n_fr_pdp.wizard.pdp_response_wizard.PdpResponseWizard.button_send',
+        ) as button_send:
+            self.env.ref('l10n_fr_pdp.ir_cron_pdp_send_lifecycles').method_direct_trigger()
+            self.assertFalse(button_send.called)
+
+    def test_paid_lifecycle_cron_sending_exception(self):
+        def mocked_button_send_raises(self):
+            raise Exception("test")
+
+        move = self._create_french_invoice()
+        move.action_post()
+
+        send_wizard = self.create_send_and_print(move)
+        send_wizard.action_send_and_print()
+        self.env['account_edi_proxy_client.user']._cron_peppol_get_message_status()
+        self.assertEqual(move.peppol_move_state, 'done')
+        self._pay(move)
+        # We only sent the payment lifecycle automatically in case the Flow 1 succeeded
+        move.pdp_ppf_move_state = 'sent'
+        self.assertEqual(move.payment_state, 'paid')
+        self.assertEqual(move.pdp_lifecycle_residual, move.amount_total)
+        self.assertFalse(move.peppol_response_ids)
+
+        with mute_logger('odoo.addons.l10n_fr_pdp.models.account_edi_proxy_user'), patch(
+            'odoo.addons.l10n_fr_pdp.wizard.pdp_response_wizard.PdpResponseWizard.button_send',
+            mocked_button_send_raises,
+        ):
+            self.env.ref('l10n_fr_pdp.ir_cron_pdp_send_lifecycles').method_direct_trigger()
+
+        paid_response = move.peppol_response_ids
+        self.assertRecordValues(paid_response, [{
+            'peppol_state': 'error',
+            'pdp_flow_number': '2',
+            'response_code': 'PD',
+            'pdp_ppf_state': False,
+            'pdp_payment_info': [
+                {'amount_changed': False, 'type_code': 'MEN', 'amount': '600.00', 'currency': 'EUR', 'tax_percent': '20.00'},
+                {'amount_changed': False, 'type_code': 'MEN', 'amount': '1085.00', 'currency': 'EUR', 'tax_percent': '8.50'},
+            ],
+            'move_id': move.id,
+        }])
+        self.assertEqual(move.pdp_lifecycle_residual, 0)
+        self.assertFalse(self.env['account_edi_proxy_client.user']._pdp_get_send_lifecycles_moves(move.company_id, 100))
+
+        with patch(
+            'odoo.addons.l10n_fr_pdp.wizard.pdp_response_wizard.PdpResponseWizard.button_send',
+        ) as button_send:
+            self.env.ref('l10n_fr_pdp.ir_cron_pdp_send_lifecycles').method_direct_trigger()
+            self.assertFalse(button_send.called)
 
 
 @tagged('post_install_l10n', 'post_install', '-at_install')

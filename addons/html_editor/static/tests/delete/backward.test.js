@@ -13,7 +13,13 @@ import {
 import { base64Img, setupEditor, testEditor } from "../_helpers/editor";
 import { unformat } from "../_helpers/format";
 import { getContent, setSelection } from "../_helpers/selection";
-import { deleteBackward, insertText, tripleClick, undo } from "../_helpers/user_actions";
+import {
+    deleteBackward,
+    insertText,
+    simulateArrowKeyPress,
+    tripleClick,
+    undo,
+} from "../_helpers/user_actions";
 import { EMBEDDED_COMPONENT_PLUGINS, MAIN_PLUGINS } from "@html_editor/plugin_sets";
 import {
     compareHighlightedContent,
@@ -149,7 +155,8 @@ describe("Selection collapsed", () => {
                     '<p data-selection-placeholder=""><br></p>' +
                     '<div><p>uv</p><br><span class="style" data-oe-zws-empty-inline="">[]\u200B</span></div>' +
                     '<p data-selection-placeholder=""><br></p>',
-                contentAfter: '<div><p>uv</p><br><span class="style" data-oe-zws-empty-inline="">[]\u200B</span></div>',
+                contentAfter:
+                    '<div><p>uv</p><br><span class="style" data-oe-zws-empty-inline="">[]</span></div>',
             });
         });
 
@@ -239,7 +246,8 @@ describe("Selection collapsed", () => {
                 },
                 contentAfterEdit:
                     '<p>ab<span class="style" data-oe-zws-empty-inline="">[]\u200B</span>ef</p>',
-                contentAfter: '<p>ab<span class="style" data-oe-zws-empty-inline="">[]\u200B</span>ef</p>',
+                contentAfter:
+                    '<p>ab<span class="style" data-oe-zws-empty-inline="">[]</span>ef</p>',
             });
         });
 
@@ -259,6 +267,8 @@ describe("Selection collapsed", () => {
         test("should ignore ZWS and merge (1)", async () => {
             await testEditor({
                 contentBefore:
+                    '<p><b>ab</b><span class="removeme" data-oe-zws-empty-inline="">[]</span></p>',
+                contentBeforeEdit:
                     '<p><b>ab</b><span class="removeme" data-oe-zws-empty-inline="">[]\u200B</span></p>',
                 stepFunction: async (editor) => {
                     deleteBackward(editor);
@@ -271,6 +281,8 @@ describe("Selection collapsed", () => {
         test("should ignore ZWS and merge (2)", async () => {
             await testEditor({
                 contentBefore:
+                    '<p><span class="a">cd</span><span class="removeme" data-oe-zws-empty-inline="">[]</span></p>',
+                contentBeforeEdit:
                     '<p><span class="a">cd</span><span class="removeme" data-oe-zws-empty-inline="">[]\u200B</span></p>',
                 stepFunction: async (editor) => {
                     deleteBackward(editor);
@@ -283,6 +295,8 @@ describe("Selection collapsed", () => {
         test("should ignore ZWS and merge (3)", async () => {
             await testEditor({
                 contentBefore:
+                    '<p><b>ef</b><br><span class="removeme" data-oe-zws-empty-inline="">[]</span></p>',
+                contentBeforeEdit:
                     '<p><b>ef</b><br><span class="removeme" data-oe-zws-empty-inline="">[]\u200B</span></p>',
                 stepFunction: async (editor) => {
                     deleteBackward(editor);
@@ -591,7 +605,8 @@ describe("Selection collapsed", () => {
 
         test("should delete empty styled paragraph(s) and move cursor to previous styled inline (1)", async () => {
             await testEditor({
-                contentBefore: `<p><strong data-oe-zws-empty-inline="">\u200B</strong></p><p><strong data-oe-zws-empty-inline="">[]\u200B</strong></p>`,
+                contentBefore: `<p><strong data-oe-zws-empty-inline=""></strong></p><p><strong data-oe-zws-empty-inline="">[]</strong></p>`,
+                contentBeforeEdit: `<p><strong data-oe-zws-empty-inline="">\u200B</strong></p><p o-we-hint-text='Type "/" for commands' class="o-we-hint"><strong data-oe-zws-empty-inline="">[]\u200B</strong></p>`,
                 stepFunction: deleteBackward,
                 contentAfterEdit: `<p o-we-hint-text='Type "/" for commands' class="o-we-hint"><strong data-oe-zws-empty-inline="">\u200B[]</strong><br></p>`,
                 contentAfter: `<p>[]<br></p>`,
@@ -600,7 +615,8 @@ describe("Selection collapsed", () => {
 
         test("should delete empty styled paragraph(s) and move cursor to previous styled inline (2)", async () => {
             await testEditor({
-                contentBefore: `<p><strong>abc</strong></p><p><strong data-oe-zws-empty-inline="">\u200B</strong></p><p><strong data-oe-zws-empty-inline="">\u200B</strong></p><p><strong data-oe-zws-empty-inline="">[]\u200B</strong></p>`,
+                contentBefore: `<p><strong>abc</strong></p><p><strong data-oe-zws-empty-inline=""></strong></p><p><strong data-oe-zws-empty-inline=""></strong></p><p><strong data-oe-zws-empty-inline="">[]</strong></p>`,
+                contentBeforeEdit: `<p><strong>abc</strong></p><p><strong data-oe-zws-empty-inline="">\u200B</strong></p><p><strong data-oe-zws-empty-inline="">\u200B</strong></p><p o-we-hint-text='Type "/" for commands' class="o-we-hint"><strong data-oe-zws-empty-inline="">[]\u200B</strong></p>`,
                 stepFunction: deleteBackward,
                 contentAfterEdit: `<p><strong>abc</strong></p><p><strong data-oe-zws-empty-inline="">\u200B</strong><br></p><p o-we-hint-text='Type "/" for commands' class="o-we-hint"><strong data-oe-zws-empty-inline="">\u200B[]</strong><br></p>`,
                 contentAfter: `<p><strong>abc</strong></p><p><br></p><p>[]<br></p>`,
@@ -1729,7 +1745,8 @@ describe("Selection not collapsed", () => {
                 '<p data-selection-placeholder=""><br></p>' +
                 '<div><p>ab <span class="style" data-oe-zws-empty-inline="">[]\u200B</span> d</p></div>' +
                 '<p data-selection-placeholder=""><br></p>',
-            contentAfter: '<div><p>ab <span class="style" data-oe-zws-empty-inline="">[]\u200B</span> d</p></div>',
+            contentAfter:
+                '<div><p>ab <span class="style" data-oe-zws-empty-inline="">[]</span> d</p></div>',
         });
     });
 
@@ -1789,6 +1806,17 @@ describe("Selection not collapsed", () => {
                 '<div><p>ab <span class="style">x[]</span> f</p></div>' +
                 '<p data-selection-placeholder=""><br></p>',
             contentAfter: '<div><p>ab <span class="style">x[]</span> f</p></div>',
+        });
+    });
+
+    test("should convert space to nbsp", async () => {
+        await testEditor({
+            contentBefore: "<div>a<span> [b]</span></div>",
+            stepFunction: async (editor) => {
+                deleteBackward(editor);
+                await insertText(editor, "x");
+            },
+            contentAfter: "<div>a<span>&nbsp;x[]</span></div>",
         });
     });
 
@@ -2290,7 +2318,9 @@ describe("Selection not collapsed", () => {
         await testEditor({
             contentBefore: '<p>ab<b class="oe_unremovable">[cd]</b>ef</p>',
             stepFunction: deleteBackward,
-            contentAfter: '<p>ab<b class="oe_unremovable" data-oe-zws-empty-inline="">[]\u200B</b>ef</p>',
+            contentAfterEdit:
+                '<p>ab<b class="oe_unremovable" data-oe-zws-empty-inline="">[]\u200B</b>ef</p>',
+            contentAfter: '<p>ab<b class="oe_unremovable" data-oe-zws-empty-inline="">[]</b>ef</p>',
         });
     });
 
@@ -2365,7 +2395,10 @@ describe("Selection not collapsed", () => {
         await testEditor({
             contentBefore: '<p>a<span class="style-class">[bcde]</span>f</p>',
             stepFunction: deleteBackward,
-            contentAfter: '<p>a<span class="style-class" data-oe-zws-empty-inline="">[]\u200B</span>f</p>',
+            contentAfterEdit:
+                '<p>a<span class="style-class" data-oe-zws-empty-inline="">[]\u200B</span>f</p>',
+            contentAfter:
+                '<p>a<span class="style-class" data-oe-zws-empty-inline="">[]</span>f</p>',
         });
     });
 
@@ -2605,5 +2638,207 @@ describe("Selection not collapsed", () => {
             await tick(); // Wait for the selection change to be handled
             expect(getContent(el)).toBe("<p>Gif []</p>");
         });
+
+        // This simulates the sequence of events that happens when pressing
+        // the Backspace key on the Microsoft Swiftkey keyboard on Android.
+        // The change of selection that Swiftkey is doing can be mocked
+        // differently for each case if needed.
+        const swiftkeyBackspace = async (
+            editor,
+            { mockSelectionChange } = {
+                mockSelectionChange: (selection) =>
+                    selection.modify("extend", "backward", "character"),
+            }
+        ) => {
+            const dispatch = (type, eventInit) =>
+                manuallyDispatchProgrammaticEvent(editor.editable, type, eventInit);
+            await dispatch("keydown", { key: "Unidentified" });
+            const selection = editor.document.getSelection();
+            if (selection.isCollapsed) {
+                mockSelectionChange(selection);
+            }
+            await dispatch("beforeinput", {
+                inputType: "deleteContentBackward",
+            });
+            // Swiftkey deletes the content even if the beforeinput is default prevented.
+            selection.getRangeAt(0).deleteContents();
+            await dispatch("input", { inputType: "deleteContentBackward" });
+            await dispatch("keyup", { key: "Unidentified" });
+            await animationFrame();
+        };
+
+        test.tags("mobile");
+        test("should handle tables correctly on backspace with Unidentified key", async () => {
+            const { editor, el } = await setupEditor(
+                unformat(`
+                    <table>
+                        <tbody>
+                            <tr><td><br></td><td>[]<br></td><td><br></td></tr>
+                            <tr><td>a</td><td>b</td><td>c</td></tr>
+                        </tbody>
+                    </table>
+                `)
+            );
+            expect(getContent(el)).toBe(
+                unformat(`
+                    <p data-selection-placeholder=""><br></p>
+                    <table>
+                        <tbody>
+                            <tr><td><br></td><td>[]<br></td><td><br></td></tr>
+                            <tr><td>a</td><td>b</td><td>c</td></tr>
+                        </tbody>
+                    </table>
+                    <p data-selection-placeholder=""><br></p>
+                `)
+            );
+            await swiftkeyBackspace(editor);
+            expect(getContent(el)).toBe(
+                unformat(`
+                    <p data-selection-placeholder=""><br></p>
+                    <table>
+                        <tbody>
+                            <tr><td><br></td><td>[]<br></td><td><br></td></tr>
+                            <tr><td>a</td><td>b</td><td>c</td></tr>
+                        </tbody>
+                    </table>
+                    <p data-selection-placeholder=""><br></p>
+                `)
+            );
+            await tick(); // Wait for the release of the Android Chrome selection change hack, see "onAndroidChromeSelectionChange".
+            const tds = [...editor.editable.querySelectorAll("td")];
+            setSelection({
+                anchorNode: tds[4],
+                anchorOffset: 0,
+                focusNode: tds[5],
+                focusOffset: 1,
+            });
+            await tick(); // Wait for the selectionchange event.
+            expect(getContent(el)).toBe(
+                unformat(`
+                    <p data-selection-placeholder=""><br></p>
+                    <table class="o_selected_table">
+                        <tbody>
+                            <tr><td><br></td><td><br></td><td><br></td></tr>
+                            <tr><td>a</td><td class="o_selected_td">[b</td><td class="o_selected_td">c]</td></tr>
+                        </tbody>
+                    </table>
+                    <p data-selection-placeholder=""><br></p>
+                `)
+            );
+            await swiftkeyBackspace(editor);
+            expect(getContent(el)).toBe(
+                unformat(`
+                    <p data-selection-placeholder=""><br></p>
+                    <table>
+                        <tbody>
+                            <tr><td><br></td><td><br></td><td><br></td></tr>
+                            <tr><td>a</td><td><p o-we-hint-text='Type "/" for commands' class="o-we-hint">[]<br></p></td><td><p><br></p></td></tr>
+                            </tbody>
+                        </table>
+                    <p data-selection-placeholder=""><br></p>
+                `)
+            );
+        });
+
+        test.tags("mobile");
+        test("should handle lists correctly on backspace with Unidentified key", async () => {
+            const { editor, el } = await setupEditor(
+                `<ul><li>abc</li><li>[def]</li><li>ghi</li></ul>`
+            );
+            await swiftkeyBackspace(editor);
+            expect(getContent(el)).toBe(
+                `<ul><li>abc</li><li o-we-hint-text="List" class="o-we-hint">[]<br></li><li>ghi</li></ul>`
+            );
+            await swiftkeyBackspace(editor);
+            expect(getContent(el)).toBe(
+                `<ul><li>abc</li><li class="oe-nested o-we-hint" o-we-hint-text="List">[]<br></li><li>ghi</li></ul>`
+            );
+            await swiftkeyBackspace(editor);
+            expect(getContent(el)).toBe(
+                `<ul><li>abc</li></ul><p o-we-hint-text='Type "/" for commands' class="o-we-hint">[]<br></p><ul><li>ghi</li></ul>`
+            );
+        });
+
+        test.tags("mobile");
+        test("should remove separator on backspace with Unidentified key", async () => {
+            const { editor, el } = await setupEditor(`<p>abc</p><hr><p>[]<br></p>`);
+            expect(getContent(el)).toBe(
+                `<p>abc</p><hr contenteditable="false"><p o-we-hint-text='Type "/" for commands' class="o-we-hint">[]<br></p>`
+            );
+            await swiftkeyBackspace(editor);
+            expect(getContent(el)).toBe(
+                `<p>abc</p><p o-we-hint-text='Type "/" for commands' class="o-we-hint">[]<br></p>`
+            );
+        });
+
+        test.tags("mobile");
+        test("should remove separator after banner on backspace with Unidentified key", async () => {
+            const { editor, el } = await setupEditor(
+                unformat(`
+                    <p>abc</p>
+                    <div class="o_editor_banner user-select-none o-contenteditable-false lh-1 d-flex align-items-center alert alert-info pb-0 pt-3" data-oe-role="status" contenteditable="false" role="status">
+                        <i class="o_editor_banner_icon mb-3 fst-normal" data-oe-aria-label="Banner Info" aria-label="Banner Info">💡</i>
+                        <div class="o_editor_banner_content o-contenteditable-true w-100 px-3" contenteditable="true">
+                            <p><br></p>
+                        </div>
+                    </div>
+                    <hr>
+                    <p>[]<br></p>
+                `)
+            );
+            await swiftkeyBackspace(editor, {
+                mockSelectionChange: (selection) => {
+                    // Swiftkey moves the selection inside of the banner because
+                    // the hr element is not editable and neither is the banner.
+                    const p = editor.editable.querySelector(".o_editor_banner_content p");
+                    selection.setPosition(p, 0);
+                },
+            });
+            expect(getContent(el)).toBe(
+                unformat(`
+                    <p>abc</p>
+                    <div class="o_editor_banner user-select-none o-contenteditable-false lh-1 d-flex align-items-center alert alert-info pb-0 pt-3" data-oe-role="status" contenteditable="false" role="status">
+                        <i class="o_editor_banner_icon mb-3 fst-normal" data-oe-aria-label="Banner Info" aria-label="Banner Info">💡</i>
+                        <div class="o_editor_banner_content o-contenteditable-true w-100 px-3" contenteditable="true">
+                            <p><br></p>
+                        </div>
+                    </div>
+                    <p o-we-hint-text='Type "/" for commands' class="o-we-hint">[]<br></p>
+                `)
+            );
+        });
     });
+});
+
+test("should remove character before unremovable", async () => {
+    await testEditor({
+        contentBefore: `<p>a<span class="oe_unremovable">[]x</span>b</p>`,
+        stepFunction: deleteBackward,
+        contentAfter: `<p><span class="oe_unremovable">[]x</span>b</p>`,
+    });
+});
+
+test("should remove character before unremovable (2)", async () => {
+    await testEditor({
+        contentBefore: `<p>aa<span class="oe_unremovable">[]x</span>b</p>`,
+        stepFunction: deleteBackward,
+        contentAfter: `<p>a[]<span class="oe_unremovable">x</span>b</p>`,
+    });
+});
+
+test("should preserve formatting element wrapping an empty unremovable element", async () => {
+    const { editor, el } = await setupEditor(
+        '<p>ab<b><span class="oe_unremovable">[cd]</span></b>ef</p>'
+    );
+    deleteBackward(editor);
+    await tick();
+    expect(getContent(el)).toBe(
+        '<p>ab<b><span class="oe_unremovable" data-oe-zws-empty-inline="">[]\u200B</span></b>ef</p>'
+    );
+
+    await simulateArrowKeyPress(editor, "ArrowLeft");
+    await tick();
+    expect(getContent(el)).toBe(
+        '<p>a[]b<b><span class="oe_unremovable" data-oe-zws-empty-inline="">\u200B</span></b>ef</p>'
+    );
 });

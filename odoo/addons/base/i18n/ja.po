@@ -18,7 +18,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-02-24 14:12+0000\n"
-"PO-Revision-Date: 2026-09-25 08:33+0000\n"
+"PO-Revision-Date: 2026-11-18 04:25+0000\n"
 "Last-Translator: \"Junko Augias (juau)\" <juau@odoo.com>\n"
 "Language-Team: Japanese <https://translate.odoo.com/projects/odoo-19/base/"
 "ja/>\n"
@@ -27,7 +27,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 2026.8.1\n"
+"X-Generator: Weblate 2026.11.2\n"
 
 #. module: base
 #: model:ir.module.module,description:base.module_l10n_at_reports
@@ -1181,9 +1181,9 @@ msgid ""
 "A helper model for managing transfers between accounts.\n"
 msgstr ""
 "\n"
-"口座振替について\n"
+"勘定間振替\n"
 "===========================\n"
-"口座間の送金を管理するためのサポートモデルです。\n"
+"勘定間の振替を管理するための補助モデルです。\n"
 
 #. module: base
 #: model:ir.module.module,description:base.module_accountant
@@ -1198,13 +1198,13 @@ msgid ""
 "accounting application and only user rights to the Demo user.\n"
 msgstr ""
 "\n"
-"会計アクセス権\n"
+"会計のアクセス権\n"
 "========================\n"
-"これは仕訳明細と勘定科目一覧表など、すべてのアカウンティング機能への管理者"
-"ユーザのアクセスを提供します。\n"
+"管理者ユーザに、仕訳明細や勘定科目表など、会計機能すべてへのアクセス権を付与"
+"します。\n"
 "\n"
-"ここで、デモ・ユーザーに会計アプリケーションのみユーザー権限の管理者に管理者"
-"とユーザーのアクセス権を割り当てます。\n"
+"また、会計アプリについては、管理者にはマネジャー権限とユーザ権限の両方を割り"
+"当て、デモユーザにはユーザ権限のみを割り当てます。\n"
 
 #. module: base
 #: model:ir.module.module,description:base.module_l10n_in_asset
@@ -1512,7 +1512,7 @@ msgid ""
 "Accounting Expense Bridge\n"
 msgstr ""
 "\n"
-"会計費用ブリッジ\n"
+"会計経費ブリッジ\n"
 
 #. module: base
 #: model:ir.module.module,description:base.module_accountant_fleet
@@ -7611,12 +7611,12 @@ msgid ""
 "for customization purpose.\n"
 msgstr ""
 "\n"
-"カスタムデータモジュールをインポート\n"
-"===============\n"
+"カスタムデータモジュールのインポート\n"
+"===========================\n"
 "\n"
-"このモジュールを使用すると、許可されたユーザーは、カスタマイズのために\n"
-"カスタムデータモジュール(.xmlファイルとstatic assests)をインポートできます"
-"。\n"
+"このモジュールは、権限を持つユーザがカスタマイズ目的で"
+"カスタムデータモジュール(.xmlファイルおよび静的アセット)を\n"
+"インポートすることを許可します。\n"
 
 #. module: base
 #: model:ir.module.module,description:base.module_sale_amazon
@@ -8840,20 +8840,19 @@ msgid ""
 "procure.\n"
 msgstr ""
 "\n"
-"マスター生産スケジュール\n"
+"基準生産計画\n"
 "==========================\n"
 "\n"
-"製造オーダの構成部品に対して、後から製造オーダーが作成される予定であっても、"
-"先に購買オーダを作成したい場合があります。た、販売オーダーがまだ存在しない\n"
-"製造オーダーに対しても同様です。その解決策は、販売予測を立て、\n"
-"それに基づいて事前に製造オーダや購買オーダを\n"
-"作成しておくことです。\n"
+"後から作成される製造オーダの構成品に対する購買オーダ\n"
+"を作成しなければならない場合があります。  あるいは、受注が後から入る\n"
+"製造オーダの場合もあります。  その解決策として、\n"
+"販売予測を行い、それに基づいて事前に製造オーダや\n"
+"購買オーダを作成します。\n"
 "\n"
-"レポートに追加したいプロダクトを選択する必要があります。レポートの対象期間は"
-"、\n"
-"t日、週、月などから選択できます。また、安全在庫、供給の最小数量を定義したり"
-"、\n"
-"調達する数量を手動で上書きすることも\n"
+"レポートに追加するプロダクトを選択する必要があります。  レポートの期間\n"
+"(日、週、月など)を選択できます。  また、安全在庫、最小補充数、および調達する"
+"金額を\n"
+"手動で上書きすることも\n"
 "可能です。\n"
 
 #. module: base
@@ -9639,25 +9638,28 @@ msgid ""
 "  need or want an online import can avoid it being available to users.\n"
 msgstr ""
 "\n"
-"New extensible file import for Odoo\n"
+"Odoo向け 拡張可能な新しいファイルインポート機能\n"
 "======================================\n"
 "\n"
-"Re-implement Odoo's file import system:\n"
+"Odooのファイルインポートシステムを再実装しました:\n"
 "\n"
-"* Server side, the previous system forces most of the logic into the\n"
-"  client which duplicates the effort (between clients), makes the\n"
-"  import system much harder to use without a client (direct RPC or\n"
-"  other forms of automation) and makes knowledge about the\n"
-"  import/export system much harder to gather as it is spread over\n"
-"  3+ different projects.\n"
+"* サーバサイド処理への移行: 従来のシステムではロジックの\n"
+"  大部分がクライアント側に置かれていました。そのため、クライアント間での開発"
+"工数\n"
+"  の重複が生じ、クライアントを介さない利用(RPCの直接呼び出しや各種自動化処理)"
+"が\n"
+"  非常に困難になっていました。また、インポート/エクスポート関連のノウハウが3"
+"つ以上の\n"
+"  異なるプロジェクトに分散し、把握しづらい\n"
+"  要因にもなっていました。\n"
 "\n"
-"* In a more extensible manner, so users and partners can build their\n"
-"  own front-end to import from other file formats (e.g. OpenDocument\n"
-"  files) which may be simpler to handle in their work flow or from\n"
-"  their data production sources.\n"
+"* 拡張性の向上: ユーザーやパートナー企業が独自のフロントエンドを構築し、\n"
+"  業務フローやデータ生成元に合わせて扱いやすい他のファイル形式\n"
+"   (例：OpenDocumentファイルなど) からインポート\n"
+"  できるようにしました。\n"
 "\n"
-"* In a module, so that administrators and users of Odoo who do not\n"
-"  need or want an online import can avoid it being available to users.\n"
+"*オンラインでのインポート機能を必要としない、あるいはユーザに提供したくない\n"
+"  管理者やユーザが、機能を無効化できるようにモジュール化しました。\n"
 
 #. module: base
 #: model:ir.module.module,description:base.module_l10n_ng
@@ -12916,8 +12918,9 @@ msgid ""
 "RFQ from an approval purchase request.\n"
 msgstr ""
 "\n"
-"このモジュールは、承認ワークフローで購入承認要求からのRFQを生成出来るようにし"
-"ます\n"
+"本モジュールは、承認購買リクエストから見積依頼書(RFQ)を生成する機能を\n"
+"承認ワークフローに追加します。\n"
+"\n"
 
 #. module: base
 #: model:ir.module.module,description:base.module_hr_attendance
@@ -13078,12 +13081,12 @@ msgstr ""
 "うになります。\n"
 "============================================================\n"
 "\n"
-"自動化アクションを使用して、さまざまな画面のアクションを自動的にトリガします"
+"自動化ルールを使用すると、さまざまな画面でアクションを自動的にトリガできます"
 "。\n"
 "\n"
-"**例:** 特定のユーザによって作成されたリードは、自動的に特定の営業チームに設"
-"定されるかもしれません。または案件が14日後もまだ保留のステータスの場合\n"
-"自動リマインダメールをトリガすることもできます。\n"
+"**例:** 特定のユーザによって作成されたリードを特定の販売チームに自動的に設定"
+"したり、14日経過しても保留ステータスのままの案件に対して\n"
+"自動リマインダーメールをトリガしたりできます。\n"
 
 #. module: base
 #: model:ir.module.module,description:base.module_onboarding
@@ -14516,12 +14519,13 @@ msgid ""
 "creates next activities for the related approvers.\n"
 msgstr ""
 "\n"
-"モジュールは承認ワークフローを管理します\n"
+"本モジュールは承認ワークフローを管理します\n"
 "======================================\n"
-"モジュールはビジネスのような承認要求を管理します\n"
-"出張、不在、残業、借入品目、一般承認、調達、契約承認など。\n"
+"出張、休暇・不在、残業、備品貸出、一般的承認、\n"
+"調達、契約承認などの承認リクエストを管理します。\n"
 "\n"
-"承認タイプの設定に従って、要求は関連する承認者の次の活動を作成します。\n"
+"承認タイプリクエストは\n"
+"関連する承認者に対する次の活動を作成します。\n"
 
 #. module: base
 #: model:ir.module.module,description:base.module_account_check_printing
@@ -17649,16 +17653,16 @@ msgstr "言語を追加"
 #: model:ir.module.module,summary:base.module_data_merge_helpdesk
 msgid "Add Merge action in contextual menu of helpdesk ticket model."
 msgstr ""
-"ヘルプデスクチケットモデルのコンテキストメニューにマージアクションを追加しま"
-"す。"
+"ヘルプデスクチケットモデルのコンテキストメニューに統合アクションを追加します"
+"。"
 
 #. module: base
 #: model:ir.module.module,description:base.module_data_merge_project
 #: model:ir.module.module,summary:base.module_data_merge_project
 msgid "Add Merge action in contextual menu of project task and tag models."
 msgstr ""
-"プロジェクトタスクとタグモデルのコンテクストメニューにマージアクションを追加"
-"します。"
+"プロジェクトタスクとタグモデルのコンテクストメニューに統合アクションを追加し"
+"ます。"
 
 #. module: base
 #: model:ir.module.module,summary:base.module_mail_bot
@@ -17782,7 +17786,7 @@ msgstr "AIエージェントの情報ソースとしてドキュメントを追�
 #. module: base
 #: model:ir.module.module,summary:base.module_base_address_extended
 msgid "Add extra fields on addresses"
-msgstr "アドレスにフィールドを追加する"
+msgstr "住所にフィールドを追加"
 
 #. module: base
 #: model:ir.module.module,description:base.module_event_crm_sale
@@ -18630,8 +18634,8 @@ msgid ""
 "All contacts must have the same email. Only the Administrator can merge "
 "contacts with different emails."
 msgstr ""
-"すべての連絡先に同じメールが必要です。 管理者だけが連絡先を別の電子メールと"
-"マージできます。"
+"すべての連絡先に同じメールが必要です。 管理者だけが連絡先を別の電子メールと統"
+"合できます。"
 
 #. module: base
 #: model_terms:res.company,invoice_terms_html:base.demo_company_be
@@ -18673,7 +18677,7 @@ msgstr "全てのユーザ"
 #. module: base
 #: model:ir.module.module,summary:base.module_hr_holidays
 msgid "Allocate time off and follow leave requests"
-msgstr "休暇の割り当てと申請の管理"
+msgstr "休暇の付与および休暇申請の管理"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_pos_account_tax_python
@@ -20048,7 +20052,7 @@ msgstr "アポイントメントMicrosoftカレンダー"
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_appointment_sms
 msgid "Appointment SMS"
-msgstr "予約SMS"
+msgstr "アポイントメントSMS"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_test_appointment_full
@@ -20091,12 +20095,12 @@ msgstr "承認"
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_approvals_purchase
 msgid "Approvals - Purchase"
-msgstr "承認-購入"
+msgstr "承認 - 購買"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_approvals_purchase_stock
 msgid "Approvals - Purchase - Stock"
-msgstr "承認-購入-在庫"
+msgstr "承認 - 購買 - 在庫"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.open_module_tree
@@ -20197,12 +20201,12 @@ msgstr "北極/Longyearbyen"
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.base_partner_merge_automatic_wizard_form
 msgid "Are you sure to execute the automatic merge of your contacts?"
-msgstr "連絡先の自動マージを本当に実行しますか？"
+msgstr "連絡先の自動統合を本当に実行しますか？"
 
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.base_partner_merge_automatic_wizard_form
 msgid "Are you sure to execute the list of automatic merges of your contacts?"
-msgstr "連絡先の自動マージのリストを本当に実行しますか？"
+msgstr "連絡先の自動統合のリストを本当に実行しますか？"
 
 #. module: base
 #: model:res.country,name:base.ar
@@ -20802,7 +20806,7 @@ msgstr "ユーザーの無効時に再認証を要求"
 #. module: base
 #: model:ir.module.module,summary:base.module_hr_appraisal
 msgid "Assess your employees"
-msgstr "従業員の評価"
+msgstr "従業員を評価"
 
 #. module: base
 #: model:ir.model,name:base.model_ir_asset
@@ -21279,7 +21283,7 @@ msgstr "自動インストール"
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.base_partner_merge_automatic_wizard_form
 msgid "Automatic Merge Wizard"
-msgstr "自動マージウィザード"
+msgstr "自動統合ウィザード"
 
 #. module: base
 #: model:ir.model,name:base.model_ir_autovacuum
@@ -21881,7 +21885,7 @@ msgstr "アプリ内課金をサポートするための基本的なモデルと
 #. module: base
 #: model:ir.module.module,summary:base.module_iot
 msgid "Basic models and helpers to support Internet of Things."
-msgstr "モノのインターネットをサポートする基本モデルとヘルパー"
+msgstr "IoTをサポートするための基本モデルおよび支援ツール"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_account_batch_payment
@@ -23375,7 +23379,7 @@ msgstr "代わりに12時間時計フォーマットに変更します。"
 #: model:ir.module.module,summary:base.module_im_livechat
 #: model:ir.module.module,summary:base.module_website_livechat
 msgid "Chat with your website visitors"
-msgstr "ウェブサイト訪問者とのライブチャット"
+msgstr "ウェブサイト訪問者とチャット"
 
 #. module: base
 #: model:ir.module.module,summary:base.module_mail
@@ -23777,12 +23781,12 @@ msgstr "コレクト & ほしい物リスト"
 #. module: base
 #: model:ir.module.module,summary:base.module_account_sepa_direct_debit
 msgid "Collect payments from your customers through SEPA direct debit."
-msgstr "SEPAダイレクトデビットを通じて顧客から支払いを収集します。"
+msgstr "SEPA口座振替で、顧客からの支払いを回収します。"
 
 #. module: base
 #: model:ir.module.module,summary:base.module_documents
 msgid "Collect, organize and share documents."
-msgstr "ドキュメントの収集・整理・共有"
+msgstr "ドキュメント(書類)の収集・整理・共有"
 
 #. module: base
 #: model_terms:res.partner,website_description:base.res_partner_address_28
@@ -25501,7 +25505,7 @@ msgstr "D - 電気、ガス、蒸気、空調の供給"
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_delivery_dhl_rest
 msgid "DHL Express Shipping"
-msgstr "DHLエクスプレス配送"
+msgstr "DHL Express配送連携"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_delivery_dhl
@@ -26087,7 +26091,7 @@ msgstr ""
 #. module: base
 #: model:ir.module.module,summary:base.module_mass_mailing_sms
 msgid "Design, send and track SMS"
-msgstr "SMSの作成・送信・追跡"
+msgstr "SMSの作成・送信・効果測定"
 
 #. module: base
 #: model:ir.module.module,summary:base.module_mass_mailing
@@ -26807,7 +26811,7 @@ msgstr "%(record)sを複製"
 #. odoo-python
 #: code:addons/base/models/ir_actions.py:0
 msgid "Duplicate ..."
-msgstr "重複 ..."
+msgstr "複製..."
 
 #. module: base
 #: model:ir.model.fields.selection,name:base.selection__ir_actions_server__state__object_copy
@@ -26986,7 +26990,7 @@ msgid ""
 "easily merge them."
 msgstr ""
 "複数のレコードにまたがるテキストデータを簡単にフォーマットします。重複する"
-"レコードを見つけて、簡単にマージします。"
+"レコードを見つけて、簡単に統合します。"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_delivery_easypost
@@ -27279,7 +27283,7 @@ msgstr "モバイルの従業員"
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_appointment_hr
 msgid "Employees on Appointments"
-msgstr "予約中の従業員"
+msgstr "予約担当従業員"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_l10n_employment_hero
@@ -27483,7 +27487,7 @@ msgstr "エントリ数"
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_delivery_envia
 msgid "Envia Shipping"
-msgstr "Envia配送"
+msgstr "Envia配送連携"
 
 #. module: base
 #: model:ir.module.category,name:base.module_category_theme_environment
@@ -28556,7 +28560,7 @@ msgstr "AI機能(文字起こしなど)で電話機能を拡張"
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_base_address_extended
 msgid "Extended Addresses"
-msgstr "拡張アドレス"
+msgstr "拡張住所"
 
 #. module: base
 #: model:ir.model.fields.selection,name:base.selection__ir_ui_view__mode__extension
@@ -29137,7 +29141,7 @@ msgstr "金融・保険"
 #: model:ir.module.module,summary:base.module_data_merge_crm
 #: model:ir.module.module,summary:base.module_data_merge_utm
 msgid "Find duplicate records and merge them"
-msgstr "重複するレコードを見つけてマージします"
+msgstr "重複するレコードを見つけて統合します"
 
 #. module: base
 #: model:ir.module.module,summary:base.module_web_unsplash
@@ -29148,7 +29152,7 @@ msgstr "Unsplashから無料の高解像度画像を検索"
 #: model:ir.module.module,description:base.module_data_recycle
 #: model:ir.module.module,summary:base.module_data_recycle
 msgid "Find old records and archive/delete them"
-msgstr "古い記録の検索・アーカイブ・削除"
+msgstr "古いレコードを検索してアーカイブまたは削除"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_industry_restaurant
@@ -29406,7 +29410,7 @@ msgid ""
 "For safety reasons, you cannot merge more than 3 contacts together. You can "
 "re-open the wizard several times if needed."
 msgstr ""
-"安全上の理由から、3つ以上の連絡先をマージすることはできません。 必要に応じて"
+"安全上の理由から、3つ以上の連絡先を統合することはできません。 必要に応じて"
 "ウィザードを複数回開くことができます。"
 
 #. module: base
@@ -30271,7 +30275,7 @@ msgstr "グロープ (グループなし = グローバル)"
 #. module: base
 #: model:ir.model.fields,field_description:base.field_res_users__all_group_ids
 msgid "Groups and implied groups"
-msgstr "グループと内包グループ"
+msgstr "グループと包含グループ"
 
 #. module: base
 #: model:ir.model.fields,help:base.field_res_users__group_ids
@@ -30667,7 +30671,7 @@ msgstr "ヘルプデスクメールプラグイン"
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_data_merge_helpdesk
 msgid "Helpdesk Merge action"
-msgstr "ヘルプデスクマージアクション"
+msgstr "ヘルプデスク統合アクション"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_helpdesk_repair
@@ -30961,7 +30965,7 @@ msgstr "I - 宿泊・飲食サービス業"
 msgid ""
 "I'll be happy to send a webhook for you, but you really need to give me a "
 "URL to reach out to..."
-msgstr "ウェブフックを送りします。連絡先のURLが必要です。"
+msgstr "Webhookの送信には、送信先URLの指定が必要です。"
 
 #. module: base
 #. odoo-python
@@ -31538,22 +31542,22 @@ msgstr "FPSファイナンスのガイドラインに準拠した登録済みの
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.view_groups_search
 msgid "Implied"
-msgstr "内包"
+msgstr "包含"
 
 #. module: base
 #: model:ir.model.fields,field_description:base.field_res_groups__implied_ids
 msgid "Implied Groups"
-msgstr "内包グループ"
+msgstr "包含グループ"
 
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.view_groups_list
 msgid "Implied groups"
-msgstr "内包グループ"
+msgstr "包含グループ"
 
 #. module: base
 #: model:ir.model.fields,field_description:base.field_res_groups__implied_by_ids
 msgid "Implying Groups"
-msgstr "継承グループ"
+msgstr "包含元グループ"
 
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.view_base_import_language
@@ -31591,7 +31595,7 @@ msgstr "SIE5ファイルから会計データをインポート"
 #. module: base
 #: model:ir.module.module,summary:base.module_sale_amazon
 msgid "Import Amazon orders and sync deliveries"
-msgstr "Amazonオーダインポートと配送同期"
+msgstr "Amazonの注文を取り込み、配送状況を同期"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_account_bank_statement_import_camt
@@ -31627,7 +31631,7 @@ msgstr "QIF銀行取引明細書をインポート"
 #. module: base
 #: model:ir.module.module,summary:base.module_sale_shopee
 msgid "Import Shopee orders and sync deliveries"
-msgstr "Shopeeオーダインポートと配送同期"
+msgstr "Shopeeの注文を取り込み、配送状況を同期"
 
 #. module: base
 #. odoo-python
@@ -31727,7 +31731,7 @@ msgstr "アプリ内課金"
 #: model_terms:ir.ui.view,arch_db:base.view_currency_search
 #: model_terms:ir.ui.view,arch_db:base.view_view_search
 msgid "Inactive"
-msgstr "無効"
+msgstr "非アクティブ"
 
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.view_users_search
@@ -32228,13 +32232,13 @@ msgstr "Odoo PoSとイタリアのフィスカルプリンタの統合"
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_sale_purchase_stock_inter_company_rules
 msgid "Inter Company Module for Sale/Purchase Orders (with Inventory link)"
-msgstr "販売/購買オーダおよび請求書のための会社間モジュール(在庫リンクあり)"
+msgstr "販売/購買オーダおよび請求書用グループ会社間モジュール(在庫リンクあり)"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_account_inter_company_rules
 #: model:ir.module.module,shortdesc:base.module_sale_purchase_inter_company_rules
 msgid "Inter Company Module for Sale/Purchase Orders and Invoices"
-msgstr "販売/購買オーダおよび請求書用会社間モジュール"
+msgstr "販売/購買オーダおよび請求書用グループ会社間モジュール"
 
 #. module: base
 #: model:ir.module.module,summary:base.module_sale_service
@@ -32765,7 +32769,7 @@ msgstr "イスラエル- 会計レポート"
 #: code:addons/base/models/res_groups.py:0
 msgid ""
 "It is not possible to remove implied group %(group)s from users %(users)s"
-msgstr "内包グループは%(group)sユーザから%(users)sから削除できません"
+msgstr "包含グループ %(group)s はユーザ %(users)s から削除できません"
 
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.form_res_users_key_description
@@ -33691,7 +33695,7 @@ msgstr "ソーシャルにおけるリードの統計と生成"
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.module_view_kanban
 msgid "Learn More"
-msgstr "もっと知る"
+msgstr "詳細を見る"
 
 #. module: base
 #: model:ir.module.module,summary:base.module_l10n_in_hr_holidays
@@ -34556,7 +34560,7 @@ msgstr "EXO番号に関するマルタコンプライアンスレター"
 #. module: base
 #: model:ir.module.module,summary:base.module_appointment_hr
 msgid "Manage Appointments with Employees"
-msgstr "従業員との予約を管理"
+msgstr "従業員アプリと連携してアポイントメントを管理"
 
 #. module: base
 #: model:ir.module.module,summary:base.module_hr_recruitment_integration_website
@@ -35219,7 +35223,7 @@ msgstr "統合"
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.base_partner_merge_automatic_wizard_form
 msgid "Merge Automatically"
-msgstr "自動的にマージ"
+msgstr "自動的に統合"
 
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.base_partner_merge_automatic_wizard_form
@@ -35229,12 +35233,12 @@ msgstr "全ての処理を自動的に統合"
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.base_partner_merge_automatic_wizard_form
 msgid "Merge Contacts"
-msgstr "連絡先をマージ"
+msgstr "連絡先を統合"
 
 #. module: base
 #: model:ir.model,name:base.model_base_partner_merge_line
 msgid "Merge Partner Line"
-msgstr "パートナー行をマージ"
+msgstr "パートナー行を統合"
 
 #. module: base
 #: model:ir.model,name:base.model_base_partner_merge_automatic_wizard
@@ -35244,12 +35248,12 @@ msgstr "取引先統合ウィザード"
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.base_partner_merge_automatic_wizard_form
 msgid "Merge the following contacts"
-msgstr "次の連絡先をマージ"
+msgstr "次の連絡先を統合"
 
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.base_partner_merge_automatic_wizard_form
 msgid "Merge with Manual Check"
-msgstr "手動チェックでマージ"
+msgstr "手動チェックで統合"
 
 #. module: base
 #: model:ir.module.module,summary:base.module_account_peppol_advanced_fields
@@ -37123,7 +37127,7 @@ msgstr ""
 "\n"
 "受信メールから自動的にリードを作成します。リード効率を分析し\n"
 "キャンペーン、チャネル、販売チームごとにパフォーマンスを比較します。\n"
-"1つの作業で重複を見つけて、リードをマージし、相応しい販売担当者に\n"
+"1つの作業で重複を見つけて、リードを統合し、相応しい販売担当者に\n"
 "割当ます。管理に費やす時間を減らし、リードの選別にもっと時間をかけましょう"
 "。\n"
 "\n"
@@ -38879,14 +38883,14 @@ msgid ""
 "Odoo is unable to merge the generated PDFs because of %(num_errors)s "
 "corrupted file(s)"
 msgstr ""
-"破損したファイル%(num_errors)sがあるため、Odooは生成されたPDFをマージできませ"
-"ん。"
+"破損したファイル%(num_errors)sがあるため、Odooは生成されたPDFを統合できません"
+"。"
 
 #. module: base
 #. odoo-python
 #: code:addons/base/models/ir_actions_report.py:0
 msgid "Odoo is unable to merge the generated PDFs."
-msgstr "Odooは生成されたPDFをマージできません。"
+msgstr "Odooは生成されたPDFを統合できません。"
 
 #. module: base
 #: model:ir.model.fields,help:base.field_ir_sequence__padding
@@ -39060,7 +39064,7 @@ msgstr ""
 "検索され、\n"
 "   当該ビューのモデルから継承するすべてのビューが適用されます (inherit_id経"
 "由)\n"
-"* プライマリの場合、最も近い主要ビューは完全に解決され (異なる\n"
+"* メインの場合、最も近い主要ビューは完全に解決され (異なる\n"
 "   モデルを使用している場合でも)、そして当該ビューの継承仕様 (<xpath/>) が \n"
 "   適用されて当該ビューの実際アーチとして結果が使用されます。\n"
 
@@ -39740,7 +39744,7 @@ msgstr "既存の用語を上書き"
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.view_attachment_search
 msgid "Owner"
-msgstr "オーナー"
+msgstr "所有者"
 
 #. module: base
 #: model:res.partner.industry,full_name:base.res_partner_industry_P
@@ -39776,7 +39780,7 @@ msgstr "POEdit"
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_pos_barcodelookup
 msgid "POS - Barcode Lookup"
-msgstr "POS - Barcode Lookup"
+msgstr "POS - バーコード検索"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_pos_event
@@ -40506,7 +40510,7 @@ msgstr "パスワードポリシー"
 #: model:ir.module.module,shortdesc:base.module_auth_password_policy_portal
 #: model:ir.module.module,shortdesc:base.module_auth_password_policy_signup
 msgid "Password Policy support for Signup"
-msgstr "登録為のパスワードサポートポリシー"
+msgstr "新規登録時のパスワードポリシー対応"
 
 #. module: base
 #: model:res.currency,currency_unit_label:base.MOP
@@ -41854,7 +41858,7 @@ msgstr ""
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_data_merge_project
 msgid "Project Merge action"
-msgstr "プロジェクトマージアクション"
+msgstr "プロジェクト統合アクション"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_project_hr_payroll_account
@@ -42874,7 +42878,7 @@ msgstr "修理"
 #. module: base
 #: model:ir.module.module,summary:base.module_repair
 msgid "Repair damaged products"
-msgstr "故障プロダクトの修理管理"
+msgstr "破損したプロダクトの修理管理"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_quality_repair
@@ -43099,7 +43103,7 @@ msgstr "レストラン"
 #. module: base
 #: model:ir.module.module,summary:base.module_pos_restaurant
 msgid "Restaurant extensions for the Point of Sale "
-msgstr "Pos機能のレストラン拡張機能 "
+msgstr "POS(レジ機能)のレストラン向け拡張機能"
 
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.server_action_history_wizard_view
@@ -43871,7 +43875,7 @@ msgstr "販売・倉庫管理"
 #. module: base
 #: model:ir.module.module,summary:base.module_sale
 msgid "Sales internal machinery"
-msgstr "販売内部機械"
+msgstr "販売業務の内部機能"
 
 #. module: base
 #: model:ir.model.fields,field_description:base.field_res_partner__user_id
@@ -44206,7 +44210,7 @@ msgid ""
 msgstr ""
 "重複した記録の検索で使用するために、項目のリストを選択します。\n"
 "複数の項目を選択した場合、Odooはすべてに共通して含まれる(ひとつではない)項目"
-"のマージを提案します。"
+"の統合を提案します。"
 
 #. module: base
 #: model:ir.model.fields,field_description:base.field_ir_model_fields__selectable
@@ -44224,12 +44228,12 @@ msgid ""
 "                                You can remove contacts from this list to "
 "avoid merging them."
 msgstr ""
-"選択した連絡先は一緒にマージされます。\n"
+"選択した連絡先は一緒に統合されます。\n"
 "                                 これらの連絡先の1つにリンクされているすべて"
 "の文書は、\n"
 "                                 宛先の連絡先にリダイレクトされます。\n"
-"                                 このリストから連絡先を削除して、マージを避け"
-"ることができます。"
+"                                 このリストから連絡先を削除して、統合を避ける"
+"ことができます。"
 
 #. module: base
 #. odoo-python
@@ -44360,7 +44364,7 @@ msgstr "株式振替の承認時のWhatsApp送信"
 #. module: base
 #: model:ir.module.module,summary:base.module_sign
 msgid "Send and request electronic signatures."
-msgstr "電子署名を送信および要求します。"
+msgstr "電子署名の送信および署名リクエスト"
 
 #. module: base
 #: model:ir.module.module,description:base.module_social_push_notifications
@@ -46018,7 +46022,7 @@ msgstr "サブメニュー"
 #: model:ir.module.module,summary:base.module_hr_expense
 #: model:ir.module.module,summary:base.module_hr_payroll_expense
 msgid "Submit, validate and reinvoice employee expenses"
-msgstr "経費の申請・承認・再請求"
+msgstr "従業員の経費申請・承認・再請求(顧客への請求振替)"
 
 #. module: base
 #: model:ir.module.category,name:base.module_category_sales_subscriptions
@@ -46539,7 +46543,7 @@ msgstr "テクニカルガイド"
 #. module: base
 #: model:ir.module.module,description:base.module_approvals_purchase_stock
 msgid "Technical module to link Approvals, Purchase and Inventory together. "
-msgstr "承認、購入、在庫をリンクするための技術モジュール。 "
+msgstr "承認、購買、在庫を連携させるための技術モジュール。 "
 
 #. module: base
 #: model:ir.module.module,summary:base.module_product_matrix
@@ -47232,7 +47236,7 @@ msgstr "以下の変数が使用できます:"
 #. module: base
 #: model:ir.model.fields,help:base.field_res_groups__all_implied_ids
 msgid "The group itself with all its implied groups."
-msgstr "そのグループ自体と、そのグループに内包されるすべてのグループ。"
+msgstr "当該グループおよび、そのグループに包含されるすべてのグループ。"
 
 #. module: base
 #. odoo-python
@@ -47762,7 +47766,7 @@ msgstr "テーマテストモジュール"
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.base_partner_merge_automatic_wizard_form
 msgid "There are no more contacts to merge for this request"
-msgstr "このリクエストでマージする連絡先はもうありません"
+msgstr "このリクエストで統合する連絡先はもうありません"
 
 #. module: base
 #: model:ir.model.fields,help:base.field_res_partner__main_user_id
@@ -48853,7 +48857,7 @@ msgstr "従業員の勤怠を記録・管理"
 #: model:ir.module.module,summary:base.module_hr_timesheet
 #: model:ir.module.module,summary:base.module_timesheet_grid
 msgid "Track employee time on tasks"
-msgstr "タスクごとの作業時間を記録"
+msgstr "タスクごとの従業員の作業時間を記録・追跡"
 
 #. module: base
 #: model:ir.module.module,summary:base.module_maintenance
@@ -48908,12 +48912,12 @@ msgstr "Transifexの連携機能"
 #. module: base
 #: model:ir.model.fields,field_description:base.field_res_groups__all_implied_ids
 msgid "Transitively Implied Groups"
-msgstr "連鎖的に内包されるグループ"
+msgstr "間接的に包含されるグループ"
 
 #. module: base
 #: model:ir.model.fields,field_description:base.field_res_groups__all_implied_by_ids
 msgid "Transitively Implying Groups"
-msgstr "間接的に継承するグループ"
+msgstr "間接的に包含するグループ"
 
 #. module: base
 #: model:ir.model.fields,field_description:base.field_ir_model_fields__translate
@@ -49966,7 +49970,7 @@ msgstr "この連絡先を識別するためにバーコードを使用してく
 #. module: base
 #: model:ir.module.module,summary:base.module_stock_barcode
 msgid "Use barcode scanners to process logistics operations"
-msgstr "バーコードスキャナーで入出庫管理"
+msgstr "バーコードスキャナーを使用して物流業務を処理"
 
 #. module: base
 #. odoo-python
@@ -50255,13 +50259,13 @@ msgstr "ユーザログ"
 #. module: base
 #: model:ir.model.fields,field_description:base.field_res_groups__all_user_ids
 msgid "Users and implied users"
-msgstr "ユーザおよび内包ユーザ"
+msgstr "ユーザおよび包含ユーザ"
 
 #. module: base
 #. odoo-python
 #: code:addons/base/models/res_groups.py:0
 msgid "Users and implied users of %(group)s"
-msgstr "%(group)sのユーザおよび内包ユーザ"
+msgstr "%(group)sのユーザおよび包含ユーザ"
 
 #. module: base
 #: model:ir.model.fields,help:base.field_res_groups__user_ids
@@ -50593,7 +50597,7 @@ msgstr "ヴァージン諸島 (アメリカ領)"
 #: model_terms:ir.ui.view,arch_db:base.edit_menu_access
 #: model_terms:ir.ui.view,arch_db:base.view_window_action_form
 msgid "Visibility"
-msgstr "可視性"
+msgstr "公開範囲"
 
 #. module: base
 #: model:ir.model.fields,field_description:base.field_ir_module_category__visible
@@ -50629,7 +50633,7 @@ msgstr "WMS会計"
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_data_merge_stock_account
 msgid "WMS Accounting Merge"
-msgstr "WMS会計マージ"
+msgstr "WMS会計統合"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_stock_landed_costs
@@ -50685,9 +50689,9 @@ msgid ""
 "enhancing solutions through the use of advanced software for our clients "
 "worldwide. At Lumber Inc we bring operational experience combined..."
 msgstr ""
-"私たちは、世界中のクライアントのために高度なソフトウェアを使用して価値を高め"
-"るソリューションを作成する技術コンサルティングおよび戦略的アドバイザリー会社"
-"です。 Lumber Incであれば、運用経験が統合できます..."
+"当社は、高度なソフトウェアを活用し、世界中のクライアントに向けて価値創出"
+"ソリューションを提供するテクノロジーコンサルティングおよび戦略アドバイザリー"
+"企業です。Lumber Inc. では、これまでの実務運用経験と..."
 
 #. module: base
 #: model_terms:res.partner,website_description:base.res_partner_18
@@ -51711,7 +51715,7 @@ msgstr "%(duration)s 日を超えることはできません。"
 #. odoo-python
 #: code:addons/base/wizard/base_partner_merge.py:0
 msgid "You cannot merge a contact with one of his parent."
-msgstr "連絡先を親の1つにマージすることはできません。"
+msgstr "連絡先を親の1つに統合することはできません。"
 
 #. module: base
 #. odoo-python
@@ -51720,8 +51724,8 @@ msgid ""
 "You cannot merge contacts linked to more than one user even if only one is "
 "active."
 msgstr ""
-"有効なユーザが1人であっても、複数のユーザにリンクされた連絡先をマージすること"
-"はできません。"
+"有効なユーザが1人であっても、複数のユーザにリンクされた連絡先を統合することは"
+"できません。"
 
 #. module: base
 #. odoo-python

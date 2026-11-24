@@ -1,9 +1,9 @@
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
 from lxml import html
-from unittest.mock import patch
-from freezegun import freeze_time
-from datetime import date
+from unittest.mock import PropertyMock, patch
+
+import werkzeug
 
 from odoo.addons.website.controllers.main import Website
 from odoo.addons.http_routing.tests.common import MockRequest
@@ -264,6 +264,55 @@ class TestPage(common.TransactionCase):
         self.assertEqual(action.get('type'), 'ir.actions.act_url',
             "Page on non-default website with domain should redirect to real domain")
 
+    def test_copy_password_protected_view(self):
+        """ Tests that the duplication of a password-protected view also copies
+        the password. Tests that it works for designers, who cannot read the
+        password. """
+        designer = common.new_test_user(self.env, login='designer', groups='base.group_user,website.group_website_designer')
+        View = self.env['ir.ui.view'].with_user(designer)
+        protected_view = View.create({
+            'name': 'Protected',
+            'type': 'qweb',
+            'arch': '<div>protected</div>',
+            'key': 'test.protected_view',
+            'visibility': 'password',
+        })
+        protected_view.visibility_password_display = 'secret'
+        cloned_view = protected_view.copy()
+        self.assertTrue(protected_view.sudo().visibility_password)
+        self.assertEqual(cloned_view.sudo().visibility_password, protected_view.sudo().visibility_password)
+
+    def test_no_crypt_context_crash_if_password_is_falsy(self):
+        """ Tests that _handle_visibility does not crash if a password-protected
+        view has a falsy visibility_password. Old databases can contain such
+        views, because duplication of a password-protected page did not copy
+        the password. """
+        View = self.env['ir.ui.view']
+        empty_password_view = View.create({
+            'name': 'Broken clone',
+            'type': 'qweb',
+            'arch': '<div>clone</div>',
+            'key': 'test.broken_clone_view',
+            'visibility': 'password',
+        })
+        public_user = self.env.ref('base.public_user')
+        website = self.env['website'].browse(1)
+        with MockRequest(self.env(user=public_user), website=website) as mock_request:
+            mock_request.params = {'visibility_password': 'secret'}
+            self.assertFalse(empty_password_view._handle_visibility(do_raise=False))
+            with self.assertRaises(werkzeug.exceptions.Forbidden):
+                empty_password_view._handle_visibility(do_raise=True)
+
+    def test_cookies_bar_on_multiple_websites(self):
+        websites = self.env.ref('website.default_website') + self.env['website'].create({'name': 'Website 2'})
+        domain = [('website_id', 'in', websites.ids), ('url', '=', '/cookie-policy')]
+        self.assertFalse(self.env['website.page'].search(domain))
+
+        websites.write({'cookies_bar': True})
+        pages = self.env['website.page'].search(domain)
+        self.assertEqual(len(pages), 2)
+        self.assertEqual(pages.website_id, websites)
+
 
 @tagged('-at_install', 'post_install')
 class WithContext(HttpCase):
@@ -300,19 +349,66 @@ class WithContext(HttpCase):
         self.assertEqual(r.status_code, 200, "Admin should see the specific unpublished page")
         self.assertEqual('I am a specific page' in r.text, True, "Admin should see the specific unpublished page")
 
-    def test_unpublished_page_no_cache(self):
-        """Ensure that a previously-published page that is now unpublished will not be cached."""
+    def test_unpublished_page_deactivated_user(self):
+        designer = common.new_test_user(
+            self.env,
+            login='designer',
+            groups='base.group_user,website.group_website_designer',
+        )
+        self.page.is_published = False
+
+        self.authenticate(designer.login, designer.login)
+        r = self.url_open(self.page.url)
+        self.assertEqual(r.status_code, 200, "Website Designers should see unpublished pages")
+
+        designer.active = False
+        r = self.url_open(self.page.url)
+        self.assertEqual(r.status_code, 404, "Deactivated users should be logged out before serving fallback pages")
+
+    def test_hidden_page_cache_invalidation(self):
+        """Ensure that a cached page is not served anymore once it is hidden"""
         self.authenticate(None, None)
 
-        with freeze_time(date(2025, 12, 30)):
-            r = self.url_open(self.page.url)
+        r = self.url_open(self.page.url)
         self.assertEqual(r.status_code, 200, "Restricted users should see the published page")
 
         self.page.write({'is_published': False})
-
-        with freeze_time(date(2025, 12, 31)):
-            r = self.url_open(self.page.url)
+        r = self.url_open(self.page.url)
         self.assertEqual(r.status_code, 404, "Restricted users should see a 404 as the page is unpublished")
+
+        self.page.write({'is_published': True})
+        r = self.url_open(self.page.url)
+        self.assertEqual(r.status_code, 200, "Restricted users should see the republished page")
+
+    def test_page_cache_host_indexability(self):
+        """Cached HTML must preserve the current host's robots directive."""
+        self.env.ref('website.default_website').domain = 'https://example.com'
+        self.authenticate(None, None)
+
+        for hosts in [('preview.example.com', 'example.com'), ('example.com', 'preview.example.com')]:
+            with self.subTest(hosts=hosts):
+                self.env.registry.clear_cache()
+                # Warm the cache on one host, then visit the same page on the other.
+                for host in hosts:
+                    response = self.url_open(self.page.url, headers={'Host': host})
+                    self.assertEqual(response.status_code, 200)
+                    noindex = html.fromstring(response.content).xpath('//meta[@name="robots"]/@content')
+                    self.assertEqual(noindex, ['noindex'] if host == 'preview.example.com' else [], host)
+
+    def test_page_cache_geoip_country(self):
+        """Ensure that a page cached for a visitor from one country is not
+        served to a visitor from another country."""
+        self.authenticate(None, None)
+
+        with patch('odoo.http.GeoIP.country_code', new_callable=PropertyMock, return_value='BE'):
+            r = self.url_open(self.page.url)
+        self.assertEqual(r.status_code, 200)
+        self.assertIn('"geoip_country_code": "BE"', r.text, "The page should be rendered for a visitor from Belgium")
+
+        with patch('odoo.http.GeoIP.country_code', new_callable=PropertyMock, return_value='FR'):
+            r = self.url_open(self.page.url)
+        self.assertEqual(r.status_code, 200)
+        self.assertIn('"geoip_country_code": "FR"', r.text, "The page cached for Belgium should not be served to a visitor from France")
 
     @mute_logger('odoo.addons.rpc.controllers.xmlrpc')
     def test_search(self):
@@ -689,6 +785,65 @@ class WithContext(HttpCase):
         self.assertEqual(r.status_code, 200, "Specific should be reachable")
         r = self.url_open(generic_page.url)
         self.assertEqual(r.status_code, 404, "Generic should not be reachable")
+
+
+@tagged('-at_install', 'post_install')
+class TestPageInMenu(common.TransactionCase):
+
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.website = cls.env.ref('website.default_website')
+        cls.page = cls.env['website.page'].create({
+            'name': 'In Menu Page',
+            'type': 'qweb',
+            'arch': '<div>content</div>',
+            'key': 'test.in_menu_page',
+            'url': '/in-menu-page',
+            'website_id': cls.website.id,
+        })
+        # A menu tree other than the main menu
+        other_menu = cls.env['website.menu'].create({
+            'name': 'Other Menu',
+            'url': '#',
+            'website_id': cls.website.id,
+        })
+        cls.other_entry = cls.env['website.menu'].create({
+            'name': 'In Menu Page',
+            'url': cls.page.url,
+            'page_id': cls.page.id,
+            'parent_id': other_menu.id,
+            'website_id': cls.website.id,
+        })
+
+    def _page_properties(self):
+        return self.env['website.page.properties'].create({
+            'target_model_id': self.page.id,
+            'website_id': self.website.id,
+            'url': self.page.url,
+        })
+
+    def _main_menu_entries(self):
+        return self.env['website.menu'].search([
+            ('page_id', '=', self.page.id),
+            ('parent_id', '=', self.website.menu_id.id),
+        ])
+
+    def test_in_menu_ignores_other_menu_trees(self):
+        self.assertFalse(self.page.is_in_menu)
+        properties = self._page_properties()
+        self.assertFalse(properties.is_in_menu)
+
+        properties.is_in_menu = True
+        self.assertEqual(len(self._main_menu_entries()), 1, "Switching 'In Menu' on should add the page to the main menu")
+        self.page.invalidate_recordset(['menu_ids', 'is_in_menu'])
+        self.assertTrue(self.page.is_in_menu)
+
+        properties = self._page_properties()
+        self.assertTrue(properties.is_in_menu)
+        properties.is_in_menu = False
+        self.assertFalse(self._main_menu_entries(), "Switching 'In Menu' off should remove the page from the main menu")
+        self.assertTrue(self.other_entry.exists(), "'In Menu' should not remove the entries of other menu trees")
 
 
 @tagged('-at_install', 'post_install')

@@ -25,6 +25,7 @@ import { useMessageSearch } from "@mail/core/common/message_search_hook";
 import { usePopoutAttachment } from "@mail/core/common/attachment_view";
 import { rpc } from "@web/core/network/rpc";
 import { useRecordObserver } from "@web/model/relational_model/utils";
+import { isMobileOS } from "@web/core/browser/feature_detection";
 
 export const DELAY_FOR_SPINNER = 1000;
 
@@ -103,6 +104,7 @@ patch(Chatter.prototype, {
         this.loadingAttachmentTimeout = null;
         /** @type {Map<string, Function>} */
         this.uploadHandlers = new Map();
+        this.isMobileOS = isMobileOS();
         useCustomDropzone(
             this.rootRef,
             MailAttachmentDropzone,
@@ -202,29 +204,26 @@ patch(Chatter.prototype, {
         if ((!partnerIds.length && !email) || mode !== "message" || status(this) === "destroyed") {
             return;
         }
+        const thread = this.state.thread;
         const recipients = await this.keepLastSuggestedRecipientsUpdate.add(
             rpc("/mail/thread/recipients/get_suggested_recipients", {
-                thread_model: this.props.threadModel,
-                thread_id: this.props.threadId,
+                thread_model: thread.model,
+                thread_id: thread.id,
                 partner_ids: partnerIds,
                 main_email: email,
             })
         );
-        if (status(this) === "destroyed" && !this.state.thread) {
-            return;
-        }
-        this.state.thread.suggestedRecipients = recipients.map((result) => ({
+        thread.suggestedRecipients = recipients.map((result) => ({
             display_name: result.display_name,
             email: result.email,
             partner_id: result.partner_id,
             name: result.name || result.email,
         }));
-        this.state.thread.additionalRecipients = this.state.thread.additionalRecipients.filter(
-            (additionalRecipient) =>
-                this.state.thread.suggestedRecipients.every(
-                    (suggestedRecipient) =>
-                        suggestedRecipient.partner_id !== additionalRecipient.partner_id
-                )
+        thread.additionalRecipients = thread.additionalRecipients.filter((additionalRecipient) =>
+            thread.suggestedRecipients.every(
+                (suggestedRecipient) =>
+                    suggestedRecipient.partner_id !== additionalRecipient.partner_id
+            )
         );
     },
 
@@ -376,7 +375,6 @@ patch(Chatter.prototype, {
     },
 
     onFollowerChanged() {
-        document.body.click(); // hack to close dropdown
         this.reloadParentView();
     },
 
@@ -496,6 +494,14 @@ patch(Chatter.prototype, {
         if (this.props.hasParentReloadOnAttachmentsChanged) {
             this.reloadParentView();
         }
+    },
+
+    get showsAttachmentPopout() {
+        return (
+            !this.isMobileOS &&
+            this.props.hasAttachmentPreview &&
+            Boolean(this.state.thread.attachmentsInWebClientView.length)
+        );
     },
 
     popoutAttachment() {

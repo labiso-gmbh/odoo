@@ -771,7 +771,7 @@ class PosSession(models.Model):
                 'amount': cash_move.amount,
                 'id': cash_move.id,
                 'date': cash_move.create_date,
-                'cashier_name': cash_move.partner_id.name,
+                'cashier_name': self._get_cash_move_cashier_name(cash_move),
             })
         return cash_in_out_list
 
@@ -1423,6 +1423,9 @@ class PosSession(models.Model):
                 'name': 'Rounding line',
                 'move_id': self.move_id.id,
             }
+            # The per-order conversions can add up to the opposite sign of `amount`.
+            if amount * amount_converted < 0:
+                amount_converted = self._amount_converter(amount, self.stop_at, True)
             if float_compare(0.0, amount, precision_rounding=self.currency_id.rounding) > 0:    # loss
                 partial_args['account_id'] = self.config_id.rounding_method.loss_account_id.id
                 return self._debit_amounts(partial_args, -amount, -amount_converted)
@@ -1873,8 +1876,10 @@ class PosSession(models.Model):
             'amount': sign * amount,
             'date': fields.Date.context_today(self),
             'payment_ref': '-'.join([session.name, extras['translatedType'], reason]),
-            'partner_id': partner_id,
         }
+
+    def _get_cash_move_cashier_name(self, cash_move):
+        return cash_move.create_uid.name
 
     def try_cash_in_out(self, _type, amount, reason, partner_id, extras):
         if not self.env.user._has_cash_move_permission():
@@ -1897,7 +1902,7 @@ class PosSession(models.Model):
         absl = self.env['account.bank.statement.line'].browse(absl_id).sudo()
         if absl not in self.sudo().statement_line_ids:
             raise AccessError(_("You cannot delete a cash move that is not linked to this session."))
-        cashier_name = absl.partner_id.name
+        cashier_name = self._get_cash_move_cashier_name(absl)
         amount = absl.amount
         action = (cashier_name + ': ' if cashier_name else '') + str(amount)
         absl.unlink()

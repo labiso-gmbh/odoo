@@ -43,10 +43,10 @@ import { CTYPES } from "../utils/content_types";
 import { withSequence } from "@html_editor/utils/resource";
 import { compareListTypes } from "@html_editor/main/list/utils";
 import {
-    hasTouch,
     isBrowserChrome,
     isBrowserSafari,
     isMacOS,
+    isMobileOS,
 } from "@web/core/browser/feature_detection";
 import { normalizeDeepCursorPosition, normalizeFakeBR } from "@html_editor/utils/selection";
 
@@ -546,7 +546,13 @@ export class DeletePlugin extends Plugin {
             // @todo: mind Icons?
             // Probably need to get deepest position's element
             // @todo: update fillEmpty
-            if (!isBlock(node) && !isTangible(node) && !isZWS(node) && !isZwnbsp(node)) {
+            if (
+                !isBlock(node) &&
+                !isTangible(node) &&
+                !isZWS(node) &&
+                !isZwnbsp(node) &&
+                !(node.textContent && isWhitespace(node.textContent))
+            ) {
                 node.appendChild(this.document.createTextNode("\u200B"));
                 node.setAttribute("data-oe-zws-empty-inline", "");
             }
@@ -1332,7 +1338,7 @@ export class DeletePlugin extends Plugin {
         if (argsForDelete) {
             this.delete(...argsForDelete);
             ev.preventDefault();
-            if (isBrowserChrome() && hasTouch()) {
+            if (isBrowserChrome() && isMobileOS()) {
                 this.preventDefaultDeleteAndroidChrome(ev);
             }
         }
@@ -1401,7 +1407,7 @@ export class DeletePlugin extends Plugin {
         return this.deleteCharUnmergeable(startContainer, startOffset, endContainer, endOffset);
     }
 
-    // Trap cursor inside unmergeable element. Remove it if empty.
+    // Trap cursor inside unmergeable block element. Remove it if empty.
     deleteCharUnmergeable(sourceContainer, sourceOffset, destContainer, destOffset) {
         if (!destContainer) {
             return;
@@ -1410,7 +1416,8 @@ export class DeletePlugin extends Plugin {
         const closestUnmergeable = findUpTo(sourceContainer, commonAncestor, (node) =>
             this.isUnmergeable(node)
         );
-        if (!closestUnmergeable) {
+
+        if (!isBlock(closestUnmergeable)) {
             return;
         }
 

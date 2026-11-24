@@ -162,7 +162,7 @@
             --o-wsale-filmstrip-item-color: #{color-contrast($light)};
             --o-wsale-filmstrip-item-span-height: 2.5rem;
 
-            --o-wsale-filmstrip-item-bg-hover: #{if(lightness($light) > .5, darken($light, 8%), lighten($light, 8%))};
+            --o-wsale-filmstrip-item-bg-hover: #{if(lightness($light) > 50%, darken($light, 8%), lighten($light, 8%))};
         }
 
         &.o_wsale_filmstrip_bordered {
@@ -916,6 +916,10 @@
         overflow-wrap: break-word;
     }
 
+    #product_documents {
+        overflow-wrap: break-word;
+    }
+
     h1[itemprop="name"] {
         @include font-size($h3-font-size);
         font-weight: $font-weight-bold;
@@ -1330,6 +1334,16 @@ $-product-radius-map: (
 #o_wsale_cta_wrapper {
     &.o_wsale_cta_wrapper_boxed {
         max-width: 26rem;
+
+        .product_price {
+            label {
+                overflow-wrap: anywhere;
+            }
+
+            td > .d-flex {
+                flex-wrap: wrap;
+            }
+        }
     }
 
     &.o_wsale_cta_wrapper_large .css_quantity {

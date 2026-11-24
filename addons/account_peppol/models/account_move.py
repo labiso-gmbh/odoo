@@ -36,8 +36,11 @@ class AccountMove(models.Model):
     def action_cancel_peppol_documents(self):
         # if the peppol_move_state is processing/done/has been replied to
         # then it means it has been already sent to peppol proxy and we can't cancel
-        if any(move.peppol_is_sent for move in self):
-            raise UserError(_("Cannot cancel an entry that has already been sent to PEPPOL"))
+        if sent_move := self.filtered('peppol_is_sent')[:1]:
+            raise UserError(_(
+                "Cannot cancel an entry that has already been sent via %(network_name)s",
+                network_name=sent_move.company_id._get_einvoicing_network_name(),
+            ))
         self.peppol_move_state = False
         self.sending_data = False
 
@@ -73,12 +76,6 @@ class AccountMove(models.Model):
         for move in self:
             move.peppol_is_sent = move.peppol_move_state not in {False, 'ready', 'to_send', 'error', 'skipped'}
 
-    @api.depends('peppol_is_sent')
-    def _compute_show_reset_to_draft_button(self):
-        # EXTEND 'account' to hide the reset to draft button for sent Peppol invoices
-        super()._compute_show_reset_to_draft_button()
-        self.filtered(lambda move: move.peppol_is_sent and move.is_sale_document(include_receipts=True)).show_reset_to_draft_button = False
-
     def _notify_by_email_prepare_rendering_context(self, message, msg_vals=False, model_description=False,
                                                    force_email_company=False, force_email_lang=False,
                                                    force_record_name=False):
@@ -98,6 +95,7 @@ class AccountMove(models.Model):
                 'is_peppol_sent': invoice.peppol_is_sent,
                 'is_partner_b2c': len(invoice.commercial_partner_id.vat or '') <= 1,
                 'partner_on_peppol': invoice.commercial_partner_id.peppol_verification_state in ('valid', 'not_valid_format'),
+                'network_name': invoice.company_id._get_einvoicing_network_name(),
             }
         return render_context
 
@@ -110,3 +108,11 @@ class AccountMove(models.Model):
         self.filtered(lambda m: m.state not in ('draft', 'cancel') and not m.inalterable_hash).button_draft()
         if ids_to_delete:
             self.env['account.move'].browse(ids_to_delete).exists().unlink()
+
+    def _get_edi_decoder(self, file_data, new=False):
+        # EXTENDS account
+        # The sender identifier of the Peppol envelope, if any, so that the decoders can use it.
+        # TODO master: pass it explicitly through `_extend_with_attachments` instead of the context.
+        if sender_identifier := self.env.context.get('peppol_sender_identifier'):
+            file_data['peppol_sender_identifier'] = sender_identifier
+        return super()._get_edi_decoder(file_data, new=new)

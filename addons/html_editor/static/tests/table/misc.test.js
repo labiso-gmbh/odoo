@@ -121,6 +121,29 @@ test("can color cells", async () => {
     expect(cells[2]).not.toHaveStyle({ "background-color": "rgba(107, 173, 222, 0.6)" });
 });
 
+test("solid color tab should be opened by default if selected cell has color from solid tab", async () => {
+    await setupEditor(`
+        <table class="table table-bordered o_table">
+            <tbody>
+                <tr>
+                    <td>[<br></td>
+                    <td><br>]</td>
+                </tr>
+            </tbody>
+        </table>`);
+
+    await expandToolbar();
+    await click(".o-select-color-background");
+    await animationFrame();
+    await click(".o_color_button[data-color='#FF0000']");
+    await animationFrame();
+
+    await click(".o-select-color-background");
+    await animationFrame();
+    expect(".o_font_color_selector .solid-tab").toHaveClass("active");
+    expect(".o_font_color_selector .o_color_button[data-color='#FF0000']").toHaveClass("selected");
+});
+
 test("remove text from single selected cell", async () => {
     const { editor } = await setupEditor(`
         <table class="table table-bordered o_table">
@@ -171,7 +194,7 @@ describe("selected cell color in toolbar", () => {
         await expandToolbar();
         expect(".fa-paint-brush").toHaveCount(1);
         expect(".fa-paint-brush").toHaveStyle({
-            "border-bottom": "2px solid rgba(255, 0, 0, 0.6)",
+            "border-bottom": "2px solid rgb(255, 0, 0)",
         });
     });
     test("cell's selected color should be shown in toolbar (2)", async () => {
@@ -209,7 +232,7 @@ describe("selected cell color in toolbar", () => {
         await expandToolbar();
         expect(".fa-paint-brush").toHaveCount(1);
         expect(".fa-paint-brush").toHaveStyle({
-            "border-bottom": "2px solid rgba(255, 0, 0, 0.6)",
+            "border-bottom": "2px solid rgb(255, 0, 0)",
         });
         const nonStyledCellOne = queryFirst(".non_styled_1");
         const nonStyledCellTwo = queryFirst(".non_styled_2");
@@ -268,7 +291,7 @@ describe("selected cell color in toolbar", () => {
         await expandToolbar();
         expect(".fa-paint-brush").toHaveCount(1);
         expect(".fa-paint-brush").toHaveStyle({
-            "border-bottom": "2px solid rgba(255, 0, 0, 0.6)",
+            "border-bottom": "2px solid rgb(255, 0, 0)",
         });
     });
 
@@ -309,15 +332,15 @@ describe("selected cell color in toolbar", () => {
         await expandToolbar();
         expect(".fa-paint-brush").toHaveCount(1);
         expect(".fa-paint-brush").toHaveStyle({
-            "border-bottom": "2px solid rgba(255, 0, 0, 0.6)",
+            "border-bottom": "2px solid rgb(255, 0, 0)",
         });
     });
 });
 
 describe("normalize table structure", () => {
-    test("should create a tbody and move table styles to it", async () => {
+    test("should create a tbody", async () => {
         // Tables containing only a caption have no tbody. Normalize the table
-        // structure so a tbody is created and table styles can be moved to it.
+        // structure so a tbody is created.
         const { el, editor } = await setupEditor(
             `<table class="table table-bordered o_table" style="width: 500px;"><caption>c</caption></table>`
         );
@@ -325,9 +348,9 @@ describe("normalize table structure", () => {
         expect(getContent(el)).toBe(
             unformat(`
                 <p data-selection-placeholder=""><br></p>
-                <table class="table table-bordered o_table">
+                <table class="table table-bordered o_table" style="width: 500px;">
                     <caption>c</caption>
-                    <tbody style="width: 500px;">
+                    <tbody>
                         <tr>
                             <td><div class="o-paragraph"><br></div></td>
                         </tr>
@@ -345,8 +368,8 @@ describe("normalize table structure", () => {
         expect(getContent(el)).toBe(
             unformat(`
                 <p data-selection-placeholder=""><br></p>
-                <table>
-                    <tbody style="width: 500px;">
+                <table style="width: 500px;">
+                    <tbody>
                         <tr>
                             <th class="o_table_header">1</th>
                             <th class="o_table_header">2</th>
@@ -370,8 +393,8 @@ describe("normalize table structure", () => {
         expect(getContent(el)).toBe(
             unformat(`
                 <p data-selection-placeholder=""><br></p>
-                <table>
-                    <tbody style="width: 500px;">
+                <table style="width: 500px;">
+                    <tbody>
                         <tr>
                             <th class="o_table_header">1</th>
                             <th class="o_table_header">2</th>
@@ -380,6 +403,58 @@ describe("normalize table structure", () => {
                             <td>3</td>
                             <td>4</td>
                         </tr>
+                    </tbody>
+                </table>
+                <p data-selection-placeholder=""><br></p>
+            `)
+        );
+    });
+});
+
+describe("table style migration", () => {
+    test("should move tbody width/margin-left back to table", async () => {
+        const { el } = await setupEditor(
+            unformat(
+                `<table>
+                    <tbody style="width: 500px; margin-left: 50px;">
+                        <tr><td>1</td><td>2</td></tr>
+                        <tr><td>3</td><td>4</td></tr>
+                    </tbody>
+                </table>`
+            )
+        );
+        expect(getContent(el)).toBe(
+            unformat(`
+                <p data-selection-placeholder=""><br></p>
+                <table style="width: 500px; margin-left: 50px;">
+                    <tbody>
+                        <tr><td>1</td><td>2</td></tr>
+                        <tr><td>3</td><td>4</td></tr>
+                    </tbody>
+                </table>
+                <p data-selection-placeholder=""><br></p>
+            `)
+        );
+    });
+
+    test("should not move tbody width/margin-left if the table already has them", async () => {
+        const { el } = await setupEditor(
+            unformat(
+                `<table style="width: 700px;">
+                    <tbody style="width: 500px; margin-left: 50px;">
+                        <tr><td>1</td><td>2</td></tr>
+                        <tr><td>3</td><td>4</td></tr>
+                    </tbody>
+                </table>`
+            )
+        );
+        expect(getContent(el)).toBe(
+            unformat(`
+                <p data-selection-placeholder=""><br></p>
+                <table style="width: 700px;">
+                    <tbody style="width: 500px; margin-left: 50px;">
+                        <tr><td>1</td><td>2</td></tr>
+                        <tr><td>3</td><td>4</td></tr>
                     </tbody>
                 </table>
                 <p data-selection-placeholder=""><br></p>

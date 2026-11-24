@@ -103,6 +103,48 @@ test("suggestion list closed by Escape stays closed when a member starts typing"
     await contains(".o-mail-Composer-suggestionList .o-open");
 });
 
+test("click away from the empty suggestion list keeps the fetched suggestions", async () => {
+    const pyEnv = await startServer();
+    pyEnv["res.partner"].create({ name: "Bob" });
+    const fetchHeld = new Deferred();
+    onRpc("res.partner", "get_mention_suggestions", async () => {
+        asyncStep("get_mention_suggestions");
+        await fetchHeld;
+    });
+    await start();
+    await openFormView("res.partner", serverState.partnerId);
+    await click("button", { text: "Send message" });
+    await insertText(".o-mail-Composer-input", "@Bob");
+    await expect.waitForSteps(["get_mention_suggestions"]);
+    await contains(".o-mail-Composer-suggestionList .o-open");
+    await click(".o_form_view");
+    await contains(".o-mail-Composer-suggestionList .o-open", { count: 0 });
+    fetchHeld.resolve();
+    await contains(".o-mail-Composer-suggestion", { text: "Bob" });
+});
+
+test("[text composer] late empty answer of a previous search does not drop the current search", async () => {
+    const pyEnv = await startServer();
+    pyEnv["res.partner"].create({ name: "Georges" });
+    const fetchHeld = new Deferred();
+    onRpc("res.partner", "get_mention_suggestions", async ({ kwargs }) => {
+        asyncStep(`get_mention_suggestions: ${kwargs.search}`);
+        if (kwargs.search === "xxx") {
+            await fetchHeld;
+        }
+    });
+    await start();
+    await openFormView("res.partner", serverState.partnerId);
+    await click("button", { text: "Send message" });
+    await insertText(".o-mail-Composer-input", "@xxx");
+    await expect.waitForSteps(["get_mention_suggestions: xxx"]);
+    await insertText(".o-mail-Composer-input", "@Georges", { replace: true });
+    await animationFrame();
+    fetchHeld.resolve();
+    await contains(".o-mail-Composer-suggestion", { text: "Georges" });
+    await expect.waitForSteps(["get_mention_suggestions: georges"]);
+});
+
 test.tags("html composer");
 test("display partner mention suggestions on typing '@'", async () => {
     const pyEnv = await startServer();

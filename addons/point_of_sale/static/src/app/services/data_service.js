@@ -100,19 +100,6 @@ export class PosData {
 
     reconnectWebSocket() {
         this.initializeWebsocket();
-        const channels = [...this.channels];
-        this.channels = [];
-        while (channels.length) {
-            const channel = channels.pop();
-            this.connectWebSocket(channel.channel, channel.method);
-
-            logPosMessage(
-                "DataService",
-                "reconnectWebSocket",
-                `Reconnecting to channe ${channel.channel}`,
-                CONSOLE_COLOR
-            );
-        }
     }
 
     connectWebSocket(channel, method) {
@@ -137,7 +124,25 @@ export class PosData {
         return await this.indexedDB.delete(model, ids);
     }
 
+    requestPersistentStorage() {
+        // Ask the browser to exempt this origin's storage (incl. indexedDB) from
+        // automatic eviction under disk pressure. Best-effort: the browser may
+        // deny (or prompt, on Firefox), so don't await it in the startup path.
+        if (navigator.storage?.persist) {
+            navigator.storage.persisted().then(async (persisted) => {
+                const granted = persisted || (await navigator.storage.persist());
+                logPosMessage(
+                    "DataService",
+                    "requestPersistentStorage",
+                    `Persistent storage ${granted ? "granted" : "denied by the browser"}`,
+                    CONSOLE_COLOR
+                );
+            });
+        }
+    }
+
     async initIndexedDB(relations) {
+        this.requestPersistentStorage();
         // This method initializes indexedDB with all models loaded into the PoS. The default key is ID.
         // But some models have another key configured in data_service_options.js. These models are
         // generally those that can be created in the frontend.
@@ -173,20 +178,17 @@ export class PosData {
 
         for (const [model, params] of modelsParams) {
             if (!params.getRecordsBasedOnLines) {
-                const data = this.models[model].getAll();
-                const recordsToPut = data.filter((record) => !params.condition(record));
+                const records = this.models[model].getAll();
+                const recordsToPut = records.filter((record) => !params.condition(record));
 
                 if (model === "pos.order.line") {
                     orderlinesToKeep = recordsToPut;
                 }
 
-                data[model] = recordsToPut;
+                data[model] = recordsToPut.map((r) => r.serializeForIndexedDB());
 
                 if (recordsToPut.length) {
-                    await this.indexedDB.create(
-                        model,
-                        recordsToPut.map((r) => r.serializeForIndexedDB())
-                    );
+                    await this.indexedDB.create(model, data[model]);
                     dataToKeep[model] = recordsToPut.map((r) => r[params.key]);
                 }
             }
@@ -201,12 +203,9 @@ export class PosData {
                         ...new Map(recordsToPut.map((r) => [r[params.key], r])).values(),
                     ];
 
-                    data[model] = uniqueRecords;
+                    data[model] = uniqueRecords.map((r) => r.serializeForIndexedDB());
 
-                    await this.indexedDB.create(
-                        model,
-                        uniqueRecords.map((r) => r.serializeForIndexedDB())
-                    );
+                    await this.indexedDB.create(model, data[model]);
                     dataToKeep[model] = uniqueRecords.map((r) => r[params.key]);
                 }
             }
@@ -841,6 +840,9 @@ export class PosData {
     }
 
     async loadServerOrders(domain) {
+        const finalizedStates = new Map(
+            this.models["pos.order"].filter((o) => o.finalized).map((o) => [o.uuid, o.state])
+        );
         const result = await this.callRelated(
             "pos.order",
             "read_pos_orders",
@@ -853,6 +855,10 @@ export class PosData {
         const session = this.models["pos.session"].get(odoo.pos_session_id);
         const orders = result["pos.order"] || [];
         for (const order of orders) {
+            // A read started before the payment was committed must not reopen the order
+            if (finalizedStates.has(order.uuid) && !order.finalized) {
+                order.state = finalizedStates.get(order.uuid);
+            }
             // Clear commands
             order.serializeForORM();
             order.config_id = config;

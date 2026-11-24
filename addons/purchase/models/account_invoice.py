@@ -6,7 +6,7 @@ import time
 from markupsafe import Markup
 
 from odoo import api, fields, models, Command, _
-from odoo.tools import OrderedSet
+from odoo.tools import float_compare, OrderedSet
 
 _logger = logging.getLogger(__name__)
 
@@ -286,6 +286,7 @@ class AccountMove(models.Model):
         matched_inv_lines = []
         try:
             start_time = time.time()
+            precision = self.env["decimal.precision"].precision_get("Product Price")
             for invoice_line in invoice_lines:
                 # There are no purchase order lines left. We are done matching.
                 if not purchase_lines:
@@ -299,10 +300,10 @@ class AccountMove(models.Model):
                     # The lists are sorted by unit price descendingly.
                     # When the unit price of the purchase line is lower than the unit price of the invoice line,
                     # we cannot get a match anymore.
-                    if purchase_line.price_unit < invoice_line.price_unit:
+                    if float_compare(purchase_line.price_unit, invoice_line.price_unit, precision_digits=precision) < 0:
                         break
 
-                    if (invoice_line.price_unit == purchase_line.price_unit
+                    if (float_compare(invoice_line.price_unit, purchase_line.price_unit, precision_digits=precision) == 0
                             and invoice_line.quantity <= purchase_line.product_qty - purchase_line.qty_invoiced):
                         # The current purchase line is a possible match for the current invoice line.
                         # We calculate the name match ratio and continue with other possible matches.
@@ -311,7 +312,7 @@ class AccountMove(models.Model):
                         # account.move.line model with the extra matching fields and extending the EDI extraction
                         # logic to fill these new fields.
                         purchase_line_candidates[purchase_line] = difflib.SequenceMatcher(
-                            None, invoice_line.name, purchase_line.name).ratio()
+                            None, invoice_line.name or "", purchase_line.name or "").ratio()
 
                 if len(purchase_line_candidates) > 0:
                     # We take the best match based on the name.
@@ -482,7 +483,8 @@ class AccountMove(models.Model):
 
         elif method == 'subset_match':
             # A subset of the referenced purchase order lines matches a subset of the invoice lines.
-            # We add the purchase order lines, but adjust the quantity to the quantities in the invoice.
+            # We add the purchase order lines, but adjust the quantity, taxes and discount to the
+            # values in the invoice.
             # The original invoice lines that correspond with a purchase order line are removed.
             self._set_purchase_orders(matched_po_lines.order_id, force_write=False)
 
@@ -491,8 +493,8 @@ class AccountMove(models.Model):
                     lambda l: l.purchase_line_id and l.purchase_line_id not in matched_po_lines)
                 invoice.invoice_line_ids = [Command.delete(line.id) for line in unmatched_lines]
 
-                # We remove the original matched invoice lines and apply their quantities and taxes to the matched
-                # purchase order lines.
+                # We remove the original matched invoice lines and apply their quantities, taxes and discounts
+                # to the matched purchase order lines.
                 inv_and_po_lines = list(map(lambda line: (
                         invoice.invoice_line_ids.filtered(
                             lambda l: l.purchase_line_id and l.purchase_line_id.id == line[0]),
@@ -502,13 +504,17 @@ class AccountMove(models.Model):
                     matched_inv_lines
                 ))
                 invoice.invoice_line_ids = [
-                    Command.update(po_line.id, {'quantity': inv_line.quantity, 'tax_ids': inv_line.tax_ids})
+                    Command.update(po_line.id, {
+                        'quantity': inv_line.quantity,
+                        'tax_ids': inv_line.tax_ids,
+                        'discount': inv_line.discount,
+                    })
                     for po_line, inv_line in inv_and_po_lines
                 ]
                 invoice.invoice_line_ids = [Command.delete(inv_line.id) for dummy, inv_line in inv_and_po_lines]
 
                 # If there are lines left not linked to a purchase order, we add a header
-                unmatched_lines = invoice.invoice_line_ids.filtered(lambda l: not l.purchase_line_id)
+                unmatched_lines = invoice.invoice_line_ids.filtered(lambda l: l.display_type == 'product' and not l.purchase_line_id)
                 if len(unmatched_lines) > 0:
                     invoice.invoice_line_ids = [Command.create({
                         'display_type': 'line_section',
@@ -516,7 +522,8 @@ class AccountMove(models.Model):
                         'sequence': -1,
                     })]
 
-        if not any(line.purchase_order_id for line in self.line_ids):
+        # Only clean the origin when it was guessed from the line descriptions: an explicit order reference is kept.
+        if self.env.context.get('invoice_origin_from_description') and not any(line.purchase_order_id for line in self.line_ids):
             self.invoice_origin = False
 
 

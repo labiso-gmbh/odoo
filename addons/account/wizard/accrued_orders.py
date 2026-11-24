@@ -45,15 +45,33 @@ class AccountAccruedOrdersWizard(models.TransientModel):
     currency_id = fields.Many2one(related='company_id.currency_id', string='Company Currency',
         readonly=True, store=True,
         help='Utility field to express amount currency')
+    account_types = fields.Json(compute='_compute_account_types')
     account_id = fields.Many2one(
         comodel_name='account.account',
         required=True,
         string='Accrual Account',
         check_company=True,
-        domain="[('account_type', '=', 'liability_current')] if context.get('active_model') in ['purchase.order', 'purchase.order.line'] else [('account_type', '=', 'asset_current')]",
+        domain="[('account_type', 'in', account_types)]",
     )
     preview_data = fields.Text(compute='_compute_preview_data')
     display_amount = fields.Boolean(compute='_compute_display_amount')
+
+    @api.depends_context('active_model', 'active_ids')
+    def _compute_account_types(self):
+        orders, lines = self._get_orders_and_lines()
+        account_types = set()
+        sign = 1 if orders._name == 'purchase.order' else -1
+        for line in lines:
+            transferred_qty = line.qty_received_at_date if line._name == 'purchase.order.line' else line.qty_delivered_at_date
+            comparison = line.product_uom_id.compare((line.qty_invoiced_at_date - transferred_qty) * sign, 0)
+            if comparison > 0:
+                account_types |= {'asset_current'}
+            elif comparison < 0:
+                account_types |= {'liability_current'}
+            else:
+                account_types |= {'liability_current', 'asset_current'}
+        for record in self:
+            record.account_types = list(account_types)
 
     @api.depends('date', 'amount')
     def _compute_display_amount(self):
@@ -255,15 +273,15 @@ class AccountAccruedOrdersWizard(models.TransientModel):
                             amount = order.currency_id._convert(amount_currency, self.company_id.currency_id, self.company_id)
                         elif qty_to_invoice < 0:
                             # Invoiced not delivered.
-                            amount_currency, amount, processed_qty = 0, 0, 0
-                            for inv_line in order_line.invoice_lines.filtered(lambda ivl: ivl.move_id.state == 'posted').sorted(reverse=True):
-                                amount_currency -= inv_line.price_subtotal
-                                amount -= order.currency_id._convert(inv_line.price_subtotal, self.company_id.currency_id, self.company_id)
-                                processed_qty += inv_line.quantity
-                                if processed_qty >= abs(qty_to_invoice):
-                                    break
-                            if processed_qty:
-                                price_unit = abs(amount / processed_qty)
+                            invoiced_amount, invoiced_qty = 0, 0
+                            for inv_line in order_line._get_invoice_lines().filtered(lambda ivl: ivl.move_id.state == 'posted'):
+                                sign = -inv_line.move_id.direction_sign
+                                invoiced_amount += sign * inv_line.price_subtotal
+                                invoiced_qty += sign * inv_line.product_uom_id._compute_quantity(inv_line.quantity, order_line.product_uom_id)
+                            if invoiced_qty:
+                                price_unit = invoiced_amount / invoiced_qty
+                            amount_currency = order.currency_id.round(qty_to_invoice * price_unit) if invoiced_qty else 0
+                            amount = order.currency_id._convert(amount_currency, self.company_id.currency_id, self.company_id)
                         label = _(
                             '%(order)s - %(order_line)s; %(quantity_invoiced)s Invoiced, %(quantity_delivered)s Delivered at %(unit_price)s each',
                             order=order.name,
@@ -402,3 +420,11 @@ class AccountAccruedOrdersWizard(models.TransientModel):
     @api.model
     def _get_product_expense_and_stock_var_accounts(self, product):
         return (False, False)
+
+    def _get_orders_and_lines(self):
+        active_model = self.env.context.get('active_model')
+        active_ids = self.env.context.get('active_ids') or []
+        records = self.env[active_model].browse(active_ids)
+        if active_model in ('purchase.order.line', 'sale.order.line'):
+            return records.order_id, records
+        return records, records.order_line.filtered(lambda l: l.product_id)

@@ -14,6 +14,7 @@ import {
     isEmptyTextNode,
     isSelfClosingElement,
     isTextNode,
+    isVisible,
     isVisibleTextNode,
     isZwnbsp,
     isZWS,
@@ -172,7 +173,11 @@ export class FormatPlugin extends Plugin {
         ],
         /** Handlers */
         beforeinput_handlers: withSequence(20, this.onBeforeInput.bind(this)),
-        clean_for_save_handlers: this.cleanForSave.bind(this),
+        clean_for_save_handlers: [
+            this.cleanForSave.bind(this),
+            // Runs last, so the other handlers can still read data-oe-zws-empty-inline.
+            withSequence(Infinity, this.removeEmptyInlineZWS.bind(this)),
+        ],
         normalize_handlers: this.normalize.bind(this),
         selectionchange_handlers: this.removeEmptyInlineElement.bind(this),
         before_set_tag_handlers: this.removeFontSizeFormat.bind(this),
@@ -180,6 +185,24 @@ export class FormatPlugin extends Plugin {
 
         intangible_char_for_keyboard_navigation_predicates: (_, char) => char === "\u200b",
     };
+
+    setup() {
+        // Give the elements saved empty with data-oe-zws-empty-inline, and the
+        // empty inline fields, a ZWS so the cursor can go in. Done in setup so
+        // it happens before contenteditable is set and is not recorded in the
+        // history.
+        for (const element of selectElements(
+            this.editable,
+            "[data-oe-zws-empty-inline]:empty, [data-oe-field]"
+        )) {
+            if (element.hasAttribute("data-oe-zws-empty-inline")) {
+                // fillEmpty skips elements that already have the attribute.
+                element.append(this.document.createTextNode("\u200B"));
+            } else if (!isVisible(element) && !isBlock(element)) {
+                fillEmpty(element);
+            }
+        }
+    }
 
     /**
      * @param {string[]} formats
@@ -300,6 +323,9 @@ export class FormatPlugin extends Plugin {
     }
 
     formatSelection(formatName, options) {
+        // Toggle the format based on the selection if applyStyle is not given.
+        const applyStyle = options?.applyStyle ?? !this.isSelectionFormat(formatName);
+        options = { ...options, applyStyle };
         this.dispatchTo("format_selection_handlers", formatName, options);
         if (this._formatSelection(formatName, options) && !options?.removeFormat) {
             this.dependencies.history.addStep();
@@ -321,9 +347,6 @@ export class FormatPlugin extends Plugin {
         this.dependencies.selection.selectAroundNonEditable();
         // note: does it work if selection is in opposite direction?
         const selection = this.dependencies.split.splitSelection();
-        if (typeof applyStyle === "undefined") {
-            applyStyle = !this.isSelectionFormat(formatName);
-        }
 
         let zws;
         if (selection.isCollapsed) {
@@ -343,18 +366,32 @@ export class FormatPlugin extends Plugin {
         const cursor = this.dependencies.selection.preserveSelection();
         const systemNodesSelector = this.getResource("system_node_selectors").join(", ");
         const selectedTextNodes = /** @type { Text[] } **/ (
-            this.dependencies.selection
-                .getTargetedNodes()
-                .filter(
-                    (n) =>
-                        (!systemNodesSelector || !closestElement(n, systemNodesSelector)) &&
-                        this.dependencies.selection.areNodeContentsFullySelected(n) &&
-                        ((isTextNode(n) && (isVisibleTextNode(n) || isZWS(n))) ||
-                            (n.nodeName === "BR" &&
-                                (isFakeLineBreak(n) ||
-                                    previousLeaf(n, closestBlock(n))?.nodeName === "BR"))) &&
-                        isContentEditable(n)
-                )
+            this.dependencies.selection.getTargetedNodes().filter((n) => {
+                if (systemNodesSelector && closestElement(n, systemNodesSelector)) {
+                    return false;
+                }
+                if (!this.dependencies.selection.areNodeContentsFullySelected(n)) {
+                    return false;
+                }
+
+                if (n.nodeName === "T") {
+                    return true;
+                }
+
+                if (!isContentEditable(n)) {
+                    return false;
+                }
+
+                if (isTextNode(n)) {
+                    return isVisibleTextNode(n) || isZWS(n);
+                }
+                if (n.nodeName === "BR") {
+                    return (
+                        isFakeLineBreak(n) || previousLeaf(n, closestBlock(n))?.nodeName === "BR"
+                    );
+                }
+                return false;
+            })
         );
         const unformattedTextNodes = selectedTextNodes.filter((n) => {
             if (!(this.checkPredicates("is_formattable_node_predicates", n) ?? true)) {
@@ -375,7 +412,12 @@ export class FormatPlugin extends Plugin {
             this.dependencies.selection
                 .getTargetedNodes()
                 .map((node) => closestElement(node, PROTECTED_QWEB_SELECTOR))
-                .filter((node) => node && this.dependencies.selection.isNodeEditable(node))
+                .filter(
+                    (node) =>
+                        node &&
+                        this.dependencies.selection.isNodeEditable(node) &&
+                        node.nodeName !== "T"
+                )
         );
         const formatSpec = formatsSpecs[formatName];
         for (const node of unformattedTextNodes) {
@@ -480,7 +522,7 @@ export class FormatPlugin extends Plugin {
                             formatProps
                         );
                     }
-                } else if (formatName !== "fontSize" || formatProps.size !== undefined) {
+                } else if (formatName !== "fontSize" || formatProps.size) {
                     formatSpec.addStyle(
                         getOrCreateSpan(node, inlineAncestors, cursor),
                         formatProps
@@ -564,6 +606,17 @@ export class FormatPlugin extends Plugin {
         this.mergeAdjacentInlines(root, { preserveSelection });
     }
 
+    removeEmptyInlineZWS({ root, preserveSelection = false } = {}) {
+        // The ZWS is only needed while editing, so don't save it. Elements
+        // other than fields keep the attribute so the ZWS is put back on load.
+        for (const element of selectElements(root, "[data-oe-zws-empty-inline]")) {
+            if (element.hasAttribute("data-oe-field")) {
+                delete element.dataset.oeZwsEmptyInline;
+            }
+            this.cleanZWS(element, { preserveSelection });
+        }
+    }
+
     removeEmptyInlineElement(selectionData) {
         const { anchorNode } = selectionData.editableSelection;
         const blockEl = closestBlock(anchorNode);
@@ -597,7 +650,12 @@ export class FormatPlugin extends Plugin {
             this.cleanZWS(element, { preserveSelection });
             return;
         }
-        if (this.getResource("unremovable_node_predicates").some((p) => p(element))) {
+        // Removing the element would also remove the unremovable nodes inside it.
+        if (
+            [element, ...descendants(element)].some((node) =>
+                this.getResource("unremovable_node_predicates").some((p) => p(node))
+            )
+        ) {
             return;
         }
         if (
@@ -770,7 +828,7 @@ function getOrCreateSpan(node, ancestors, cursor) {
         return span;
     }
 }
-function removeFormat(node, formatSpec, cursor) {
+export function removeFormat(node, formatSpec, cursor) {
     const document = node.ownerDocument;
     node = closestElement(node);
     if (formatSpec.hasStyle(node)) {

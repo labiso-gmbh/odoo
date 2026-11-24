@@ -4,7 +4,7 @@ from datetime import datetime
 
 from odoo import Command
 from odoo.tests import new_test_user
-from odoo.tests.common import TransactionCase, tagged
+from odoo.tests.common import HttpCase, tagged
 
 from odoo.exceptions import ValidationError
 
@@ -12,7 +12,7 @@ from freezegun import freeze_time
 import time
 
 @tagged('post_install', '-at_install', 'holidays_attendance')
-class TestHolidaysOvertime(TransactionCase):
+class TestHolidaysOvertime(HttpCase):
 
     @classmethod
     def setUpClass(cls):
@@ -479,6 +479,22 @@ class TestHolidaysOvertime(TransactionCase):
             "get_overtime_data_by_employee() did not return the expected values",
         )
 
+    def test_get_overtime_data_by_employee_approved_only(self):
+        """Check that the extra hours balance only counts approved extra hours."""
+        self.company.attendance_overtime_validation = 'by_manager'
+        self.new_attendance(check_in=datetime(2021, 1, 2, 8), check_out=datetime(2021, 1, 2, 12))
+        self.new_attendance(check_in=datetime(2021, 1, 3, 8), check_out=datetime(2021, 1, 3, 12))
+        self.new_attendance(check_in=datetime(2021, 1, 9, 8), check_out=datetime(2021, 1, 9, 12))
+        approved_overtime, refused_overtime, _pending_overtime = self.employee.overtime_ids.sorted('date')
+        approved_overtime.action_approve()
+        refused_overtime.action_refuse()
+
+        self.assertDictEqual(self.employee.get_overtime_data_by_employee()[self.employee.id], {
+            'compensable_overtime': 4.0,
+            'not_compensable_overtime': 0,
+            'unspent_compensable_overtime': 4.0,
+        })
+
     def test_overtime_update_after_leave(self):
         self.employee.ruleset_id = self.ruleset_with_timing_rule
 
@@ -499,6 +515,35 @@ class TestHolidaysOvertime(TransactionCase):
 
         leave.action_refuse()
         self.assertEqual(self.employee.total_overtime, 0, 'Should have 0 hours of overtime as the leave has been refused.')
+
+    def test_timing_leave_overtime_without_break(self):
+        """ Ensure that the scheduled break is not counted as extra hours when the employee works while off. """
+        ruleset = self.env['hr.attendance.overtime.ruleset'].create({
+            'name': 'Ruleset employee is off',
+            'company_id': self.company.id,
+            'rule_ids': [
+                Command.create({
+                    'name': 'Rule employee is off',
+                    'base_off': 'timing',
+                    'timing_type': 'leave',
+                }),
+            ],
+        })
+        self.employee.ruleset_id = ruleset
+
+        leave = self.env['hr.leave'].create({
+            'name': 'Vacation Yippie',
+            'employee_id': self.employee.id,
+            'holiday_status_id': self.regular_leave_type.id,
+            'request_date_from': datetime(2026, 1, 13),
+            'request_date_to': datetime(2026, 1, 13),
+        })
+        leave.action_approve()
+
+        # The employee works the whole shift, the one hour break included.
+        self.new_attendance(check_in=datetime(2026, 1, 13, 8), check_out=datetime(2026, 1, 13, 17))
+        # Only the 8 scheduled work hours are extra hours, the break is not worked.
+        self.assertEqual(self.employee.total_overtime, 8, 'The break should not be counted as extra hours.')
 
     def test_absence_management_with_timeoff(self):
         self.company.write({
@@ -566,3 +611,30 @@ class TestHolidaysOvertime(TransactionCase):
         leave.action_approve()
 
         self.assertAlmostEqual(self.employee.total_overtime, 0.0, 2)
+
+    def test_employee_kiosk_remaining_overtime(self):
+        self.new_attendance(check_in=datetime(2021, 1, 2, 8), check_out=datetime(2021, 1, 2, 17))
+        self.new_attendance(check_in=datetime(2021, 1, 3, 8), check_out=datetime(2021, 1, 3, 17))
+        self.assertEqual(self.employee.total_overtime, 18, 'Should have 18 hours of overtime')
+
+        self.env['hr.leave'].create({
+            'name': 'overtime leave',
+            'employee_id': self.employee.id,
+            'holiday_status_id': self.leave_type_no_alloc.id,
+            'request_date_from': datetime(2021, 1, 4),
+            'request_date_to': datetime(2021, 1, 4),
+        })
+
+        self._check_deductible(10)
+        response = self.make_jsonrpc_request(
+            '/hr_attendance/attendance_employee_data',
+            {
+                'token': self.employee.company_id.attendance_kiosk_key,
+                'employee_id': self.employee.id,
+            },
+        )
+        self.assertEqual(
+            response.get('total_overtime'),
+            10,
+            "Kiosk should show remaining deductible overtime after leave deduction",
+        )

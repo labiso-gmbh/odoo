@@ -2,7 +2,8 @@ import { test, expect, describe } from "@odoo/hoot";
 import { getFilledOrder, setupPosEnv } from "../utils";
 import { definePosModels } from "../data/generate_model_definitions";
 import { ConnectionLostError } from "@web/core/network/rpc";
-import { onRpc } from "@web/../tests/web_test_helpers";
+import { onRpc, patchWithCleanup } from "@web/../tests/web_test_helpers";
+import { downloadFile } from "@web/core/network/download";
 import { imageUrl } from "@web/core/utils/urls";
 import { prepareRoundingVals } from "../accounting/utils";
 const { DateTime } = luxon;
@@ -19,6 +20,20 @@ describe("pos_store.js", () => {
         expect(order.is_tipped).toBe(true);
         expect(order.tip_amount).toBe(50);
         expect(order.lines.length).toBe(3); // 2 original lines + 1 tip line
+    });
+
+    test("a popstate after clickSaveOrder does not reopen the saved order", async () => {
+        const store = await setupPosEnv();
+        const order = await getFilledOrder(store);
+        store.navigate("ProductScreen", { orderUuid: order.uuid });
+
+        store.clickSaveOrder();
+        const newOrder = store.getOrder();
+        expect(newOrder.uuid).not.toBe(order.uuid);
+        expect(store.router.state.params.orderUuid).toBe(newOrder.uuid);
+        await store.router.popStateCallback();
+
+        expect(store.getOrder().uuid).toBe(newOrder.uuid);
     });
 
     test("orderNoteFormat", async () => {
@@ -84,6 +99,54 @@ describe("pos_store.js", () => {
 
         expect(printCalled).toBe(false);
         expect(order.hasChange).toBe(false);
+    });
+
+    test("computeProductAttributesExclusion ignores exclusion of an unloaded value", async () => {
+        const store = await setupPosEnv();
+        // Exclusion 99 points to a value the POS never loaded, e.g. read back from IndexedDB
+        store.models.loadConnectedData({
+            "product.template.attribute.exclusion": [
+                { id: 98, product_template_attribute_value_id: 5, value_ids: [6, 9998] },
+                { id: 99, product_template_attribute_value_id: 9999, value_ids: [5] },
+            ],
+        });
+
+        const exclusions = store.computeProductAttributesExclusion();
+        expect([...exclusions.get(5)]).toEqual([6]);
+        expect([...exclusions.get(6)]).toEqual([5]);
+        expect(exclusions.has(9999)).toBe(false);
+    });
+
+    test("sendOrderInPreparation marks changes as sent when printed on retry", async () => {
+        const store = await setupPosEnv();
+        const order = await getFilledOrder(store);
+        const printer = store.unwatched.printers[0];
+        let printedCount = 0;
+        printer.printReceipt = async () => {
+            printedCount++;
+            if (printedCount === 1) {
+                return { successful: false, message: { body: "The printer is not reachable." } };
+            }
+            return { successful: true };
+        };
+        let retryPopupProps;
+        patchWithCleanup(store.dialog, {
+            add: (component, props) => {
+                retryPopupProps = props;
+            },
+        });
+
+        await store.sendOrderInPreparation(order);
+        expect(retryPopupProps.message).toInclude("The printer is not reachable.");
+        expect(store.getOrderChanges(order).nbrOfChanges).toBe(5);
+
+        await retryPopupProps.retry();
+        expect(printedCount).toBe(2);
+
+        // The changes printed on retry must not be printed again with the next ones
+        expect(store.getOrderChanges(order).nbrOfChanges).toBe(0);
+        await store.sendOrderInPreparation(order);
+        expect(printedCount).toBe(2);
     });
 
     describe("syncAllOrders", () => {
@@ -253,6 +316,26 @@ describe("pos_store.js", () => {
         expect(lastOrderLine.attribute_value_ids).toHaveLength(1);
         expect(lastOrderLine.attribute_value_ids[0].id).toBe(12);
         expect(lastOrderLine.attribute_value_ids[0].name).toBe("Male");
+        expect(lastOrderLine.getFullProductName()).toBe("Single attribute");
+    });
+
+    test("addLineToCurrentOrder names the line with chosen and custom attribute values", async () => {
+        const store = await setupPosEnv();
+        store.setOrder(null);
+        const cake = store.models["product.template"].get(51);
+
+        await store.addLineToCurrentOrder({
+            product_tmpl_id: cake,
+            payload: {
+                attribute_value_ids: [5, 7],
+                attribute_custom_values: { 7: "Happy birthday" },
+                price_extra: 0,
+                qty: 1,
+            },
+        });
+        expect(store.getOrder().lines[0].getFullProductName()).toBe(
+            "Cake (Chocolate, Customization: Yes: Happy birthday)"
+        );
     });
 
     test("changesToOrderNoPrepCateg", async () => {
@@ -446,6 +529,39 @@ describe("pos_store.js", () => {
         expect(products[0].id).toBe(6);
     });
 
+    test("falls back to all products when the selected category becomes empty", async () => {
+        const store = await setupPosEnv();
+        const product = store.models["product.template"].get(12);
+        const category = product.pos_categ_ids[0];
+        let onSave;
+
+        patchWithCleanup(store.action, {
+            doAction(action, options) {
+                if (action === "point_of_sale.product_template_action_edit_pos") {
+                    onSave = options.props.onSave;
+                }
+            },
+        });
+        patchWithCleanup(store.data, {
+            read: async () => {
+                store.models.connectNewData({
+                    "product.template": [{ ...product.raw, pos_categ_ids: [] }],
+                });
+                return [];
+            },
+            searchRead: async () => [],
+        });
+
+        store.setSelectedCategory(category.id);
+        expect(store.selectedCategory.id).toBe(category.id);
+
+        await store.editProduct(product);
+        await onSave({ evalContext: { id: product.id } });
+
+        expect(store.selectedCategory).toBe(undefined);
+        expect(store.productsToDisplay.length).toBeGreaterThan(0);
+    });
+
     test("productToDisplayByCateg", async () => {
         const store = await setupPosEnv();
 
@@ -584,6 +700,18 @@ describe("pos_store.js", () => {
         const deletedOrder = await store.onDeleteOrder(order);
         expect(order.uiState.displayed).toBe(false);
         expect(deletedOrder).toBe(true);
+    });
+
+    test("onDeleteOrder keeps the router state in sync with the order it switches to", async () => {
+        const store = await setupPosEnv();
+        const order = store.addNewOrder();
+        store.navigate("ProductScreen", { orderUuid: order.uuid });
+
+        await store.onDeleteOrder(order);
+
+        const newOrder = store.getOrder();
+        expect(newOrder.uuid).not.toBe(order.uuid);
+        expect(store.router.state.params.orderUuid).toBe(newOrder.uuid);
     });
 
     test("setNextOrderRefs", async () => {
@@ -754,5 +882,120 @@ describe("pos_store.js", () => {
         );
         expect(weighed).toHaveLength(0);
         expect(line.qty).toBe(1.25);
+    });
+
+    describe("reloadData", () => {
+        test("keeps a paid order that could not be synced", async () => {
+            const store = await setupPosEnv();
+            const order = await getFilledOrder(store);
+            order.state = "paid";
+            store.data.network.offline = true;
+            patchWithCleanup(store.data, {
+                async resetIndexedDB() {
+                    expect.step("resetIndexedDB");
+                    throw new Error("stop before leaving the page");
+                },
+            });
+            patchWithCleanup(store.dialog, {
+                add(component, props) {
+                    expect.step(props.title);
+                    props.cancel();
+                },
+            });
+
+            await store.reloadData().catch(() => {});
+            expect.verifySteps(["Reload Data"]);
+            expect(store.models["pos.order"].get(order.id)).toBe(order);
+            expect(order.isSynced).toBe(false);
+        });
+
+        const reloadAndExport = async (store) => {
+            let file;
+            patchWithCleanup(store.data, {
+                async resetIndexedDB() {
+                    throw new Error("stop before leaving the page");
+                },
+            });
+            patchWithCleanup(store.dialog, {
+                add(component, props) {
+                    props.confirm();
+                },
+            });
+            patchWithCleanup(downloadFile, {
+                _download(data) {
+                    file = JSON.parse(data);
+                },
+            });
+            await expect(store.reloadData()).rejects.toThrow("stop before leaving the page");
+            return file;
+        };
+
+        test("exports the unsynced paid orders before reloading", async () => {
+            const store = await setupPosEnv();
+            const order = await getFilledOrder(store, {}, true);
+            store.data.network.offline = true;
+            // Hoot stubs the IndexedDB layer, use the real synchronization
+            patchWithCleanup(store.data, {
+                synchronizeLocalDataInIndexedDB() {
+                    return this._synchronizeLocalDataInIndexedDB();
+                },
+            });
+
+            const file = await reloadAndExport(store);
+            expect(file["pos.order"].map((o) => o.uuid)).toEqual([order.uuid]);
+            expect(file["pos.order.line"].length).toBe(2);
+            expect(file["pos.payment"].length).toBe(1);
+        });
+
+        test("exports the unsynced paid orders when IndexedDB fails", async () => {
+            const store = await setupPosEnv();
+            const order = await getFilledOrder(store, {}, true);
+            store.data.network.offline = true;
+            patchWithCleanup(store.data, {
+                synchronizeLocalDataInIndexedDB() {
+                    return this._synchronizeLocalDataInIndexedDB();
+                },
+            });
+            patchWithCleanup(store.data.indexedDB, {
+                async create() {
+                    return [{ status: "rejected", reason: "IndexedDB transaction timeout" }];
+                },
+            });
+
+            const file = await reloadAndExport(store);
+            expect(file["pos.order"].map((o) => o.uuid)).toEqual([order.uuid]);
+            expect(file["pos.order.line"].length).toBe(2);
+            expect(file["pos.payment"].length).toBe(1);
+        });
+
+        test("an empty paid order does not block the reload", async () => {
+            const store = await setupPosEnv();
+            const order = store.addNewOrder();
+            order.state = "paid";
+            patchWithCleanup(store.data, {
+                async resetIndexedDB() {
+                    expect.step("resetIndexedDB");
+                    throw new Error("stop before leaving the page");
+                },
+            });
+
+            await expect(store.reloadData()).rejects.toThrow("stop before leaving the page");
+            expect.verifySteps(["resetIndexedDB"]);
+        });
+
+        test("syncs a paid order before wiping local data", async () => {
+            const store = await setupPosEnv();
+            const order = await getFilledOrder(store);
+            order.state = "paid";
+            patchWithCleanup(store.data, {
+                async resetIndexedDB() {
+                    expect.step(`resetIndexedDB, synced: ${order.isSynced}`);
+                    throw new Error("stop before leaving the page");
+                },
+            });
+
+            await expect(store.reloadData()).rejects.toThrow("stop before leaving the page");
+            expect.verifySteps(["resetIndexedDB, synced: true"]);
+        });
     });
 });

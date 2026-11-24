@@ -26,7 +26,7 @@ export const barcodeService = {
     isMobileChrome: isMobileOS() && isBrowserChrome(),
 
     cleanBarcode: function(barcode) {
-        return barcode.replace(/Alt|Shift|Control/g, '');
+        return barcode.replace(/Alt|Shift|Control|\x00/g, '');
     },
 
     start() {
@@ -106,28 +106,34 @@ export const barcodeService = {
         }
 
         function mobileChromeHandler(ev) {
-            if (ev.key === "Unidentified") {
-                return;
-            }
+            currentTarget = ev.target;
             if (document.activeElement && !document.activeElement.matches('input:not([type]), input[type="text"], textarea, [contenteditable], ' +
                 '[type="email"], [type="number"], [type="password"], [type="tel"], [type="search"]')) {
                 barcodeInput.focus();
             }
-            keydownHandler(ev);
+        }
+
+        function inputHandler() {
+            currentTarget ??= barcodeInput;
+            clearTimeout(timeout);
+            timeout = setTimeout(checkBarcode, barcodeService.maxTimeBetweenKeysInMs);
         }
 
         whenReady(() => {
-            const isMobileChrome = barcodeService.isMobileChrome;
-            if (isMobileChrome) {
+            if (barcodeService.isMobileChrome) {
                 barcodeInput = makeBarcodeInput();
                 document.body.appendChild(barcodeInput);
+                barcodeInput.addEventListener('input', inputHandler);
+
+                document.body.addEventListener('keydown', mobileChromeHandler);
+            } else {
+                document.body.addEventListener('keydown', keydownHandler);
             }
-            const handler = isMobileChrome ? mobileChromeHandler : keydownHandler;
-            document.body.addEventListener('keydown', handler);
         });
 
         return {
             bus,
+            cleanBarcode: barcodeService.cleanBarcode,
         };
     },
 };

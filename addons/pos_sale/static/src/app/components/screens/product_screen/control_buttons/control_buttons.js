@@ -13,7 +13,13 @@ patch(ControlButtons.prototype, {
             ["state", "!=", "cancel"],
             ["invoice_status", "!=", "invoiced"],
             ["currency_id", "=", this.pos.currency.id],
+            // A down payment still has to be deducted when settling the order, and
+            // amount_unpaid is floored at 0 so zero/negative orders must be kept too
+            "|",
+            "|",
             ["amount_unpaid", ">", 0],
+            ["amount_total", "<=", 0],
+            ["order_line.is_downpayment", "=", true],
         ];
 
         const saleOrderIds = this.pos

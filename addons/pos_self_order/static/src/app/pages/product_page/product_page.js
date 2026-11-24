@@ -4,7 +4,7 @@ import { useService } from "@web/core/utils/hooks";
 import { AttributeSelection } from "@pos_self_order/app/components/attribute_selection/attribute_selection";
 import { useScrollShadow } from "../../utils/scroll_shadow_hook";
 import {
-    getProductVariantByAttributes,
+    getBestMatchingVariant,
     getAttributeValues,
     getAttributeValuesExtraPrice,
 } from "@pos_self_order/app/services/card_utils";
@@ -106,7 +106,8 @@ export class ProductPage extends Component {
         return (
             this.isProductAvailable() &&
             !this.hasMissingAttributeValues() &&
-            !this.isArchivedCombination()
+            !this.isArchivedCombination() &&
+            !this.isDeletedCombination()
         );
     }
 
@@ -124,10 +125,19 @@ export class ProductPage extends Component {
         return this.props.productTemplate._isArchivedCombination(variantAttributeValueIds);
     }
 
+    isDeletedCombination() {
+        return (
+            !this.hasMissingAttributeValues() &&
+            this.productTemplate.isDeletedCombination(
+                getAttributeValues(this.getSelectedAttributesValues(), this.selfOrder.models)
+            )
+        );
+    }
+
     getProductPrice() {
         const attributeIds = this.getSelectedAttributesValues();
 
-        const productVariant = getProductVariantByAttributes(
+        const productVariant = getBestMatchingVariant(
             this.selfOrder.models,
             this.props.productTemplate,
             attributeIds

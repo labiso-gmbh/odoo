@@ -67,7 +67,6 @@ PROJECT_TASK_READABLE_FIELDS = {
 PROJECT_TASK_WRITABLE_FIELDS = {
     'name',
     'description',
-    'partner_id',
     'date_deadline',
     'date_last_stage_update',
     'tag_ids',
@@ -79,6 +78,7 @@ PROJECT_TASK_WRITABLE_FIELDS = {
     'priority',
     'state',
     'is_closed',
+    'partner_id',
 }
 
 CLOSED_STATES = {
@@ -500,7 +500,8 @@ class ProjectTask(models.Model):
             for project_follower in project_followers:
                 project_subtypes = project_follower.subtype_ids
                 task_subtypes = (project_subtypes.mapped('parent_id') | project_subtypes.filtered(lambda sub: sub.internal or sub.default)).ids if project_subtypes else None
-                partner_ids.remove(project_follower.partner_id.id)
+                if project_follower.partner_id.id in partner_ids:
+                    partner_ids.remove(project_follower.partner_id.id)
                 super().message_subscribe(project_follower.partner_id.ids, task_subtypes)
         return super().message_subscribe(partner_ids, subtype_ids)
 
@@ -1138,6 +1139,8 @@ class ProjectTask(models.Model):
         if is_portal_user:
             child_ids_list = []
         for vals, additional_vals in zip(vals_list, additional_vals_list):
+            if 'priority' in vals and not vals['priority']:
+                vals['priority'] = '0'
             project_id = vals.get('project_id') or default_project_id
 
             if vals.get('user_ids'):
@@ -1264,6 +1267,8 @@ class ProjectTask(models.Model):
                 if valid_milestone_tasks:
                     valid_milestone_tasks.sudo().write({'milestone_id': vals['milestone_id']})
                 del vals['milestone_id']
+                # the sub-tasks have already been handled by the writes above
+                valid_milestone_tasks = self.env['project.task']
 
             # 2. Parent's milestone is set to subtask with no milestone recursively
             subtasks_to_update = valid_milestone_tasks.child_ids.filtered(
@@ -1687,8 +1692,9 @@ class ProjectTask(models.Model):
         project_user_group_id = self.env.ref('project.group_project_user').id
         new_group = ('group_project_user', lambda pdata: pdata['type'] == 'user' and project_user_group_id in pdata['groups'], {})
         groups = [new_group] + groups
+        portal_privacy = self.project_id.privacy_visibility in ['invited_users', 'portal']
 
-        if self.project_privacy_visibility in ['invited_users', 'portal']:
+        if portal_privacy:
             groups.insert(0, (
                 'allowed_portal_users',
                 lambda pdata: pdata['type'] in ['invited_users', 'portal'],
@@ -1697,7 +1703,6 @@ class ProjectTask(models.Model):
                     'has_button_access': True,
                 }
             ))
-        portal_privacy = self.project_id.privacy_visibility in ['invited_users', 'portal']
         for group_name, _group_method, group_data in groups:
             if group_name in ('customer', 'user') or group_name == 'portal_customer' and not portal_privacy:
                 group_data['has_button_access'] = False
@@ -2256,10 +2261,9 @@ class ProjectTask(models.Model):
     @api.model
     def _get_thread_with_access(self, thread_id, *, project_sharing_id=None, token=None, **kwargs):
         if project_sharing_id:
-            if token := ProjectSharingChatter._check_project_access_and_get_token(
+            token = ProjectSharingChatter._check_project_access_and_get_token(
                 self, project_sharing_id, self._name, thread_id, token
-            ):
-                token = token
+            )
         return super()._get_thread_with_access(thread_id, project_sharing_id=project_sharing_id, token=token, **kwargs)
 
     def get_mention_suggestions(self, search, limit=8):

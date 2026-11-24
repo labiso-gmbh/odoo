@@ -514,7 +514,9 @@ class Many2one(_Relational):
                 sql = self._condition_to_sql_company(sql, field_expr, operator, value, model, alias, query)
             if can_be_null:
                 if positive:
-                    sql = SQL("(%s IS NOT NULL AND %s)", sql_field, sql)
+                    # PERF: Explicitly rejecting NULLs on the joined primary key allows PostgreSQL
+                    # to reduce the LEFT JOIN to an INNER JOIN and potentially choose a better plan.
+                    sql = SQL("(%s IS NOT NULL AND %s IS NOT NULL AND %s)", sql_field, SQL.identifier(coalias, 'id'), sql)
                 else:
                     sql = SQL("(%s IS NULL OR %s)", sql_field, sql)
             return sql
@@ -615,10 +617,10 @@ class _RelationalMulti(_Relational):
                         ids.add(comodel.new(command[2], ref=command[1]).id)
                     elif command[0] == Command.UPDATE:
                         line = browse(command[1])
-                        if validate:
-                            line.update(command[2])
-                        else:
-                            line._update_cache(command[2], validate=False)
+                        # don't update real records, otherwise some subsequent
+                        # write() won't do the actual update
+                        if not line.id:
+                            line._update_cache(command[2], validate)
                         ids.add(line.id)
                     elif command[0] in (Command.DELETE, Command.UNLINK):
                         ids.discard(browse(command[1]).id)

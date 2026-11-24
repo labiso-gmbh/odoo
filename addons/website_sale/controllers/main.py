@@ -1673,7 +1673,7 @@ class WebsiteSale(payment_portal.PaymentPortal):
         if order_sudo.amount_total and not tx_sudo:
             return request.redirect(self._get_shop_path())
 
-        if not order_sudo.amount_total and not tx_sudo and order_sudo.state != 'sale':
+        if not order_sudo.amount_total and order_sudo.state != 'sale':
             order_sudo._check_cart_is_ready_to_be_paid()
             # Only confirm the order if it wasn't already confirmed.
             order_sudo._validate_order()
@@ -1893,11 +1893,8 @@ class WebsiteSale(payment_portal.PaymentPortal):
         """ Transforms a list of order lines into a dict for google analytics """
         ret = []
         for line in order_lines.filtered(lambda line: not line.is_delivery):
-            product = line.product_id
             ret.append({
-                'item_id': product.default_code or product.id,
-                'item_name': product.name or '-',
-                'item_category': product.categ_id.name or '-',
+                **line.product_id._get_google_analytics_item(),
                 'price': line.price_unit,
                 'quantity': line.product_uom_qty,
             })
@@ -1913,9 +1910,9 @@ class WebsiteSale(payment_portal.PaymentPortal):
             'currency': order.currency_id.name,
             'items': self.order_lines_2_google_api(order.order_line),
         }
-        delivery_line = order.order_line.filtered('is_delivery')
-        if delivery_line:
-            tracking_cart_dict['shipping'] = delivery_line.price_unit
+        delivery_lines = order.order_line.filtered('is_delivery')
+        if delivery_lines:
+            tracking_cart_dict['shipping'] = sum(delivery_lines.mapped('price_unit'))
         return tracking_cart_dict
 
     # --------------------------------------------------------------------------
@@ -2026,8 +2023,12 @@ class WebsiteSale(payment_portal.PaymentPortal):
         :return: A dict grouping attribute value ids by attribute id.
         :rtype: dict(int, list(int))
         """
-        attribute_value_pairs = [value.split('-') for value in attribute_values if value]
-        return {
-            int(pair[0]): [int(value_id) for value_id in pair[1].split(',')]
-            for pair in attribute_value_pairs
-        }
+        attribute_value_dict = {}
+        for value in attribute_values:
+            pair = value.split('-')
+            if len(pair) < 2 or not pair[0].isdigit():
+                continue
+            value_ids = [value_id for value_id in pair[1].split(',') if value_id.isdigit()]
+            if value_ids:
+                attribute_value_dict[int(pair[0])] = [int(value_id) for value_id in value_ids]
+        return attribute_value_dict

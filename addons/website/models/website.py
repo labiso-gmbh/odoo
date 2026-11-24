@@ -357,24 +357,27 @@ class Website(models.Model):
             (original_company | self.company_id)._compute_website_id()
 
         if 'cookies_bar' in values:
-            existing_policy_page = self.env['website.page'].search([
-                ('website_id', '=', self.id),
+            existing_policy_pages = self.env['website.page'].search([
+                ('website_id', 'in', self.ids),
                 ('url', '=', '/cookie-policy'),
             ])
             if not values['cookies_bar']:
-                existing_policy_page.unlink()
-            elif not existing_policy_page:
+                existing_policy_pages.unlink()
+            else:
                 cookies_view = self.env.ref('website.cookie_policy', raise_if_not_found=False)
                 if cookies_view:
-                    cookies_view.with_context(website_id=self.id).write({'website_id': self.id})
-                    specific_cook_view = self.with_context(website_id=self.id).viewref('website.cookie_policy')
-                    self.env['website.page'].create({
-                        'is_published': True,
-                        'website_indexed': False,
-                        'url': '/cookie-policy',
-                        'website_id': self.id,
-                        'view_id': specific_cook_view.id,
-                    })
+                    page_vals_list = []
+                    for website in self - existing_policy_pages.website_id:
+                        cookies_view.with_context(website_id=website.id).write({'website_id': website.id})
+                        specific_cook_view = website.with_context(website_id=website.id).viewref('website.cookie_policy')
+                        page_vals_list.append({
+                            'is_published': True,
+                            'website_indexed': False,
+                            'url': '/cookie-policy',
+                            'website_id': website.id,
+                            'view_id': specific_cook_view.id,
+                        })
+                    self.env['website.page'].create(page_vals_list)
 
         return result
 
@@ -707,6 +710,8 @@ class Website(models.Model):
     @api.model
     def configurator_skip(self):
         website = self.get_current_website()
+        if website.configurator_done:
+            return website.button_go_website()
         theme = self.env["ir.module.module"].search([("name", "=", "theme_default")])
         website.configurator_done = True
         return theme.button_choose_theme()
@@ -2070,13 +2075,13 @@ class Website(models.Model):
         fuzzy_term = False
         search_details = self._search_get_details(search_type, order, options)
         if search and options.get('allowFuzzy', True):
-            fuzzy_term = self._search_find_fuzzy_term(search_details, search)
-            if fuzzy_term:
-                count, results = self._search_exact(search_details, fuzzy_term, limit, order)
-                if fuzzy_term.lower() == search.lower():
+            count, results = self._search_exact(search_details, search, limit, order)
+            if not count:
+                fuzzy_term = self._search_find_fuzzy_term(search_details, search)
+                if fuzzy_term and fuzzy_term.lower() != search.lower():
+                    count, results = self._search_exact(search_details, fuzzy_term, limit, order)
+                else:
                     fuzzy_term = False
-            else:
-                count, results = self._search_exact(search_details, search, limit, order)
         else:
             count, results = self._search_exact(search_details, search, limit, order)
         return count, results, fuzzy_term
@@ -2289,16 +2294,22 @@ class Website(models.Model):
                         rel_table = direct_field.relation
                         rel_joinkey = direct_field.column2
                 subqueries.append(get_similarity_subquery(comodel, comodel_similarity_fields, id_column, rel_table, rel_joinkey))
+            # Rank only the records eligible for the provider domain, before the
+            # similarity LIMIT. The eligible ids are a sub-select (not fetched)
+            # to keep the domain's joins/aliases out of the similarity query.
             query = SQL("""
                 SELECT id,
                     MAX(similarity) as _best_similarity
-                FROM (%s) sub
+                FROM (%(subqueries)s) sub
+                WHERE id IN %(eligible_ids)s
                 GROUP BY id
                 ORDER BY _best_similarity DESC
                 LIMIT 1000
-            """, SQL("\nUNION ALL\n").join(subqueries))  # UNION ALL allows to hit GIST indexes in subplans.
-            self.env.cr.execute(query)
-            ids = {row[0] for row in self.env.cr.fetchall()}
+            """,
+                subqueries=SQL("\nUNION ALL\n").join(subqueries),  # UNION ALL allows to hit GIST indexes in subplans.
+                eligible_ids=model._search(domain).subselect(),
+            )
+            ids = {row[0] for row in self.env.execute_query(query)}
             domain = Domain.AND([domain, Domain([('id', 'in', list(ids))])])
             records = model.search_read(domain, direct_fields, limit=limit)
             for record in records:
